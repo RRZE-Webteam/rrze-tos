@@ -4,7 +4,7 @@
  * Plugin Name:     WACG
  * Plugin URI:      https://gitlab.rrze.fau.de/rrze-webteam/rrze-wcag.git
  * Description:     WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den Konformitätskriterien der WCAG.
- * Version:         0.1.0
+ * Version:         0.1.1
  * Author:          RRZE-Webteam
  * Author URI:      https://blogs.fau.de/webworking/
  * License:         GNU General Public License v2
@@ -93,6 +93,7 @@ function loaded() {
     load_textdomain();
     require_once __DIR__ . '/includes/posttype/wcag-posttype.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox.php';
+    require_once __DIR__ . '/includes/posttype/wcag-metabox-save.php';
     
     // Ab hier können weitere Funktionen bzw. Klassen angelegt werden.
     autoload();
