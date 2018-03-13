@@ -91,12 +91,17 @@ function system_requirements() {
 function loaded() {
     // Sprachdateien werden eingebunden.
     load_textdomain();
+    autoload();
     require_once __DIR__ . '/includes/posttype/wcag-posttype.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox-save.php';
     
+    //require_once __DIR__ . '/includes/endpoint/wcag-endpoint.php';
+    //require_once __DIR__ . '/includes/templates/wcag-template.php';
+    //new WCAGEndpoint;
+    
     // Ab hier können weitere Funktionen bzw. Klassen angelegt werden.
-    autoload();
+    
     
     
 }
