@@ -1,6 +1,7 @@
 <?php
 
-// Register Custom Post Type
+namespace RRZE\Wcag;
+
 function rrze_wcag_post_type() {
 
     $labels = array(
@@ -46,4 +47,4 @@ function rrze_wcag_post_type() {
 
 }
 
-add_action( 'init', 'rrze_wcag_post_type', 0 );
+add_action( 'init', 'RRZE\Wcag\rrze_wcag_post_type', 0 );
