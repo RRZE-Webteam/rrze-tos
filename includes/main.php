@@ -1,9 +1,9 @@
 <?php
 
-namespace CMS\Basis;
+namespace RRZE\Wcag;
 
-use CMS\Basis\Options;
-use CMS\Basis\Settings;
+use RRZE\Wcag\Options;
+use RRZE\Wcag\Settings;
 
 defined('ABSPATH') || exit;
 

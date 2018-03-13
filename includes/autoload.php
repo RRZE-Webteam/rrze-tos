@@ -1,11 +1,11 @@
 <?php
 
-namespace CMS\Basis;
+namespace RRZE\Wcag;
 
 defined('ABSPATH') || exit;
 
 spl_autoload_register(function ($class) {
-    $prefix = 'CMS\Basis\\';
+    $prefix = 'RRZE\Wcag\\';
     $base_dir = __DIR__ . '/';
 
     $len = strlen($prefix);

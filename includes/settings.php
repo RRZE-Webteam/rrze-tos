@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS\Basis;
+namespace RRZE\Wcag;
 
 defined('ABSPATH') || exit;
 
@@ -33,7 +33,7 @@ class Settings {
      * @return void
      */
     public function admin_settings_page() {
-        $this->admin_settings_page = add_options_page(__('CMS Basis', 'cms-basis'), __('CMS Basis', 'cms-basis'), 'manage_options', 'cms-basis', array($this, 'settings_page'));
+        $this->admin_settings_page = add_options_page(__('WCAG', 'rrze-wcag'), __('WCAG', 'rrze-wcag'), 'manage_options', 'rrze-wcag', array($this, 'settings_page'));
         add_action('load-' . $this->admin_settings_page, array($this, 'admin_help_menu'));        
     }
     
@@ -44,11 +44,11 @@ class Settings {
     public function settings_page() {
         ?>
         <div class="wrap">
-            <h2><?php echo __('Settings &rsaquo; CMS Basis', 'cms-basis'); ?></h2>
+            <h2><?php echo __('Settings &rsaquo; WCAG', 'rrze-wcag'); ?></h2>
             <form method="post" action="options.php">
                 <?php
-                settings_fields('cms_basis_options');
-                do_settings_sections('cms_basis_options');
+                settings_fields('rrze_wcag_options');
+                do_settings_sections('rrze_wcag_options');
                 submit_button();
                 ?>
             </form>
@@ -61,9 +61,9 @@ class Settings {
      * @return void
      */
     public function admin_settings() {
-        register_setting('cms_basis_options', $this->option_name, array($this, 'options_validate'));
-        add_settings_section('cms_basis_section_1', false, '__return_false', 'cms_basis_options');
-        add_settings_field('cms_basis_field_1', __('Field 1', 'cms-basis'), array($this, 'cms_basis_field_1'), 'cms_basis_options', 'cms_basis_section_1');
+        register_setting('rrze_wcag_options', $this->option_name, array($this, 'options_validate'));
+        add_settings_section('rrze_wcag_section_1', false, '__return_false', 'rrze_wcag_options');
+        add_settings_field('rrze_wcag_field_1', __('Field 1', 'rrze-wcag'), array($this, 'rrze_wcag_field_1'), 'rrze_wcag_options', 'rrze_wcag_section_1');
     }
 
     /*
@@ -72,7 +72,7 @@ class Settings {
      * @return array
      */
     public function options_validate($input) {
-        $input['cms_basis_text'] = !empty($input['cms_basis_field_1']) ? $input['cms_basis_field_1'] : '';
+        $input['rrze_wcag_text'] = !empty($input['rrze_wcag_field_1']) ? $input['rrze_wcag_field_1'] : '';
         return $input;
     }
 
@@ -80,9 +80,9 @@ class Settings {
      * Erstes Feld der Optionsseite
      * @return void
      */
-    public function cms_basis_field_1() {
+    public function rrze_wcag_field_1() {
         ?>
-        <input type='text' name="<?php printf('%s[cms_basis_field_1]', $this->option_name); ?>" value="<?php echo $this->options->cms_basis_field_1; ?>">
+        <input type='text' name="<?php printf('%s[rrze_wcag_field_1]', $this->option_name); ?>" value="<?php echo $this->options->rrze_wcag_field_1; ?>">
         <?php
     }
 
@@ -93,17 +93,17 @@ class Settings {
     public function admin_help_menu() {
 
         $content = array(
-            '<p>' . __('Here comes the Context Help content.', 'cms-basis') . '</p>',
+            '<p>' . __('Here comes the Context Help content.', 'rrze-wcag') . '</p>',
         );
 
 
         $help_tab = array(
             'id' => $this->admin_settings_page,
-            'title' => __('Overview', 'cms-basis'),
+            'title' => __('Overview', 'rrze-wcag'),
             'content' => implode(PHP_EOL, $content),
         );
 
-        $help_sidebar = sprintf('<p><strong>%1$s:</strong></p><p><a href="http://blogs.fau.de/webworking">RRZE-Webworking</a></p><p><a href="https://github.com/RRZE-Webteam">%2$s</a></p>', __('For more information', 'cms-basis'), __('RRZE Webteam on Github', 'cms-basis'));
+        $help_sidebar = sprintf('<p><strong>%1$s:</strong></p><p><a href="http://blogs.fau.de/webworking">RRZE-Webworking</a></p><p><a href="https://github.com/RRZE-Webteam">%2$s</a></p>', __('For more information', 'rrze-wcag'), __('RRZE Webteam on Github', 'rrze-wcag'));
 
         $screen = get_current_screen();
 

@@ -1,56 +1,38 @@
 <?php
 
 /**
- * Plugin Name:     CMS Basis
- * Plugin URI:      https://gitlab.rrze.fau.de/rrze-webteam/cms-basis
- * Description:     Grundlegende Vorlage für alle WordPress-CMS-Plugins.
- * Version:         3.0.0
+ * Plugin Name:     WACG
+ * Plugin URI:      https://gitlab.rrze.fau.de/rrze-webteam/rrze-wcag.git
+ * Description:     WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den Konformitätskriterien der WCAG.
+ * Version:         0.1.0
  * Author:          RRZE-Webteam
  * Author URI:      https://blogs.fau.de/webworking/
  * License:         GNU General Public License v2
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path:     /languages
- * Text Domain:     cms-basis
+ * Text Domain:     rrze-wcag
  */
 
-/*
-  Verzeichnisschema:
-  cms-basis
-  |-- languages                     Verzeichnis der Sprachdateien
-  |   +-- cms-basis.pot             Vorlagedatei falls Übersetzungen in andere Sprachen nötig werden
-  |   +-- cms-basis-de_DE.po        Deutsche Übersetzungsdatei (kann mit poedit angepasst werden)
-  |   +-- cms-basis-de_DE.mo        Deutsche Übersetzungsdatei (wird beim Speichern in poedit aktualisiert)
-  |   +-- cms-basis-de_DE_formal.po Deutsche (Sie) Übersetzungsdatei (kann mit poedit angepasst werden)
-  |   +-- cms-basis-de_DE_formal.mo Deutsche (Sie) Übersetzungsdatei (wird beim Speichern in poedit aktualisiert)
-  |-- includes                      (Optional)
-      +-- autoload.php              Automatische Laden von Klassen
-      +-- main.php                  Main-Klasse
-      +-- options.php               Optionen-Klasse
-      +-- settings.php              Settings-Klasse
-  +-- README.md                     Anweisungen
-  +-- cms-basis.php                 Hauptdatei des Plugins
- */
+namespace RRZE\Wcag;
 
-namespace CMS\Basis;
-
-use CMS\Basis\Main;
+use RRZE\Wcag\Main;
 
 defined('ABSPATH') || exit;
 
-const RRZE_PHP_VERSION = '5.5';
-const RRZE_WP_VERSION = '4.8';
+const RRZE_PHP_VERSION = '7.1';
+const RRZE_WP_VERSION = '4.9';
 
-register_activation_hook(__FILE__, 'CMS\Basis\activation');
-register_deactivation_hook(__FILE__, 'CMS\Basis\deactivation');
+register_activation_hook(__FILE__, 'RRZE\Wcag\activation');
+register_deactivation_hook(__FILE__, 'RRZE\Wcag\deactivation');
 
-add_action('plugins_loaded', 'CMS\Basis\loaded');
+add_action('plugins_loaded', 'RRZE\Wcag\loaded');
 
 /*
  * Einbindung der Sprachdateien.
  * @return void
  */
 function load_textdomain() {
-    load_plugin_textdomain('cms-basis', FALSE, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
+    load_plugin_textdomain('rrze-wcag', FALSE, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 
 /*
@@ -109,9 +91,13 @@ function system_requirements() {
 function loaded() {
     // Sprachdateien werden eingebunden.
     load_textdomain();
+    require_once __DIR__ . '/includes/posttype/wcag-posttype.php';
+    require_once __DIR__ . '/includes/posttype/wcag-metabox.php';
     
     // Ab hier können weitere Funktionen bzw. Klassen angelegt werden.
-    //autoload();
+    autoload();
+    
+    
 }
 
 /*

@@ -1,12 +1,12 @@
 <?php
 
-namespace CMS\Basis;
+namespace RRZE\Wcag;
 
 defined('ABSPATH') || exit;
 
 class Options {
     
-    protected $option_name = 'cms_basis';
+    protected $option_name = 'rrze_wcag';
     
     public function __construct() {
         
@@ -18,7 +18,7 @@ class Options {
      */
     public function default_options() {
         $options = array(
-            'cms_basis_field_1' => '',
+            'rrze_wcag_field_1' => '',
             // Hier können weitere Felder ('key' => 'value') angelegt werden.
         );
 
