@@ -90,20 +90,22 @@ function system_requirements() {
  */
 function loaded() {
     // Sprachdateien werden eingebunden.
+    add_action( 'wp_enqueue_scripts', 'RRZE\Wcag\rrze_wcag_scripts');
     load_textdomain();
     autoload();
     require_once __DIR__ . '/includes/posttype/wcag-posttype.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox-save.php';
     
-    //require_once __DIR__ . '/includes/endpoint/wcag-endpoint.php';
-    //require_once __DIR__ . '/includes/templates/wcag-template.php';
-    //new WCAGEndpoint;
+    require_once __DIR__ . '/includes/endpoint/wcag-endpoint.php';
+    new WCAGEndpoint;
     
     // Ab hier können weitere Funktionen bzw. Klassen angelegt werden.
-    
-    
-    
+}
+
+function rrze_wcag_scripts() {
+    wp_register_style( 'wcag_styles', plugins_url('rrze-wcag/assets/css/styles.css', dirname(__FILE__)));
+    wp_enqueue_style( 'wcag_styles' );
 }
 
 /*

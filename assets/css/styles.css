@@ -1,0 +1,45 @@
+.wcag-pass:before {
+  font-family: FontAwesome;
+  font-size: 2em;
+  content: "\f00c";
+  color: green;
+  padding-right: 13px;
+  vertical-align: -20%; }
+
+.wcag-pass {
+  font-size: 1em;
+  color: green;
+  background-color: #f2f2f2;
+  padding: 30px; }
+
+.wcag-fail:before {
+  font-family: FontAwesome;
+  font-size: 2em;
+  content: "\f00d";
+  color: red;
+  padding-right: 13px;
+  vertical-align: -20%; }
+
+.wcag-fail {
+  font-size: 1em;
+  color: red;
+  background-color: #f2f2f2;
+  padding: 30px; }
+
+@media (min-width: 768px) {
+  .wcag-pass:before {
+    font-size: 2.5em;
+    vertical-align: -40%; }
+
+  .wcag-pass {
+    font-size: 1.25em; }
+
+  .wcag-fail:before {
+    font-size: 2.5em;
+    vertical-align: -35%; }
+
+  .wcag-fail {
+    font-size: 1.25em; }
+
+  textarea {
+    width: 750px !important; } }
