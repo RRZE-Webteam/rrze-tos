@@ -20,13 +20,66 @@ if (isset($options['breadcrumb_root'])) {
     $breadcrumb .= '<a data-wpel-link="internal" href="' . site_url('/') . '">' . $options['breadcrumb_root'] . '</a>';
 }
 
+/* Captcha */
+
+$matching_numbers = array(
+    'eins'  => 1,
+    'zwei'  => 2,
+    'drei'  => 3,
+    'vier'  => 4,
+    'fünf'  => 5,
+    'sechs' => 6,
+    'sieben'=> 7,
+    'acht'  => 8,
+    'neun'  => 9
+);
+
+$operator = array(
+    '+' => 'plus',
+    '*' => 'mal'
+);
+
+$min_number = 1;
+$max_number = 9;
+
+$random_number1 = mt_rand($min_number, $max_number);
+$random_number2 = mt_rand($min_number, $max_number);
+$random_operator = array_rand($operator, 1);
+
+$figure = array_search($random_number2, $matching_numbers);
+
+$op = $operator[$random_operator[0]];
+
+$solution = $random_number1 . ' ' . $operator[$random_operator[0]] . ' ' . $figure;
+
+$flipped = array_flip($matching_numbers);
+
+$opflipped = array_search($op, $operator);
+
+switch ($op) {
+  case 'plus':
+    $output = $random_number1 + $random_number2;
+    break;
+  case 'minus':
+    $output = $random_number1 - $random_number2;
+    break;
+  case 'mal':
+    $output = $random_number1 * $random_number2;
+    break;
+}
+
+/*if(!isset($_POST['submit'])) {
+    $out = md5($output);
+}*/
+
+/*if( get_option('captcha') === false) {
+    add_option('captcha', md5($output));
+}*/
 
 /* Check Custom Posttype - wcag */
 global $post;
 
-?>
-
-<?php $args = array( 'post_type' => 'wcag' );
+$args = array( 'post_type' => 'wcag' );
 
 $loop = new WP_Query( $args );
 
@@ -67,12 +120,42 @@ get_header(); ?>
                                 <?php the_content();
                              } 
                         endwhile; ?>
-                        <br /><h2>Probleme bei der Benutzung der Seite?</h2>
-                        <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!</p><br />
-                        <form>
-                            <p><label for="feedback">Ihr Feedback</label></p>
-                            <textarea id="feeadback" cols="150" rows="10"></textarea>
-                        </form>
+                            <?php 
+                            if (isset($_POST['submit'])){
+                                /*$cap = md5($_POST['captcha']);
+                                /*echo $cap;
+                                echo get_option('captcha');
+                                delete_option('captcha');*/
+                                /*if($cap === $out) {
+                                    echo 'ok';
+                                }else {
+                                    echo 'nicht ok';
+                                }*/
+                                //echo $_POST['captcha'];
+                                ?> 
+                                   <p>Vielen Dank für Ihr Feedback! Wir werden uns umgehend bei Ihnen melden.</p> 
+                                <?php
+                            } else {;
+                            ?>
+                                <br /><h2>Probleme bei der Bedienung der Seite?</h2>
+                                <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!</p><br />
+
+
+                                <form method="post" id="captchaform">
+                                    <p>
+                                        <label for="feedback">Ihr Feedback</label>
+                                        <textarea id="feeadback" name="feedback" cols="150" rows="10"></textarea>
+                                    </p>
+                                    <p>
+                                        <label for="check">Lösen Sie folgende Aufgabe:</label></p>
+                                        <p><?php echo $solution . ' = ' ?> <input type="text" name="captcha" id="check" /></p>
+                                </form>
+                                 <input type="submit" name="submit" form="captchaform" value="Jetzt abschicken">
+                                 <?php 
+                                   echo get_option('captcha');
+                                 //echo $out;
+                            }
+                        ?>
                     </main>
                 </div>
 
