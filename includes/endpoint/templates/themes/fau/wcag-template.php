@@ -68,15 +68,16 @@ switch ($op) {
     break;
 }
 
-/*if(!isset($_POST['submit'])) {
-    $out = md5($output);
-}*/
+$salt = 'Ng<RX12m_i,jN:DSzW J*8lX-8uDmniw!7mIowxigB#+Fb+KcW$?phRDk|<)YGf|';
 
-/*if( get_option('captcha') === false) {
-    add_option('captcha', md5($output));
-}*/
+//if(!isset($_POST['submit'])) {
+   $captcha = array(
+       'answers' => array(
+           md5($output)
+        )
+   );
+//}
 
-/* Check Custom Posttype - wcag */
 global $post;
 
 $args = array( 'post_type' => 'wcag' );
@@ -122,39 +123,72 @@ get_header(); ?>
                         endwhile; ?>
                             <?php 
                             if (isset($_POST['submit'])){
-                                /*$cap = md5($_POST['captcha']);
-                                /*echo $cap;
-                                echo get_option('captcha');
-                                delete_option('captcha');*/
-                                /*if($cap === $out) {
-                                    echo 'ok';
-                                }else {
-                                    echo 'nicht ok';
-                                }*/
-                                //echo $_POST['captcha'];
+                                $errors = array();
+                                $ans = $_POST['captcha'];
+                                $checksum = md5($ans);
+                                $salted = md5($checksum.$salt);
+                                if(!isset($_POST['feedback'], $_POST['captcha'])) {
+                                    //$errors[] = "Bitte benutzen sie unser Formular.";
+                                } else {
+                                    if($_POST['feedback'] =='') {
+                                        $errors['feedback'] = "Bitte geben Sie Ihr Feedback ein.";
+                                    }
+                                    if($_POST['captcha'] =='') {
+                                        $errors['captcha'] = "Bitte geben Sie das Captcha ein.";
+                                    }
+                                }
+                            }
+                            
+                            if(isset($errors) AND !count($errors)) {
+                                /*$ans = $_POST['captcha'];
+                                $checksum = md5($ans);
+                                $salted = md5($checksum.$salt);
+                                if(in_array($salted,$_POST['ans'])) { */?>
+                                <p>Vielen Dank für Ihr Feedback! Wir werden uns umgehend bei Ihnen melden.</p> 
+                                <?php } else {
+                                   if(isset($errors)) { ?>
+                                    <p>Ihre Benutzereingaben sind nicht korrekt!</p><?php
+                                    /*foreach($errors as $error) {
+                                        echo $error;
+                                    }*/
+                                 }
+                                }
+                                
                                 ?> 
-                                   <p>Vielen Dank für Ihr Feedback! Wir werden uns umgehend bei Ihnen melden.</p> 
+                                   
                                 <?php
-                            } else {;
+                            //} else {
                             ?>
                                 <br /><h2>Probleme bei der Bedienung der Seite?</h2>
                                 <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!</p><br />
-
-
                                 <form method="post" id="captchaform">
                                     <p>
-                                        <label for="feedback">Ihr Feedback</label>
-                                        <textarea id="feeadback" name="feedback" cols="150" rows="10"></textarea>
+                                        <?php foreach($captcha['answers'] as $checksum)  { 
+                                            $salted = md5($checksum.$salt); ?>
+                                            <input type="hidden" name="ans[]" value="<?php echo $salted ?>"/>
+                                        
+                                        <?php } ?>
+                                    
                                     </p>
                                     <p>
+                                        <?php if(isset($_POST['submit']) && !empty($errors['feedback']))  { ?> 
+                                            <div style="color:red;"><?php echo $errors['feedback'] ?></div>
+                                        <?php } ?>
+                                        <label for="feedback">Ihr Feedback</label>
+                                        <textarea id="feeadback" name="feedback" cols="150" rows="10"><?php if(isset($_POST['submit'])) echo $_POST['feedback'] ?></textarea>
+                                    </p>
+                                    <p>
+                                        <?php if(isset($_POST['submit']) && !empty($errors['captcha']))  { ?> 
+                                            <div style="color:red;"><?php echo $errors['captcha'] ?></div>
+                                        <?php } ?>
                                         <label for="check">Lösen Sie folgende Aufgabe:</label></p>
                                         <p><?php echo $solution . ' = ' ?> <input type="text" name="captcha" id="check" /></p>
                                 </form>
-                                 <input type="submit" name="submit" form="captchaform" value="Jetzt abschicken">
+                                 <input type="submit" name="submit" form="captchaform" value="Senden">
                                  <?php 
                                    echo get_option('captcha');
                                  //echo $out;
-                            }
+                           // }
                         ?>
                     </main>
                 </div>
