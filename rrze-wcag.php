@@ -96,7 +96,8 @@ function loaded() {
     require_once __DIR__ . '/includes/posttype/wcag-posttype.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox-save.php';
-    
+    require_once __DIR__ . '/includes/shortcode/wcag-contact-form-captcha.php';
+    require_once __DIR__ . '/includes/shortcode/wcag-contact-form-shortcode.php';
     require_once __DIR__ . '/includes/endpoint/wcag-endpoint.php';
     new WCAGEndpoint;
     
