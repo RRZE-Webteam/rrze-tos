@@ -31,6 +31,7 @@ function create_form($email = '') {
         if(isset($errors) AND !count($errors)) {
             if (in_array($salted, $form_values['ans'])) { 
                 echo '<h2>Vielen Dank! Wir werden uns umgehend bei Ihnen melden!</h2>';
+                sendMail($form_values['feedback'], $form_values['email'], $form_values['name']);
                 $flag = 1;
             } else {
                 $errors['newcaptcha'] = 'Falsches Captcha! Versuchen Sie es erneut.';
@@ -103,5 +104,16 @@ function checkErrors($values) {
     }
     
     return $hasErrors;
+    
+}
+
+function sendMail($feedback, $from, $name) {
+    
+    $to = 'bernhard.mehler@gmail.com';
+    $subject = 'Feedback-Formular WCAG Prüfung der Webseite';
+    $message = $feedback;
+    $headers = 'From:'. $name .'<'. $from .'>;' . "\r\n";
+    
+    wp_mail( $to, $subject, $message );
     
 }
