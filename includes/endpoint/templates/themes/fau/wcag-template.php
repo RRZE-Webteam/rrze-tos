@@ -124,6 +124,7 @@ get_header(); ?>
                                 <?php the_content();
                              } 
                         endwhile; ?>
+                        <?php echo do_shortcode('[admins]'); ?>
                         <?php echo do_shortcode('[contact]'); ?>
                     </main>
                 </div>
