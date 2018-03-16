@@ -19,7 +19,7 @@ function create_form($email = '') {
     
     $captcha_array = getCaptcha();
     
-    //print_r($captcha_array);
+    print_r($captcha_array['task_encrypted']);
     
     if(isset($_POST['submit'])) {
        
@@ -27,8 +27,15 @@ function create_form($email = '') {
         $errors = checkErrors($form_values);
         
         $ans = $form_values['captcha'];
-        echo $ans;
+        echo '<pre>';
+        print_r($ans);
+        echo '</pre>';
+      
         $checksum = md5($ans);
+      
+        echo '<pre>';
+        print_r($checksum);
+        echo '</pre>';
         $saltet = md5($checksum.$salt);
         echo '<pre>';
         print_r($saltet);
@@ -42,7 +49,7 @@ function create_form($email = '') {
     $output  =  '<h2>Probleme bei der Bedienung der Seite?</h2>';
     $output .=  '<p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!</p><br />';
     $output .=  '<form method="post" id="captchaform">';
-    $encry = md5($captcha_array['task_encrypted']);
+    $encry = md5($captcha_array['task_encrypted'].$salt);
     $output .=  '<p><input type="hidden" name="ans[]" value="' . $encry . '"/></p>';
     $output .=  (isset($errors['feedback']) ? '<div style="color:red;">' . $errors['feedback'] . '</div>' : '');
     $output .=  '<p><label for="feedback">Ihr Feedback</label>';
@@ -77,9 +84,9 @@ function checkErrors($values) {
         if($_POST['captcha'] =='') {
             $hasErrors['captcha'] = "Bitte geben Sie das Captcha ein.";
         }
-        if(!preg_match($pattern, $_POST['captcha'])) {
+        /*if(!preg_match($pattern, $_POST['captcha'])) {
             $hasErrors['tomany'] = "Sie können nur eine Ziffer eingeben";
-        }
+        }*/
     }
     
     return $hasErrors;
