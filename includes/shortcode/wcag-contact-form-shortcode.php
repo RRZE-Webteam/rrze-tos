@@ -1,9 +1,82 @@
 <?php
 namespace RRZE\Wcag;
 
-add_shortcode('contact', 'RRZE\WCag\show_contact_form'); 
+add_shortcode('contact', 'RRZE\WCag\contact_shortcode'); 
 
-function show_contact_form( $atts ) {
+function contact_shortcode( $atts ) {
+
+$atts = shortcode_atts( 
+    array(
+      'field-one'   => 'name,text,name-id',
+      'field-two'   => 'email,text,email-id',
+      'field-three' => 'feedback,textarea,textarea-id',
+      'field-four'  => 'captcha,text,captcha-id',
+      'field-five'  => 'answer,hidden,hidden-id'
+    ), $atts);
+
+    $filter = array_filter($atts);
+
+    foreach($filter as $key => $value) {
+      $fields[] = explode(",", $value);
+    }
+
+    return generateForm($fields);
+}
+
+function generateForm($fields) {
+    
+    $salt = getSalt();
+    $captcha_array = getCaptcha();
+    $encrypted = md5($captcha_array['task_encrypted'].$salt);
+    
+    echo '<pre>';
+    print_r($captcha_array);
+    echo '</pre>';
+    
+    echo $salt;
+
+    if(isset($_POST['submit'])) {
+
+      echo '<pre>';
+      print_r($_POST);
+      echo '</pre>';
+
+    }
+
+?>
+ <form method="post" id="feedback_form">
+  <?php 
+    for($i = 0; $i < sizeof($fields); $i++) {
+      switch($fields[$i][1]) {
+        case 'text': 
+            if($fields[$i][0] == 'captcha') { ?>
+            <p>
+                <label for="check">Lösen Sie folgende Aufgabe:</label><br />
+                <?php echo $captcha_array['task_string'] . ' '?><input type="text" name="captcha" id="check" >
+            </p>
+           <?php } else {?>
+            <p>
+                <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label><br />
+                <input type="text" name=<?php echo $fields[$i][0] ?> id=<?php echo $fields[$i][2] ?> placeholder=<?php echo ucfirst($fields[$i][0]) ?>>
+           </p><?php } break;
+        case 'textarea': ?>
+            <p>
+                <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label>
+                <textarea name=<?php echo $fields[$i][0] ?>  id=<?php echo $fields[$i][2] ?> cols="150" rows="10"></textarea>
+            </p><?php break;
+        case 'hidden': ?>
+            <p>
+                <input type="hidden" class="form-control" name=<?php echo $fields[$i][0].'[]'?> value=<?php echo $encrypted ?>>
+            </p><?php break;
+      }
+    }?>
+    <input type="submit" name="submit" form="feedback_form"value="Senden" >
+  </form>
+<?php }
+
+
+
+/*function show_contact_form( $atts ) {
 
     $rrze_wcag_atts = shortcode_atts( array(
         'email' => '',
@@ -116,4 +189,4 @@ function sendMail($feedback, $from, $name) {
     
     wp_mail( $to, $subject, $message );
     
-}
+}*/
