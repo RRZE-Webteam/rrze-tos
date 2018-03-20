@@ -20,67 +20,6 @@ if (isset($options['breadcrumb_root'])) {
     $breadcrumb .= '<a data-wpel-link="internal" href="' . site_url('/') . '">' . $options['breadcrumb_root'] . '</a>';
 }
 
-/* Captcha */
-
-$matching_numbers = array(
-    'eins'  => 1,
-    'zwei'  => 2,
-    'drei'  => 3,
-    'vier'  => 4,
-    'fünf'  => 5,
-    'sechs' => 6,
-    'sieben'=> 7,
-    'acht'  => 8,
-    'neun'  => 9
-);
-
-$operator = array(
-    '+' => 'plus',
-    '*' => 'mal'
-);
-
-$min_number = 1;
-$max_number = 9;
-
-$random_number1 = mt_rand($min_number, $max_number);
-$random_number2 = mt_rand($min_number, $max_number);
-$random_operator = array_rand($operator, 1);
-
-$figure = array_search($random_number2, $matching_numbers);
-
-$op = $operator[$random_operator[0]];
-
-$solution = $random_number1 . ' ' . $operator[$random_operator[0]] . ' ' . $figure;
-
-$flipped = array_flip($matching_numbers);
-
-$opflipped = array_search($op, $operator);
-
-switch ($op) {
-  case 'plus':
-    $output = $random_number1 + $random_number2;
-    break;
-  case 'minus':
-    $output = $random_number1 - $random_number2;
-    break;
-  case 'mal':
-    $output = $random_number1 * $random_number2;
-    break;
-}
-
-$salt = 'Ng<RX12m_i,jN:DSzW J*8lX-8uDmniw!7mIowxigB#+Fb+KcW$?phRDk|<)YGf|';
-//delete_option('captcha');
-/*if(!isset($_POST['submit'])) {
-   $captcha = array(
-       'answers' => array(
-           md5($output)
-        )
-   );
-   add_option('captcha', $captcha);
-}*/
-
-$flag = 0;
-
 global $post;
 
 $args = array( 'post_type' => 'wcag' );
@@ -124,8 +63,15 @@ get_header(); ?>
                                 <?php the_content();
                              } 
                         endwhile; ?>
-                        <?php echo do_shortcode('[admins]'); ?>
-                        <?php echo do_shortcode('[contact]'); ?>
+                                <?php echo do_shortcode('[admins]'); ?>
+                                <h2>Probleme bei der Bedienung der Seite?</h2>
+                                <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!</p>
+                        
+                        <?php echo do_shortcode('[contact field-one="name,text,name-id" '
+                                . 'field-two="email,text,email-id" '
+                                . 'field-three="feedback,textarea,textarea-id" '
+                                . 'field-four="captcha,text,captcha-id" '
+                                . 'field-five="answer,hidden,hidden-id"]'); ?>
                     </main>
                 </div>
 
