@@ -28,10 +28,13 @@ function generateForm($fields) {
     $salt = getSalt();
     $captcha_array = getCaptcha();
     $encrypted = md5($captcha_array['task_encrypted'].$salt);
+    $flag = 0;
     
-    echo '<pre>';
+    print_r($encrypted);
+    
+   /* echo '<pre>';
     print_r($captcha_array);
-    echo '</pre>';
+    echo '</pre>';*/
     
     echo $salt;
 
@@ -43,18 +46,37 @@ function generateForm($fields) {
       
       $values = assignPostValues($_POST);
       
-      echo '<pre>';
-      print_r($values);
-      echo '</pre>';
+     
+    $hasErrors = checkErrors($values);
       
-      $hasErrors = checkErrors($values);
-      
-        echo '<pre>';
-      print_r($hasErrors);
-      echo '</pre>';
+    $ans = $values['captcha'];
+    $checksum = md5($ans);
+    $salted = md5($checksum.$salt);
+    
+    print_r($salted);
+    print_r($values['answer'][0]);
+    
+    
+    
+    //if(isset($hasErrors) AND !count($hasErrors)) {
+            if (in_array($salted, $values['answer'])) { 
+                echo '<h2>Vielen Dank! Wir werden uns umgehend bei Ihnen melden!</h2>';
+                $flag = 1;
+                //echo '<h2>Vielen Dank! Wir werden uns umgehend bei Ihnen melden!</h2>';
+                //sendMail($form_values['feedback'], $form_values['email'], $form_values['name']);
+                //$flag = 1;
+            } else {
+                $flag = 0;
+                $hasErrors['captcha'] = 'Falsches Captcha! Versuchen Sie es erneut.';
+                //echo $errors['captcha'];
+                //$flag = 0;
+            }
+        
+        }
 
-    }
-
+   // }
+    
+if($flag == 0) {
 ?>
  <form method="post" id="feedback_form">
   <?php 
@@ -63,16 +85,25 @@ function generateForm($fields) {
         case 'text': 
             if($fields[$i][0] == 'captcha') { ?>
             <p>
+                <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
+                <div style="color:red"><?php echo $hasErrors[$fields[$i][0]] ?></div>
+                <?php } ?>
                 <label for="check">Lösen Sie folgende Aufgabe:</label><br />
                 <?php echo $captcha_array['task_string'] . ' '?><input type="text" name="captcha" id="check" >
             </p>
            <?php } else {?>
             <p>
+                <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
+                <div style="color:red"><?php echo $hasErrors[$fields[$i][0]] ?></div>
+                <?php } ?>
                 <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label><br />
                 <input type="text" name=<?php echo $fields[$i][0] ?> id=<?php echo $fields[$i][2] ?> placeholder=<?php echo ucfirst($fields[$i][0]) ?>>
            </p><?php } break;
         case 'textarea': ?>
             <p>
+                <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
+                <div style="color:red"><?php echo $hasErrors[$fields[$i][0]] ?></div>
+                <?php } ?>
                 <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label>
                 <textarea name=<?php echo $fields[$i][0] ?>  id=<?php echo $fields[$i][2] ?> cols="150" rows="10"></textarea>
             </p><?php break;
@@ -84,13 +115,15 @@ function generateForm($fields) {
     }?>
     <input type="submit" name="submit" form="feedback_form"value="Senden" >
   </form>
-<?php }
+<?php } }
 
 function assignPostValues($post) {
 
     foreach($post as $key => $value) {
         if($key != 'answer') {
             $a[$key] = strip_tags(htmlspecialchars($value));
+        } else {
+            $a[$key] = $value;
         }
     }
 
@@ -99,10 +132,14 @@ function assignPostValues($post) {
 
 function checkErrors($a) {
     foreach($a as $key1 => $value1) {
-        if($value1 === ' ') {
+        if($value1 === '') {
             $hasErrors[$key1] = 'Bitte ' . ucfirst($key1) . ' eingeben.';
         }elseif($key1 == 'email' && !filter_var($value1, FILTER_VALIDATE_EMAIL)) {
             $hasErrors[$key1] = 'Falsche Format für ' . $key1;
+        }elseif($key1 == 'captcha' && !preg_match('/^[0-9]{1,2}$/', $_POST['captcha'])) {
+            $hasErrors[$key1] = 'Sie können maximal zwei Ziffern eingeben';
+        }else{
+           $hasErrors[] = '';
         }
     }
 
