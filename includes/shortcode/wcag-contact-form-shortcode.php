@@ -40,6 +40,18 @@ function generateForm($fields) {
       echo '<pre>';
       print_r($_POST);
       echo '</pre>';
+      
+      $values = assignPostValues($_POST);
+      
+      echo '<pre>';
+      print_r($values);
+      echo '</pre>';
+      
+      $hasErrors = checkErrors($values);
+      
+        echo '<pre>';
+      print_r($hasErrors);
+      echo '</pre>';
 
     }
 
@@ -73,6 +85,32 @@ function generateForm($fields) {
     <input type="submit" name="submit" form="feedback_form"value="Senden" >
   </form>
 <?php }
+
+function assignPostValues($post) {
+
+    foreach($post as $key => $value) {
+        if($key != 'answer') {
+            $a[$key] = strip_tags(htmlspecialchars($value));
+        }
+    }
+
+    return $a;
+}
+
+function checkErrors($a) {
+    foreach($a as $key1 => $value1) {
+        if($value1 === ' ') {
+            $hasErrors[$key1] = 'Bitte ' . ucfirst($key1) . ' eingeben.';
+        }elseif($key1 == 'email' && !filter_var($value1, FILTER_VALIDATE_EMAIL)) {
+            $hasErrors[$key1] = 'Falsche Format für ' . $key1;
+        }
+    }
+
+    return $hasErrors;
+}
+
+
+
 
 
 
