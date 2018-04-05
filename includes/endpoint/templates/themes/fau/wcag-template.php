@@ -64,14 +64,15 @@ get_header(); ?>
                              } 
                         endwhile; ?>
                                 <?php echo do_shortcode('[admins]'); ?>
-                                <h2>Probleme bei der Bedienung der Seite?</h2>
+                                <h3>Probleme bei der Bedienung der Seite?</h3>
                                 <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!</p>
                         
                         <?php echo do_shortcode('[contact field-one="name,text,name-id" '
                                 . 'field-two="email,text,email-id" '
                                 . 'field-three="feedback,textarea,textarea-id" '
                                 . 'field-four="captcha,text,captcha-id" '
-                                . 'field-five="answer,hidden,hidden-id"]'); ?>
+                                . 'field-five="answer,hidden,hidden-id" '
+                                . 'field-six="timeout,hidden,timeout-id"]'); ?>
                     </main>
                 </div>
 

@@ -11,7 +11,9 @@ $atts = shortcode_atts(
       'field-two'   => '',
       'field-three' => '',
       'field-four'  => '',
-      'field-five'  => ''
+      'field-five'  => '',
+      'field-six'   => '',
+      'timeout'     =>  3, 
     ), $atts);
 
     $filter = array_filter($atts);
@@ -19,16 +21,23 @@ $atts = shortcode_atts(
     foreach($filter as $key => $value) {
       $fields[] = explode(",", $value);
     }
+    
+    /*echo '<pre>';
+    print_r($fields);
+    echo '</pre>';*/
 
     return generateForm($fields);
 }
 
-function generateForm($fields) {
+function generateForm($values) {
     
     $salt = getSalt();
     $captcha_array = getCaptcha();
     $encrypted = md5($captcha_array['task_encrypted'].$salt);
     $flag = 0;
+    
+    $fields = $values;
+    $timeout = array_pop($fields);
     
     if(isset($_POST['submit'])) {
 
@@ -38,6 +47,8 @@ function generateForm($fields) {
         print_r($values);
         echo '</pre>';
         
+        $current_time = time();
+        $submitted = $values['timeout'] + $timeout[0];
         
         $hasErrors = checkErrors($values);
         $ans = $values['captcha'];
@@ -46,7 +57,9 @@ function generateForm($fields) {
         $clean = array_filter($hasErrors);
         
         if(isset($clean) && !count($clean)) {
-            if ($salted === $values['answer']) { 
+            if ($current_time < $submitted) {
+                echo 'Du bist ein Bot!';
+            } elseif ($salted === $values['answer']) { 
                 echo '<h2>Vielen Dank! Wir werden uns umgehend bei Ihnen melden!</h2>';
                 sendMail($values['feedback'], $values['email'], $values['name']);
                 $flag = 1;
@@ -89,10 +102,16 @@ function generateForm($fields) {
                         <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label>
                         <textarea name=<?php echo $fields[$i][0] ?>  id=<?php echo $fields[$i][2] ?> cols="150" rows="10"><?php echo (isset($_POST['submit'])) ? $values[$fields[$i][0]] : ''?></textarea>
                     </p><?php break;
-                case 'hidden': ?>
-                    <p>
-                        <input type="hidden" class="form-control" name=<?php echo $fields[$i][0].'[]'?> value=<?php echo $encrypted ?>>
-                    </p><?php break;
+                case 'hidden': 
+                    if($fields[$i][0] == 'answer') { ?>
+                        <p>
+                            <input type="hidden" class="form-control" name=<?php echo $fields[$i][0].'[]'?> value=<?php echo $encrypted ?>>
+                        </p><?php
+                    } else { ?>
+                        <p>
+                            <input type="hidden" class="form-control" name=<?php echo $fields[$i][0] ?> value=<?php echo time() ?>>
+                        </p><?php break;
+                    }
               }
             }?>
             <input type="submit" name="submit" form="feedback_form"value="Senden" >

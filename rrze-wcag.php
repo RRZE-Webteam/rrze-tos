@@ -4,7 +4,7 @@
  * Plugin Name:     WACG
  * Plugin URI:      https://gitlab.rrze.fau.de/rrze-webteam/rrze-wcag.git
  * Description:     WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den Konformitätskriterien der WCAG.
- * Version:         0.1.1
+ * Version:         0.1.2
  * Author:          RRZE-Webteam
  * Author URI:      https://blogs.fau.de/webworking/
  * License:         GNU General Public License v2
