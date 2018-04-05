@@ -7,7 +7,7 @@ add_shortcode('admins', 'RRZE\WCag\show_admins');
 function show_admins ($atts) {
 
     $atts = shortcode_atts( array(
-        'role'      => ' administrator',
+        'role'      => '',
         'exclude'   => ''
     ), $atts, 'admins' );
     
@@ -20,45 +20,29 @@ function show_admins ($atts) {
 
 function get_info($role, $exclude) {
     
-    $args = array(
-        'role'      => $role,
-        'exclude'   => ''
-    );
+    $host = $_SERVER['SERVER_NAME'];
+    echo 'https://www.wmp.rrze.fau.de/api/domain/metadata/www.'. $host;
     
-    //echo '<h3>Für diesen Webauftritt sind folgende Personen verantwortlich:</h3>';
-    
-    $my_user_query = new \WP_User_Query( $args );
- 
-    $admins = $my_user_query->get_results();
-    
-    $count_admins = count($admins);
-    
-    echo '<h3 style="margin-top:30px;">Für diesen Webauftritt ' . ($count_admins > 1 ? 'sind folgende Personen' : 'ist folgende Person') .' (Webmaster) verantwortlich:</h3>';
-    
-    if ( ! empty( $admins ) ) {
+    $response = file_get_contents( 'http://remoter.dev/wcag-test.json' );
+    $res = json_decode($response, TRUE);
+   
+    echo '<h3>Für diesen Webauftritt sind folgende Personen verantwortlich:</h3>';
+    $i = 0;
+    if ( !empty( $res ) ) {
  
         echo '<ul class="admins-list">';
 
-            foreach ( $admins as $admin ) {
-
-                $admin_info = get_userdata( $admin->ID );
-                $sep = substr($admin->user_email, 0, strpos($admin->user_email, '@'));
-                $ex = explode('.', $sep);
-                $name = '';
-                foreach($ex as $key => $value) {
-                    $name .= ucfirst($value) . ' ';
-                }
+            foreach ( $res['metadata'] as $admin ) {
                
-
-                echo '<li>' . $name . ' ' . '(E-Mail: <a href="mailto:' . $admin->user_email . '?Subject=Anfrage zur Barrierefreiheit ihres Webauftritts">' . $admin->user_email . ')</a></li>';
-
-            }
+               echo '<li>' . $admin['vorname'] . ' ' . $admin['nachname'] . ($i == 0 ? ' (Verantwortliche/er)' : ' (Webmaster)') . ',' . ' E-Mail: <a href="mailto:' . $admin['email'] . '?Subject=Anfrage zur Barrierefreiheit ihres Webauftritts">' .  $admin['email'] . '</a></li>';
+               $i++;
+           }
 
         echo '</ul>';
  
     } else {
         
-        echo __( 'No editors found!', 'tutsplus' );
+        echo __( 'No persons found!', 'rrze-wcag' );
 
     }
     
