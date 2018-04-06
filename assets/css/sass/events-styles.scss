@@ -1,0 +1,70 @@
+.wcag-h2 {
+    font-size: 1.750em;
+}
+
+.wcag-h3 {
+    margin-bottom: 10px;
+}
+
+input:not(:disabled):not([type="submit"]) {
+    width: 400px;
+}
+
+.wcag-pass:before {
+    font-family: FontAwesome;
+    font-size: 2em;
+    content: "\f00c";
+    color: green;
+    padding-right: 13px;
+    vertical-align: -20%;
+}
+
+.wcag-pass {
+    font-size: 1em;
+    color: green;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.wcag-fail:before {
+   font-family: FontAwesome;
+   font-size: 2em;
+   content: "\f00d";
+   color: red;
+   padding-right: 13px;
+   vertical-align: -20%;
+}
+
+.wcag-fail {
+    font-size: 1em;
+    color: red;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+@media (min-width: 768px) {
+    .wcag-pass:before {
+       font-size: 2.5em;
+    }
+
+    .wcag-pass {
+        font-size: 1.25em;
+    }
+
+    .wcag-fail:before {
+       font-size: 2.5em;
+    }
+
+    .wcag-fail {
+        font-size: 1.25em;
+    }
+    
+    textarea {
+        width: 750px !important;
+        display:block;
+    }
+    
+    #feedback_form {
+        margin-bottom: 100px;
+    }
+}

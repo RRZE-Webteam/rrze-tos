@@ -26,7 +26,7 @@ function get_info($role, $exclude) {
     $response = file_get_contents( 'http://remoter.dev/wcag-test.json' );
     $res = json_decode($response, TRUE);
    
-    echo '<h3>Für diesen Webauftritt sind folgende Personen verantwortlich:</h3>';
+    echo '<h3 class="wcag-h3">Für diesen Webauftritt sind folgende Personen verantwortlich:</h3>';
     $i = 0;
     if ( !empty( $res ) ) {
  
