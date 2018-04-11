@@ -43,7 +43,7 @@ Class WCAGEndpoint {
     }
     
     function rewrite() {
-        add_rewrite_endpoint($this->options['endpoint_slug'], EP_PERMALINK );
+        add_rewrite_endpoint($this->options['endpoint_slug'], EP_ROOT );
     }
     
     function endpoint_template_redirect() {
@@ -72,5 +72,4 @@ Class WCAGEndpoint {
     }
     
 }
-
 ?>

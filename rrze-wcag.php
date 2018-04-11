@@ -45,6 +45,15 @@ function activation() {
 
     // Überprüft die minimal erforderliche PHP- u. WP-Version.
     system_requirements();
+    
+    require_once __DIR__ . '/includes/endpoint/wcag-endpoint.php';
+    $obj = new WCAGEndpoint;
+    $obj->default_options();
+    $obj->rewrite();
+    
+    flush_rewrite_rules();
+    
+    
 
     // Ab hier können die Funktionen hinzugefügt werden, 
     // die bei der Aktivierung des Plugins aufgerufen werden müssen.
@@ -56,6 +65,7 @@ function activation() {
  * @return void
  */
 function deactivation() {
+    flush_rewrite_rules();
     // Hier können die Funktionen hinzugefügt werden, die
     // bei der Deaktivierung des Plugins aufgerufen werden müssen.
     // Bspw. wp_clear_scheduled_hook, flush_rewrite_rules, etc.
@@ -101,6 +111,7 @@ function loaded() {
     require_once __DIR__ . '/includes/shortcode/wcag-admin-information-shortcode.php';
     require_once __DIR__ . '/includes/endpoint/wcag-endpoint.php';
     new WCAGEndpoint;
+    require_once __DIR__ . '/includes/menu/wcag-add-footer-menu.php';
     
     // Ab hier können weitere Funktionen bzw. Klassen angelegt werden.
 }
