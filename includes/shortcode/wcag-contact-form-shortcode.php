@@ -154,8 +154,8 @@ function sendMail($feedback, $from, $name) {
     $to = 'bernhard.mehler@gmail.com';
     $subject = 'Feedback-Formular WCAG Prüfung der Webseite';
     $message = $feedback;
-    $headers = 'From:'. $name .'<'. $from .'>;' . "\r\n";
+    $headers = "From: $name <$from>" . "\r\n";
     
-    wp_mail( $to, $subject, $message );
+    wp_mail( $to, $subject, $message, $headers );
     
 }
