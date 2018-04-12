@@ -81,7 +81,7 @@ function generateForm($values) {
                     if($fields[$i][0] == 'captcha') { ?>
                     <p>
                         <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
-                        <div style="color:red"><?php echo $hasErrors[$fields[$i][0]] ?></div>
+                        <div class="error"><?php echo $hasErrors[$fields[$i][0]] ?></div>
                         <?php } ?>
                         <label for="check">Lösen Sie folgende Aufgabe:</label><br />
                         <?php echo $captcha_array['task_string'] . ' '?><input type="text" name="captcha" id="check" >
@@ -89,7 +89,7 @@ function generateForm($values) {
                    <?php } else {?>
                     <p>
                         <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
-                        <div style="color:red"><?php echo $hasErrors[$fields[$i][0]] ?></div>
+                        <div class="error"><?php echo $hasErrors[$fields[$i][0]] ?></div>
                         <?php } ?>
                         <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label><br />
                         <input type="text" name=<?php echo $fields[$i][0] ?> id=<?php echo $fields[$i][2] ?> placeholder=<?php echo ucfirst($fields[$i][0]) ?> value=<?php echo (isset($_POST['submit'])) ? $values[$fields[$i][0]] : ''?> >
@@ -97,7 +97,7 @@ function generateForm($values) {
                 case 'textarea': ?>
                     <p>
                         <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
-                        <div style="color:red"><?php echo $hasErrors[$fields[$i][0]] ?></div>
+                        <div class="error"><?php echo $hasErrors[$fields[$i][0]] ?></div>
                         <?php } ?>
                         <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label>
                         <textarea name=<?php echo $fields[$i][0] ?>  id=<?php echo $fields[$i][2] ?> cols="150" rows="10"><?php echo (isset($_POST['submit'])) ? $values[$fields[$i][0]] : ''?></textarea>
