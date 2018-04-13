@@ -114,7 +114,7 @@ function generateForm($values) {
                     }
               }
             }?>
-            <input type="submit" name="submit" form="feedback_form"value="Senden" >
+            <input type="submit" class="submit_wcag_form" name="submit" form="feedback_form"value="Senden" >
         </form>
         <?php 
     } 

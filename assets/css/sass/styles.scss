@@ -3,7 +3,11 @@ input[type=text]:focus, textarea:focus {
     border: 1px solid rgba(81, 203, 238, 1);
 }
 
-input[type="submit"] {
+/*input[type="submit"] {
+    margin-bottom: 30px;
+}*/
+
+.submit_wcag_form {
     margin-bottom: 30px;
 }
 
