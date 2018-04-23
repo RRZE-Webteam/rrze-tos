@@ -18,9 +18,11 @@ get_header(); ?>
 <?php } ?>
 <div id="primary" class="content-area">
     <div id="content" class="site-content" role="main">
-        <h2>Prüfungsergebnisse gemäß WCAG 2.0 AA</h2>
+        <h2>WCAG-Prüfung der Website</h2>
+        <p>Die öffentlichen Stellen sind gemäß der <a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1">EU-Richtline</a> über den barrierefreien Zugang zu den Webseites und mobilen Anwendungen öffentlicher Stellen
+            verpflichtet Ihre Websites entsprechend den WCAG Kriterien umzusetzen.
           <p>Diese Webseite wurde gemäß den Konformitätsbedingungen der WCAG geprüft.</p>
-          <h3>Sind die Konformitätskriterien derzeit erfüllt?</h3><br />
+          <h3>Sind die Konformitätskriterien derzeit erfüllt?</h3>
           <?php  
           while ( $loop->have_posts() ) : $loop->the_post();
               $complete = get_post_meta($post->ID, 'wcag_complete', true);
@@ -34,7 +36,9 @@ get_header(); ?>
           endwhile; ?>
                   <?php echo do_shortcode('[admins]'); ?>
                   <h3>Probleme bei der Bedienung der Seite?</h3>
-                  <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!</p>
+                  <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!<br/>
+                    Falls Ihnen nicht geholfen wird, wenden Sie sich bitte an die <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html">Schiedsstelle</a>.</p>
+
 
           <?php echo do_shortcode('[contact field-one="name,text,name-id" '
                   . 'field-two="email,text,email-id" '

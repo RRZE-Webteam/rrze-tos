@@ -11,7 +11,9 @@ function add_page_to_footer_menu() {
         if(has_nav_menu('meta-footer')) {
             $menu_name = 'meta-footer';
             $menu_id = wp_get_nav_menu_object( get_nav_menu_locations( $menu_name )[ $menu_name ] )->term_id;
+           
             $menu_items = wp_get_nav_menu_items($menu_id);
+             error_log(print_r($menu_items, true));
             foreach($menu_items as $menu_item) {
                 $title = $menu_item->title;
                 if($title == 'Barrierefreiheit') {

@@ -21,7 +21,8 @@ function show_admins ($atts) {
 function get_info($role, $exclude) {
     
     $host = $_SERVER['SERVER_NAME'];
-    echo 'https://www.wmp.rrze.fau.de/api/domain/metadata/www.'. $host;
+    
+    #$response = 'https://www.wmp.rrze.fau.de/api/domain/metadata/www.'. $host;
     
     $response = file_get_contents( 'http://remoter.dev/wcag-test.json' );
     $res = json_decode($response, TRUE);
@@ -42,7 +43,7 @@ function get_info($role, $exclude) {
  
     } else {
         
-        echo __( 'No persons found!', 'rrze-wcag' );
+        echo __( 'Keine Einträge gefunden!', 'rrze-wcag' );
 
     }
     

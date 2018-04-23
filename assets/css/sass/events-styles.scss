@@ -6,6 +6,10 @@
     margin-bottom: 10px;
 }
 
+.error {
+    color: red;
+}
+
 input:not(:disabled):not([type="submit"]) {
     width: 400px;
 }

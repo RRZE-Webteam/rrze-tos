@@ -1,3 +1,9 @@
+.error {
+  color: red; }
+
+input[type="text"] {
+  width: 350px !important; }
+
 .wcag-pass:before {
   font-family: FontAwesome;
   font-size: 2em;
