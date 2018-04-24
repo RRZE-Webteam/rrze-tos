@@ -37,7 +37,7 @@ get_header(); ?>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>Barriefreiheitserklärung</h1>
+                    <h1>Barrierefreiheitserklärung</h1>
                 </div>
             </div>
         </div>

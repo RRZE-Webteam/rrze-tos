@@ -101,11 +101,14 @@ function system_requirements() {
 function loaded() {
     // Sprachdateien werden eingebunden.
     add_action( 'wp_enqueue_scripts', 'RRZE\Wcag\rrze_wcag_scripts');
+    add_action( 'admin_enqueue_scripts', 'RRZE\Wcag\rrze_wcag_admin_scripts');
     load_textdomain();
     autoload();
     require_once __DIR__ . '/includes/posttype/wcag-posttype.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox.php';
     require_once __DIR__ . '/includes/posttype/wcag-metabox-save.php';
+    require_once __DIR__ . '/includes/posttype/wcag-metabox-person1.php';
+    require_once __DIR__ . '/includes/posttype/wcag-metabox-person2.php';
     require_once __DIR__ . '/includes/shortcode/wcag-contact-form-captcha.php';
     require_once __DIR__ . '/includes/shortcode/wcag-contact-form-shortcode.php';
     require_once __DIR__ . '/includes/shortcode/wcag-admin-information-shortcode.php';
@@ -131,6 +134,10 @@ function rrze_wcag_scripts() {
     } else {
          wp_enqueue_style( 'wcag_styles_events');
     }
+}
+
+function rrze_wcag_admin_scripts() {
+    wp_enqueue_style('admin-styles', plugins_url('rrze-wcag/assets/css/admin.css', dirname(__FILE__)));
 }
 
 /*
