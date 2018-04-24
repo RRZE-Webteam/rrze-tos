@@ -60,7 +60,7 @@ function get_info() {
     $html .= (!empty($store['verantwortlich']['strasse']) ? '<strong>Anschrift:</strong> ' . $store['verantwortlich']['strasse'] . ', ' . $store['verantwortlich']['ort'] . '<br/>': '');
     $html .= (!empty($store['verantwortlich']['telefon']) ? '<strong>Telefon:</strong> ' . $store['verantwortlich']['telefon'] . '<br/>' : '');
     $html .= '<strong>E-Mail:</strong> ' . $store['verantwortlich']['email'] . '</br>';
-    $html .= (!empty($store['verantwortlich']['telefon']) ? '<strong>Website:</strong> ' . $store['verantwortlich']['homepage'] . '<br/>' : '');
+    $html .= (!empty($store['verantwortlich']['homepage']) ? '<strong>Website:</strong> ' . $store['verantwortlich']['homepage'] . '<br/>' : '');
     $html .= '</td><td>';
     $html .=  $store['webmaster']['vorname'] . ' ' . $store['webmaster']['nachname'] .'<br/>';
     $html .= (!empty($store['webmaster']['strasse']) ? '<strong>Anschrift:</strong> ' . $store['webmaster']['strasse'] . ', ' . $store['webmaster']['ort'] . '<br/>': '');
