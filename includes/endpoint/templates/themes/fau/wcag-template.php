@@ -65,7 +65,6 @@ get_header(); ?>
                                 <?php the_content();
                              } 
                         endwhile; ?>
-                                <?php echo do_shortcode('[admins]'); ?>
                                 <h3>Probleme bei der Bedienung der Seite?</h3>
                                 <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!<br/>
                                     Falls Ihnen nicht geholfen wird, wenden Sie sich bitte an die <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html">Schiedsstelle</a>.</p>
@@ -76,6 +75,7 @@ get_header(); ?>
                                 . 'field-four="captcha,text,captcha-id" '
                                 . 'field-five="answer,hidden,hidden-id" '
                                 . 'field-six="timeout,hidden,timeout-id"]'); ?>
+                        <?php echo do_shortcode('[admins]'); ?>
                     </main>
                 </div>
 
