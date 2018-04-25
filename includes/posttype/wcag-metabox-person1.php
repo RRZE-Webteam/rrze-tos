@@ -5,7 +5,7 @@ namespace RRZE\Wcag;
 function wcag_resp_person_create_metabox() {
     add_meta_box(
         'wcag_resp_person_metabox', // Metabox ID
-        'Responsible', // Title to display
+         __( 'Responsible', 'rrze-wcag' ), // Title to display
         'RRZE\Wcag\wcag_resp_person_render_metabox', // Function to call that contains the metabox content
         'wcag', // Post type to display metabox on
         'normal', // Where to put it (normal = main colum, side = sidebar, etc.)
@@ -51,7 +51,7 @@ function wcag_resp_person_render_metabox() {
         <div>
             <label for="wcag_resp_person_custom_metabox_item_1">
             <?php
-                _e( 'Firstname:', 'wcag_resp_person' );
+                _e( 'Firstname:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -65,7 +65,7 @@ function wcag_resp_person_render_metabox() {
          <div>
             <label for="wcag_resp_person_custom_metabox_item_2">
             <?php
-                _e( 'Lastname:', 'wcag_resp_person' );
+                _e( 'Lastname:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -79,7 +79,7 @@ function wcag_resp_person_render_metabox() {
         <div>
             <label for="wcag_resp_person_custom_metabox_item_3">
             <?php
-                _e( 'Street:', 'wcag_resp_person' );
+                _e( 'Street:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -92,7 +92,7 @@ function wcag_resp_person_render_metabox() {
         <div>
             <label for="wcag_resp_person_custom_metabox_item_4">
             <?php
-                _e( 'City:', 'wcag_resp_person' );
+                _e( 'City:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -105,7 +105,7 @@ function wcag_resp_person_render_metabox() {
         <div>
             <label for="wcag_resp_person_custom_metabox_item_5">
             <?php
-                _e( 'Phone:', 'wcag_resp_person' );
+                _e( 'Phone:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -118,7 +118,7 @@ function wcag_resp_person_render_metabox() {
         <div>
             <label for="wcag_resp_person_custom_metabox_item_6">
             <?php
-                _e( 'E-Mail:', 'wcag_resp_person' );
+                _e( 'E-Mail:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -132,7 +132,7 @@ function wcag_resp_person_render_metabox() {
         <div>
             <label for="wcag_resp_person_custom_metabox_item_7">
             <?php
-                _e( 'Homepage:', 'wcag_resp_person' );
+                _e( 'Homepage:', 'rrze-wcag' );
             ?>
             </label>
             <input

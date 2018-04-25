@@ -5,7 +5,7 @@ namespace RRZE\Wcag;
 function wcag_webmaster_create_metabox() {
     add_meta_box(
         'wcag_webmaster_metabox', // Metabox ID
-        'Webmaster', // Title to display
+         __( 'Webmaster', 'rrze-wcag' ), // Title to display
         'RRZE\Wcag\wcag_webmaster_render_metabox', // Function to call that contains the metabox content
         'wcag', // Post type to display metabox on
         'normal', // Where to put it (normal = main colum, side = sidebar, etc.)
@@ -42,7 +42,7 @@ function wcag_webmaster_render_metabox() {
 
     if ( 200 === $status_code ) {
         $json = file_get_contents( 'http://remoter.dev/wcag-test.json' );
-        #$res = json_decode($json, TRUE);
+        $res = json_decode($json, TRUE);
     }
 
     ?>
@@ -50,7 +50,7 @@ function wcag_webmaster_render_metabox() {
         <div>
             <label for="wcag_webmaster_custom_metabox_item_1">
             <?php
-                _e( 'Firstname:', 'wcag_webmaster' );
+                _e( 'Firstname:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -64,7 +64,7 @@ function wcag_webmaster_render_metabox() {
          <div>
             <label for="wcag_webmaster_custom_metabox_item_2">
             <?php
-                _e( 'Lastname:', 'wcag_webmaster' );
+                _e( 'Lastname:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -78,7 +78,7 @@ function wcag_webmaster_render_metabox() {
         <div>
             <label for="wcag_webmaster_custom_metabox_item_3">
             <?php
-                _e( 'Street:', 'wcag_webmaster' );
+                _e( 'Street:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -91,7 +91,7 @@ function wcag_webmaster_render_metabox() {
         <div>
             <label for="wcag_webmaster_custom_metabox_item_4">
             <?php
-                _e( 'City:', 'wcag_webmaster' );
+                _e( 'City:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -104,7 +104,7 @@ function wcag_webmaster_render_metabox() {
         <div>
             <label for="wcag_webmaster_custom_metabox_item_5">
             <?php
-                _e( 'Phone:', 'wcag_webmaster' );
+                _e( 'Phone:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -117,7 +117,7 @@ function wcag_webmaster_render_metabox() {
         <div>
             <label for="wcag_webmaster_custom_metabox_item_6">
             <?php
-                _e( 'E-Mail:', 'wcag_webmaster' );
+                _e( 'E-Mail:', 'rrze-wcag' );
             ?>
             </label>
             <input
@@ -131,7 +131,7 @@ function wcag_webmaster_render_metabox() {
         <div>
             <label for="wcag_webmaster_custom_metabox_item_7">
             <?php
-                _e( 'Homepage:', 'wcag_webmaster' );
+                _e( 'Homepage:', 'rrze-wcag' );
             ?>
             </label>
             <input
