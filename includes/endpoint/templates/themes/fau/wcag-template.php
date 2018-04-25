@@ -68,6 +68,7 @@ get_header(); ?>
                                 <h3>Probleme bei der Bedienung der Seite?</h3>
                                 <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!<br/>
                                     Falls Ihnen nicht geholfen wird, wenden Sie sich bitte an die <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html">Schiedsstelle</a>.</p>
+                                <h3>Feedback-Formular</h3>
                         
                         <?php echo do_shortcode('[contact field-one="name,text,name-id" '
                                 . 'field-two="email,text,email-id" '
