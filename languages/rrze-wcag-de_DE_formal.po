@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 10:38+0200\n"
+"POT-Creation-Date: 2018-04-26 18:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Sie befinden sich hier:"
 msgstr ""
 
-#: ../includes/menu/wcag-add-footer-menu.php:28
+#: ../includes/menu/wcag-add-footer-menu.php:28 ../includes/settings.php:45
 msgid "Barrierefreiheit"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgid "WCAG"
 msgstr "WCAG"
 
 #: ../includes/posttype/wcag-posttype.php:10
-#: ../includes/posttype/wcag-posttype.php:11 ../includes/settings.php:36
+#: ../includes/posttype/wcag-posttype.php:11
 msgid "WCAG"
 msgstr "WCAG"
 
@@ -167,27 +167,75 @@ msgstr "Wag"
 msgid "WCAG Criteria"
 msgstr "WCAG Erfolgskriterium"
 
-#: ../includes/settings.php:47
-msgid "Settings &rsaquo; WCAG"
+#: ../includes/settings.php:56
+msgid "Settings &rsaquo; Barrierefreiheit"
 msgstr ""
 
-#: ../includes/settings.php:66
-msgid "Field 1"
+#: ../includes/settings.php:75
+msgid "Title"
 msgstr ""
+
+#: ../includes/settings.php:76
+msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
+msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
+
+#: ../includes/settings.php:77
+msgid "If not, with what reason"
+msgstr "Wenn nein, mit welcher Begründung"
+
+#: ../includes/settings.php:79 ../includes/settings.php:87
+msgid "Firstname"
+msgstr "Vorname"
+
+#: ../includes/settings.php:80 ../includes/settings.php:88
+msgid "Lastname"
+msgstr "Nachname"
+
+#: ../includes/settings.php:81 ../includes/settings.php:89
+msgid "Street"
+msgstr "Straße"
+
+#: ../includes/settings.php:82 ../includes/settings.php:90
+msgid "City"
+msgstr "Ort"
+
+#: ../includes/settings.php:83 ../includes/settings.php:91
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../includes/settings.php:84 ../includes/settings.php:92
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: ../includes/settings.php:85 ../includes/settings.php:93
+msgid "Person-ID"
+msgstr "Person-ID"
+
+#: ../includes/settings.php:95
+msgid "Receiver E-Mail"
+msgstr "Empfänger"
 
 #: ../includes/settings.php:96
+msgid "Subject"
+msgstr "Betreff"
+
+#: ../includes/settings.php:97
+msgid "CC"
+msgstr "CC"
+
+#: ../includes/settings.php:242
 msgid "Here comes the Context Help content."
 msgstr ""
 
-#: ../includes/settings.php:102
+#: ../includes/settings.php:248
 msgid "Overview"
 msgstr ""
 
-#: ../includes/settings.php:106
+#: ../includes/settings.php:252
 msgid "For more information"
 msgstr ""
 
-#: ../includes/settings.php:106
+#: ../includes/settings.php:252
 msgid "RRZE Webteam on Github"
 msgstr ""
 

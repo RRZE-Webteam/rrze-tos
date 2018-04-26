@@ -20,11 +20,7 @@ if (isset($options['breadcrumb_root'])) {
     $breadcrumb .= '<a data-wpel-link="internal" href="' . site_url('/') . '">' . $options['breadcrumb_root'] . '</a>';
 }
 
-global $post;
-
-$args = array( 'post_type' => 'wcag' );
-
-$loop = new WP_Query( $args );
+$values = get_option('rrze_wcag');
 
 get_header(); ?>
 
@@ -37,7 +33,7 @@ get_header(); ?>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <h1>Barrierefreiheitserklärung</h1>
+                    <h1><?php echo (isset($values['rrze_wcag_field_1']) ? $values['rrze_wcag_field_1'] : 'Barrierefreiheitserklärung') ?></h1>
                 </div>
             </div>
         </div>
@@ -55,19 +51,18 @@ get_header(); ?>
                         Diese Webseite wurde gemäß den Konformitätsbedingungen der WCAG geprüft.</p>
                         <h3>Sind die Konformitätskriterien derzeit erfüllt?</h3>
                         <?php  
-                        while ( $loop->have_posts() ) : $loop->the_post();
-                            $complete = get_post_meta($post->ID, 'wcag_complete', true);
-                            if($complete == 1) { ?>
+                       
+                            if(isset($values['rrze_wcag_field_2']) && $values['rrze_wcag_field_2'] == 1) { ?>
                                 <p class="wcag-pass">Die Kriterien werden erfüllt.</p>
                             <?php } else { ?>
                                 <p class="wcag-fail">Die Kriterien werden nicht erfüllt.</p>
                                 <p style="margin-top:20px;margin-bottom:20px"><strong>Begründung:</strong></p>
-                                <?php the_content();
-                             } 
-                        endwhile; ?>
+                                <?php echo $values['rrze_wcag_field_3']; ?>
+                               <?php } ?>
                                 <h3>Probleme bei der Bedienung der Seite?</h3>
-                                <p>Sollten Sie Probleme bei der Bedingung der Webseite haben, füllen Sie bitte das Feedback-Formular aus!<br/>
-                                    Falls Ihnen nicht geholfen wird, wenden Sie sich bitte an die <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html">Schiedsstelle</a>.</p>
+                                <h4 class="wcag-h3">Für diesen Webauftritt sind folgende Personen verantwortlich:</h4>
+                                <?php echo do_shortcode('[admins]'); ?>
+                                <p>Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an muster@fau.de oder füllen Sie das Feedback-Formular aus!</p>
                                 <h3>Feedback-Formular</h3>
                         
                         <?php echo do_shortcode('[contact field-one="name,text,name-id" '
@@ -76,7 +71,8 @@ get_header(); ?>
                                 . 'field-four="captcha,text,captcha-id" '
                                 . 'field-five="answer,hidden,hidden-id" '
                                 . 'field-six="timeout,hidden,timeout-id"]'); ?>
-                        <?php echo do_shortcode('[admins]'); ?>
+                                 <p class="complaint">Sollten Sie den Eindruck haben, dass Ihnen nicht geholfen wird, können Sie sich an die <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html">Schiedsstelle</a> wenden.<p>
+                        
                     </main>
                 </div>
 

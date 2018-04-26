@@ -39,6 +39,9 @@ input[type=text]:focus, textarea:focus {
   background-color: #f2f2f2;
   padding: 30px; }
 
+.complaint {
+  padding-top: 20px; }
+
 @media (min-width: 768px) {
   input[type=text]:focus, textarea:focus {
     box-shadow: 0 0 5px #51cbee;

@@ -104,11 +104,6 @@ function loaded() {
     add_action( 'admin_enqueue_scripts', 'RRZE\Wcag\rrze_wcag_admin_scripts');
     load_textdomain();
     autoload();
-    require_once __DIR__ . '/includes/posttype/wcag-posttype.php';
-    require_once __DIR__ . '/includes/posttype/wcag-metabox.php';
-    require_once __DIR__ . '/includes/posttype/wcag-metabox-save.php';
-    require_once __DIR__ . '/includes/posttype/wcag-metabox-person1.php';
-    require_once __DIR__ . '/includes/posttype/wcag-metabox-person2.php';
     require_once __DIR__ . '/includes/shortcode/wcag-contact-form-captcha.php';
     require_once __DIR__ . '/includes/shortcode/wcag-contact-form-shortcode.php';
     require_once __DIR__ . '/includes/shortcode/wcag-admin-information-shortcode.php';

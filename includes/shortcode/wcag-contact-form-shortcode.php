@@ -43,9 +43,9 @@ function generateForm($values) {
 
         $values = assignPostValues($_POST);
         
-        echo '<pre>';
+       /* echo '<pre>';
         print_r($values);
-        echo '</pre>';
+        echo '</pre>';*/
         
         $current_time = time();
         $submitted = $values['timeout'] + $timeout[0];
@@ -91,8 +91,8 @@ function generateForm($values) {
                         <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
                         <div class="error"><?php echo $hasErrors[$fields[$i][0]] ?></div>
                         <?php } ?>
-                        <label for=<?php echo $fields[$i][2] ?>><?php echo ucfirst($fields[$i][0]) ?>:</label><br />
-                        <input type="text" name=<?php echo $fields[$i][0] ?> id=<?php echo $fields[$i][2] ?> placeholder=<?php echo ucfirst($fields[$i][0]) ?> value=<?php echo (isset($_POST['submit'])) ? $values[$fields[$i][0]] : ''?> >
+                        <label for=<?php echo $fields[$i][2] ?>><?php echo ($fields[$i][0] == 'email' ? 'E-Mail' : ucfirst($fields[$i][0])) ?>:</label><br />
+                        <input type="text" name=<?php echo $fields[$i][0] ?> id=<?php echo $fields[$i][2] ?> placeholder=<?php echo ($fields[$i][0] == 'email' ? 'E-Mail' : ucfirst($fields[$i][0])) ?> value=<?php echo (isset($_POST['submit'])) ? $values[$fields[$i][0]] : ''?> >
                    </p><?php } break;
                 case 'textarea': ?>
                     <p>
@@ -151,8 +151,10 @@ function checkErrors($a) {
 
 function sendMail($feedback, $from, $name) {
     
-    $to = 'bernhard.mehler@gmail.com';
-    $subject = 'Feedback-Formular WCAG Prüfung der Webseite';
+    $values = get_option('rrze_wcag');
+    
+    $to = $values['rrze_wcag_field_18'];
+    $subject = $values['rrze_wcag_field_19'];
     $message = $feedback;
     $headers = "From: $name <$from>" . "\r\n";
     
