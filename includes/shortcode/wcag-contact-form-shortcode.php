@@ -153,7 +153,19 @@ function sendMail($feedback, $from, $name) {
     
     $values = get_option('rrze_wcag');
     
-    $to = $values['rrze_wcag_field_18'];
+    if(!$values) {
+        
+        $response = wp_remote_get('http://remoter.dev/wcag-test.json');
+        $status_code = wp_remote_retrieve_response_code( $response );
+
+        if ( 200 === $status_code ) {
+            $json = file_get_contents( 'http://remoter.dev/wcag-test.json' );
+            $res = json_decode($json, TRUE);
+        }
+        
+    }
+    
+    $to = (!empty($values['rrze_wcag_field_18']) ? $values['rrze_wcag_field_18'] : $res['metadata']['webmaster']['email']);
     $subject = $values['rrze_wcag_field_19'];
     $message = $feedback;
     $headers = "From: $name <$from>" . "\r\n";

@@ -32,7 +32,7 @@ Class WCAGEndpoint {
     
     function default_options() {
         $this->options = [
-            'endpoint_slug' => 'fa7b70763d9d18f3fd32481907f4b687e4a7ca71a62582ad0cc00f5840cfa9c3',
+            'endpoint_slug' => 'barrierefreiheit',
         ];
         return $this->options;
     }

@@ -26,6 +26,7 @@ class Settings {
         $this->main = $main;
         $this->option_name = $this->main->options->get_option_name();
         $this->options = $this->main->options->get_options();
+        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         $response = wp_remote_get('http://remoter.dev/wcag-test.json');
         $status_code = wp_remote_retrieve_response_code( $response );
 
@@ -82,7 +83,9 @@ class Settings {
         add_settings_field('rrze_wcag_field_7', __('City', 'rrze-wcag'), array($this, 'rrze_wcag_field_7'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
         add_settings_field('rrze_wcag_field_8', __('Phone', 'rrze-wcag'), array($this, 'rrze_wcag_field_8'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
         add_settings_field('rrze_wcag_field_9', __('E-Mail', 'rrze-wcag'), array($this, 'rrze_wcag_field_9'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
-        add_settings_field('rrze_wcag_field_10', __('Person-ID', 'rrze-wcag'), array($this, 'rrze_wcag_field_10'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
+        if(is_plugin_active('fau-person/fau-person.php')) {
+            add_settings_field('rrze_wcag_field_10', __('Person-ID', 'rrze-wcag'), array($this, 'rrze_wcag_field_10'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
+        }
         add_settings_section('rrze_wcag_section_3', 'Webmaster', '__return_false', 'rrze_wcag_options');
         add_settings_field('rrze_wcag_field_11', __('Firstname', 'rrze-wcag'), array($this, 'rrze_wcag_field_11'), 'rrze_wcag_options', 'rrze_wcag_section_3'); 
         add_settings_field('rrze_wcag_field_12', __('Lastname', 'rrze-wcag'), array($this, 'rrze_wcag_field_12'), 'rrze_wcag_options', 'rrze_wcag_section_3'); 
@@ -90,7 +93,9 @@ class Settings {
         add_settings_field('rrze_wcag_field_14', __('City', 'rrze-wcag'), array($this, 'rrze_wcag_field_14'), 'rrze_wcag_options', 'rrze_wcag_section_3'); 
         add_settings_field('rrze_wcag_field_15', __('Phone', 'rrze-wcag'), array($this, 'rrze_wcag_field_15'), 'rrze_wcag_options', 'rrze_wcag_section_3'); 
         add_settings_field('rrze_wcag_field_16', __('E-Mail', 'rrze-wcag'), array($this, 'rrze_wcag_field_16'), 'rrze_wcag_options', 'rrze_wcag_section_3'); 
-        add_settings_field('rrze_wcag_field_17', __('Person-ID', 'rrze-wcag'), array($this, 'rrze_wcag_field_17'), 'rrze_wcag_options', 'rrze_wcag_section_3');
+        if(is_plugin_active('fau-person/fau-person.php')) {
+            add_settings_field('rrze_wcag_field_17', __('Person-ID', 'rrze-wcag'), array($this, 'rrze_wcag_field_17'), 'rrze_wcag_options', 'rrze_wcag_section_3');
+        }
         add_settings_section('rrze_wcag_section_4', 'E-Mail Settings', '__return_false', 'rrze_wcag_options');
         add_settings_field('rrze_wcag_field_18', __('Receiver E-Mail', 'rrze-wcag'), array($this, 'rrze_wcag_field_18'), 'rrze_wcag_options', 'rrze_wcag_section_4'); 
         add_settings_field('rrze_wcag_field_19', __('Subject', 'rrze-wcag'), array($this, 'rrze_wcag_field_19'), 'rrze_wcag_options', 'rrze_wcag_section_4'); 
