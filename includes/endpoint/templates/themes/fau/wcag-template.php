@@ -62,7 +62,7 @@ get_header(); ?>
                                 <h3>Probleme bei der Bedienung der Seite?</h3>
                                 <h4 class="wcag-h3">Für diesen Webauftritt sind folgende Personen verantwortlich:</h4>
                                 <?php echo do_shortcode('[admins]'); ?>
-                                <p>Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an muster@fau.de oder füllen Sie das Feedback-Formular aus!</p>
+                                <p>Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an <a href="mailto:<?php echo $values['rrze_wcag_field_16'] ?>?subject=<?php echo (!empty($values['rrze_wcag_field_19']) ? $values['rrze_wcag_field_19'] : 'Feedback zur Barrierefreiheit des Webauftritts') ?>"><?php echo $values['rrze_wcag_field_16'] ?></a> oder füllen Sie das Feedback-Formular aus!</p>
                                 <h3>Feedback-Formular</h3>
                         
                         <?php echo do_shortcode('[contact field-one="name,text,name-id" '

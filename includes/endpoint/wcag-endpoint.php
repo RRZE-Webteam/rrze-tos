@@ -32,7 +32,8 @@ Class WCAGEndpoint {
     
     function default_options() {
         $this->options = [
-            'endpoint_slug' => 'barrierefreiheit',
+            'endpoint_slug' => __( 'accessible', 'rrze-wcag' ),
+            #'endpoint_slug' => 'barrierefreiheit',
         ];
         return $this->options;
     }

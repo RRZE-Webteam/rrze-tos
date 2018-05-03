@@ -22,6 +22,8 @@ function example_remove_dashboard_widget() {
  	remove_meta_box( 'wcag_dashboard_widget', 'dashboard', 'normal' );
 } 
 
+#add_action('wp_dashboard_setup', 'RRZE\Wcag\wcag_add_dashboard_widgets' );
+
 function the_slug_exists($page_slug) {
 
      $page = get_page_by_path( $page_slug , OBJECT );
@@ -39,8 +41,11 @@ function add_page_to_footer_menu() {
     $menu_entry_option = 'wcag_menu';
     
     if (the_slug_exists('barrierefreiheit')) {
-        error_log(print_r('berni', true));
+        error_log(print_r('ja', true));
         $slug_exists = true;
+    } else {
+        error_log(print_r('nein', true));
+        $slug_exists = false;
     }
     
     if(in_array($current_theme, $themes_fau)) {
@@ -53,7 +58,6 @@ function add_page_to_footer_menu() {
                 $title = $menu_item->title;
                 if($title == 'Barrierefreiheit') {
                     if($menu_item->object != 'custom') {
-                    #if($slug_exists) {
                         add_action('wp_dashboard_setup', 'RRZE\Wcag\wcag_add_dashboard_widgets' );
                     }
                     $used = true;
@@ -64,16 +68,16 @@ function add_page_to_footer_menu() {
     
             if(!$used) {
                 wp_update_nav_menu_item($menu_id, 0, array(
-                    'menu-item-title' =>  __('Barrierefreiheit','rrze-wcag'),
+                    'menu-item-title' =>  __('Accessible','rrze-wcag'),
                     'menu-item-classes' => 'wcag',
-                    'menu-item-url' => home_url('/barrierefreiheit'), 
+                    'menu-item-url' => home_url(__('/accessible','rrze-wcag')), 
                     'menu-item-status' => 'publish')
                 );
             }
         } else {
             add_action('wp_dashboard_setup', 'RRZE\Wcag\wcag_add_dashboard_menu_widgets' );
         }
-    }  
+    }
 }
 
 add_action('init', 'RRZE\Wcag\add_page_to_footer_menu');

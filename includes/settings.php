@@ -43,7 +43,7 @@ class Settings {
      * @return void
      */
     public function admin_settings_page() {
-        $this->admin_settings_page = add_options_page(__('Barrierefreiheit', 'rrze-wcag'), __('Barrierefreiheit', 'rrze-wcag'), 'manage_options', 'rrze-wcag', array($this, 'settings_page'));
+        $this->admin_settings_page = add_options_page(__('Accessible', 'rrze-wcag'), __('Accessible', 'rrze-wcag'), 'manage_options', 'rrze-wcag', array($this, 'settings_page'));
         add_action('load-' . $this->admin_settings_page, array($this, 'admin_help_menu'));        
     }
     
@@ -54,7 +54,7 @@ class Settings {
     public function settings_page() {
         ?>
         <div class="wrap">
-            <h2><?php echo __('Settings &rsaquo; Barrierefreiheit', 'rrze-wcag'); ?></h2>
+            <h2><?php echo __('Settings &rsaquo; Accessible', 'rrze-wcag'); ?></h2>
             <form method="post" action="options.php">
                 <?php
                 settings_fields('rrze_wcag_options');

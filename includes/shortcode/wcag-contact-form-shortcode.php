@@ -165,10 +165,28 @@ function sendMail($feedback, $from, $name) {
         
     }
     
+    /*$to = (!empty($values['rrze_wcag_field_18']) ? $values['rrze_wcag_field_18'] : $res['metadata']['webmaster']['email']);
+    $subject = $values['rrze_wcag_field_19'];
+    $message = $feedback;
+    $headers[] = "From: <$from>";
+    $cc = (!empty($values['rrze_wcag_field_20']) ? $values['rrze_wcag_field_20'] : '');
+    if(!empty($cc)) {
+        $headers[] = "CC: <$cc>";
+    }
+    
+    wp_mail( $to, $subject, $message, $headers );*/
+    
     $to = (!empty($values['rrze_wcag_field_18']) ? $values['rrze_wcag_field_18'] : $res['metadata']['webmaster']['email']);
     $subject = $values['rrze_wcag_field_19'];
     $message = $feedback;
-    $headers = "From: $name <$from>" . "\r\n";
+    $headers[] = "From: <$from>";
+    $cc = (!empty($values['rrze_wcag_field_20']) ? $values['rrze_wcag_field_20'] : '');
+    $cc_addr = explode(",", $cc);
+    if(!empty($cc)) {
+        foreach($cc_addr as $cc => $value) {
+            $headers[] = "CC: <$value>";
+        }
+    }
     
     wp_mail( $to, $subject, $message, $headers );
     

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 18:01+0200\n"
+"POT-Creation-Date: 2018-05-03 17:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -25,217 +25,87 @@ msgstr ""
 msgid "Sie befinden sich hier:"
 msgstr ""
 
-#: ../includes/menu/wcag-add-footer-menu.php:28 ../includes/settings.php:45
-msgid "Barrierefreiheit"
-msgstr ""
+#: ../includes/endpoint/wcag-endpoint.php:35
+msgid "accessible"
+msgstr "barrierefreiheit"
 
-#: ../includes/posttype/wcag-metabox-person1.php:8
-msgid "Responsible"
-msgstr "Verantwortliche/er"
+#: ../includes/menu/wcag-add-footer-menu.php:71 ../includes/settings.php:46
+msgid "Accessible"
+msgstr "Barrierefreiheit"
 
-#: ../includes/posttype/wcag-metabox-person1.php:54
-#: ../includes/posttype/wcag-metabox-person2.php:53
-msgid "Firstname:"
-msgstr "Vorname:"
+#: ../includes/menu/wcag-add-footer-menu.php:73
+msgid "/accessible"
+msgstr "/barrierefreiheit"
 
-#: ../includes/posttype/wcag-metabox-person1.php:68
-#: ../includes/posttype/wcag-metabox-person2.php:67
-msgid "Lastname:"
-msgstr "Nachname:"
-
-#: ../includes/posttype/wcag-metabox-person1.php:82
-#: ../includes/posttype/wcag-metabox-person2.php:81
-msgid "Street:"
-msgstr "Strasse:"
-
-#: ../includes/posttype/wcag-metabox-person1.php:95
-#: ../includes/posttype/wcag-metabox-person2.php:94
-msgid "City:"
-msgstr "Ort:"
-
-#: ../includes/posttype/wcag-metabox-person1.php:108
-#: ../includes/posttype/wcag-metabox-person2.php:107
-msgid "Phone:"
-msgstr "Telefon:"
-
-#: ../includes/posttype/wcag-metabox-person1.php:121
-#: ../includes/posttype/wcag-metabox-person2.php:120
-msgid "E-Mail:"
-msgstr "E-Mail:"
-
-#: ../includes/posttype/wcag-metabox-person1.php:135
-#: ../includes/posttype/wcag-metabox-person2.php:134
-msgid "Homepage:"
-msgstr "Homepage:"
-
-#: ../includes/posttype/wcag-metabox-person2.php:8
-msgid "Webmaster"
-msgstr "Webmaster"
-
-#: ../includes/posttype/wcag-metabox.php:16
-msgid "WCAG Criteria accomplished?"
-msgstr "Sind die Konformitätsbedingungen der WCAG 2.0 erfüllt?"
-
-#: ../includes/posttype/wcag-metabox.php:29
-msgid "Yes"
-msgstr "Ja"
-
-#: ../includes/posttype/wcag-metabox.php:31
-msgid "No"
-msgstr "Nein"
-
-#: ../includes/posttype/wcag-posttype.php:8
-msgctxt "Post Type General Name"
-msgid "WCAG"
-msgstr "WCAG"
-
-#: ../includes/posttype/wcag-posttype.php:9
-msgctxt "Post Type Singular Name"
-msgid "WCAG"
-msgstr "WCAG"
-
-#: ../includes/posttype/wcag-posttype.php:10
-#: ../includes/posttype/wcag-posttype.php:11
-msgid "WCAG"
-msgstr "WCAG"
-
-#: ../includes/posttype/wcag-posttype.php:12
-msgid "Criteria Archives"
-msgstr "Kriterium Archiv"
-
-#: ../includes/posttype/wcag-posttype.php:13
-msgid "Criteria Attributes"
-msgstr "Kriterium Attribute"
-
-#: ../includes/posttype/wcag-posttype.php:14
-msgid "Parent Criteria:"
-msgstr "Übergeordnetes Kriterium"
-
-#: ../includes/posttype/wcag-posttype.php:15
-msgid "All Criteria"
-msgstr "Alle Kriterien"
-
-#: ../includes/posttype/wcag-posttype.php:16
-msgid "Add New Criteria"
-msgstr "Neues Kriterium anlegen"
-
-#: ../includes/posttype/wcag-posttype.php:17
-msgid "Add New"
-msgstr "Kriterium anlegen"
-
-#: ../includes/posttype/wcag-posttype.php:18
-msgid "New Criteria"
-msgstr "Neues Kriterium"
-
-#: ../includes/posttype/wcag-posttype.php:19
-msgid "Edit Criteria"
-msgstr "Kriterium bearbeiten"
-
-#: ../includes/posttype/wcag-posttype.php:20
-msgid "Update Criteria"
-msgstr "Kriterium aktualisieren"
-
-#: ../includes/posttype/wcag-posttype.php:21
-msgid "View Criteria"
-msgstr "Kriterien anzeigen"
-
-#: ../includes/posttype/wcag-posttype.php:22
-msgid "View Criterias"
-msgstr "Kriterien anzeigen"
-
-#: ../includes/posttype/wcag-posttype.php:23
-msgid "Search Criteria"
-msgstr "Kriterium suchen"
-
-#: ../includes/posttype/wcag-posttype.php:24
-msgid "Not found"
-msgstr "Nicht gefunden"
-
-#: ../includes/posttype/wcag-posttype.php:25
-msgid "Not found in Trash"
-msgstr "Nicht im Papierkorb gefunden"
-
-#: ../includes/posttype/wcag-posttype.php:26
-msgid "Filter criteria list"
-msgstr "Filtern"
-
-#: ../includes/posttype/wcag-posttype.php:29
-msgid "wcag"
-msgstr "Wag"
-
-#: ../includes/posttype/wcag-posttype.php:30
-msgid "WCAG Criteria"
-msgstr "WCAG Erfolgskriterium"
-
-#: ../includes/settings.php:56
-msgid "Settings &rsaquo; Barrierefreiheit"
-msgstr ""
-
-#: ../includes/settings.php:75
-msgid "Title"
-msgstr ""
+#: ../includes/settings.php:57
+msgid "Settings &rsaquo; Accessible"
+msgstr "Settings &rsaquo; Barrierefreiheit"
 
 #: ../includes/settings.php:76
+msgid "Title"
+msgstr "Titel"
+
+#: ../includes/settings.php:77
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
 
-#: ../includes/settings.php:77
+#: ../includes/settings.php:78
 msgid "If not, with what reason"
 msgstr "Wenn nein, mit welcher Begründung"
 
-#: ../includes/settings.php:79 ../includes/settings.php:87
+#: ../includes/settings.php:80 ../includes/settings.php:90
 msgid "Firstname"
 msgstr "Vorname"
 
-#: ../includes/settings.php:80 ../includes/settings.php:88
+#: ../includes/settings.php:81 ../includes/settings.php:91
 msgid "Lastname"
 msgstr "Nachname"
 
-#: ../includes/settings.php:81 ../includes/settings.php:89
+#: ../includes/settings.php:82 ../includes/settings.php:92
 msgid "Street"
 msgstr "Straße"
 
-#: ../includes/settings.php:82 ../includes/settings.php:90
+#: ../includes/settings.php:83 ../includes/settings.php:93
 msgid "City"
 msgstr "Ort"
 
-#: ../includes/settings.php:83 ../includes/settings.php:91
+#: ../includes/settings.php:84 ../includes/settings.php:94
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../includes/settings.php:84 ../includes/settings.php:92
+#: ../includes/settings.php:85 ../includes/settings.php:95
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: ../includes/settings.php:85 ../includes/settings.php:93
+#: ../includes/settings.php:87 ../includes/settings.php:97
 msgid "Person-ID"
 msgstr "Person-ID"
 
-#: ../includes/settings.php:95
+#: ../includes/settings.php:100
 msgid "Receiver E-Mail"
 msgstr "Empfänger"
 
-#: ../includes/settings.php:96
+#: ../includes/settings.php:101
 msgid "Subject"
 msgstr "Betreff"
 
-#: ../includes/settings.php:97
+#: ../includes/settings.php:102
 msgid "CC"
 msgstr "CC"
 
-#: ../includes/settings.php:242
+#: ../includes/settings.php:247
 msgid "Here comes the Context Help content."
 msgstr ""
 
-#: ../includes/settings.php:248
+#: ../includes/settings.php:253
 msgid "Overview"
 msgstr ""
 
-#: ../includes/settings.php:252
+#: ../includes/settings.php:257
 msgid "For more information"
 msgstr ""
 
-#: ../includes/settings.php:252
+#: ../includes/settings.php:257
 msgid "RRZE Webteam on Github"
 msgstr ""
 
@@ -252,3 +122,101 @@ msgid ""
 "Your Wordpress version is %s. Please upgrade at least to Wordpress version "
 "%s."
 msgstr ""
+
+#~ msgid "Barrierefreiheit"
+#~ msgstr "Accessible"
+
+#~ msgid "Firstname:"
+#~ msgstr "Vorname:"
+
+#~ msgid "Lastname:"
+#~ msgstr "Nachname:"
+
+#~ msgid "Street:"
+#~ msgstr "Strasse:"
+
+#~ msgid "City:"
+#~ msgstr "Ort:"
+
+#~ msgid "Phone:"
+#~ msgstr "Telefon:"
+
+#~ msgid "E-Mail:"
+#~ msgstr "E-Mail:"
+
+#~ msgid "Homepage:"
+#~ msgstr "Homepage:"
+
+#~ msgid "Webmaster"
+#~ msgstr "Webmaster"
+
+#~ msgid "WCAG Criteria accomplished?"
+#~ msgstr "Sind die Konformitätsbedingungen der WCAG 2.0 erfüllt?"
+
+#~ msgid "Yes"
+#~ msgstr "Ja"
+
+#~ msgid "No"
+#~ msgstr "Nein"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "WCAG"
+#~ msgstr "WCAG"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "WCAG"
+#~ msgstr "WCAG"
+
+#~ msgid "WCAG"
+#~ msgstr "WCAG"
+
+#~ msgid "Criteria Archives"
+#~ msgstr "Kriterium Archiv"
+
+#~ msgid "Criteria Attributes"
+#~ msgstr "Kriterium Attribute"
+
+#~ msgid "Parent Criteria:"
+#~ msgstr "Übergeordnetes Kriterium"
+
+#~ msgid "All Criteria"
+#~ msgstr "Alle Kriterien"
+
+#~ msgid "Add New Criteria"
+#~ msgstr "Neues Kriterium anlegen"
+
+#~ msgid "Add New"
+#~ msgstr "Kriterium anlegen"
+
+#~ msgid "New Criteria"
+#~ msgstr "Neues Kriterium"
+
+#~ msgid "Edit Criteria"
+#~ msgstr "Kriterium bearbeiten"
+
+#~ msgid "Update Criteria"
+#~ msgstr "Kriterium aktualisieren"
+
+#~ msgid "View Criteria"
+#~ msgstr "Kriterien anzeigen"
+
+#~ msgid "View Criterias"
+#~ msgstr "Kriterien anzeigen"
+
+#~ msgid "Search Criteria"
+#~ msgstr "Kriterium suchen"
+
+#~ msgid "Not found"
+#~ msgstr "Nicht gefunden"
+
+#~ msgid "Not found in Trash"
+#~ msgstr "Nicht im Papierkorb gefunden"
+
+#~ msgid "Filter criteria list"
+#~ msgstr "Filtern"
+
+#~ msgid "wcag"
+#~ msgstr "Wag"
+
+#~ msgid "WCAG Criteria"
+#~ msgstr "WCAG Erfolgskriterium"

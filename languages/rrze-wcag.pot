@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMS-Basis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 10:40+0200\n"
+"POT-Creation-Date: 2018-05-03 17:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -26,169 +26,87 @@ msgstr ""
 msgid "Sie befinden sich hier:"
 msgstr ""
 
-#: ../includes/menu/wcag-add-footer-menu.php:28
-msgid "Barrierefreiheit"
+#: ../includes/endpoint/wcag-endpoint.php:35
+msgid "accessible"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:8
-msgid "Responsible"
+#: ../includes/menu/wcag-add-footer-menu.php:71 ../includes/settings.php:46
+msgid "Accessible"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:54
-#: ../includes/posttype/wcag-metabox-person2.php:53
-msgid "Firstname:"
+#: ../includes/menu/wcag-add-footer-menu.php:73
+msgid "/accessible"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:68
-#: ../includes/posttype/wcag-metabox-person2.php:67
-msgid "Lastname:"
+#: ../includes/settings.php:57
+msgid "Settings &rsaquo; Barrierefreiheit"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:82
-#: ../includes/posttype/wcag-metabox-person2.php:81
-msgid "Street:"
+#: ../includes/settings.php:76
+msgid "Title"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:95
-#: ../includes/posttype/wcag-metabox-person2.php:94
-msgid "City:"
+#: ../includes/settings.php:77
+msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:108
-#: ../includes/posttype/wcag-metabox-person2.php:107
-msgid "Phone:"
+#: ../includes/settings.php:78
+msgid "If not, with what reason"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:121
-#: ../includes/posttype/wcag-metabox-person2.php:120
-msgid "E-Mail:"
+#: ../includes/settings.php:80 ../includes/settings.php:90
+msgid "Firstname"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person1.php:135
-#: ../includes/posttype/wcag-metabox-person2.php:134
-msgid "Homepage:"
+#: ../includes/settings.php:81 ../includes/settings.php:91
+msgid "Lastname"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox-person2.php:8
-msgid "Webmaster"
+#: ../includes/settings.php:82 ../includes/settings.php:92
+msgid "Street"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox.php:16
-msgid "WCAG Criteria accomplished?"
+#: ../includes/settings.php:83 ../includes/settings.php:93
+msgid "City"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox.php:29
-msgid "Yes"
+#: ../includes/settings.php:84 ../includes/settings.php:94
+msgid "Phone"
 msgstr ""
 
-#: ../includes/posttype/wcag-metabox.php:31
-msgid "No"
+#: ../includes/settings.php:85 ../includes/settings.php:95
+msgid "E-Mail"
 msgstr ""
 
-#: ../includes/posttype/wcag-posttype.php:8
-msgctxt "Post Type General Name"
-msgid "WCAG"
+#: ../includes/settings.php:87 ../includes/settings.php:97
+msgid "Person-ID"
 msgstr ""
 
-#: ../includes/posttype/wcag-posttype.php:9
-msgctxt "Post Type Singular Name"
-msgid "WCAG"
+#: ../includes/settings.php:100
+msgid "Receiver E-Mail"
 msgstr ""
 
-#: ../includes/posttype/wcag-posttype.php:10
-#: ../includes/posttype/wcag-posttype.php:11 ../includes/settings.php:36
-msgid "WCAG"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:12
-msgid "Criteria Archives"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:13
-msgid "Criteria Attributes"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:14
-msgid "Parent Criteria:"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:15
-msgid "All Criteria"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:16
-msgid "Add New Criteria"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:17
-msgid "Add New"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:18
-msgid "New Criteria"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:19
-msgid "Edit Criteria"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:20
-msgid "Update Criteria"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:21
-msgid "View Criteria"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:22
-msgid "View Criterias"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:23
-msgid "Search Criteria"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:24
-msgid "Not found"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:25
-msgid "Not found in Trash"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:26
-msgid "Filter criteria list"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:29
-msgid "wcag"
-msgstr ""
-
-#: ../includes/posttype/wcag-posttype.php:30
-msgid "WCAG Criteria"
-msgstr ""
-
-#: ../includes/settings.php:47
-msgid "Settings &rsaquo; WCAG"
-msgstr ""
-
-#: ../includes/settings.php:66
-msgid "Field 1"
-msgstr ""
-
-#: ../includes/settings.php:96
-msgid "Here comes the Context Help content."
+#: ../includes/settings.php:101
+msgid "Subject"
 msgstr ""
 
 #: ../includes/settings.php:102
+msgid "CC"
+msgstr ""
+
+#: ../includes/settings.php:247
+msgid "Here comes the Context Help content."
+msgstr ""
+
+#: ../includes/settings.php:253
 msgid "Overview"
 msgstr ""
 
-#: ../includes/settings.php:106
+#: ../includes/settings.php:257
 msgid "For more information"
 msgstr ""
 
-#: ../includes/settings.php:106
+#: ../includes/settings.php:257
 msgid "RRZE Webteam on Github"
 msgstr ""
 
