@@ -43,7 +43,7 @@ function generateForm($values) {
 
         $values = assignPostValues($_POST);
         
-       /* echo '<pre>';
+        /*echo '<pre>';
         print_r($values);
         echo '</pre>';*/
         
@@ -61,7 +61,7 @@ function generateForm($values) {
                 echo 'Du bist ein Bot!';
             } elseif ($salted === $values['answer']) { 
                 echo '<h2>Vielen Dank! Wir werden uns umgehend bei Ihnen melden!</h2>';
-                sendMail($values['feedback'], $values['email'], $values['name']);
+                sendMail($values['feedback'], $values['rrze-email'], $values['rrze-name']);
                 $flag = 1;
             } else {
                 $flag = 0;
@@ -88,11 +88,11 @@ function generateForm($values) {
                     </p>
                    <?php } else {?>
                     <p>
-                        <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
-                        <div class="error"><?php echo $hasErrors[$fields[$i][0]] ?></div>
+                        <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][3], $hasErrors)) {  ?>
+                        <div class="error"><?php echo $hasErrors[$fields[$i][3]] ?></div>
                         <?php } ?>
                         <label for=<?php echo $fields[$i][2] ?>><?php echo ($fields[$i][0] == 'email' ? 'E-Mail' : ucfirst($fields[$i][0])) ?>:</label><br />
-                        <input type="text" name=<?php echo $fields[$i][0] ?> id=<?php echo $fields[$i][2] ?> placeholder=<?php echo ($fields[$i][0] == 'email' ? 'E-Mail' : ucfirst($fields[$i][0])) ?> value=<?php echo (isset($_POST['submit'])) ? $values[$fields[$i][0]] : ''?> >
+                        <input type="text" name=<?php echo $fields[$i][3] ?> id=<?php echo $fields[$i][2] ?> placeholder=<?php echo ($fields[$i][0] == 'email' ? 'E-Mail' : ucfirst($fields[$i][0])) ?> value=<?php echo (isset($_POST['submit'])) ? $values[$fields[$i][3]] : ''?> >
                    </p><?php } break;
                 case 'textarea': ?>
                     <p>
@@ -136,9 +136,15 @@ function assignPostValues($post) {
 function checkErrors($a) {
     foreach($a as $key1 => $value1) {
         if($value1 === '') {
-            $hasErrors[$key1] = 'Bitte ' . ucfirst($key1) . ' eingeben.';
-        }elseif($key1 == 'email' && !filter_var($value1, FILTER_VALIDATE_EMAIL)) {
-            $hasErrors[$key1] = 'Falsches ' . ucfirst($key1).'-Format.';
+            if(preg_match('/email/', $key1)) {
+                $hasErrors[$key1] = 'Bitte E-Mail eingeben.'; 
+            }elseif(preg_match('/name/', $key1)){
+                $hasErrors[$key1] = 'Bitte Name eingeben.'; 
+            }else{
+                $hasErrors[$key1] = 'Bitte ' . ucfirst($key1) . ' eingeben.'; 
+            }
+        }elseif(preg_match('/email/', $key1) && !filter_var($value1, FILTER_VALIDATE_EMAIL)) {
+            $hasErrors[$key1] = 'Falsches E-Mail Format.';
         }elseif($key1 == 'captcha' && !preg_match('/^[0-9]{1,2}$/', $_POST['captcha'])) {
             $hasErrors[$key1] = 'Sie können maximal zwei Ziffern eingeben';
         }else{
@@ -179,7 +185,7 @@ function sendMail($feedback, $from, $name) {
     $to = (!empty($values['rrze_wcag_field_18']) ? $values['rrze_wcag_field_18'] : $res['metadata']['webmaster']['email']);
     $subject = $values['rrze_wcag_field_19'];
     $message = $feedback;
-    $headers[] = "From: <$from>";
+    $headers[] = "From: $name <$from>";
     $cc = (!empty($values['rrze_wcag_field_20']) ? $values['rrze_wcag_field_20'] : '');
     $cc_addr = explode(",", $cc);
     if(!empty($cc)) {
