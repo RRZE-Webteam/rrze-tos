@@ -37,14 +37,14 @@ function the_slug_exists($page_slug) {
 function add_page_to_footer_menu() {
     
     $current_theme = wp_get_theme();
-    $themes_fau = array(__('FAU-Institutions','rrzw-wcag'), 'FAU-Natfak', 'FAU-Philfak', 'FAU-RWFak', 'FAU-Techfak', 'FAU-Medfak');
+    $themes_fau = array(__('FAU-Institutions','rrze-wcag'), 'FAU-Natfak', 'FAU-Philfak', 'FAU-RWFak', 'FAU-Techfak', 'FAU-Medfak');
     $menu_entry_option = 'wcag_menu';
     
     if (the_slug_exists('barrierefreiheit')) {
-        error_log(print_r('ja', true));
+        #error_log(print_r('ja', true));
         $slug_exists = true;
     } else {
-        error_log(print_r('nein', true));
+        #error_log(print_r('nein', true));
         $slug_exists = false;
     }
     
@@ -53,7 +53,7 @@ function add_page_to_footer_menu() {
             $menu_name = 'meta-footer';
             $menu_id = wp_get_nav_menu_object( get_nav_menu_locations( $menu_name )[ $menu_name ] )->term_id;
             $menu_items = wp_get_nav_menu_items($menu_id);
-            error_log(print_r($menu_items, true));
+            #error_log(print_r($menu_items, true));
             foreach($menu_items as $menu_item) {
                 $title = $menu_item->title;
                 if($title == 'Barrierefreiheit' || $title == 'Accessibility') {

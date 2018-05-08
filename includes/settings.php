@@ -76,7 +76,7 @@ class Settings {
         add_settings_field('rrze_wcag_field_1', __('Title', 'rrze-wcag'), array($this, 'rrze_wcag_field_1'), 'rrze_wcag_options', 'rrze_wcag_section_1');
         add_settings_field('rrze_wcag_field_2', __('Are the conformity conditions of the WCAG 2.0 AA fulfilled?', 'rrze-wcag'), array($this, 'rrze_wcag_field_2'), 'rrze_wcag_options', 'rrze_wcag_section_1'); 
         add_settings_field('rrze_wcag_field_3', __('If not, with what reason', 'rrze-wcag'), array($this, 'rrze_wcag_field_3'), 'rrze_wcag_options', 'rrze_wcag_section_1'); 
-        add_settings_section('rrze_wcag_section_2', 'Verantwortliche/er', '__return_false', 'rrze_wcag_options');
+        add_settings_section('rrze_wcag_section_2', __('Responsible', 'rrze-wcag'), '__return_false', 'rrze_wcag_options');
         add_settings_field('rrze_wcag_field_4', __('Firstname', 'rrze-wcag'), array($this, 'rrze_wcag_field_4'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
         add_settings_field('rrze_wcag_field_5', __('Lastname', 'rrze-wcag'), array($this, 'rrze_wcag_field_5'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
         add_settings_field('rrze_wcag_field_6', __('Street', 'rrze-wcag'), array($this, 'rrze_wcag_field_6'), 'rrze_wcag_options', 'rrze_wcag_section_2'); 
@@ -125,8 +125,8 @@ class Settings {
     
     public function rrze_wcag_field_2() {
     ?>
-            <input type="radio" name="<?php printf('%s[rrze_wcag_field_2]', $this->option_name) ?>" value="1" <?php checked(1, $this->options->rrze_wcag_field_2, true); ?>>Ja
-            <input type="radio" name="<?php printf('%s[rrze_wcag_field_2]', $this->option_name) ?>" value="2" <?php checked(2, $this->options->rrze_wcag_field_2, true); ?>>Nein
+            <input type="radio" name="<?php printf('%s[rrze_wcag_field_2]', $this->option_name) ?>" value="1" <?php checked(1, $this->options->rrze_wcag_field_2, true); ?>><?php _e('Yes','rrze-wcag') ?>
+            <input type="radio" name="<?php printf('%s[rrze_wcag_field_2]', $this->option_name) ?>" value="2" <?php checked(2, $this->options->rrze_wcag_field_2, true); ?>><?php _e('No','rrze-wcag') ?>
        <?php
     }
     

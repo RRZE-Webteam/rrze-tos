@@ -29,7 +29,7 @@ class Options {
         }
         
         $options = array(
-            'rrze_wcag_field_1' => 'Barrierefreiheitserklärung',
+            'rrze_wcag_field_1' => __('Accessibility statement','rrze-wcag'),
             'rrze_wcag_field_2' => '2',
             'rrze_wcag_field_3' => '',
             # Verantwortlicher

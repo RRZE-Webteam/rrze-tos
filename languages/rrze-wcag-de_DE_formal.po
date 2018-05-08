@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 14:15+0200\n"
+"POT-Creation-Date: 2018-05-08 14:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -29,23 +29,21 @@ msgstr ""
 msgid "accessibility"
 msgstr "barrierefreiheit"
 
-#: ../includes/menu/wcag-add-footer-menu.php:40
+#: ../includes/menu/wcag-add-footer-menu.php:40 ../rrze-wcag.php:123
 msgid "FAU-Institutions"
 msgstr "FAU-Einrichtungen"
 
-#: ../includes/menu/wcag-add-footer-menu.php:71
+#: ../includes/menu/wcag-add-footer-menu.php:71 ../includes/settings.php:46
 msgid "Accessibility"
 msgstr "Barrierefreiheit"
 
 #: ../includes/menu/wcag-add-footer-menu.php:73
-#, fuzzy
-#| msgid "accessibility"
 msgid "/accessibility"
 msgstr "barrierefreiheit"
 
-#: ../includes/settings.php:46
-msgid "Accessible"
-msgstr "Barrierefreiheit"
+#: ../includes/options.php:32
+msgid "Accessibility statement"
+msgstr "Barrierefreiheitserklärung"
 
 #: ../includes/settings.php:57
 msgid "Settings &rsaquo; Accessible"
@@ -62,6 +60,10 @@ msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
 #: ../includes/settings.php:78
 msgid "If not, with what reason"
 msgstr "Wenn nein, mit welcher Begründung"
+
+#: ../includes/settings.php:79
+msgid "Responsible"
+msgstr "Verantwortliche/er"
 
 #: ../includes/settings.php:80 ../includes/settings.php:90
 msgid "Firstname"
@@ -102,6 +104,14 @@ msgstr "Betreff"
 #: ../includes/settings.php:102
 msgid "CC"
 msgstr "CC"
+
+#: ../includes/settings.php:128
+msgid "Yes"
+msgstr "Ja"
+
+#: ../includes/settings.php:129
+msgid "No"
+msgstr "Nein"
 
 #: ../includes/settings.php:247
 msgid "Here comes the Context Help content."
@@ -165,12 +175,6 @@ msgstr ""
 
 #~ msgid "WCAG Criteria accomplished?"
 #~ msgstr "Sind die Konformitätsbedingungen der WCAG 2.0 erfüllt?"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "No"
-#~ msgstr "Nein"
 
 #~ msgctxt "Post Type General Name"
 #~ msgid "WCAG"
