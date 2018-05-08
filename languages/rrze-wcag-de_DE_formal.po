@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-03 17:49+0200\n"
+"POT-Creation-Date: 2018-05-08 14:15+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -26,16 +26,26 @@ msgid "Sie befinden sich hier:"
 msgstr ""
 
 #: ../includes/endpoint/wcag-endpoint.php:35
-msgid "accessible"
+msgid "accessibility"
 msgstr "barrierefreiheit"
 
-#: ../includes/menu/wcag-add-footer-menu.php:71 ../includes/settings.php:46
-msgid "Accessible"
+#: ../includes/menu/wcag-add-footer-menu.php:40
+msgid "FAU-Institutions"
+msgstr "FAU-Einrichtungen"
+
+#: ../includes/menu/wcag-add-footer-menu.php:71
+msgid "Accessibility"
 msgstr "Barrierefreiheit"
 
 #: ../includes/menu/wcag-add-footer-menu.php:73
-msgid "/accessible"
-msgstr "/barrierefreiheit"
+#, fuzzy
+#| msgid "accessibility"
+msgid "/accessibility"
+msgstr "barrierefreiheit"
+
+#: ../includes/settings.php:46
+msgid "Accessible"
+msgstr "Barrierefreiheit"
 
 #: ../includes/settings.php:57
 msgid "Settings &rsaquo; Accessible"
@@ -122,6 +132,9 @@ msgid ""
 "Your Wordpress version is %s. Please upgrade at least to Wordpress version "
 "%s."
 msgstr ""
+
+#~ msgid "/accessible"
+#~ msgstr "/barrierefreiheit"
 
 #~ msgid "Barrierefreiheit"
 #~ msgstr "Accessible"

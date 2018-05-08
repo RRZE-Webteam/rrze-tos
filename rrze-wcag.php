@@ -120,9 +120,10 @@ function rrze_wcag_scripts() {
     wp_register_style( 'wcag_styles_events', plugins_url('rrze-wcag/assets/css/events-styles.css', dirname(__FILE__)));
     
     $current_theme = wp_get_theme();
-    $themes_fau = array('FAU-Einrichtungen', 'FAU-Natfak', 'FAU-Philfak', 'FAU-RWFak', 'FAU-Techfak', 'FAU-Medfak');
+    $themes_fau = array(__('FAU-Institutions','rrzw-wcag'), 'FAU-Natfak', 'FAU-Philfak', 'FAU-RWFak', 'FAU-Techfak', 'FAU-Medfak');
         
     if(in_array($current_theme, $themes_fau)) {
+        error_log(print_r($current_theme, true));
         wp_enqueue_style( 'wcag_styles' );
     } elseif($current_theme == 'RRZE 2015') {
         wp_enqueue_style( 'wcag_styles_rrze');

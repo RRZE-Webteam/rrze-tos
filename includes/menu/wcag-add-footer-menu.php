@@ -37,7 +37,7 @@ function the_slug_exists($page_slug) {
 function add_page_to_footer_menu() {
     
     $current_theme = wp_get_theme();
-    $themes_fau = array('FAU-Einrichtungen', 'FAU-Natfak', 'FAU-Philfak', 'FAU-RWFak', 'FAU-Techfak', 'FAU-Medfak');
+    $themes_fau = array(__('FAU-Institutions','rrzw-wcag'), 'FAU-Natfak', 'FAU-Philfak', 'FAU-RWFak', 'FAU-Techfak', 'FAU-Medfak');
     $menu_entry_option = 'wcag_menu';
     
     if (the_slug_exists('barrierefreiheit')) {
@@ -56,7 +56,7 @@ function add_page_to_footer_menu() {
             error_log(print_r($menu_items, true));
             foreach($menu_items as $menu_item) {
                 $title = $menu_item->title;
-                if($title == 'Barrierefreiheit') {
+                if($title == 'Barrierefreiheit' || $title == 'Accessibility') {
                     if($menu_item->object != 'custom') {
                         add_action('wp_dashboard_setup', 'RRZE\Wcag\wcag_add_dashboard_widgets' );
                     }
@@ -68,9 +68,9 @@ function add_page_to_footer_menu() {
     
             if(!$used) {
                 wp_update_nav_menu_item($menu_id, 0, array(
-                    'menu-item-title' =>  __('Accessible','rrze-wcag'),
+                    'menu-item-title' =>  __('Accessibility','rrze-wcag'),
                     'menu-item-classes' => 'wcag',
-                    'menu-item-url' => home_url(__('/accessible','rrze-wcag')), 
+                    'menu-item-url' => home_url(__('/accessibility','rrze-wcag')), 
                     'menu-item-status' => 'publish')
                 );
             }

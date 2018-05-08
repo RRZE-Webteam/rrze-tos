@@ -43,7 +43,7 @@ class Settings {
      * @return void
      */
     public function admin_settings_page() {
-        $this->admin_settings_page = add_options_page(__('Accessible', 'rrze-wcag'), __('Accessible', 'rrze-wcag'), 'manage_options', 'rrze-wcag', array($this, 'settings_page'));
+        $this->admin_settings_page = add_options_page(__('Accessibility', 'rrze-wcag'), __('Accessibility', 'rrze-wcag'), 'manage_options', 'rrze-wcag', array($this, 'settings_page'));
         add_action('load-' . $this->admin_settings_page, array($this, 'admin_help_menu'));        
     }
     
