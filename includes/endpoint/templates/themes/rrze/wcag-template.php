@@ -32,8 +32,8 @@ get_header(); ?>
         <?php echo do_shortcode('[admins]'); ?>
         <p>Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an <a href="mailto:<?php echo $values['rrze_wcag_field_16'] ?>?subject=<?php echo (!empty($values['rrze_wcag_field_19']) ? $values['rrze_wcag_field_19'] : 'Feedback zur Barrierefreiheit des Webauftritts') ?>"><?php echo $values['rrze_wcag_field_16'] ?></a> oder füllen Sie das Feedback-Formular aus!</p>
         <h3>Feedback-Formular</h3>
-        <?php echo do_shortcode('[contact field-one="name,text,name-id" '
-        . 'field-two="email,text,email-id" '
+        <?php echo do_shortcode('[contact field-one="name,text,name-id,rrze-name" '
+        . 'field-two="email,text,email-id,rrze-email" '
         . 'field-three="feedback,textarea,textarea-id" '
         . 'field-four="captcha,text,captcha-id" '
         . 'field-five="answer,hidden,hidden-id" '
