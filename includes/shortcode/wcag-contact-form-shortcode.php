@@ -161,12 +161,10 @@ function sendMail($feedback, $from, $name) {
     
     if(!$values) {
         
-        $response = wp_remote_get('http://remoter.dev/wcag-test.json');
-        $status_code = wp_remote_retrieve_response_code( $response );
+        $status_code = checkWMP();
 
         if ( 200 === $status_code ) {
-            $json = file_get_contents( 'http://remoter.dev/wcag-test.json' );
-            $res = json_decode($json, TRUE);
+            $res = getJsonWMP();
         }
         
     }

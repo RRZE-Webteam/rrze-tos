@@ -27,12 +27,11 @@ class Settings {
         $this->option_name = $this->main->options->get_option_name();
         $this->options = $this->main->options->get_options();
         include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-        $response = wp_remote_get('http://remoter.dev/wcag-test.json');
-        $status_code = wp_remote_retrieve_response_code( $response );
+        
+        $status_code = checkWMP();
 
         if ( 200 === $status_code ) {
-            $json = file_get_contents( 'http://remoter.dev/wcag-test.json' );
-            $this->res = json_decode($json, TRUE);
+            $this->res = getJsonWMP();
         } else {
             $this->res = '';
         }

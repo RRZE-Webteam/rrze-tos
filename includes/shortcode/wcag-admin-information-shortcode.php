@@ -13,9 +13,9 @@ function get_info() {
     global $post;
     
     $host = $_SERVER['SERVER_NAME'];
+    $wmp = 'https://www.wmp.rrze.fau.de/api/domain/metadata/www.'. $host;
     
-    $response = wp_remote_get('http://remoter.dev/wcag-test.json');
-    $status_code = wp_remote_retrieve_response_code( $response );
+    $status_code = checkWMP();
 
     if ( 200 === $status_code ) {
         $json = file_get_contents( 'http://remoter.dev/wcag-test.json' );
