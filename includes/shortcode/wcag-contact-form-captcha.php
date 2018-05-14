@@ -24,15 +24,15 @@ function randomNumbers() {
 function numbers(array $random) {
 
   $arr = array(
-    'eins'  => 1,
-    'zwei'  => 2,
-    'drei'  => 3,
-    'vier'  => 4,
-    'fünf'  => 5,
-    'sechs' => 6,
-    'sieben'=> 7,
-    'acht'  => 8,
-    'neun'  => 9
+    __('one', 'rrze-wcag')      => 1,
+    __('two', 'rrze-wcag')      => 2,
+    __('three', 'rrze-wcag')    => 3,
+    __('four', 'rrze-wcag')     => 4,
+    __('five', 'rrze-wcag')     => 5,
+    __('six', 'rrze-wcag')      => 6,
+    __('seven', 'rrze-wcag')    => 7,
+    __('eight', 'rrze-wcag')    => 8,
+    __('nine', 'rrze-wcag')     => 9,
   );
 
   $number2 = $random['number2'];
@@ -47,7 +47,7 @@ function getOperator() {
 
   $operator = array(
     '+' => 'plus',
-    '*' => 'mal'
+    '*' => __('times', 'rrze-wcag'),
   );
 
   $rand_operator = array_rand($operator, 1);
@@ -64,7 +64,7 @@ function calculate(array $random, $operator) {
     case 'plus':
       $output = $random['number1'] + $random['number2'];
       break;
-    case 'mal':
+    case __('times','rrze-wcag'):
       $output = $random['number1'] * $random['number2'];
       break;
   }

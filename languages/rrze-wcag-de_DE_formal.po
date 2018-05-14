@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-14 11:48+0200\n"
+"POT-Creation-Date: 2018-05-14 13:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -199,6 +199,59 @@ msgstr ""
 #: ../includes/settings.php:257
 msgid "RRZE Webteam on Github"
 msgstr ""
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:27
+msgid "one"
+msgstr "eins"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:28
+msgid "two"
+msgstr "zwei"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:29
+msgid "three"
+msgstr "drei"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:30
+msgid "four"
+msgstr "vier"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:31
+msgid "five"
+msgstr "fünf"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:32
+msgid "six"
+msgstr "sechs"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:33
+msgid "seven"
+msgstr "sieben"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:34
+msgid "eight"
+msgstr "acht"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:35
+msgid "nine"
+msgstr "neun"
+
+#: ../includes/shortcode/wcag-contact-form-captcha.php:50
+#: ../includes/shortcode/wcag-contact-form-captcha.php:67
+msgid "times"
+msgstr "mal"
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:61
+msgid "Your are a bot!"
+msgstr "Du bist ein Bot!"
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:63
+msgid "Many Thanks! We will contact you immediately!"
+msgstr "Vielen Dank! Wir werden uns umgehend bei Ihnen melden!"
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:68
+msgid "Wrong solution! Try it again."
+msgstr "Falsche Lösung! Versuchen Sie es erneut."
 
 #: ../includes/shortcode/wcag-contact-form-shortcode.php:86
 msgid "Solve the following task:"

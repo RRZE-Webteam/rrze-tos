@@ -58,14 +58,14 @@ function generateForm($values) {
         
         if(isset($clean) && !count($clean)) {
             if ($current_time < $submitted) {
-                echo 'Du bist ein Bot!';
+                _e('Your are a bot!', 'rrze-wcag');
             } elseif ($salted === $values['answer']) { 
-                echo '<h2>Vielen Dank! Wir werden uns umgehend bei Ihnen melden!</h2>';
+                echo '<h2>'. __('Many Thanks! We will contact you immediately!','rrze-wcag') .'</h2>';
                 sendMail($values['feedback'], $values['rrze-email'], $values['rrze-name']);
                 $flag = 1;
             } else {
                 $flag = 0;
-                $hasErrors['captcha'] = 'Falsches Captcha! Versuchen Sie es erneut.';
+                $hasErrors['captcha'] = __('Wrong solution! Try it again.','rrze-wcag');
             }
 
         }
