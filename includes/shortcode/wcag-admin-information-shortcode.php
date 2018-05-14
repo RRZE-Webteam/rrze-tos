@@ -42,6 +42,7 @@ function get_info() {
                 $role = ucfirst($key);
                 if ($key == 'verantwortlich') {
                     $role .= 'e/er';
+                    $role = __('Responsible','rrze-wcag');
                 }
                 $heading[] = $role;
             }
@@ -94,6 +95,7 @@ function get_info() {
             $role = ucfirst($key);
             if ($key == 'verantwortlich') {
                 $role .= 'e/er';
+                $role = __('Responsible','rrze-wcag');
             }
             $heading[] = $role;
         }

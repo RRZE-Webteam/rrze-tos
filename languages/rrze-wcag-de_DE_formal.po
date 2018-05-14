@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-14 10:14+0200\n"
+"POT-Creation-Date: 2018-05-14 10:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -67,20 +67,20 @@ msgstr "Probleme bei der Bedienung der Seite?"
 msgid "The following people are responsible for this website:"
 msgstr "Für diesen Webauftritt sind folgende Personen verantwortlich:"
 
-#: ../includes/endpoint/templates/themes/fau/wcag-template.php:65
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:66
 msgid "If you have any problems using the website, please email "
 msgstr ""
 "Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an "
 
-#: ../includes/endpoint/templates/themes/fau/wcag-template.php:65
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:66
 msgid " or fill out the feedback form!"
 msgstr " oder füllen Sie das Feedback-Formular aus!"
 
-#: ../includes/endpoint/templates/themes/fau/wcag-template.php:67
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:68
 msgid "Feedback-Form"
 msgstr "Feedback-Formular"
 
-#: ../includes/endpoint/templates/themes/fau/wcag-template.php:75
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:76
 msgid ""
 "If you feel that you are not being helped, you can contact the <a href="
 "\"https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/"
@@ -128,6 +128,8 @@ msgid "If not, with what reason"
 msgstr "Wenn nein, mit welcher Begründung"
 
 #: ../includes/settings.php:79
+#: ../includes/shortcode/wcag-admin-information-shortcode.php:45
+#: ../includes/shortcode/wcag-admin-information-shortcode.php:98
 msgid "Responsible"
 msgstr "Verantwortliche/er"
 

@@ -61,6 +61,7 @@ get_header(); ?>
                                <?php } ?>
                                 <h3><?php _e('Problems with the operation of the site?','rrze-wcag')?></h3>
                                 <h4 class="wcag-h3"><?php _e('The following people are responsible for this website:','rrze-wcag')?></h4>
+                                <?php echo do_shortcode('[admins]'); ?>
                                 <p>
                                     <?php _e('If you have any problems using the website, please email ','rrze-wcag') ?><a href="mailto:<?php echo $values['rrze_wcag_field_16'] ?>?subject=<?php echo (!empty($values['rrze_wcag_field_19']) ? $values['rrze_wcag_field_19'] : 'Feedback zur Barrierefreiheit des Webauftritts') ?>"><?php echo $values['rrze_wcag_field_16'] ?></a><?php _e(' or fill out the feedback form!', 'rrze-wcag') ?>
                                 </p>
