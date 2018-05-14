@@ -47,7 +47,7 @@ get_header(); ?>
                     <main>                        
                         <h2><?php _e('WCAG review','rrze-wcag') ?></h2>
                         <p>
-                            <?php _e('Public authorities are required by the <a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1">EU Directive</a> on Accessibility to Sites and Mobile Applications of Public Agencies to implement their websites in accordance with WCAG criteria. This website has been reviewed in accordance with WCAG`s compliance requirements.','rrze-wcag'); ?>
+                            <?php _e('Public authorities are required by the ','rrze-wcag') ?><a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1"><?php _e('EU Directive','rrze-wcag') ?></a><?php _e(' on Accessibility to Sites and Mobile Applications of Public Agencies to implement their websites in accordance with WCAG criteria. This website has been reviewed in accordance with WCAG`s compliance requirements.','rrze-wcag'); ?>
                         </p>
                         <h3><?php _e('Are the conformity criteria currently fulfilled?','rrze-wcag') ?></h3>
                         <?php  
@@ -73,7 +73,7 @@ get_header(); ?>
                                 . 'field-four="captcha,text,captcha-id" '
                                 . 'field-five="answer,hidden,hidden-id" '
                                 . 'field-six="timeout,hidden,timeout-id"]'); ?>
-                                 <p class="complaint"><?php _e('If you feel that you are not being helped, you can contact the <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html"> arbitration board </a>.','rrze-wcag')?><p>
+                                 <p class="complaint"><?php _e('If you feel that you are not being helped, you can contact the ','rrze-wcag') ?><a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html"> <?php _e('arbitration board.','rrze-wcag') ?> </a><p>
                         
                     </main>
                 </div>
