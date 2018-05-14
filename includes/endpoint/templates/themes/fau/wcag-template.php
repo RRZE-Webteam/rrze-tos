@@ -47,7 +47,7 @@ get_header(); ?>
                     <main>                        
                         <h2><?php _e('WCAG review','rrze-wcag') ?></h2>
                         <p>
-                            <?php _e('Public authorities are required by the ','rrze-wcag') ?><a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1"><?php _e('EU Directive','rrze-wcag') ?></a><?php _e(' on Accessibility to Sites and Mobile Applications of Public Agencies to implement their websites in accordance with WCAG criteria. This website has been reviewed in accordance with WCAG`s compliance requirements.','rrze-wcag'); ?>
+                            <?php _e('Public authorities are required by the ','rrze-wcag') ?><a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1"><?php _e('EU Directive','rrze-wcag') ?></a><?php _e(' on Accessibility to Sites and Mobile Applications of Public Agencies to implement their websites in accordance with WCAG criteria. This website has been reviewed in accordance with WCAG conformity criteria.','rrze-wcag'); ?>
                         </p>
                         <h3><?php _e('Are the conformity criteria currently fulfilled?','rrze-wcag') ?></h3>
                         <?php  
@@ -63,7 +63,7 @@ get_header(); ?>
                                 <h4 class="wcag-h3"><?php _e('The following people are responsible for this website:','rrze-wcag')?></h4>
                                 <?php echo do_shortcode('[admins]'); ?>
                                 <p>
-                                    <?php _e('If you have any problems using the website, please email ','rrze-wcag') ?><a href="mailto:<?php echo $values['rrze_wcag_field_16'] ?>?subject=<?php echo (!empty($values['rrze_wcag_field_19']) ? $values['rrze_wcag_field_19'] : 'Feedback zur Barrierefreiheit des Webauftritts') ?>"><?php echo $values['rrze_wcag_field_16'] ?></a><?php _e(' or fill out the feedback form!', 'rrze-wcag') ?>
+                                    <?php _e('If you have any problems using this website, please write an email to ','rrze-wcag') ?><a href="mailto:<?php echo $values['rrze_wcag_field_16'] ?>?subject=<?php echo (!empty($values['rrze_wcag_field_19']) ? $values['rrze_wcag_field_19'] : 'Feedback zur Barrierefreiheit des Webauftritts') ?>"><?php echo $values['rrze_wcag_field_16'] ?></a><?php _e(' or fill out the feedback form!', 'rrze-wcag') ?>
                                 </p>
                                 <h3><?php _e('Feedback-Form','rrze-wcag')?></h3>
                         
