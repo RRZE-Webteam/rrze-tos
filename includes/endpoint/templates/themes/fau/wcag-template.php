@@ -45,25 +45,26 @@ get_header(); ?>
             <div class="row">
                 <div class="col-xs-12">
                     <main>                        
-                        <h2>WCAG-Prüfung der Website</h2>
-                        <p>Die öffentlichen Stellen sind gemäß der <a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1">EU-Richtline</a> über den barrierefreien Zugang zu den Webseites und mobilen Anwendungen öffentlicher Stellen
-                           verpflichtet Ihre Websites entsprechend den WCAG Kriterien umzusetzen.
-                        Diese Webseite wurde gemäß den Konformitätsbedingungen der WCAG geprüft.</p>
-                        <h3>Sind die Konformitätskriterien derzeit erfüllt?</h3>
+                        <h2><?php _e('WCAG review','rrze-wcag') ?></h2>
+                        <p>
+                            <?php _e('Public authorities are required by the <a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1">EU Directive</a> on Accessibility to Sites and Mobile Applications of Public Agencies to implement their websites in accordance with WCAG criteria. This website has been reviewed in accordance with WCAG`s compliance requirements.','rrze-wcag'); ?>
+                        </p>
+                        <h3><?php _e('Are the conformity criteria currently fulfilled?','rrze-wcag') ?></h3>
                         <?php  
                        
                             if(isset($values['rrze_wcag_field_2']) && $values['rrze_wcag_field_2'] == 1) { ?>
-                                <p class="wcag-pass">Die Kriterien werden erfüllt.</p>
+                                <p class="wcag-pass"><?php _e('The criteria are fulfilled.','rrze-wcag')?></p>
                             <?php } else { ?>
-                                <p class="wcag-fail">Die Kriterien werden nicht erfüllt.</p>
-                                <p style="margin-top:20px;margin-bottom:20px"><strong>Begründung:</strong></p>
+                                <p class="wcag-fail"><?php _e('The criteria are not fulfilled.','rrze-wcag')?></p>
+                                <p style="margin-top:20px;margin-bottom:20px"><strong><?php _e('Reason:','rrze-wcag') ?></strong></p>
                                 <?php echo $values['rrze_wcag_field_3']; ?>
                                <?php } ?>
-                                <h3>Probleme bei der Bedienung der Seite?</h3>
-                                <h4 class="wcag-h3">Für diesen Webauftritt sind folgende Personen verantwortlich:</h4>
-                                <?php echo do_shortcode('[admins]'); ?>
-                                <p>Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an <a href="mailto:<?php echo $values['rrze_wcag_field_16'] ?>?subject=<?php echo (!empty($values['rrze_wcag_field_19']) ? $values['rrze_wcag_field_19'] : 'Feedback zur Barrierefreiheit des Webauftritts') ?>"><?php echo $values['rrze_wcag_field_16'] ?></a> oder füllen Sie das Feedback-Formular aus!</p>
-                                <h3>Feedback-Formular</h3>
+                                <h3><?php _e('Problems with the operation of the site?','rrze-wcag')?></h3>
+                                <h4 class="wcag-h3"><?php _e('The following people are responsible for this website:','rrze-wcag')?></h4>
+                                <p>
+                                    <?php _e('If you have any problems using the website, please email ','rrze-wcag') ?><a href="mailto:<?php echo $values['rrze_wcag_field_16'] ?>?subject=<?php echo (!empty($values['rrze_wcag_field_19']) ? $values['rrze_wcag_field_19'] : 'Feedback zur Barrierefreiheit des Webauftritts') ?>"><?php echo $values['rrze_wcag_field_16'] ?></a><?php _e(' or fill out the feedback form!', 'rrze-wcag') ?>
+                                </p>
+                                <h3><?php _e('Feedback-Form','rrze-wcag')?></h3>
                         
                         <?php echo do_shortcode('[contact field-one="name,text,name-id,rrze-name" '
                                 . 'field-two="email,text,email-id,rrze-email" '
@@ -71,7 +72,7 @@ get_header(); ?>
                                 . 'field-four="captcha,text,captcha-id" '
                                 . 'field-five="answer,hidden,hidden-id" '
                                 . 'field-six="timeout,hidden,timeout-id"]'); ?>
-                                 <p class="complaint">Sollten Sie den Eindruck haben, dass Ihnen nicht geholfen wird, können Sie sich an die <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html">Schiedsstelle</a> wenden.<p>
+                                 <p class="complaint"><?php _e('If you feel that you are not being helped, you can contact the <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html"> arbitration board </a>.','rrze-wcag')?><p>
                         
                     </main>
                 </div>

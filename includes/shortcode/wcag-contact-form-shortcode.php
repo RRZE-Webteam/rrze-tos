@@ -83,7 +83,7 @@ function generateForm($values) {
                         <?php if(isset($_POST['submit']) && isset($hasErrors) && array_key_exists($fields[$i][0], $hasErrors)) {  ?>
                         <div class="error"><?php echo $hasErrors[$fields[$i][0]] ?></div>
                         <?php } ?>
-                        <label for="check">Lösen Sie folgende Aufgabe:</label><br />
+                        <label for="check"><?php _e('Solve the following task:','rrze-wcag')?></label><br />
                         <?php echo $captcha_array['task_string'] . ' '?><input type="text" name="captcha" id="check" >
                     </p>
                    <?php } else {?>
@@ -137,16 +137,16 @@ function checkErrors($a) {
     foreach($a as $key1 => $value1) {
         if($value1 === '') {
             if(preg_match('/email/', $key1)) {
-                $hasErrors[$key1] = 'Bitte E-Mail eingeben.'; 
+                $hasErrors[$key1] = __('Please enter e-mail','rrze-wcag'); 
             }elseif(preg_match('/name/', $key1)){
-                $hasErrors[$key1] = 'Bitte Name eingeben.'; 
+                $hasErrors[$key1] = __('Please enter name', 'rrze-wcag'); 
             }else{
-                $hasErrors[$key1] = 'Bitte ' . ucfirst($key1) . ' eingeben.'; 
+                $hasErrors[$key1] = __('Please enter ','rrze-wcag') . ucfirst($key1); 
             }
         }elseif(preg_match('/email/', $key1) && !filter_var($value1, FILTER_VALIDATE_EMAIL)) {
-            $hasErrors[$key1] = 'Falsches E-Mail Format.';
+            $hasErrors[$key1] = __('Wrong e-mail format.', 'rrze-wcag');
         }elseif($key1 == 'captcha' && !preg_match('/^[0-9]{1,2}$/', $_POST['captcha'])) {
-            $hasErrors[$key1] = 'Sie können maximal zwei Ziffern eingeben';
+            $hasErrors[$key1] = __('You can enter a maximum of two digits.','rrze-wcag');
         }else{
            $hasErrors['error'] = '';
         }

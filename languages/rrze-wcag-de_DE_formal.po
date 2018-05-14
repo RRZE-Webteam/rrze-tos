@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 14:39+0200\n"
+"POT-Creation-Date: 2018-05-14 10:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -12,8 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
-"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
-"esc_html_x:1,2c\n"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -24,6 +23,73 @@ msgstr ""
 #: ../includes/endpoint/templates/themes/fau/wcag-template.php:19
 msgid "Sie befinden sich hier:"
 msgstr ""
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:48
+msgid "WCAG review"
+msgstr "WCAG Prüfung"
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:50
+msgid ""
+"Public authorities are required by the <a href=\"http://eur-lex.europa.eu/"
+"legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1\">EU Directive</a> on "
+"Accessibility to Sites and Mobile Applications of Public Agencies to "
+"implement their websites in accordance with WCAG criteria. This website has "
+"been reviewed in accordance with WCAG`s compliance requirements."
+msgstr ""
+"Die öffentlichen Stellen sind gemäß der <a href=\\“http://eur-lex.europa.eu/"
+"legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1“>EU-Richtline</a> über "
+"den barrierefreien Zugang zu den Webseites und mobilen Anwendungen "
+"öffentlicher Stellen verpflichtet Ihre Websites entsprechend den WCAG "
+"Kriterien umzusetzen. Diese Webseite wurde gemäß den Konformitätsbedingungen "
+"der WCAG geprüft."
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:52
+msgid "Are the conformity criteria currently fulfilled?"
+msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:56
+msgid "The criteria are fulfilled."
+msgstr "Die Kriterien werden erfüllt."
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:58
+msgid "The criteria are not fulfilled."
+msgstr "Die Kriterien werden nicht erfüllt."
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:59
+msgid "Reason:"
+msgstr "Begründung:"
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:62
+msgid "Problems with the operation of the site?"
+msgstr "Probleme bei der Bedienung der Seite?"
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:63
+msgid "The following people are responsible for this website:"
+msgstr "Für diesen Webauftritt sind folgende Personen verantwortlich:"
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:65
+msgid "If you have any problems using the website, please email "
+msgstr ""
+"Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an "
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:65
+msgid " or fill out the feedback form!"
+msgstr " oder füllen Sie das Feedback-Formular aus!"
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:67
+msgid "Feedback-Form"
+msgstr "Feedback-Formular"
+
+#: ../includes/endpoint/templates/themes/fau/wcag-template.php:75
+msgid ""
+"If you feel that you are not being helped, you can contact the <a href="
+"\"https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/"
+"SchlichtungsstelleBGG_node.html\"> arbitration board </a>."
+msgstr ""
+"Sollten Sie den Eindruck haben, dass Ihnen nicht geholfen wird, können Sie "
+"sich an die <a href=\\“https://www.behindertenbeauftragte.de/DE/"
+"SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html“>Schiedsstelle</a> "
+"wenden."
 
 #: ../includes/endpoint/wcag-endpoint.php:35
 msgid "accessibility"
@@ -129,6 +195,30 @@ msgstr ""
 msgid "RRZE Webteam on Github"
 msgstr ""
 
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:86
+msgid "Solve the following task:"
+msgstr "Lösen Sie folgende Aufgabe:"
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:140
+msgid "Please enter e-mail"
+msgstr "Bitte E-Mail eingeben"
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:142
+msgid "Please enter name"
+msgstr "Bitte Namen eingeben"
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:144
+msgid "Please enter "
+msgstr "Bitte eingeben "
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:147
+msgid "Wrong e-mail format."
+msgstr "Falsche E-Mail Format"
+
+#: ../includes/shortcode/wcag-contact-form-shortcode.php:149
+msgid "You can enter a maximum of two digits."
+msgstr "Bitte maximal zwei Ziffern eingeben."
+
 #: ../rrze-wcag.php:82
 #, php-format
 msgid ""
@@ -142,6 +232,9 @@ msgid ""
 "Your Wordpress version is %s. Please upgrade at least to Wordpress version "
 "%s."
 msgstr ""
+
+#~ msgid "enter"
+#~ msgstr "eingeben"
 
 #~ msgid "/accessible"
 #~ msgstr "/barrierefreiheit"
@@ -234,6 +327,3 @@ msgstr ""
 
 #~ msgid "wcag"
 #~ msgstr "Wag"
-
-#~ msgid "WCAG Criteria"
-#~ msgstr "WCAG Erfolgskriterium"
