@@ -4,9 +4,9 @@ Mit dem WCAG-Plugin wird nach der Aktivierung automatisch eine Barrierefreiheits
 ## Aufbau des Plugins
 Das Plugin gliedert sich in mehrere Teile und wird über einen Endpoint auf der Webseite eingefügt.
 
-1. Nach der Aktivierung erscheint im Backend im Menüpunkt Einstellungen der Eintrag Barrierefreiheit (Accessibility). Hier können verschiedene Einstellungen gemacht werden (z.B. Werden die WCAG-Kriterien derzeit erfüllt?). Darüberhinaus werden die Kontaktdaten der Verantwortlichen für die Webseite im FAU-Netz automatisch ausgefüllt und können ergänzt werden. Die Url für das RRZE ist: https://www.wmp.rrze.fau.de/api/domain/metadata/www.rrze.fau.de. Wird das Plugin außerhalb der Universität verwendet, so müssen die Kontaktdaten eingepflegt werden.
+1. Nach der Aktivierung erscheint der Menüpunkt Barrierefreiheit (Accessibility) in den Einstellungen. Hier können verschiedene Einstellungen gemacht werden (z.B. Werden die WCAG-Kriterien derzeit erfüllt?). Darüberhinaus werden die Kontaktdaten der Verantwortlichen für die Webseite im FAU-Netz automatisch ausgefüllt und können ergänzt werden. Die Url für das RRZE ist: https://www.wmp.rrze.fau.de/api/domain/metadata/www.rrze.fau.de. Wird das Plugin außerhalb der Universität verwendet, so müssen die Kontaktdaten eingepflegt werden.
 
-2. Darüberhinaus beinhaltet das Plugin ein Formular, welches per Shortcode im Endpoint aufgerufen wird. Aufbau des Shortcodes:
+2. Darüber hinaus beinhaltet das Plugin ein Formular, welches per Shortcode im Endpoint eingebunden wird. Aufbau des Shortcodes:
 ```
 [contact field-one="class,type,id" field-two="" ...]
 ```
