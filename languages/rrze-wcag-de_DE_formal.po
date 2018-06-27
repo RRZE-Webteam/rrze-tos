@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-14 13:37+0200\n"
+"POT-Creation-Date: 2018-06-14 16:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.8\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
@@ -98,11 +98,11 @@ msgstr "Schiedsstelle."
 msgid "accessibility"
 msgstr "barrierefreiheit"
 
-#: ../includes/menu/wcag-add-footer-menu.php:40 ../rrze-wcag.php:123
+#: ../includes/menu/wcag-add-footer-menu.php:40 ../rrze-wcag.php:133
 msgid "FAU-Institutions"
 msgstr "FAU-Einrichtungen"
 
-#: ../includes/menu/wcag-add-footer-menu.php:71 ../includes/settings.php:46
+#: ../includes/menu/wcag-add-footer-menu.php:71 ../includes/settings.php:45
 msgid "Accessibility"
 msgstr "Barrierefreiheit"
 
@@ -110,93 +110,93 @@ msgstr "Barrierefreiheit"
 msgid "/accessibility"
 msgstr "barrierefreiheit"
 
-#: ../includes/options.php:32
+#: ../includes/options.php:30
 msgid "Accessibility statement"
 msgstr "Barrierefreiheitserklärung"
 
-#: ../includes/settings.php:57
+#: ../includes/settings.php:56
 msgid "Settings &rsaquo; Accessible"
 msgstr "Settings &rsaquo; Barrierefreiheit"
 
-#: ../includes/settings.php:76
+#: ../includes/settings.php:75
 msgid "Title"
 msgstr "Titel"
 
-#: ../includes/settings.php:77
+#: ../includes/settings.php:76
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
 
-#: ../includes/settings.php:78
+#: ../includes/settings.php:77
 msgid "If not, with what reason"
 msgstr "Wenn nein, mit welcher Begründung"
 
-#: ../includes/settings.php:79
+#: ../includes/settings.php:78
 #: ../includes/shortcode/wcag-admin-information-shortcode.php:45
 #: ../includes/shortcode/wcag-admin-information-shortcode.php:98
 msgid "Responsible"
 msgstr "Verantwortliche/er"
 
-#: ../includes/settings.php:80 ../includes/settings.php:90
+#: ../includes/settings.php:79 ../includes/settings.php:89
 msgid "Firstname"
 msgstr "Vorname"
 
-#: ../includes/settings.php:81 ../includes/settings.php:91
+#: ../includes/settings.php:80 ../includes/settings.php:90
 msgid "Lastname"
 msgstr "Nachname"
 
-#: ../includes/settings.php:82 ../includes/settings.php:92
+#: ../includes/settings.php:81 ../includes/settings.php:91
 msgid "Street"
 msgstr "Straße"
 
-#: ../includes/settings.php:83 ../includes/settings.php:93
+#: ../includes/settings.php:82 ../includes/settings.php:92
 msgid "City"
 msgstr "Ort"
 
-#: ../includes/settings.php:84 ../includes/settings.php:94
+#: ../includes/settings.php:83 ../includes/settings.php:93
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../includes/settings.php:85 ../includes/settings.php:95
+#: ../includes/settings.php:84 ../includes/settings.php:94
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: ../includes/settings.php:87 ../includes/settings.php:97
+#: ../includes/settings.php:86 ../includes/settings.php:96
 msgid "Person-ID"
 msgstr "Person-ID"
 
-#: ../includes/settings.php:100
+#: ../includes/settings.php:99
 msgid "Receiver E-Mail"
 msgstr "Empfänger"
 
-#: ../includes/settings.php:101
+#: ../includes/settings.php:100
 msgid "Subject"
 msgstr "Betreff"
 
-#: ../includes/settings.php:102
+#: ../includes/settings.php:101
 msgid "CC"
 msgstr "CC"
 
-#: ../includes/settings.php:128
+#: ../includes/settings.php:127
 msgid "Yes"
 msgstr "Ja"
 
-#: ../includes/settings.php:129
+#: ../includes/settings.php:128
 msgid "No"
 msgstr "Nein"
 
-#: ../includes/settings.php:247
+#: ../includes/settings.php:246
 msgid "Here comes the Context Help content."
 msgstr ""
 
-#: ../includes/settings.php:253
+#: ../includes/settings.php:252
 msgid "Overview"
 msgstr ""
 
-#: ../includes/settings.php:257
+#: ../includes/settings.php:256
 msgid "For more information"
 msgstr ""
 
-#: ../includes/settings.php:257
+#: ../includes/settings.php:256
 msgid "RRZE Webteam on Github"
 msgstr ""
 
@@ -271,24 +271,24 @@ msgstr "Bitte eingeben "
 
 #: ../includes/shortcode/wcag-contact-form-shortcode.php:147
 msgid "Wrong e-mail format."
-msgstr "Falsche E-Mail Format"
+msgstr "Falsche E-Mail Format."
 
 #: ../includes/shortcode/wcag-contact-form-shortcode.php:149
 msgid "You can enter a maximum of two digits."
 msgstr "Bitte maximal zwei Ziffern eingeben."
 
-#: ../rrze-wcag.php:82
+#: ../rrze-wcag.php:84
 #, php-format
 msgid ""
-"Your server is running PHP version %s. Please upgrade at least to PHP "
-"version %s."
+"Your server is running PHP version %1$s. Please upgrade at least to PHP "
+"version %2$s."
 msgstr ""
 
-#: ../rrze-wcag.php:86
+#: ../rrze-wcag.php:88
 #, php-format
 msgid ""
-"Your Wordpress version is %s. Please upgrade at least to Wordpress version "
-"%s."
+"Your WordPress version is %1$s. Please upgrade at least to WordPress version "
+"%2$s."
 msgstr ""
 
 #~ msgid ""
