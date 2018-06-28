@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     WACG
+ * Plugin Name:     WACG RRZE-TOS
  * Plugin URI:      https://gitlab.rrze.fau.de/rrze-webteam/rrze-wcag.git
  * Description:     WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den Konformitätskriterien der WCAG.
  * Version:         0.1.2
@@ -168,3 +168,5 @@ function autoload() {
 	$main = new Main();
 	$main->init( plugin_basename( __FILE__ ) );
 }
+//TODO: create array for template text to be included
+//TODO: loco translate plugin
