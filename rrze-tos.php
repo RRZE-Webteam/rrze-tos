@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * Plugin Name:     RRZE TOS
+ * Plugin URI:      https://github.com/RRZE-Webteam/rrze-tos.git
+ * Description:     WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den Konformitätskriterien der TOS.
+ * Version:         0.1.2
+ * Author:          RRZE-Webteam
+ * Author URI:      https://blogs.fau.de/webworking/
+ * License:         GNU General Public License v2
+ * License URI:     http://www.gnu.org/licenses/gpl-2.0.html
+ * Domain Path:     /languages
+ * Text Domain:     rrze-tos
+ */
+
+namespace RRZE\Tos {
+
+	use RRZE\Tos\Main;
+
+	defined('ABSPATH') || exit;
+
+	const RRZE_PHP_VERSION = '7.1';
+	const RRZE_WP_VERSION = '4.9';
+
+	register_activation_hook(__FILE__, 'RRZE\Tos\activation');
+	register_deactivation_hook(__FILE__, 'RRZE\Tos\deactivation');
+
+	add_action('plugins_loaded', 'RRZE\Tos\loaded');
+
+	/*
+	 * Einbindung der Sprachdateien.
+	 * @return void
+	 */
+	function load_textdomain() {
+		load_plugin_textdomain('rrze-tos', FALSE, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
+	}
+
+	/*
+	 * Wird durchgeführt, nachdem das Plugin aktiviert wurde.
+	 * @return void
+	 */
+	function activation() {
+		// Sprachdateien werden eingebunden.
+		load_textdomain();
+
+		// Überprüft die minimal erforderliche PHP- u. WP-Version.
+		system_requirements();
+
+		require_once __DIR__ . '/includes/endpoint/tos-endpoint.php';
+		$obj = new TosEndpoint;
+		$obj->default_options();
+		$obj->rewrite();
+
+		flush_rewrite_rules();
+
+
+
+		// Ab hier können die Funktionen hinzugefügt werden,
+		// die bei der Aktivierung des Plugins aufgerufen werden müssen.
+		// Bspw. wp_schedule_event, flush_rewrite_rules, etc.
+	}
+
+	/*
+	 * Wird durchgeführt, nachdem das Plugin deaktiviert wurde.
+	 * @return void
+	 */
+	function deactivation() {
+		flush_rewrite_rules();
+		// Hier können die Funktionen hinzugefügt werden, die
+		// bei der Deaktivierung des Plugins aufgerufen werden müssen.
+		// Bspw. wp_clear_scheduled_hook, flush_rewrite_rules, etc.
+	}
+
+	/*
+	 * Überprüft die minimal erforderliche PHP- u. WP-Version.
+	 * @return void
+	 */
+	function system_requirements() {
+		$error = '';
+
+		if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
+			$error = sprintf(__('Your server is running PHP version %s. Please upgrade at least to PHP version %s.', 'rrze-tos'), PHP_VERSION, RRZE_PHP_VERSION);
+		}
+
+		if (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
+			$error = sprintf(__('Your Wordpress version is %s. Please upgrade at least to Wordpress version %s.', 'rrze-tos'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
+		}
+
+		// Wenn die Überprüfung fehlschlägt, dann wird das Plugin automatisch deaktiviert.
+		if (!empty($error)) {
+			deactivate_plugins(plugin_basename(__FILE__), FALSE, TRUE);
+			wp_die($error);
+		}
+	}
+
+	/*
+	 * Wird durchgeführt, nachdem das WP-Grundsystem hochgefahren
+	 * und alle Plugins eingebunden wurden.
+	 * @return void
+	 */
+	function loaded() {
+		// Sprachdateien werden eingebunden.
+		add_action( 'wp_enqueue_scripts', 'RRZE\Tos\rrze_tos_scripts');
+		add_action( 'admin_enqueue_scripts', 'RRZE\Tos\rrze_tos_admin_scripts');
+		load_textdomain();
+		require_once __DIR__ . '/includes/helper/tos-helper-functions.php';
+		autoload();
+		require_once __DIR__ . '/includes/shortcode/tos-contact-form-captcha.php';
+		require_once __DIR__ . '/includes/shortcode/tos-contact-form-shortcode.php';
+		require_once __DIR__ . '/includes/shortcode/tos-admin-information-shortcode.php';
+		require_once __DIR__ . '/includes/endpoint/tos-endpoint.php';
+		new TosEndpoint;
+		require_once __DIR__ . '/includes/menu/tos-add-footer-menu.php';
+
+		// Ab hier können weitere Funktionen bzw. Klassen angelegt werden.
+	}
+
+	function rrze_tos_scripts() {
+		wp_register_style( 'tos_styles', plugins_url('rrze-tos/assets/css/styles.css', dirname(__FILE__)));
+		wp_register_style( 'tos_styles_rrze', plugins_url('rrze-tos/assets/css/rrze-styles.css', dirname(__FILE__)));
+		wp_register_style( 'tos_styles_events', plugins_url('rrze-tos/assets/css/events-styles.css', dirname(__FILE__)));
+
+		$current_theme = wp_get_theme();
+		$themes_fau = array(__('FAU-Institutions','rrze-tos'), 'FAU-Natfak', 'FAU-Philfak', 'FAU-RWFak', 'FAU-Techfak', 'FAU-Medfak');
+
+		if(in_array($current_theme, $themes_fau)) {
+			#error_log(print_r($current_theme, true));
+			wp_enqueue_style( 'tos_styles' );
+		} elseif($current_theme == 'RRZE 2015') {
+			wp_enqueue_style( 'tos_styles_rrze');
+		} else {
+			wp_enqueue_style( 'tos_styles_events');
+		}
+	}
+
+	function rrze_tos_admin_scripts() {
+		wp_enqueue_style('admin-styles', plugins_url('rrze-tos/assets/css/admin.css', dirname(__FILE__)));
+	}
+
+	/*
+	 * Automatische Laden von Klassen.
+	 * @return void
+	 */
+	function autoload() {
+		require __DIR__ . '/includes/autoload.php';
+		$main = new Main();
+		$main->init(plugin_basename(__FILE__));
+	}
+}
