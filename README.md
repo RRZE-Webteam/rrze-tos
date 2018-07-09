@@ -8,7 +8,7 @@ Das Plugin gliedert sich in mehrere Teile und wird über einen Endpoint in die W
 
 2. Darüber hinaus beinhaltet das Plugin ein Formular, welches per Shortcode im jeweiligen Template eingebunden wird. Aufbau des Shortcodes:
 ```
-[contact field-one="class,type,id" field-two="" ...]
+[contact field-name="class,type,id" field-email="" ...]
 ```
 
 Da name und email in Wordpress geschützte Begriffe sind, wurde für diese eine Zusatzklasse (rrze-name und rrze-email) hinzugefügt.
@@ -21,21 +21,21 @@ Da name und email in Wordpress geschützte Begriffe sind, wurde für diese eine 
 Allgemeine Formularfelder
 ---
 
-field-one="name,text,name-id,rrze-name"
-field-two="email,text,email-id,rrze-email" 
-field-three="feedback,textarea,textarea-id" 
+field-name="name,text,name-id,rrze-name"
+field-email="email,text,email-id,rrze-email" 
+field-feedback="feedback,textarea,textarea-id" 
 ...
 
 Captcha Felder
 ---
 
-field-four="captcha,text,captcha-id" 
-field-five="answer,hidden,hidden-id" 
+field-captcha="captcha,text,captcha-id" 
+field-answer="answer,hidden,hidden-id" 
 
 Timeout in Sekunden - wird das Formular schneller ausgefüllt als der Timeout (Sekunden) erfolgt keine Übermittlung der Formulardaten
 ----
 
-field-six="timeout,hidden,timeout-id"
+field-timeout="timeout,hidden,timeout-id"
 ]
 ```
 3. Support für die FAU-Themes, für das Events-Theme sowie für das RRZE-Theme.
