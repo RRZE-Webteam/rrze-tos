@@ -3,123 +3,327 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMS-Basis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-03 17:47+0200\n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2018-07-11 13:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
-"Language: de\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
-"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
-"esc_html_x:1,2c\n"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: ..\n"
+"X-Poedit-SearchPath-1: .."
 
-#: ../includes/endpoint/templates/themes/fau/wcag-template.php:19
-msgid "Sie befinden sich hier:"
+#: rrze-tos.php:86
+#, php-format
+msgid ""
+"Your server is running PHP version %1$s. Please upgrade at least to PHP "
+"version %2$s."
 msgstr ""
 
-#: ../includes/endpoint/wcag-endpoint.php:35
-msgid "accessible"
+#: rrze-tos.php:90
+#, php-format
+msgid ""
+"Your WordPress version is %1$s. Please upgrade at least to WordPress version "
+"%2$s."
 msgstr ""
 
-#: ../includes/menu/wcag-add-footer-menu.php:71 ../includes/settings.php:46
-msgid "Accessible"
+#: rrze-tos.php:135 includes/menu/tos-add-footer-menu.php:42
+msgid "FAU-Institutions"
 msgstr ""
 
-#: ../includes/menu/wcag-add-footer-menu.php:73
-msgid "/accessible"
+#: includes/class-options.php:50 includes/strings.php:12
+msgid "Accessibility Statement"
 msgstr ""
 
-#: ../includes/settings.php:57
-msgid "Settings &rsaquo; Barrierefreiheit"
+#: includes/class-settings.php:68 includes/menu/tos-add-footer-menu.php:79
+msgid "Accessibility"
 msgstr ""
 
-#: ../includes/settings.php:76
+#: includes/class-settings.php:83
+msgid "Settings &rsaquo; Accessible"
+msgstr ""
+
+#: includes/class-settings.php:102
+msgid "General"
+msgstr ""
+
+#: includes/class-settings.php:103
 msgid "Title"
 msgstr ""
 
-#: ../includes/settings.php:77
+#: includes/class-settings.php:107
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr ""
 
-#: ../includes/settings.php:78
+#: includes/class-settings.php:111
 msgid "If not, with what reason"
 msgstr ""
 
-#: ../includes/settings.php:80 ../includes/settings.php:90
+#: includes/class-settings.php:115
+#: includes/shortcode/tos-admin-information-shortcode.php:60
+#: includes/shortcode/tos-admin-information-shortcode.php:118
+msgid "Responsible"
+msgstr ""
+
+#: includes/class-settings.php:116 includes/class-settings.php:147
 msgid "Firstname"
 msgstr ""
 
-#: ../includes/settings.php:81 ../includes/settings.php:91
+#: includes/class-settings.php:120 includes/class-settings.php:151
 msgid "Lastname"
 msgstr ""
 
-#: ../includes/settings.php:82 ../includes/settings.php:92
+#: includes/class-settings.php:124 includes/class-settings.php:155
 msgid "Street"
 msgstr ""
 
-#: ../includes/settings.php:83 ../includes/settings.php:93
+#: includes/class-settings.php:128 includes/class-settings.php:159
 msgid "City"
 msgstr ""
 
-#: ../includes/settings.php:84 ../includes/settings.php:94
+#: includes/class-settings.php:132 includes/class-settings.php:163
 msgid "Phone"
 msgstr ""
 
-#: ../includes/settings.php:85 ../includes/settings.php:95
+#: includes/class-settings.php:136 includes/class-settings.php:167
 msgid "E-Mail"
 msgstr ""
 
-#: ../includes/settings.php:87 ../includes/settings.php:97
+#: includes/class-settings.php:141 includes/class-settings.php:172
 msgid "Person-ID"
 msgstr ""
 
-#: ../includes/settings.php:100
+#: includes/class-settings.php:178
 msgid "Receiver E-Mail"
 msgstr ""
 
-#: ../includes/settings.php:101
+#: includes/class-settings.php:182
 msgid "Subject"
 msgstr ""
 
-#: ../includes/settings.php:102
+#: includes/class-settings.php:186
 msgid "CC"
 msgstr ""
 
-#: ../includes/settings.php:247
+#: includes/class-settings.php:221
+msgid "Yes"
+msgstr ""
+
+#: includes/class-settings.php:223
+msgid "No"
+msgstr ""
+
+#: includes/class-settings.php:361
 msgid "Here comes the Context Help content."
 msgstr ""
 
-#: ../includes/settings.php:253
+#: includes/class-settings.php:367
 msgid "Overview"
 msgstr ""
 
-#: ../includes/settings.php:257
+#: includes/class-settings.php:371
 msgid "For more information"
 msgstr ""
 
-#: ../includes/settings.php:257
+#: includes/class-settings.php:371
 msgid "RRZE Webteam on Github"
 msgstr ""
 
-#: ../rrze-wcag.php:82
+#: includes/strings.php:13
 #, php-format
 msgid ""
-"Your server is running PHP version %s. Please upgrade at least to PHP "
-"version %s."
+"Public authorities are required by the %1sEU Directive%2s on Accessibility "
+"to Sites and Mobile Applications of Public Agencies to implement their "
+"websites in accordance with WCAG criteria. This website has been reviewed in "
+"accordance with WCAG conformity criteria."
 msgstr ""
 
-#: ../rrze-wcag.php:86
-#, php-format
+#: includes/strings.php:14
+#: includes/endpoint/templates/themes/fau/tos-template.php:53
+msgid "Are the conformity criteria currently fulfilled?"
+msgstr ""
+
+#: includes/strings.php:15
+#: includes/endpoint/templates/themes/fau/tos-template.php:57
+msgid "The criteria are fulfilled."
+msgstr ""
+
+#: includes/strings.php:16
+#: includes/endpoint/templates/themes/fau/tos-template.php:59
+msgid "The criteria are not fulfilled."
+msgstr ""
+
+#: includes/strings.php:17
+msgid "Reason"
+msgstr ""
+
+#: includes/strings.php:18
+#: includes/endpoint/templates/themes/fau/tos-template.php:64
+msgid "Problems with the operation of the site?"
+msgstr ""
+
+#: includes/strings.php:19
+#: includes/endpoint/templates/themes/fau/tos-template.php:65
+msgid "The following people are responsible for this website:"
+msgstr ""
+
+#: includes/strings.php:20
+#: includes/endpoint/templates/themes/fau/tos-template.php:68
+msgid "If you have any problems using this website, please write an email to "
+msgstr ""
+
+#: includes/strings.php:21
+#: includes/endpoint/templates/themes/fau/tos-template.php:71
+msgid "Feedback-Form"
+msgstr ""
+
+#: includes/strings.php:22
+#: includes/endpoint/templates/themes/fau/tos-template.php:80
+msgid "If you feel that you are not being helped, you can contact the "
+msgstr ""
+
+#: includes/endpoint/class-tos-endpoint.php:40
+msgid "accessibility"
+msgstr ""
+
+#: includes/menu/tos-add-footer-menu.php:81
+msgid "/accessibility"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:48
+msgid "one"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:49
+msgid "two"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:50
+msgid "three"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:51
+msgid "four"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:52
+msgid "five"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:53
+msgid "six"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:54
+msgid "seven"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:55
+msgid "eight"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:56
+msgid "nine"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-captcha.php:75
+#: includes/shortcode/tos-contact-form-captcha.php:99
+msgid "times"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:77
+msgid "Your are a bot!"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:79
+msgid "Many Thanks! We will contact you immediately!"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:84
+msgid "Wrong solution! Try it again."
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:102
+msgid "Solve the following task:"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:176
+msgid "Please enter e-mail"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:178
+msgid "Please enter name"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:180
+msgid "Please enter "
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:183
+msgid "Wrong e-mail format."
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:185
+msgid "You can enter a maximum of two digits."
+msgstr ""
+
+#: includes/endpoint/templates/themes/fau/tos-template.php:48
+msgid "TOS review"
+msgstr ""
+
+#: includes/endpoint/templates/themes/fau/tos-template.php:50
+msgid "Public authorities are required by the "
+msgstr ""
+
+#: includes/endpoint/templates/themes/fau/tos-template.php:51
+msgid "EU Directive"
+msgstr ""
+
+#: includes/endpoint/templates/themes/fau/tos-template.php:51
 msgid ""
-"Your Wordpress version is %s. Please upgrade at least to Wordpress version "
-"%s."
+" on Accessibility to Sites and Mobile Applications of Public Agencies to "
+"implement their websites in accordance with WCAG criteria. This website has "
+"been reviewed in accordance with WCAG conformity criteria."
+msgstr ""
+
+#: includes/endpoint/templates/themes/fau/tos-template.php:61
+msgid "Reason:"
+msgstr ""
+
+#: includes/endpoint/templates/themes/fau/tos-template.php:69
+msgid " or fill out the feedback form!"
+msgstr ""
+
+#: includes/endpoint/templates/themes/fau/tos-template.php:81
+msgid "arbitration board."
+msgstr ""
+
+#. Name of the plugin
+msgid "RRZE TOS"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den "
+"Konformitätskriterien der TOS."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/RRZE-Webteam/rrze-tos.git"
+msgstr ""
+
+#. Author of the plugin
+msgid "RRZE-Webteam"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://blogs.fau.de/webworking/"
 msgstr ""

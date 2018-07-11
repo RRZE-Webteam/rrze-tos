@@ -99,7 +99,7 @@ namespace RRZE\Tos {
 		 */
 		public function admin_settings() {
 			register_setting( 'rrze_tos_options', $this->option_name, array( $this, 'options_validate' ) );
-			add_settings_section( 'rrze_tos_section_1', 'Allgemein', '__return_false', 'rrze_tos_options' );
+			add_settings_section( 'rrze_tos_section_1', __( 'General', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
 			add_settings_field( 'rrze_tos_field_title', __( 'Title', 'rrze-tos' ), array(
 				$this,
 				'rrze_tos_field_title'

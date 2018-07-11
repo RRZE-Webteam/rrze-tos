@@ -3,7 +3,8 @@
 defined( 'ABSPATH' ) || exit;
 
 $values = get_option( 'rrze_tos' );
-
+include WP_PLUGIN_DIR . "/rrze-tos/includes/strings.php";
+$strings = $template['a11y'];
 get_header();
 
 ?>
@@ -11,12 +12,8 @@ get_header();
 <div class="content-wrap">
 	<div id="blog-wrap" class="blog-wrap cf">
 		<div id="primary" class="site-content cf rrze-calendar" role="main">
-			<h2>WCAG-Prüfung der Website</h2>
-			<p>Die öffentlichen Stellen sind gemäß der <a
-					href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1">EU-Richtline</a>
-				über den barrierefreien Zugang zu den Webseites und mobilen Anwendungen öffentlicher Stellen
-				verpflichtet Ihre Websites entsprechend den WCAG Kriterien umzusetzen.
-				Diese Webseite wurde gemäß den Konformitätsbedingungen der WCAG geprüft.</p>
+			<h2><?php echo $strings['title']; ?></h2>
+			<p><?php echo $strings['intro']; ?></p>
 			<h3>Sind die Konformitätskriterien derzeit erfüllt?</h3>
 			<?php
 
