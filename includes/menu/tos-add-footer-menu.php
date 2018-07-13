@@ -1,29 +1,59 @@
 <?php
+/**
+ * WordPress TOS Footer menu.
+ *
+ * @package    WordPress
+ * @subpackage TOS
+ * @since      3.4.0
+ */
 
 namespace RRZE\Tos {
-
+	/**
+	 *
+	 * @param $post
+	 * @param $callback_args
+	 */
 	function tos_dashboard_widget_function( $post, $callback_args ) {
 		echo "Das <strong>TOS Plugin</strong> kann keinen Menüeintrag in der <strong>Navigation unten</strong> anlegen. Wahrscheinlich haben Sie bereits einen Menüeintrag mit dem Namen <strong>Barrierefreiheit</strong> angelegt. Ändern Sie bitte den Namen Ihrer Seite.";
 	}
 
+	/**
+	 *
+	 */
 	function tos_add_dashboard_widgets() {
 		wp_add_dashboard_widget( 'tos_dashboard_widget', '<span class="dashicons dashicons-awards"></span>Achtung!', 'RRZE\Tos\tos_dashboard_widget_function' );
 	}
 
+	/**
+	 *
+	 * @param $post
+	 * @param $callback_args
+	 */
 	function tos_dashboard_widget_menu_function( $post, $callback_args ) {
 		echo "Das <strong>TOS Plugin</strong> kann keinen Menüeintrag in der Navigation unten anlegen. Bitte legen Sie ein Footer-Menü an!";
 	}
 
+	/**
+	 *
+	 */
 	function tos_add_dashboard_menu_widgets() {
 		wp_add_dashboard_widget( 'tos_dashboard_widget', '<span class="dashicons dashicons-awards"></span>Achtung!', 'RRZE\Tos\tos_dashboard_widget_menu_function' );
 	}
 
+	/**
+	 *
+	 */
 	function example_remove_dashboard_widget() {
 		remove_meta_box( 'tos_dashboard_widget', 'dashboard', 'normal' );
 	}
 
 #add_action('wp_dashboard_setup', 'RRZE\Tos\tos_add_dashboard_widgets' );
-
+	/**
+	 *
+	 * @param $page_slug
+	 *
+	 * @return bool
+	 */
 	function the_slug_exists( $page_slug ) {
 
 		$page = get_page_by_path( $page_slug, OBJECT );
@@ -35,6 +65,9 @@ namespace RRZE\Tos {
 		}
 	}
 
+	/**
+	 *
+	 */
 	function add_page_to_footer_menu() {
 
 		$current_theme     = wp_get_theme();
@@ -44,7 +77,7 @@ namespace RRZE\Tos {
 			'FAU-Philfak',
 			'FAU-RWFak',
 			'FAU-Techfak',
-			'FAU-Medfak'
+			'FAU-Medfak',
 		);
 		$menu_entry_option = 'tos_menu';
 
@@ -64,8 +97,8 @@ namespace RRZE\Tos {
 				#error_log(print_r($menu_items, true));
 				foreach ( $menu_items as $menu_item ) {
 					$title = $menu_item->title;
-					if ( $title == 'Barrierefreiheit' || $title == 'Accessibility' ) {
-						if ( $menu_item->object != 'custom' ) {
+					if ( 'Barrierefreiheit' === $title || 'Accessibility' === $title ) {
+						if ( 'custom' !== $menu_item->object ) {
 							add_action( 'wp_dashboard_setup', 'RRZE\Tos\tos_add_dashboard_widgets' );
 						}
 						$used = true;
@@ -75,11 +108,12 @@ namespace RRZE\Tos {
 				}
 
 				if ( ! $used ) {
-					wp_update_nav_menu_item( $menu_id, 0, array(
+					wp_update_nav_menu_item( $menu_id, 0,
+						array(
 							'menu-item-title'   => __( 'Accessibility', 'rrze-tos' ),
 							'menu-item-classes' => 'tos',
 							'menu-item-url'     => home_url( __( '/accessibility', 'rrze-tos' ) ),
-							'menu-item-status'  => 'publish'
+							'menu-item-status'  => 'publish',
 						)
 					);
 				}

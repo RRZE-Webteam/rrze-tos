@@ -17,19 +17,19 @@ namespace RRZE\Tos {
 	/**
 	 * Class Main
 	 *
-	 * @package RRZE\Wcag
+	 * @package RRZE\Tos
 	 */
 	class Main {
 		/**
 		 * Options object type
 		 *
-		 * @var object $options
+		 * @var object Options
 		 */
 		public $options;
 		/**
 		 * Settings object type
 		 *
-		 * @var object $settings
+		 * @var object Settings
 		 */
 		public $settings;
 
