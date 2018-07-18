@@ -45,29 +45,33 @@ namespace RRZE\Tos {
 			} else {
 				$res = '';
 			}
-
+                        if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+                            $admin_email = get_site_option( 'admin_email' );
+                        } else {
+                            $admin_email = get_option( 'admin_email' );
+                        }
 			$options = array(
-				'rrze_tos_field_title'                 => __( 'Accessibility statement', 'rrze-tos' ),
-				'rrze_tos_field_conformity'            => '2',
-				'rrze_tos_field_no_reason'             => '',
+				'rrze_tos_field_title'                     => __( 'Accessibility Statement', 'rrze-tos' ),
+				'rrze_tos_field_conformity'                     => '2',
+				'rrze_tos_field_no_reason'                     => '',
 				// Verantwortlicher!
 				'rrze_tos_field_responsible_firstname' => ( isset( $res['metadata']['verantwortlich']['vorname'] ) ? $res['metadata']['verantwortlich']['vorname'] : '' ),
 				'rrze_tos_field_responsible_lastname'  => ( isset( $res['metadata']['verantwortlich']['nachname'] ) ? $res['metadata']['verantwortlich']['nachname'] : '' ),
 				'rrze_tos_field_responsible_street'    => '',
 				'rrze_tos_field_responsible_city'      => '',
 				'rrze_tos_field_responsible_phone'     => '',
-				'rrze_tos_field_responsible_email'     => ( isset( $res['metadata']['verantwortlich']['email'] ) ? $res['metadata']['verantwortlich']['email'] : '' ),
+				'rrze_tos_field_responsible_email'     => ( isset( $res['metadata']['verantwortlich']['email'] ) ? $res['metadata']['verantwortlich']['email'] : $admin_email ),
 				'rrze_tos_field_responsible_ID'        => '',
 				// Webmaster!
 				'rrze_tos_field_webmaster_firstname'   => ( isset( $res['metadata']['webmaster']['vorname'] ) ? $res['metadata']['webmaster']['vorname'] : '' ),
-				'rrze_tos_field_webmaster_lastname'    => ( isset( $res['metadata']['webmaster']['nachname'] ) ? $res['metadata']['webmaster']['nachname'] : '' ),
-				'rrze_tos_field_webmaster_street'      => '',
-				'rrze_tos_field_webmaster_city'        => '',
-				'rrze_tos_field_webmaster_phone'       => '',
-				'rrze_tos_field_webmaster_email'       => ( isset( $res['metadata']['webmaster']['email'] ) ? $res['metadata']['webmaster']['email'] : '' ),
-				'rrze_tos_field_webmaster_ID'          => '',
-				'rrze_tos_field_receiver_email'        => '',
-				'rrze_tos_field_subject'               => 'Feedback-Formular Barrierefreiheit',
+				'rrze_tos_field_webmaster_lastname'                    => ( isset( $res['metadata']['webmaster']['nachname'] ) ? $res['metadata']['webmaster']['nachname'] : '' ),
+				'rrze_tos_field_webmaster_street'                    => '',
+				'rrze_tos_field_webmaster_city'                    => '',
+				'rrze_tos_field_webmaster_phone'                    => '',
+				'rrze_tos_field_webmaster_email'                    => ( isset( $res['metadata']['webmaster']['email'] ) ? $res['metadata']['webmaster']['email'] : $admin_email ),
+				'rrze_tos_field_webmaster_ID'                    => '',
+				'rrze_tos_field_receiver_email'                    => '',
+				'rrze_tos_field_subject'                    => 'Feedback-Formular Barrierefreiheit',
 				'rrze_tos_field_cc'                    => '',
 				// Hier können weitere Felder ('key' => 'value') angelegt werden.
 			);

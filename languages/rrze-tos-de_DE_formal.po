@@ -1,13 +1,12 @@
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: CMS-Basis\n"
+"Project-Id-Version: RRZE WCAG\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-11 13:09+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: \n"
-"Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-07-11 13:12+0000\n"
+"Last-Translator: barbara <barbara.bothe@fau.de>\n"
+"Language-Team: Deutsch (Sie)\n"
+"Language: de_DE_formal\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,7 +15,7 @@ msgstr ""
 "esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: .."
@@ -45,7 +44,7 @@ msgstr ""
 
 #: includes/class-settings.php:68 includes/menu/tos-add-footer-menu.php:79
 msgid "Accessibility"
-msgstr ""
+msgstr "Barrierefreiheit"
 
 #: includes/class-settings.php:83
 msgid "Settings &rsaquo; Accessible"
@@ -53,19 +52,19 @@ msgstr ""
 
 #: includes/class-settings.php:102
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: includes/class-settings.php:103
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: includes/class-settings.php:107
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
-msgstr ""
+msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
 
 #: includes/class-settings.php:111
 msgid "If not, with what reason"
-msgstr ""
+msgstr "Wenn nein, mit welcher Begründung"
 
 #: includes/class-settings.php:115
 #: includes/shortcode/tos-admin-information-shortcode.php:60
@@ -75,43 +74,43 @@ msgstr ""
 
 #: includes/class-settings.php:116 includes/class-settings.php:147
 msgid "Firstname"
-msgstr ""
+msgstr "Vorname"
 
 #: includes/class-settings.php:120 includes/class-settings.php:151
 msgid "Lastname"
-msgstr ""
+msgstr "Nachname"
 
 #: includes/class-settings.php:124 includes/class-settings.php:155
 msgid "Street"
-msgstr ""
+msgstr "Straße"
 
 #: includes/class-settings.php:128 includes/class-settings.php:159
 msgid "City"
-msgstr ""
+msgstr "Ort"
 
 #: includes/class-settings.php:132 includes/class-settings.php:163
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: includes/class-settings.php:136 includes/class-settings.php:167
 msgid "E-Mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: includes/class-settings.php:141 includes/class-settings.php:172
 msgid "Person-ID"
-msgstr ""
+msgstr "Person-ID"
 
 #: includes/class-settings.php:178
 msgid "Receiver E-Mail"
-msgstr ""
+msgstr "Empfänger"
 
 #: includes/class-settings.php:182
 msgid "Subject"
-msgstr ""
+msgstr "Betreff"
 
 #: includes/class-settings.php:186
 msgid "CC"
-msgstr ""
+msgstr "CC"
 
 #: includes/class-settings.php:221
 msgid "Yes"
@@ -145,40 +144,46 @@ msgid ""
 "websites in accordance with WCAG criteria. This website has been reviewed in "
 "accordance with WCAG conformity criteria."
 msgstr ""
+"Die öffentlichen Stellen sind gemäß der %1sEU Directive%2s über den "
+"barrierefreien Zugang zu den Webseites und mobilen Anwendungen öffentlicher "
+"Stellen verpflichtet Ihre Websites entsprechend den WCAG Kriterien "
+"umzusetzen. Diese Webseite wurde gemäß den Konformitätsbedingungen der WCAG "
+"geprüft."
 
 #: includes/strings.php:14
 #: includes/endpoint/templates/themes/fau/tos-template.php:53
 msgid "Are the conformity criteria currently fulfilled?"
-msgstr ""
+msgstr "Sind die Konformitätskriterien derzeit erfüllt?"
 
 #: includes/strings.php:15
 #: includes/endpoint/templates/themes/fau/tos-template.php:57
 msgid "The criteria are fulfilled."
-msgstr ""
+msgstr "Die Kriterien werden erfüllt."
 
 #: includes/strings.php:16
 #: includes/endpoint/templates/themes/fau/tos-template.php:59
 msgid "The criteria are not fulfilled."
-msgstr ""
+msgstr "Die Kriterien werden nicht erfüllt."
 
 #: includes/strings.php:17
 msgid "Reason"
-msgstr ""
+msgstr "Begründung"
 
 #: includes/strings.php:18
 #: includes/endpoint/templates/themes/fau/tos-template.php:64
 msgid "Problems with the operation of the site?"
-msgstr ""
+msgstr "Probleme bei der Bedienung der Seite?"
 
 #: includes/strings.php:19
 #: includes/endpoint/templates/themes/fau/tos-template.php:65
 msgid "The following people are responsible for this website:"
-msgstr ""
+msgstr "Für diesen Webauftritt sind folgende Personen verantwortlich:"
 
 #: includes/strings.php:20
 #: includes/endpoint/templates/themes/fau/tos-template.php:68
 msgid "If you have any problems using this website, please write an email to "
 msgstr ""
+"Bei Problemen mit der Bedienung der Webseite schreiben Sie eine E-Mail an "
 
 #: includes/strings.php:21
 #: includes/endpoint/templates/themes/fau/tos-template.php:71
