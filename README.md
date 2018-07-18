@@ -1,10 +1,10 @@
-# Das WCAG-Plugin
-Mit dem WCAG-Plugin wird nach der Aktivierung automatisch eine Barrierefreiheitserklärung eingefügt. Diese kann über einen Link im Footer aufgerufen werden.
+# Das TOS-Plugin
+Mit dem TOS-Plugin wird nach der Aktivierung automatisch eine Barrierefreiheitserklärung eingefügt. Diese kann über einen Link im Footer aufgerufen werden.
 
 ## Aufbau des Plugins
 Das Plugin gliedert sich in mehrere Teile und wird über einen Endpoint in die Webseite eingefügt.
 
-1. Nach der Aktivierung erscheint der Menüpunkt Barrierefreiheit (Accessibility) in den Einstellungen. Hier können verschiedene Einstellungen gemacht werden (z.B. Werden die WCAG-Kriterien derzeit erfüllt?). Darüber hinaus werden die Kontaktdaten der Verantwortlichen für die Webseite im FAU-Netz automatisch ausgefüllt und können ergänzt werden. Die Url für das RRZE ist: https://www.wmp.rrze.fau.de/api/domain/metadata/www.rrze.fau.de. Wird das Plugin außerhalb der Universität verwendet, so müssen die Kontaktdaten händisch in den Einstellungen eingepflegt werden.
+1. Nach der Aktivierung erscheint der Menüpunkt Barrierefreiheit (Accessibility) in den Einstellungen. Hier können verschiedene Einstellungen gemacht werden (z.B. Werden die TOS-Kriterien derzeit erfüllt?). Darüber hinaus werden die Kontaktdaten der Verantwortlichen für die Webseite im FAU-Netz automatisch ausgefüllt und können ergänzt werden. Die Url für das RRZE ist: https://www.wmp.rrze.fau.de/api/domain/metadata/www.rrze.fau.de. Wird das Plugin außerhalb der Universität verwendet, so müssen die Kontaktdaten händisch in den Einstellungen eingepflegt werden.
 
 2. Darüber hinaus beinhaltet das Plugin ein Formular, welches per Shortcode im jeweiligen Template eingebunden wird. Aufbau des Shortcodes:
 ```
@@ -13,7 +13,7 @@ Das Plugin gliedert sich in mehrere Teile und wird über einen Endpoint in die W
 
 Da name und email in Wordpress geschützte Begriffe sind, wurde für diese eine Zusatzklasse (rrze-name und rrze-email) hinzugefügt.
 
-### Contact-Shortcode für das WCAG-Plugin
+### Contact-Shortcode für das TOS-Plugin
 
 ```
 [contact 

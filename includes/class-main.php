@@ -2,9 +2,9 @@
 /**
  * WordPress TOS Class
  *
- * @package WordPress
+ * @package    WordPress
  * @subpackage TOS
- * @since 3.4.0
+ * @since      3.4.0
  */
 
 namespace RRZE\Tos {

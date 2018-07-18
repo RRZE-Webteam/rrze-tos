@@ -211,22 +211,22 @@ namespace RRZE\Tos {
 
 		}
 
-		/*$to = (!empty($values['rrze_tos_field_receiver_email']) ? $values['rrze_tos_field_receiver_email'] : $res['metadata']['webmaster']['email']);
-		$subject = $values['rrze_tos_field_subject'];
+		/*$to = (!empty($values['rrze_tos_receiver_email']) ? $values['rrze_tos_receiver_email'] : $res['metadata']['webmaster']['email']);
+		$subject = $values['rrze_tos_subject'];
 		$message = $feedback;
 		$headers[] = "From: <$from>";
-		$cc = (!empty($values['rrze_tos_field_cc']) ? $values['rrze_tos_field_cc'] : '');
+		$cc = (!empty($values['rrze_tos_cc']) ? $values['rrze_tos_cc'] : '');
 		if(!empty($cc)) {
 			$headers[] = "CC: <$cc>";
 		}
 
 		wp_mail( $to, $subject, $message, $headers );*/
 
-		$to        = ( ! empty( $values['rrze_tos_field_receiver_email'] ) ? $values['rrze_tos_field_receiver_email'] : $res['metadata']['webmaster']['email'] );
-		$subject   = $values['rrze_tos_field_subject'];
+		$to        = ( ! empty( $values['rrze_tos_receiver_email'] ) ? $values['rrze_tos_receiver_email'] : $res['metadata']['webmaster']['email'] );
+		$subject   = $values['rrze_tos_subject'];
 		$message   = $feedback;
 		$headers[] = "From: $name <$from>";
-		$cc        = ( ! empty( $values['rrze_tos_field_cc'] ) ? $values['rrze_tos_field_cc'] : '' );
+		$cc        = ( ! empty( $values['rrze_tos_cc'] ) ? $values['rrze_tos_cc'] : '' );
 		$cc_addr   = explode( ",", $cc );
 		if ( ! empty( $cc ) ) {
 			foreach ( $cc_addr as $cc => $value ) {

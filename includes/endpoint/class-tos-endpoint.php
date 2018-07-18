@@ -1,15 +1,25 @@
 <?php
+/**
+ * WordPress TOS endpoint Class
+ *
+ * @package    WordPress
+ * @subpackage TOS
+ * @since      3.4.0
+ */
 
 namespace RRZE\Tos {
 
 	/**
 	 * Class TosEndpoint
 	 *
+	 * @property array options
 	 * @package RRZE\Tos
 	 */
-	Class Tos_Endpoint {
-
-		function __construct() {
+	class Tos_Endpoint {
+		/**
+		 * Tos_Endpoint constructor.
+		 */
+		public function __construct() {
 			add_action( 'init', array( $this, 'default_options' ) );
 			add_action( 'init', array( $this, 'rewrite' ) );
 			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
@@ -17,6 +27,11 @@ namespace RRZE\Tos {
 
 		}
 
+		/**
+		 * List of themes
+		 *
+		 * @var array
+		 */
 		public static $allowed_stylesheets = [
 			'fau'        => [
 				'FAU-Einrichtungen',
@@ -25,36 +40,53 @@ namespace RRZE\Tos {
 				'FAU-RWFak',
 				'FAU-Philfak',
 				'FAU-Techfak',
-				'FAU-Natfak'
+				'FAU-Natfak',
 			],
 			'rrze'       => [
-				'rrze-2015'
+				'rrze-2015',
 			],
 			'fau-events' => [
-				'FAU-Events'
-			]
+				'FAU-Events',
+			],
 		];
 
-		function default_options() {
+		/**
+		 * Define default values.
+		 *
+		 * @return array
+		 */
+		public function default_options() {
 			$this->options = [
 				'endpoint_slug' => __( 'accessibility', 'rrze-tos' ),
-				#'endpoint_slug' => 'barrierefreiheit',
 			];
 
 			return $this->options;
 		}
 
-		function add_query_vars( $vars ) {
+		/**
+		 * Create a vector out of options
+		 *
+		 * @param array $vars Parameter with output variables.
+		 *
+		 * @return array
+		 */
+		public function add_query_vars( $vars ) {
 			$vars[] = $this->options['endpoint_slug'];
 
 			return $vars;
 		}
 
-		function rewrite() {
+		/**
+		 * Change endpoint.
+		 */
+		public function rewrite() {
 			add_rewrite_endpoint( $this->options['endpoint_slug'], EP_ROOT );
 		}
 
-		function endpoint_template_redirect() {
+		/**
+		 * Redirect according to theme.
+		 */
+		public function endpoint_template_redirect() {
 
 			global $wp_query;
 
@@ -66,7 +98,7 @@ namespace RRZE\Tos {
 
 			$styledir = '';
 			foreach ( self::$allowed_stylesheets as $dir => $style ) {
-				if ( in_array( strtolower( $current_theme->stylesheet ), array_map( 'strtolower', $style ) ) ) {
+				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ), array_map( 'strtolower', $style ), true ) ) {
 					$styledir = dirname( __FILE__ ) . "/templates/themes/$dir/";
 					break;
 				}

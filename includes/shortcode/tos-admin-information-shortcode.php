@@ -40,16 +40,16 @@ namespace RRZE\Tos {
 			if ( ! empty( $values ) ) {
 				if ( $values ) {
 					foreach ( $values as $key => $value ) {
-						$store['verantwortlich']['strasse'] = $values['rrze_tos_field_responsible_street'];
-						$store['verantwortlich']['ort']     = $values['rrze_tos_field_responsible_city'];
-						$store['verantwortlich']['telefon'] = $values['rrze_tos_field_responsible_phone'];
-						//$store['verantwortlich']['email']     =  $values['rrze_tos_field_responsible_email'];!
-						//$store['verantwortlich']['personid']  =  $values['rrze_tos_field_responsible_ID'];!
-						$store['webmaster']['strasse'] = $values['rrze_tos_field_webmaster_street'];
-						$store['webmaster']['ort']     = $values['rrze_tos_field_webmaster_city'];
-						$store['webmaster']['telefon'] = $values['rrze_tos_field_webmaster_phone'];
-						//$store['webmaster']['email']     =  $values['rrze_tos_field_webmaster_email'];!
-						//$store['webmaster']['personid']  =  $values['rrze_tos_field_webmaster_ID'];!
+						$store['verantwortlich']['strasse'] = $values['rrze_tos_responsible_street'];
+						$store['verantwortlich']['ort']     = $values['rrze_tos_responsible_city'];
+						$store['verantwortlich']['telefon'] = $values['rrze_tos_responsible_phone'];
+						//$store['verantwortlich']['email']     =  $values['rrze_tos_responsible_email'];!
+						//$store['verantwortlich']['personid']  =  $values['rrze_tos_responsible_ID'];!
+						$store['webmaster']['strasse'] = $values['rrze_tos_webmaster_street'];
+						$store['webmaster']['ort']     = $values['rrze_tos_webmaster_city'];
+						$store['webmaster']['telefon'] = $values['rrze_tos_webmaster_phone'];
+						//$store['webmaster']['email']     =  $values['rrze_tos_webmaster_email'];!
+						//$store['webmaster']['personid']  =  $values['rrze_tos_webmaster_ID'];!
 					}
 
 					if ( ! empty( $store ) ) {
@@ -93,20 +93,20 @@ namespace RRZE\Tos {
 
 			if ( ! empty( $values ) ) {
 				foreach ( $values as $key => $value ) {
-					$store['verantwortlich']['vorname']  = $values['rrze_tos_field_responsible_firstname'];
-					$store['verantwortlich']['nachname'] = $values['rrze_tos_field_responsible_lastname'];
-					$store['verantwortlich']['strasse']  = $values['rrze_tos_field_responsible_street'];
-					$store['verantwortlich']['ort']      = $values['rrze_tos_field_responsible_city'];
-					$store['verantwortlich']['telefon']  = $values['rrze_tos_field_responsible_phone'];
-					$store['verantwortlich']['email']    = $values['rrze_tos_field_responsible_email'];
-					//$store['verantwortlich']['personid']  =  $values['rrze_tos_field_responsible_ID'];!
-					$store['webmaster']['vorname']  = $values['rrze_tos_field_webmaster_firstname'];
-					$store['webmaster']['nachname'] = $values['rrze_tos_field_webmaster_lastname'];
-					$store['webmaster']['strasse']  = $values['rrze_tos_field_webmaster_street'];
-					$store['webmaster']['ort']      = $values['rrze_tos_field_webmaster_city'];
-					$store['webmaster']['telefon']  = $values['rrze_tos_field_webmaster_phone'];
-					$store['webmaster']['email']    = $values['rrze_tos_field_webmaster_email'];
-					//$store['webmaster']['personid']  =  $values['rrze_tos_field_webmaster_ID'];!
+					$store['verantwortlich']['vorname']  = $values['rrze_tos_responsible_firstname'];
+					$store['verantwortlich']['nachname'] = $values['rrze_tos_responsible_lastname'];
+					$store['verantwortlich']['strasse']  = $values['rrze_tos_responsible_street'];
+					$store['verantwortlich']['ort']      = $values['rrze_tos_responsible_city'];
+					$store['verantwortlich']['telefon']  = $values['rrze_tos_responsible_phone'];
+					$store['verantwortlich']['email']    = $values['rrze_tos_responsible_email'];
+					//$store['verantwortlich']['personid']  =  $values['rrze_tos_responsible_ID'];!
+					$store['webmaster']['vorname']  = $values['rrze_tos_webmaster_firstname'];
+					$store['webmaster']['nachname'] = $values['rrze_tos_webmaster_lastname'];
+					$store['webmaster']['strasse']  = $values['rrze_tos_webmaster_street'];
+					$store['webmaster']['ort']      = $values['rrze_tos_webmaster_city'];
+					$store['webmaster']['telefon']  = $values['rrze_tos_webmaster_phone'];
+					$store['webmaster']['email']    = $values['rrze_tos_webmaster_email'];
+					//$store['webmaster']['personid']  =  $values['rrze_tos_webmaster_ID'];!
 				}
 			}
 
