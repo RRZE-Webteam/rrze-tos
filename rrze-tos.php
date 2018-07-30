@@ -11,7 +11,7 @@
  * Domain Path:     /languages
  * Text Domain:     rrze-tos
  *
- * @package WordPress
+ * @package    WordPress
  * @subpackage TOS
  */
 
@@ -140,7 +140,7 @@ namespace RRZE\Tos {
 			'FAU-Medfak',
 		);
 
-		if ( in_array( $current_theme, $themes_fau ) ) {
+		if ( in_array( $current_theme, $themes_fau, true ) ) {
 			//error_log(print_r($current_theme, true));!
 			wp_enqueue_style( 'tos_styles' );
 		} elseif ( 'RRZE 2015' === $current_theme ) {
@@ -157,6 +157,27 @@ namespace RRZE\Tos {
 	 */
 	function rrze_tos_admin_scripts() {
 		wp_enqueue_style( 'admin-styles', plugins_url( 'rrze-tos/assets/css/admin.css', dirname( __FILE__ ) ) );
+		wp_enqueue_style( 'parsley-validator-styles', plugins_url( 'rrze-tos/assets/css/parsley.css', dirname( __FILE__ ) ) );
+
+		wp_enqueue_script( 'parsley-validator',
+			plugins_url( 'rrze-tos/assets/js/parsley.min.js', dirname( __FILE__ ) ),
+			array( 'jquery' ),
+			'2.8.1',
+			true
+		);
+		wp_enqueue_script( 'parsley-i18n',
+			plugins_url( 'rrze-tos/assets/js/i18n/de.js', dirname( __FILE__ ) ),
+			array( 'parsley-validator' ),
+			'2.8.1',
+			true
+		);
+		wp_enqueue_script( 'tos_admin_script',
+			plugins_url( 'rrze-tos/assets/js/tos-admin-script.js', dirname( __FILE__ ) ),
+			array( 'jquery', 'parsley-validator' ),
+			1.0,
+			true
+		);
+
 	}
 
 	/**

@@ -25,5 +25,5 @@ $template = [
 		'contact'       => __( 'If you feel that you are not being helped, you can contact the ', 'rrze-tos' )
 	],
 	'imprint' => [],
-	'privacy' => []
+	'privacy' => [],
 ];

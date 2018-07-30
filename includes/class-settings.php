@@ -71,9 +71,9 @@ namespace RRZE\Tos {
 		 */
 		private static function options_page_tabs() {
 			$tabs = [
-				'accessibility'   => __( 'Accessibility', 'rrze-tos' ),
-				'imprint'         => __( 'Imprint', 'rrze-tos' ),
-				'data_protection' => __( 'Data Protection', 'rrze-tos' ),
+				'accessibility' => __( 'Accessibility', 'rrze-tos' ),
+				'imprint'       => __( 'Imprint', 'rrze-tos' ),
+				'privacy'       => __( 'Privacy', 'rrze-tos' ),
 			];
 
 			return $tabs;
@@ -108,6 +108,9 @@ namespace RRZE\Tos {
 					'settings_page',
 				] );
 			add_action( 'load-' . $this->admin_settings_page, array( $this, 'admin_help_menu' ) );
+			add_action( 'load-' . $this->admin_settings_page, array( $this, 'admin_help_menu' ) );
+
+			add_action( 'admin_notices', array( $this, 'my_error_notice' ) );
 		}
 
 		/**
@@ -131,7 +134,7 @@ namespace RRZE\Tos {
 					}
 					?>
 				</h3>
-				<form method="post" action="options.php">
+				<form method="post" action="options.php" id="tos-admin-form">
 					<?php
 					settings_fields( 'rrze_tos_options' );
 					do_settings_sections( 'rrze_tos_options' );
@@ -149,7 +152,7 @@ namespace RRZE\Tos {
 		 */
 		public function admin_settings() {
 			register_setting( 'rrze_tos_options', $this->option_name, array( $this, 'options_validate' ) );
-
+			$tab = 'accessibility';
 			if ( isset( $_GET ) ) {
 				$tab = self::current_tab( $_GET );
 			}
@@ -197,23 +200,17 @@ namespace RRZE\Tos {
 					add_settings_section( 'rrze_tos_section_responsible', __( 'Responsible', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
 
 					add_settings_field(
-						'rrze_tos_responsible_firstname', __( 'First name', 'rrze-tos' ),
+						'rrze_tos_responsible_name', __( 'Name', 'rrze-tos' ),
 						[
 							$this,
 							'rrze_tos_textbox_callback',
 						],
 						'rrze_tos_options',
 						'rrze_tos_section_responsible',
-						[ 'name' => 'rrze_tos_responsible_firstname' ]
-					);
-					add_settings_field(
-						'rrze_tos_responsible_lastname', __( 'Lastname', 'rrze-tos' ), [
-						$this,
-						'rrze_tos_textbox_callback'
-					],
-						'rrze_tos_options',
-						'rrze_tos_section_responsible',
-						[ 'name' => 'rrze_tos_responsible_lastname' ]
+						[
+							'name'         => 'rrze_tos_responsible_name',
+							'autocomplete' => 'given-name',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_responsible_street', __( 'Street', 'rrze-tos' ), [
@@ -222,19 +219,39 @@ namespace RRZE\Tos {
 					],
 						'rrze_tos_options',
 						'rrze_tos_section_responsible',
-						[ 'name' => 'rrze_tos_responsible_street' ]
+						[
+							'name'         => 'rrze_tos_responsible_street',
+							'autocomplete' => 'address-line1',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_responsible_postalcode', __( 'Postcode', 'rrze-tos' ), [
+						$this,
+						'rrze_tos_textbox_callback'
+					],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name' => 'rrze_tos_responsible_postalcode',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_responsible_city', __( 'City', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_responsible',
-						[ 'name' => 'rrze_tos_responsible_city' ]
+						[
+							'name'         => 'rrze_tos_responsible_city',
+							'autocomplete' => 'address-level2',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_responsible_phone', __( 'Phone', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_responsible',
-						[ 'name' => 'rrze_tos_responsible_phone' ]
+						[
+							'name'         => 'rrze_tos_responsible_phone',
+							'autocomplete' => 'tel',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_responsible_email', __( 'E-Mail', 'rrze-tos' ), [
@@ -243,7 +260,10 @@ namespace RRZE\Tos {
 					],
 						'rrze_tos_options',
 						'rrze_tos_section_responsible',
-						[ 'name' => 'rrze_tos_responsible_email' ]
+						[
+							'name'         => 'rrze_tos_responsible_email',
+							'autocomplete' => 'email',
+						]
 					);
 					if ( is_plugin_active( 'fau-person/fau-person.php' ) ) {
 						add_settings_field(
@@ -263,46 +283,63 @@ namespace RRZE\Tos {
 					add_settings_section( 'rrze_tos_section_webmaster', __( 'Webmaster', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
 
 					add_settings_field(
-						'rrze_tos_webmaster_firstname', __( 'First Name', 'rrze-tos' ), [
+						'rrze_tos_webmaster_name', __( 'Name', 'rrze-tos' ), [
 						$this,
 						'rrze_tos_textbox_callback'
 					],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_firstname' ]
-					);
-					add_settings_field(
-						'rrze_tos_webmaster_lastname', __( 'Last Name', 'rrze-tos' ), [
-						$this,
-						'rrze_tos_textbox_callback'
-					],
-						'rrze_tos_options',
-						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_lastname' ]
+						[
+							'name'         => 'rrze_tos_webmaster_name',
+							'autocomplete' => 'given-name',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_webmaster_street', __( 'Street', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_street' ]
+						[
+							'name'         => 'rrze_tos_webmaster_street',
+							'autocomplete' => 'address-line1',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_webmaster_postalcode', __( 'Postcode', 'rrze-tos' ), [
+						$this,
+						'rrze_tos_textbox_callback'
+					],
+						'rrze_tos_options',
+						'rrze_tos_section_webmaster',
+						[
+							'name' => 'rrze_tos_webmaster_postalcode',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_webmaster_city', __( 'City', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_city' ]
+						[
+							'name'         => 'rrze_tos_webmaster_city',
+							'autocomplete' => 'address-level2',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_webmaster_phone', __( 'Phone', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_phone' ]
+						[
+							'name'         => 'rrze_tos_webmaster_phone',
+							'autocomplete' => 'tel',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_webmaster_email', __( 'E-Mail', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_email' ]
+						[
+							'name'         => 'rrze_tos_webmaster_email',
+							'autocomplete' => 'email',
+						]
 					);
 					if ( is_plugin_active( 'fau-person/fau-person.php' ) ) {
 						add_settings_field(
@@ -328,7 +365,10 @@ namespace RRZE\Tos {
 					],
 						'rrze_tos_options',
 						'rrze_tos_section_email',
-						[ 'name' => 'rrze_tos_receiver_email' ]
+						[
+							'name'         => 'rrze_tos_receiver_email',
+							'autocomplete' => 'email',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_subject', __( 'Subject', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
@@ -337,10 +377,13 @@ namespace RRZE\Tos {
 						[ 'name' => 'rrze_tos_subject' ]
 					);
 					add_settings_field(
-						'rrze_tos_cc', __( 'CC', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_cc_email', __( 'CC', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_email',
-						[ 'name' => 'rrze_tos_cc' ]
+						[
+							'name'         => 'rrze_tos_cc_email',
+							'autocomplete' => 'email',
+						]
 					);
 
 					break;
@@ -368,12 +411,24 @@ namespace RRZE\Tos {
 						[ 'name' => 'rrze_tos_editor_street', 'description' => __( 'Street Number', 'rrze-tos' ) ]
 					);
 					add_settings_field(
-						'rrze_tos_editor_place', __( 'Place', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_editor_postalcode', __( 'Postcode', 'rrze-tos' ), [
+						$this,
+						'rrze_tos_textbox_callback'
+					],
 						'rrze_tos_options',
 						'rrze_tos_section_editor',
 						[
-							'name'        => 'rrze_tos_editor_place',
-							'description' => __( 'PLZ Place', 'rrze-tos' ),
+							'name'        => 'rrze_tos_editor_postalcode',
+							'description' => __( 'Postcode', 'rrze-tos' ),
+						]
+					);
+					add_settings_field(
+						'rrze_tos_editor_city', __( 'Place', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_editor',
+						[
+							'name'        => 'rrze_tos_editor_city',
+							'description' => __( 'City', 'rrze-tos' ),
 						]
 					);
 
@@ -397,20 +452,30 @@ namespace RRZE\Tos {
 						[ 'name' => 'rrze_tos_content_street', 'description' => __( 'Street Number', 'rrze-tos' ) ]
 					);
 					add_settings_field(
-						'rrze_tos_content_place', __( 'Place', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_content_postalcode', __( 'Postcode', 'rrze-tos' ), [
+						$this,
+						'rrze_tos_textbox_callback'
+					],
 						'rrze_tos_options',
 						'rrze_tos_section_content',
 						[
-							'name'        => 'rrze_tos_content_place',
-							'description' => __( 'PLZ Place', 'rrze-tos' ),
+							'name' => 'rrze_tos_content_postalcode',
 						]
 					);
 					add_settings_field(
-						'rrze_tos_content_tel', __( 'Phone', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_content_city', __( 'City', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_content',
 						[
-							'name'        => 'rrze_tos_content_tel',
+							'name' => 'rrze_tos_content_city',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_content_phone', __( 'Phone', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_content',
+						[
+							'name'        => 'rrze_tos_content_phone',
 							'description' => __( 'Direct dialing', 'rrze-tos' ),
 						]
 					);
@@ -427,27 +492,18 @@ namespace RRZE\Tos {
 				// --------
 				// Tab data_protection
 				// --------
-				case 'data_protection':
+				case 'privacy':
 					// --------
 					// Section Content
 					// --------
-					add_settings_section( 'rrze_tos_section_newsletter', __( 'Newsletter', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
+					add_settings_section( 'rrze_tos_section_privacy', __( 'Newsletter', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
 					add_settings_field(
-						'rrze_tos_show_newsletter', __( 'Name', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_newsletter',
-						[
-							'name'        => 'rrze_tos_show_newsletter',
-							'description' => __( 'Full name of the content manager', 'rrze-tos' )
-						]
-					);
-					add_settings_field(
-						'rrze_tos_show_newsletter', __( 'Do you want to show the newsletter section?', 'rrze-tos' ),
+						'rrze_tos_protection_newsletter', __( 'Do you want to show the newsletter section?', 'rrze-tos' ),
 						[ $this, 'rrze_tos_radio_callback' ],
 						'rrze_tos_options',
-						'rrze_tos_section_newsletter',
+						'rrze_tos_section_privacy',
 						[
-							'name'    => 'rrze_tos_show_newsletter',
+							'name'    => 'rrze_tos_protection_newsletter',
 							'options' =>
 								[
 									'1' => __( 'Yes', 'rrze-tos' ),
@@ -460,6 +516,36 @@ namespace RRZE\Tos {
 
 		}
 
+
+		public function my_error_notice() {
+			?>
+			<div class="updated settings-error notice is-dismissible">
+				<p><?php _e( 'There has been an error. Bummer!', 'my_plugin_textdomain' ); ?></p>
+			</div>
+			<?php
+		}
+
+
+		/**
+		 * Sanitize fields according to its type
+		 *
+		 * @param array $input form fields after post
+		 */
+		private
+		function sanitize_fields(
+			$input
+		) {
+			foreach ( $input as $key => $value ) {
+				if ( preg_match( '/email/i', $key ) ) {
+					$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] ) ? sanitize_email( $_POST[ $this->option_name ][ $key ] ) : $this->options->$key;
+				} elseif ( preg_match( '/[\r\n\t ]+/', $value ) ) {
+					$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] ) ? sanitize_textarea_field( $_POST[ $this->option_name ][ $key ] ) : $this->options->$key;
+				} else {
+					$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] ) ? sanitize_text_field( $_POST[ $this->option_name ][ $key ] ) : $this->options->$key;
+				}
+			}
+		}
+
 		/**
 		 * Validiert die Eingabe der Optionsseite.
 		 *
@@ -467,12 +553,28 @@ namespace RRZE\Tos {
 		 *
 		 * @return array
 		 */
-		public function options_validate( $input ) {
-			$input['rrze_tos_text'] = ! empty( $input['rrze_tos_title'] ) ? $input['rrze_tos_title'] : '';
-			$input['rrze_tos_text'] = ! empty( $input['rrze_tos_no_reason'] ) ? $input['rrze_tos_no_reason'] : '';
+		public
+		function options_validate(
+			$input
+		) {
+			$parts = parse_url( $_POST['_wp_http_referer'] );
+			parse_str( $parts['query'], $query );
+			$tab = $query['tab'];
 
-			// TODO: Check for all fields
-			return $input;
+			switch ( $tab ) {
+				case 'accessibility':
+				default:
+					$this->sanitize_fields( $input );
+					break;
+				case 'imprint':
+					$this->sanitize_fields( $input );
+					break;
+				case 'privacy':
+					$this->sanitize_fields( $input );
+					break;
+			}
+
+			return $this->options;
 		}
 
 		/**
@@ -480,19 +582,32 @@ namespace RRZE\Tos {
 		 *
 		 * @param array $args It contains name and description of the text field.
 		 */
-		public function rrze_tos_textbox_callback( $args ) {
+		public
+		function rrze_tos_textbox_callback(
+			$args
+		) {
 			if ( array_key_exists( 'name', $args ) ) {
 				$name = esc_attr( $args['name'] );
 			}
 			if ( array_key_exists( 'description', $args ) ) {
 				$description = esc_attr( $args['description'] );
 			}
+			if ( array_key_exists( 'autocomplete', $args ) ) {
+				$autocomplete = esc_attr( $args['autocomplete'] );
+			}
+
 			?>
 			<?php if ( isset( $name ) ) { ?>
 				<input size="50" name="<?php printf( '%s[' . $name . ']', $this->option_name ); ?>" type='text'
+				       title="<?php echo __( 'If the field has no data, please fill it manually', 'rrze-tos' ); ?>"
+
 				       value="<?php if ( array_key_exists( $name, $this->options ) ) {
 					       echo $this->options->$name;
-				       } ?>">
+				       } ?>"
+					<?php if ( isset( $autocomplete ) ) { ?>
+						autocomplete="<?php echo $autocomplete; ?>"
+					<?php } ?>
+				>
 				<br/>
 				<?php if ( isset( $description ) ) { ?>
 					<span class="description"><?php esc_html_e( $description ); ?></span>
@@ -506,7 +621,10 @@ namespace RRZE\Tos {
 		 *
 		 * @param array $args It contains name and description of the text area field.
 		 */
-		public function rrze_tos_textarea_callback( $args ) {
+		public
+		function rrze_tos_textarea_callback(
+			$args
+		) {
 			if ( array_key_exists( 'name', $args ) ) {
 				$name = esc_attr( $args['name'] );
 			}
@@ -515,7 +633,8 @@ namespace RRZE\Tos {
 			}
 			?>
 			<?php if ( isset( $name ) ) { ?>
-				<textarea name="<?php printf( '%s[' . $name . ']', $this->option_name ); ?>" cols="50" rows="8">
+				<textarea name="<?php printf( '%s[' . $name . ']', $this->option_name ); ?>" cols="50" rows="8"
+				          title="<?php echo __( 'If the field has no data, please fill it manually', 'rrze-tos' ) ?>">
 					<?php
 					if ( array_key_exists( $name, $this->options ) ) {
 						if ( is_array( $this->options->$name ) && count( $this->options->$name ) > 0 && $this->options->$name[0] !== '' ) {
@@ -538,7 +657,10 @@ namespace RRZE\Tos {
 		 *
 		 * @param array $args All options only one can be selected.
 		 */
-		public function rrze_tos_radio_callback( $args ) {
+		public
+		function rrze_tos_radio_callback(
+			$args
+		) {
 			$radios = [];
 			if ( array_key_exists( 'name', $args ) ) {
 				$name = esc_attr( $args['name'] );
@@ -579,7 +701,10 @@ namespace RRZE\Tos {
 		 *
 		 * @param array $args All options than can be selected.
 		 */
-		public function cris_select_callback( $args ) {
+		public
+		function cris_select_callback(
+			$args
+		) {
 			$limit = [];
 			if ( array_key_exists( 'name', $args ) ) {
 				$name = esc_attr( $args['name'] );
@@ -591,7 +716,8 @@ namespace RRZE\Tos {
 				$limit = $args['options'];
 			} ?>
 			<?php if ( isset( $name ) ) { ?>
-				<select name="<?php printf( '%s[' . $name . ']', $this->option_name ); ?>">
+				<select name="<?php printf( '%s[' . $name . ']', $this->option_name ); ?>"
+				        title="<?php __('Please select one', 'rrze-tos' ) ?>">
 					<?php foreach ( $limit as $_k => $_v ) { ?>
 						<option value='<?php print $_k; ?>'
 							<?php if ( array_key_exists( $name, $this->options ) ) {
@@ -614,7 +740,8 @@ namespace RRZE\Tos {
 		 *
 		 * @return void
 		 */
-		public function admin_help_menu() {
+		public
+		function admin_help_menu() {
 
 			$content = array(
 				'<p>' . __( 'Here comes the Context Help content.', 'rrze-tos' ) . '</p>',

@@ -57,10 +57,31 @@ namespace RRZE\Tos {
 		 */
 		public function default_options() {
 			$this->options = [
-				'endpoint_slug' => __( 'accessibility', 'rrze-tos' ),
+				'accessibility' => __( 'accessibility', 'rrze-tos' ),
+				'privacy'       => __( 'privacy', 'rrze-tos' ),
+				'impressum'     => __( 'impressum', 'rrze-tos' ),
 			];
 
 			return $this->options;
+		}
+
+		/**
+		 * Include content template into endpoint.
+		 *
+		 * @param null $name Slug of the template.
+		 */
+		public function get_tos_content( $name = null ) {
+			global $wp_query;
+			$this->default_options();
+			do_action( 'get_tos_content' );
+			foreach ( $this->options as $key => $value ) {
+				if ( isset( $wp_query->query[ $value ] ) ) {
+					$template_part = dirname( __FILE__ ) . '/templates/' . $key . '-template.php';
+					if ( file_exists( $template_part ) ) {
+						require_once $template_part;
+					}
+				}
+			}
 		}
 
 		/**
@@ -71,7 +92,7 @@ namespace RRZE\Tos {
 		 * @return array
 		 */
 		public function add_query_vars( $vars ) {
-			$vars[] = $this->options['endpoint_slug'];
+			$vars = array_merge( $vars, $this->options );
 
 			return $vars;
 		}
@@ -80,7 +101,9 @@ namespace RRZE\Tos {
 		 * Change endpoint.
 		 */
 		public function rewrite() {
-			add_rewrite_endpoint( $this->options['endpoint_slug'], EP_ROOT );
+			foreach ( $this->options as $key => $value ) {
+				add_rewrite_endpoint( $value, EP_ROOT );
+			}
 		}
 
 		/**
@@ -90,12 +113,19 @@ namespace RRZE\Tos {
 
 			global $wp_query;
 
-			if ( ! isset( $wp_query->query_vars[ $this->options['endpoint_slug'] ] ) ) {
+			$is_option_set = false;
+			foreach ( $this->options as $key => $value ) {
+				if ( isset( $wp_query->query_vars[ $value ] ) ) {
+					$is_option_set = true;
+				}
+			}
+			if ( ! $is_option_set ) {
 				return;
 			}
 
 			$current_theme = wp_get_theme();
 
+			// Find the correct FAU template to be included.
 			$styledir = '';
 			foreach ( self::$allowed_stylesheets as $dir => $style ) {
 				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ), array_map( 'strtolower', $style ), true ) ) {
@@ -104,12 +134,16 @@ namespace RRZE\Tos {
 				}
 			}
 
-			if ( isset( $wp_query->query[ $this->options['endpoint_slug'] ] ) ) {
-				include $styledir . 'tos-template.php';
+			foreach ( $this->options as $key => $value ) {
+				if ( isset( $wp_query->query[ $value ] ) ) {
+					 $new_template = $styledir . 'tos-template.php';
+					if ( file_exists( $new_template ) ) {
+						include $new_template;
+					}
+				}
 			}
 
 			exit();
 		}
-
 	}
 }

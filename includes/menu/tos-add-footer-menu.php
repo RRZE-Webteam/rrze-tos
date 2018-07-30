@@ -8,13 +8,14 @@
  */
 
 namespace RRZE\Tos {
+
 	/**
 	 *
 	 * @param $post
 	 * @param $callback_args
 	 */
 	function tos_dashboard_widget_function( $post, $callback_args ) {
-		echo "Das <strong>TOS Plugin</strong> kann keinen Menüeintrag in der <strong>Navigation unten</strong> anlegen. Wahrscheinlich haben Sie bereits einen Menüeintrag mit dem Namen <strong>Barrierefreiheit</strong> angelegt. Ändern Sie bitte den Namen Ihrer Seite.";
+		echo 'Das <strong>TOS Plugin</strong> kann keinen Menüeintrag in der <strong>Navigation unten</strong> anlegen. Wahrscheinlich haben Sie bereits einen Menüeintrag mit dem Namen <strong>Barrierefreiheit</strong> angelegt. Ändern Sie bitte den Namen Ihrer Seite.';
 	}
 
 	/**
@@ -30,7 +31,7 @@ namespace RRZE\Tos {
 	 * @param $callback_args
 	 */
 	function tos_dashboard_widget_menu_function( $post, $callback_args ) {
-		echo "Das <strong>TOS Plugin</strong> kann keinen Menüeintrag in der Navigation unten anlegen. Bitte legen Sie ein Footer-Menü an!";
+		echo 'Das <strong>TOS Plugin</strong> kann keinen Menüeintrag in der Navigation unten anlegen. Bitte legen Sie ein Footer-Menü an!';
 	}
 
 	/**
@@ -47,7 +48,8 @@ namespace RRZE\Tos {
 		remove_meta_box( 'tos_dashboard_widget', 'dashboard', 'normal' );
 	}
 
-#add_action('wp_dashboard_setup', 'RRZE\Tos\tos_add_dashboard_widgets' );
+//add_action('wp_dashboard_setup', 'RRZE\Tos\tos_add_dashboard_widgets' );
+
 	/**
 	 *
 	 * @param $page_slug
@@ -58,64 +60,68 @@ namespace RRZE\Tos {
 
 		$page = get_page_by_path( $page_slug, OBJECT );
 
-		if ( isset( $page ) ) {
-			return true;
-		} else {
-			return false;
-		}
+		return isset( $page );
 	}
 
 	/**
-	 *
+	 * Check if footer items exist and create links.
 	 */
 	function add_page_to_footer_menu() {
 
 		$current_theme     = wp_get_theme();
-		$themes_fau        = array(
+		$themes_fau        = [
 			__( 'FAU-Institutions', 'rrze-tos' ),
 			'FAU-Natfak',
 			'FAU-Philfak',
 			'FAU-RWFak',
 			'FAU-Techfak',
 			'FAU-Medfak',
-		);
-		$menu_entry_option = 'tos_menu';
+		];
 
-		if ( the_slug_exists( 'barrierefreiheit' ) ) {
-			#error_log(print_r('ja', true));
-			$slug_exists = true;
-		} else {
-			#error_log(print_r('nein', true));
-			$slug_exists = false;
-		}
+		// $slug_exists = the_slug_exists( 'barrierefreiheit' );!
+		$tos_menu_items = [
+			'a11y'    => __( 'Accessibility', 'rrze-tos' ),
+			'imprint' => __( 'privacy', 'rrze-tos' ),
+			'privacy' => __( 'impressum', 'rrze-tos' ),
+		];
 
-		if ( in_array( $current_theme, $themes_fau ) ) {
+		if ( in_array( $current_theme->get( 'Name' ), $themes_fau, true ) ) {
 			if ( has_nav_menu( 'meta-footer' ) ) {
 				$menu_name  = 'meta-footer';
-				$menu_id    = wp_get_nav_menu_object( get_nav_menu_locations( $menu_name )[ $menu_name ] )->term_id;
+				$menu_id    = wp_get_nav_menu_object( get_nav_menu_locations()[ $menu_name ] )->term_id;
 				$menu_items = wp_get_nav_menu_items( $menu_id );
-				#error_log(print_r($menu_items, true));
-				foreach ( $menu_items as $menu_item ) {
-					$title = $menu_item->title;
-					if ( 'Barrierefreiheit' === $title || 'Accessibility' === $title ) {
-						if ( 'custom' !== $menu_item->object ) {
-							add_action( 'wp_dashboard_setup', 'RRZE\Tos\tos_add_dashboard_widgets' );
-						}
-						$used = true;
-					} else {
-						$used = false;
+				if ( ! $menu_items ) {
+					foreach ( $tos_menu_items as $menu_name => $value ) {
+						wp_update_nav_menu_item( $menu_id, 0,
+							[
+								'menu-item-title'   => $value,
+								'menu-item-classes' => 'tos',
+								'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
+								'menu-item-status'  => 'publish',
+							]
+						);
 					}
-				}
-
-				if ( ! $used ) {
-					wp_update_nav_menu_item( $menu_id, 0,
-						array(
-							'menu-item-title'   => __( 'Accessibility', 'rrze-tos' ),
-							'menu-item-classes' => 'tos',
-							'menu-item-url'     => home_url( __( '/accessibility', 'rrze-tos' ) ),
-							'menu-item-status'  => 'publish',
-						)
-					);
+				} else {
+					$title_exist = false;
+					foreach ( $tos_menu_items as $menu_name => $value ) {
+						foreach ( $menu_items as $item ) {
+							$title = $item->title;
+							if ( $value === $title ) {
+								$title_exist = true;
+							}
+						}
+						if ( ! $title_exist ) {
+							wp_update_nav_menu_item( $menu_id, 0,
+								[
+									'menu-item-title'   => $value,
+									'menu-item-classes' => 'tos',
+									'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
+									'menu-item-status'  => 'publish',
+								]
+							);
+						}
+						$title_exist = false;
+					}
 				}
 			} else {
 				add_action( 'wp_dashboard_setup', 'RRZE\Tos\tos_add_dashboard_menu_widgets' );
