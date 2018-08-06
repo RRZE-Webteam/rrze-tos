@@ -7,8 +7,8 @@
  * @since      3.4.0
  */
 
-$a11y_email = "<a href=\"mailto:" . $values['rrze_tos_webmaster_email']
-              . "?subject=" . ( ! empty( $values['rrze_tos_subject'] ) ? $values['rrze_tos_subject'] : 'Feedback zur Barrierefreiheit des Webauftritts' ) . "\">" . $values['rrze_tos_webmaster_email'] . "</a>";
+$a11y_email = "<a href=\"mailto:" . $option_values['rrze_tos_webmaster_email']
+              . "?subject=" . ( ! empty( $option_values['rrze_tos_subject'] ) ? $option_values['rrze_tos_subject'] : 'Feedback zur Barrierefreiheit des Webauftritts' ) . "\">" . $option_values['rrze_tos_webmaster_email'] . "</a>";
 
 $template = [
 	'a11y'    => [

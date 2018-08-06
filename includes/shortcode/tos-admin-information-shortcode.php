@@ -2,9 +2,9 @@
 /**
  * WordPress TOS shortcode
  *
- * @package WordPress
+ * @package    WordPress
  * @subpackage TOS
- * @since 3.4.0
+ * @since      3.4.0
  */
 
 namespace RRZE\Tos {
@@ -23,104 +23,30 @@ namespace RRZE\Tos {
 	 * Show tos information.
 	 */
 	function get_info() {
+		$values = (array) get_option( 'rrze_tos' );
 
-		global $post;
-
-		$host = $_SERVER['SERVER_NAME'];
-		$wmp  = 'https://www.wmp.rrze.fau.de/api/domain/metadata/www.' . $host;
-
-		$status_code = check_wmp();
-
-		if ( 200 === $status_code ) {
-			$json = file_get_contents( 'http://remoter.dev/wcag-test.json' );
-			$res  = json_decode( $json, true );
-
-			$values = get_option( 'rrze_tos' );
-
-			if ( ! empty( $values ) ) {
-				if ( $values ) {
-					foreach ( $values as $key => $value ) {
-						$store['verantwortlich']['strasse'] = $values['rrze_tos_responsible_street'];
-						$store['verantwortlich']['ort']     = $values['rrze_tos_responsible_city'];
-						$store['verantwortlich']['telefon'] = $values['rrze_tos_responsible_phone'];
-						//$store['verantwortlich']['email']     =  $values['rrze_tos_responsible_email'];!
-						//$store['verantwortlich']['personid']  =  $values['rrze_tos_responsible_ID'];!
-						$store['webmaster']['strasse'] = $values['rrze_tos_webmaster_street'];
-						$store['webmaster']['ort']     = $values['rrze_tos_webmaster_city'];
-						$store['webmaster']['telefon'] = $values['rrze_tos_webmaster_phone'];
-						//$store['webmaster']['email']     =  $values['rrze_tos_webmaster_email'];!
-						//$store['webmaster']['personid']  =  $values['rrze_tos_webmaster_ID'];!
-					}
-
-					if ( ! empty( $store ) ) {
-						foreach ( $store as $key => $value ) {
-							$role = ucfirst( $key );
-							if ( 'verantwortlich' === $key ) {
-								$role .= 'e/er';
-								$role  = __( 'Responsible', 'rrze-tos' );
-							}
-							$heading[] = $role;
-						}
-					}
-				}
-			}
-
-			$html  = '<div class="table-wrapper">';
-			$html .= '<div class="scrollable">';
-			$html .= '<table width="" border="1">';
-			$html .= '<tbody><tr>';
-			$html .= '<th>' . ( isset( $heading[0] ) ? $heading[0] : 'Verantwortliche/er' ) . '</th><th>' . ( isset( $heading[1] ) ? $heading[1] : 'Webmaster' ) . '</th></tr><tr><td>';
-			$html .= $res['metadata']['verantwortlich']['vorname'] . ' ' . $res['metadata']['verantwortlich']['nachname'] . '<br/>';
-			$html .= ( ! empty( $store['verantwortlich']['strasse'] ) && ! empty( $store['verantwortlich']['ort'] ) ? $store['verantwortlich']['strasse'] . '<br/>' . $store['verantwortlich']['ort'] . '<br/>' : '' );
-			$html .= ( ! empty( $store['verantwortlich']['telefon'] ) ? '<strong>Telefon:</strong> ' . $store['verantwortlich']['telefon'] . '<br/>' : '' );
-			$html .= '<strong>E-Mail:</strong> ' . $res['metadata']['verantwortlich']['email'] . '</br>';
-			$html .= ( ! empty( $store['verantwortlich']['homepage'] ) ? '<strong>Website:</strong> ' . $store['verantwortlich']['homepage'] . '<br/>' : '' );
-			$html .= '</td><td>';
-			$html .= $res['metadata']['webmaster']['vorname'] . ' ' . $res['metadata']['webmaster']['nachname'] . '<br/>';
-			$html .= ( ! empty( $store['webmaster']['strasse'] ) && ! empty( $store['webmaster']['ort'] ) ? $store['webmaster']['strasse'] . '<br/>' . $store['webmaster']['ort'] . '<br/>' : '' );
-			$html .= ( ! empty( $store['webmaster']['telefon'] ) ? '<strong>Telefon:</strong> ' . $store['webmaster']['telefon'] . '<br/>' : '' );
-			$html .= '<strong>E-Mail:</strong> ' . $res['metadata']['webmaster']['email'] . '</br>';
-			$html .= ( ! empty( $store['webmaster']['homepage'] ) ? '<strong>Website:</strong> ' . $store['webmaster']['homepage'] . '<br/>' : '' );
-			$html .= '</td>';
-			$html .= '</tr>';
-			$html .= '</tbody>';
-			$html .= '</table></div></div>';
-			echo  $html ;
-
-		} else {
-
-			$values = get_option( 'rrze_tos' );
-
-			if ( ! empty( $values ) ) {
-				foreach ( $values as $key => $value ) {
-					$store['verantwortlich']['vorname']  = $values['rrze_tos_responsible_firstname'];
-					$store['verantwortlich']['nachname'] = $values['rrze_tos_responsible_lastname'];
-					$store['verantwortlich']['strasse']  = $values['rrze_tos_responsible_street'];
-					$store['verantwortlich']['ort']      = $values['rrze_tos_responsible_city'];
-					$store['verantwortlich']['telefon']  = $values['rrze_tos_responsible_phone'];
-					$store['verantwortlich']['email']    = $values['rrze_tos_responsible_email'];
-					//$store['verantwortlich']['personid']  =  $values['rrze_tos_responsible_ID'];!
-					$store['webmaster']['vorname']  = $values['rrze_tos_webmaster_firstname'];
-					$store['webmaster']['nachname'] = $values['rrze_tos_webmaster_lastname'];
-					$store['webmaster']['strasse']  = $values['rrze_tos_webmaster_street'];
-					$store['webmaster']['ort']      = $values['rrze_tos_webmaster_city'];
-					$store['webmaster']['telefon']  = $values['rrze_tos_webmaster_phone'];
-					$store['webmaster']['email']    = $values['rrze_tos_webmaster_email'];
-					//$store['webmaster']['personid']  =  $values['rrze_tos_webmaster_ID'];!
-				}
-			}
+		if ( ! empty( $values ) ) {
+			$store['verantwortlich']['name']    = isset( $values['rrze_tos_responsible_name'] ) ? $values['rrze_tos_responsible_name'] : '';
+			$store['verantwortlich']['strasse'] = isset( $values['rrze_tos_responsible_street'] ) ? $values['rrze_tos_responsible_street'] : '';
+			$store['verantwortlich']['ort']     = isset( $values['rrze_tos_responsible_city'] ) ? $values['rrze_tos_responsible_city'] : '';
+			$store['verantwortlich']['telefon'] = isset( $values['rrze_tos_responsible_phone'] ) ? $values['rrze_tos_responsible_phone'] : '';
+			$store['verantwortlich']['email']   = isset( $values['rrze_tos_responsible_email'] ) ? $values['rrze_tos_responsible_email'] : '';
+			$store['webmaster']['name']         = isset( $values['rrze_tos_content_name'] ) ? $values['rrze_tos_content_name'] : '';
+			$store['webmaster']['strasse']      = isset( $values['rrze_tos_content_street'] ) ? $values['rrze_tos_content_street'] : '';
+			$store['webmaster']['ort']          = isset( $values['rrze_tos_content_city'] ) ? $values['rrze_tos_content_city'] : '';
+			$store['webmaster']['telefon']      = isset( $values['rrze_tos_content_phone'] ) ? $values['rrze_tos_content_phone'] : '';
+			$store['webmaster']['email']        = isset( $values['rrze_tos_content_email'] ) ? $values['rrze_tos_content_email'] : '';
 
 			if ( ! empty( $store ) ) {
 				foreach ( $store as $key => $value ) {
 					$role = ucfirst( $key );
 					if ( 'verantwortlich' === $key ) {
 						$role .= 'e/er';
-						$role  = __( 'Responsible', 'rrze-tos' );
+						$role = __( 'Responsible', 'rrze-tos' );
 					}
 					$heading[] = $role;
 				}
 			}
-
 
 			$html  = '<div class="table-wrapper">';
 			$html .= '<div class="scrollable">';
@@ -130,7 +56,7 @@ namespace RRZE\Tos {
 				$html .= '<th>' . $heading[0] . '</th><th>' . $heading[1] . '</th></tr><tr><td>';
 			}
 			if ( ! empty( $store ) ) {
-				$html .= $store['verantwortlich']['vorname'] . ' ' . $store['verantwortlich']['nachname'] . '<br/>';
+				$html .= $store['verantwortlich']['name'] . '<br/>';
 			}
 			$html .= ( ! empty( $store['verantwortlich']['strasse'] ) ? $store['verantwortlich']['strasse'] . '<br/>' . $store['verantwortlich']['ort'] . '<br/>' : '' );
 			$html .= ( ! empty( $store['verantwortlich']['telefon'] ) ? '<strong>Telefon:</strong> ' . $store['verantwortlich']['telefon'] . '<br/>' : '' );
@@ -140,7 +66,7 @@ namespace RRZE\Tos {
 			$html .= ( ! empty( $store['verantwortlich']['homepage'] ) ? '<strong>Website:</strong> ' . $store['verantwortlich']['homepage'] . '<br/>' : '' );
 			$html .= '</td><td>';
 			if ( ! empty( $store ) ) {
-				$html .= $store['webmaster']['vorname'] . ' ' . $store['webmaster']['nachname'] . '<br/>';
+				$html .= $store['webmaster']['name'] . '<br/>';
 			}
 			$html .= ( ! empty( $store['webmaster']['strasse'] ) ? $store['webmaster']['strasse'] . '<br/>' . $store['webmaster']['ort'] . '<br/>' : '' );
 			$html .= ( ! empty( $store['webmaster']['telefon'] ) ? '<strong>Telefon:</strong> ' . $store['webmaster']['telefon'] . '<br/>' : '' );

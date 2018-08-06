@@ -17,7 +17,7 @@ jQuery(document).ready(function ($) {
     checkConformity();
 
     /**
-     * Show or hide text area when input radio is modify.
+     * Show or hide text area when input radio is modified.
      */
     $("#tos-admin-form input").on('change', function () {
         checkConformity();
@@ -26,5 +26,5 @@ jQuery(document).ready(function ($) {
     /**
      * Validate client-side form before send data
      */
-    // $("#tos-admin-form").parsley();
+    $("#tos-admin-form").parsley();
 });

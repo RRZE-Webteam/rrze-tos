@@ -66,11 +66,11 @@ namespace RRZE\Tos {
 			$current_time = time();
 			$submitted    = $values['timeout'] + $timeout[0];
 
-			$hasErrors = check_errors( $values );
+			$has_errors = check_errors( $values );
 			$ans       = $values['captcha'];
 			$checksum  = md5( $ans );
 			$salted    = md5( $checksum . $salt );
-			$clean     = array_filter( $hasErrors );
+			$clean     = array_filter( $has_errors );
 
 			if ( isset( $clean ) && ! count( $clean ) ) {
 				if ( $current_time < $submitted ) {
@@ -81,7 +81,7 @@ namespace RRZE\Tos {
 					$flag = 1;
 				} else {
 					$flag                 = 0;
-					$hasErrors['captcha'] = __( 'Wrong solution! Try it again.', 'rrze-tos' );
+					$has_errors['captcha'] = __( 'Wrong solution! Try it again.', 'rrze-tos' );
 				}
 
 			}
@@ -96,8 +96,8 @@ namespace RRZE\Tos {
 						case 'text':
 							if ( $fields[ $i ][0] == 'captcha' ) { ?>
 								<p>
-								<?php if ( isset( $_POST['submit'] ) && isset( $hasErrors ) && array_key_exists( $fields[ $i ][0], $hasErrors ) ) { ?>
-									<div class="error"><?php echo $hasErrors[ $fields[ $i ][0] ] ?></div>
+								<?php if ( isset( $_POST['submit'] ) && isset( $has_errors ) && array_key_exists( $fields[ $i ][0], $has_errors ) ) { ?>
+									<div class="error"><?php echo $has_errors[ $fields[ $i ][0] ] ?></div>
 								<?php } ?>
 								<label for="check"><?php _e( 'Solve the following task:', 'rrze-tos' ) ?></label><br/>
 								<?php echo $captcha_array['task_string'] . ' ' ?><input type="text" name="captcha"
@@ -105,8 +105,8 @@ namespace RRZE\Tos {
 								</p>
 							<?php } else { ?>
 								<p>
-								<?php if ( isset( $_POST['submit'] ) && isset( $hasErrors ) && array_key_exists( $fields[ $i ][3], $hasErrors ) ) { ?>
-									<div class="error"><?php echo $hasErrors[ $fields[ $i ][3] ] ?></div>
+								<?php if ( isset( $_POST['submit'] ) && isset( $has_errors ) && array_key_exists( $fields[ $i ][3], $has_errors ) ) { ?>
+									<div class="error"><?php echo $has_errors[ $fields[ $i ][3] ] ?></div>
 								<?php } ?>
 								<label
 									for=<?php echo $fields[ $i ][2] ?>><?php echo( $fields[ $i ][0] == 'email' ? 'E-Mail' : ucfirst( $fields[ $i ][0] ) ) ?>
@@ -117,8 +117,8 @@ namespace RRZE\Tos {
 							break;
 						case 'textarea': ?>
 							<p>
-							<?php if ( isset( $_POST['submit'] ) && isset( $hasErrors ) && array_key_exists( $fields[ $i ][0], $hasErrors ) ) { ?>
-								<div class="error"><?php echo $hasErrors[ $fields[ $i ][0] ] ?></div>
+							<?php if ( isset( $_POST['submit'] ) && isset( $has_errors ) && array_key_exists( $fields[ $i ][0], $has_errors ) ) { ?>
+								<div class="error"><?php echo $has_errors[ $fields[ $i ][0] ] ?></div>
 							<?php } ?>
 							<label for=<?php echo $fields[ $i ][2] ?>><?php echo ucfirst( $fields[ $i ][0] ) ?>:</label>
 							<textarea name=<?php echo $fields[ $i ][0] ?>  id=<?php echo $fields[ $i ][2] ?> cols="150"

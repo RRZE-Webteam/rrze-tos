@@ -22,8 +22,9 @@ namespace RRZE\Tos {
 		public function __construct() {
 			add_action( 'init', array( $this, 'default_options' ) );
 			add_action( 'init', array( $this, 'rewrite' ) );
-			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
-			add_action( 'template_redirect', array( $this, 'endpoint_template_redirect' ) );
+//			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
+			add_action( 'template_redirect',
+				array( $this, 'endpoint_template_redirect' ) );
 
 		}
 
@@ -32,23 +33,24 @@ namespace RRZE\Tos {
 		 *
 		 * @var array
 		 */
-		public static $allowed_stylesheets = [
-			'fau'        => [
-				'FAU-Einrichtungen',
-				'FAU-Einrichtungen-BETA',
-				'FAU-Medfak',
-				'FAU-RWFak',
-				'FAU-Philfak',
-				'FAU-Techfak',
-				'FAU-Natfak',
-			],
-			'rrze'       => [
-				'rrze-2015',
-			],
-			'fau-events' => [
-				'FAU-Events',
-			],
-		];
+		public static $allowed_stylesheets
+			= [
+				'fau'        => [
+					'FAU-Einrichtungen',
+					'FAU-Einrichtungen-BETA',
+					'FAU-Medfak',
+					'FAU-RWFak',
+					'FAU-Philfak',
+					'FAU-Techfak',
+					'FAU-Natfak',
+				],
+				'rrze'       => [
+					'rrze-2015',
+				],
+				'fau-events' => [
+					'FAU-Events',
+				],
+			];
 
 		/**
 		 * Define default values.
@@ -56,29 +58,23 @@ namespace RRZE\Tos {
 		 * @return array
 		 */
 		public function default_options() {
-			$this->options = [
-				'accessibility' => __( 'accessibility', 'rrze-tos' ),
-				'privacy'       => __( 'privacy', 'rrze-tos' ),
-				'impressum'     => __( 'impressum', 'rrze-tos' ),
-			];
+			$this->options = Settings::options_page_tabs();
 
 			return $this->options;
 		}
 
 		/**
-		 * Include content template into endpoint.
-		 *
-		 * @param null $name Slug of the template.
+		 * Include content part into base template endpoint.
 		 */
-		public function get_tos_content( $name = null ) {
-			global $wp_query;
+		public function get_tos_content() {
+			global $wp_query, $locale;
 			$this->default_options();
-			do_action( 'get_tos_content' );
 			foreach ( $this->options as $key => $value ) {
 				if ( isset( $wp_query->query[ $value ] ) ) {
+//					$template_part = dirname( __FILE__ ) . '/templates/' . substr( $locale, 0, 2 ) . '/' . $key . '-template.php';
 					$template_part = dirname( __FILE__ ) . '/templates/' . $key . '-template.php';
 					if ( file_exists( $template_part ) ) {
-						require_once $template_part;
+						include_once $template_part;
 					}
 				}
 			}
@@ -102,12 +98,12 @@ namespace RRZE\Tos {
 		 */
 		public function rewrite() {
 			foreach ( $this->options as $key => $value ) {
-				add_rewrite_endpoint( $value, EP_ROOT );
+				add_rewrite_endpoint( $value, EP_ROOT, true );
 			}
 		}
 
 		/**
-		 * Redirect according to theme.
+		 * Redirect according to theme and load base template.
 		 */
 		public function endpoint_template_redirect() {
 
@@ -128,7 +124,8 @@ namespace RRZE\Tos {
 			// Find the correct FAU template to be included.
 			$styledir = '';
 			foreach ( self::$allowed_stylesheets as $dir => $style ) {
-				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ), array_map( 'strtolower', $style ), true ) ) {
+				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ),
+					array_map( 'strtolower', $style ), true ) ) {
 					$styledir = dirname( __FILE__ ) . "/templates/themes/$dir/";
 					break;
 				}
@@ -136,13 +133,15 @@ namespace RRZE\Tos {
 
 			foreach ( $this->options as $key => $value ) {
 				if ( isset( $wp_query->query[ $value ] ) ) {
-					 $new_template = $styledir . 'tos-template.php';
-					if ( file_exists( $new_template ) ) {
-						include $new_template;
+					$base_template = $styledir . 'tos-template.php';
+
+					if ( file_exists( $base_template ) ) {
+						// Pass title to base template.
+						$title = ucfirst( $value );
+						include $base_template;
 					}
 				}
 			}
-
 			exit();
 		}
 	}

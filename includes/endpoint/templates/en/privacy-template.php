@@ -16,8 +16,8 @@ $option_values = (array) get_option( 'rrze_tos' );
 		<?php echo isset( $option_values['rrze_tos_responsible_name'] ) ? $option_values['rrze_tos_responsible_name'] : '' ; ?><br>
 		<?php echo isset( $option_values['rrze_tos_responsible_street'] ) ? $option_values['rrze_tos_responsible_street'] : '' ; ?><br>
 
-			<?php echo isset( $option_values['rrze_tos_responsible_postalcode'] ) ? $option_values['rrze_tos_responsible_postalcode'] : '' ; ?>
-			<?php echo isset( $option_values['rrze_tos_responsible_city'] ) ? $option_values['rrze_tos_responsible_city'] : '' ; ?><br>
+		<?php echo isset( $option_values['rrze_tos_responsible_postalcode'] ) ? $option_values['rrze_tos_responsible_postalcode'] : '' ; ?>
+		<?php echo isset( $option_values['rrze_tos_responsible_city'] ) ? $option_values['rrze_tos_responsible_city'] : '' ; ?><br>
 		<br>
 		<?php isset( $option_values['rrze_tos_responsible_phone'] ) ? printf('<strong>Tel:</strong> %s', $option_values['rrze_tos_responsible_phone'] ) : printf('') ; ?><br>
 		<?php isset( $option_values['rrze_tos_responsible_email'] ) ? printf('<strong>E-mail:</strong> %s', $option_values['rrze_tos_responsible_email'] ) : printf('') ; ?><br>
@@ -148,26 +148,26 @@ $option_values = (array) get_option( 'rrze_tos' );
 		unsere Website deaktiviert, können möglicherweise nicht mehr alle Funktionen der Website vollumfänglich genutzt
 		werden.</p>
 	<?php if( isset( $option_values['rrze_tos_protection_newsletter'] ) && $option_values['rrze_tos_protection_newsletter'] === '1' ){?>
-	<h2>Newsletter</h2>
-	<h3>Beschreibung und Umfang der Datenverarbeitung</h3>
-	<p>Auf unserer Internetseite besteht die Möglichkeit einen kostenfreien Newsletter zu abonnieren. Dabei werden bei
-		der Anmeldung zum Newsletter die Daten aus der Eingabemaske an uns übermittelt.<br>
-		Für die Verarbeitung der Daten wird im Rahmen des Anmeldevorgangs Ihre Einwilligung eingeholt und auf diese
-		Datenschutzerklärung verwiesen.<br>
-		Es erfolgt im Zusammenhang mit der Datenverarbeitung für den Versand von Newslettern keine Weitergabe der Daten
-		an Dritte. Die Daten werden ausschließlich für den Versand des Newsletters verwendet.</p>
-	<h3>Rechtsgrundlage für die Datenverarbeitung</h3>
-	<p>Rechtsgrundlage für die Verarbeitung der Daten nach Anmeldung zum Newsletters durch den Nutzer ist bei Vorliegen
-		einer Einwilligung des Nutzers Art. 6 Abs. 1 lit. a DSGVO.</p>
-	<h3>Zweck der Datenverarbeitung</h3>
-	<p>Die Erhebung der E-Mail-Adresse des Nutzers dient dazu, den Newsletter zuzustellen.</p>
-	<h3>Dauer der Speicherung</h3>
-	<p>Die Daten werden gelöscht, sobald sie für die Erreichung des Zweckes ihrer Erhebung nicht mehr erforderlich sind.
-		Die E-Mail-Adresse des Nutzers wird demnach solange gespeichert, wie das Abonnement des Newsletters aktiv
-		ist.</p>
-	<h3>Widerspruchs- und Beseitigungsmöglichkeit</h3>
-	<p>Das Abonnement des Newsletters kann durch den betroffenen Nutzer jederzeit gekündigt werden. Zu diesem Zweck
-		findet sich in jedem Newsletter ein entsprechender Link.</p>
+		<h2>Newsletter</h2>
+		<h3>Beschreibung und Umfang der Datenverarbeitung</h3>
+		<p>Auf unserer Internetseite besteht die Möglichkeit einen kostenfreien Newsletter zu abonnieren. Dabei werden bei
+			der Anmeldung zum Newsletter die Daten aus der Eingabemaske an uns übermittelt.<br>
+			Für die Verarbeitung der Daten wird im Rahmen des Anmeldevorgangs Ihre Einwilligung eingeholt und auf diese
+			Datenschutzerklärung verwiesen.<br>
+			Es erfolgt im Zusammenhang mit der Datenverarbeitung für den Versand von Newslettern keine Weitergabe der Daten
+			an Dritte. Die Daten werden ausschließlich für den Versand des Newsletters verwendet.</p>
+		<h3>Rechtsgrundlage für die Datenverarbeitung</h3>
+		<p>Rechtsgrundlage für die Verarbeitung der Daten nach Anmeldung zum Newsletters durch den Nutzer ist bei Vorliegen
+			einer Einwilligung des Nutzers Art. 6 Abs. 1 lit. a DSGVO.</p>
+		<h3>Zweck der Datenverarbeitung</h3>
+		<p>Die Erhebung der E-Mail-Adresse des Nutzers dient dazu, den Newsletter zuzustellen.</p>
+		<h3>Dauer der Speicherung</h3>
+		<p>Die Daten werden gelöscht, sobald sie für die Erreichung des Zweckes ihrer Erhebung nicht mehr erforderlich sind.
+			Die E-Mail-Adresse des Nutzers wird demnach solange gespeichert, wie das Abonnement des Newsletters aktiv
+			ist.</p>
+		<h3>Widerspruchs- und Beseitigungsmöglichkeit</h3>
+		<p>Das Abonnement des Newsletters kann durch den betroffenen Nutzer jederzeit gekündigt werden. Zu diesem Zweck
+			findet sich in jedem Newsletter ein entsprechender Link.</p>
 	<?php } ?>
 	<h2>Kontaktformular und E-Mail-Kontakt</h2>
 	<h3>Beschreibung und Umfang der Datenverarbeitung</h3>

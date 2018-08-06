@@ -62,31 +62,27 @@ namespace RRZE\Tos {
 					'rrze_tos_responsible_phone'      => '',
 					'rrze_tos_responsible_email'      => ( isset( $res['verantwortlich']['email'] ) ? $res['verantwortlich']['email'] : $admin_email ),
 					'rrze_tos_responsible_ID'         => '',
-					// Webmaster!
-					'rrze_tos_webmaster_name'         => ( isset( $res['webmaster']['name'] ) ? $res['webmaster']['name'] : '' ),
-					'rrze_tos_webmaster_street'       => ( isset( $res['webmaster']['street'] ) ? $res['webmaster']['street'] : '' ),
-					'rrze_tos_webmaster_postalcode'   => ( isset( $res['webmaster']['postalcode'] ) ? $res['webmaster']['postalcode'] : '' ),
-					'rrze_tos_webmaster_city'         => ( isset( $res['webmaster']['city'] ) ? $res['webmaster']['city'] : '' ),
-					'rrze_tos_webmaster_phone'        => '',
-					'rrze_tos_webmaster_email'        => ( isset( $res['webmaster']['email'] ) ? $res['webmaster']['email'] : $admin_email ),
-					'rrze_tos_webmaster_ID'           => '',
 					// email data!
 					'rrze_tos_receiver_email'         => ( isset( $res['webmaster']['email'] ) ? $res['webmaster']['email'] : $admin_email ),
 					'rrze_tos_subject'                => 'Feedback-Formular Barrierefreiheit',
 					'rrze_tos_cc_email'               => '',
-					// Editor
+					// Editor.
 					'rrze_tos_editor_name'            => ( isset( $res['verantwortlich']['name'] ) ? $res['verantwortlich']['name'] : '' ),
 					'rrze_tos_editor_street'          => ( isset( $res['verantwortlich']['street'] ) ? $res['verantwortlich']['street'] : '' ),
 					'rrze_tos_editor_postalcode'      => ( isset( $res['verantwortlich']['postalcode'] ) ? $res['verantwortlich']['postalcode'] : '' ),
 					'rrze_tos_editor_city'            => ( isset( $res['verantwortlich']['city'] ) ? $res['verantwortlich']['city'] : '' ),
-					// Content
+					'rrze_tos_editor_org'             => ( isset( $res['verantwortlich']['org'] ) ? $res['verantwortlich']['org'] : '' ),
+					// Content & Webmaster!
 					'rrze_tos_content_name'           => ( isset( $res['webmaster']['name'] ) ? $res['webmaster']['name'] : '' ),
 					'rrze_tos_content_street'         => ( isset( $res['webmaster']['street'] ) ? $res['webmaster']['street'] : '' ),
 					'rrze_tos_content_postalcode'     => ( isset( $res['webmaster']['postalcode'] ) ? $res['webmaster']['postalcode'] : '' ),
 					'rrze_tos_content_city'           => ( isset( $res['webmaster']['city'] ) ? $res['webmaster']['city'] : '' ),
+					'rrze_tos_content_org'            => ( isset( $res['webmaster']['org'] ) ? $res['webmaster']['org'] : '' ),
+					'rrze_tos_content_email'          => ( isset( $res['webmaster']['email'] ) ? $res['webmaster']['email'] : '' ),
 					'rrze_tos_content_phone'          => '',
 					'rrze_tos_content_fax'            => '',
-					// privacy
+					'rrze_tos_content_ID'             => '',
+					// privacy.
 					'rrze_tos_protection_newsletter'  => '2',
 					// Hier können weitere Felder ('key' => 'value') angelegt werden.
 				];
