@@ -83,12 +83,6 @@ namespace RRZE\Tos {
 		];
 
 		// $slug_exists = the_slug_exists( 'barrierefreiheit' );!
-		$tos_menu_items = [
-			'a11y'    => __( 'Accessibility', 'rrze-tos' ),
-			'privacy' => __( 'Privacy', 'rrze-tos' ),
-			'imprint' => __( 'Imprint', 'rrze-tos' ),
-		];
-
 		$tos_menu_items = Settings::options_page_tabs();
 
 		if ( in_array( $current_theme->get( 'Name' ), $themes_fau, true ) ) {

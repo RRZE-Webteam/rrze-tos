@@ -1,31 +1,30 @@
-<?php
 /**
- * WordPress TOS privacy Template
- *
- * @package    WordPress
- * @subpackage TOS
- * @since      3.4.0
- */
+* WordPress TOS privacy Template
+* Open php tag has been deleted on purpose to eval php code
+* The function get_tos_content() in class Tos_Endpoint will replace keywords by values
+* and check for basic conditions.
+*
+* @package    WordPress
+* @subpackage TOS
+* @since      3.4.0
+*/
 
-$option_values = (array) get_option( 'rrze_tos' );
-$site_url      = get_option( 'siteurl' );
-$site_url      = preg_replace( '#^https?://#', '', $site_url );
 ?>
 
-<div class="alert alert-info" role="alert">
-
+<div class="alert" role="alert">
 	<p>Dieses Impressum gilt für den Webauftritt unter der Adresse
-		<strong><em><?php echo substr( $site_url, 5 ); ?></em></strong>.</p>
+		<strong><em>{{ rrze_tos_url }}</em></strong>.</p>
 
 	<h3>Herausgeber</h3>
 	<p>
-		<?php echo isset( $option_values['rrze_tos_editor_name'] ) ? $option_values['rrze_tos_editor_name'] : '' ; ?><br>
-		<?php echo isset( $option_values['rrze_tos_editor_street'] ) ? $option_values['rrze_tos_editor_street'] : ''; ?><br>
-		<?php echo isset( $option_values['rrze_tos_editor_postalcode'] ) ? $option_values['rrze_tos_editor_postalcode'] : ''; ?>
-		<?php echo isset( $option_values['rrze_tos_editor_city'] ) ? $option_values['rrze_tos_editor_city'] : ''; ?><br>
+		{{ rrze_tos_editor_name }}<br>
+		{{ rrze_tos_editor_street }}<br>
+		{{ rrze_tos_editor_postalcode }}
+		{{ rrze_tos_editor_city }}<br>
 	</p>
+
 	<h4>Vertreten durch</h4>
-	<p><strong><em><?php echo isset( $option_values['rrze_tos_content_org'] ) ? $option_values['rrze_tos_content_org'] : ''; ?></em></strong>
+	<p><strong><em>{{ rrze_tos_content_org }}</em></strong>
 		ist eine Einrichtung des
 		Öffentlichen Rechts innerhalb der <a href="https://www.fau.de">Friedrich-Alexander-Universität
 			Erlangen-Nürnberg
@@ -39,21 +38,24 @@ $site_url      = preg_replace( '#^https?://#', '', $site_url );
 
 	<h3>Verantwortlich für den Inhalt</h3>
 	<p>
-		<?php echo isset( $option_values['rrze_tos_content_name'] ) ? $option_values['rrze_tos_content_name'] : '' ; ?><br>
-		<?php echo isset( $option_values['rrze_tos_content_street'] ) ? $option_values['rrze_tos_content_street'] : ''; ?><br>
-		<?php echo isset( $option_values['rrze_tos_content_postalcode'] ) ? $option_values['rrze_tos_content_postalcode'] : '' ; ?>
-		<?php echo isset( $option_values['rrze_tos_content_city'] ) ? $option_values['rrze_tos_content_city'] : ''; ?><br>
+		{{ rrze_tos_content_name }}<br>
+		{{ rrze_tos_content_street }}<br>
+		{{ rrze_tos_content_postalcode }}
+		{{ rrze_tos_content_city }}<br>
 	</p>
 	<p>
-		<?php isset( $option_values['rrze_tos_content_phone'] ) ? printf('<strong>Telefon:</strong> +49 9131 85-%s', $option_values['rrze_tos_content_phone'] ) : printf('') ; ?><br>
-		<?php isset( $option_values['rrze_tos_content_fax'] ) ? printf('<strong>Fax: </strong> +49 9131 %s', $option_values['rrze_tos_content_fax'] ) : printf('') ; ?><br>
-		<?php isset( $option_values['rrze_tos_content_email'] ) ? printf('<strong>E-mail:</strong> %s', $option_values['rrze_tos_content_email'] ) : printf('') ; ?><br>
+		<strong>Telefon:</strong> +49 9131 85-{{ rrze_tos_content_phone }}<br>
+		<strong>Fax: </strong> +49 9131 {{ rrze_tos_content_fax }}<br>
+		<strong>E-mail:</strong> {{ rrze_tos_content_email }}<br>
+
 	</p>
+
 	<h4>Zuständige Aufsichtsbehörde</h4>
 	<p>Bayerisches Staatsministerium für Wissenschaft und Kunst<br>
 		Salvatorstraße 2<br>
 		80327 München</p>
 	<p>Webseite: https://www.km.bayern.de/</p>
+
 	<h4>Identifikationsnummern</h4>
 	<div class="table-wrapper">
 		<div class="scrollable">
@@ -90,7 +92,7 @@ $site_url      = preg_replace( '#^https?://#', '', $site_url );
 			</table>
 		</div>
 	</div>
-	<p>&nbsp;</p>
+
 	<h3>Sicherheitsvorfälle</h3>
 	<p class="notice-attention">Meldung über Missbrauch von Computer- und
 		Netzwerk-Ressourcen</p>
@@ -100,6 +102,7 @@ $site_url      = preg_replace( '#^https?://#', '', $site_url );
 			href="https://www.rrze.fau.de/infocenter/kontakt-hilfe/sicherheitsvorfaelle/">informieren
 			Sie bitte umgehend
 			die für IT-Sicherheit</a>&nbsp;zuständige Stelle am RRZE.</p>
+
 	<h3>Nutzungsbedingungen</h3>
 	<p>Texte, Bilder, Grafiken sowie die Gestaltung dieser Internetseiten können
 		dem Urheberrecht unterliegen.</p>
@@ -135,6 +138,7 @@ $site_url      = preg_replace( '#^https?://#', '', $site_url );
 		nähere Auskünfte, sofern diese Rechte nicht bereits durch entsprechende
 		Hinweise im Webangebot kenntlich gemacht
 		sind.</p>
+
 	<h3>Haftungsausschluss</h3>
 	<p>Für die Inhalte anderer Webangebote der FAU sind die jeweiligen
 		Einrichtungen verantwortlich.</p>
@@ -172,6 +176,7 @@ $site_url      = preg_replace( '#^https?://#', '', $site_url );
 		gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die
 		Veröffentlichung zeitweise oder endgültig
 		einzustellen.</p>
+
 	<h3>Haftung für Links</h3>
 	<p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren
 		Inhalte wir keinen Einfluss haben. Deshalb

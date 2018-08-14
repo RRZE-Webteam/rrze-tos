@@ -72,8 +72,8 @@ namespace RRZE\Tos {
 		public static function options_page_tabs() {
 			$tabs = [
 				'accessibility' => __( 'accessibility', 'rrze-tos' ),
-				'privacy'       => __( 'privacy', 'rrze-tos' ),
 				'imprint'       => __( 'imprint', 'rrze-tos' ),
+				'privacy'       => __( 'privacy', 'rrze-tos' ),
 			];
 
 			return $tabs;
@@ -109,8 +109,7 @@ namespace RRZE\Tos {
 					$this,
 					'settings_page',
 				] );
-			add_action( 'load-' . $this->admin_settings_page,
-				array( $this, 'admin_help_menu' ) );
+			add_action( 'load-' . $this->admin_settings_page, array( $this, 'admin_help_menu' ) );
 //			add_action( 'admin_notices', array( $this, 'my_error_notice' ) );
 		}
 

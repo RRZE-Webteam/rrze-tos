@@ -9,6 +9,9 @@
 
 namespace RRZE\Tos {
 
+	defined( 'ABSPATH' ) || exit;
+	require_once plugin_dir_path( __DIR__ ) . 'class-settings.php';
+
 	/**
 	 * Class TosEndpoint
 	 *
@@ -22,10 +25,7 @@ namespace RRZE\Tos {
 		public function __construct() {
 			add_action( 'init', array( $this, 'default_options' ) );
 			add_action( 'init', array( $this, 'rewrite' ) );
-//			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
-			add_action( 'template_redirect',
-				array( $this, 'endpoint_template_redirect' ) );
-
+			add_action( 'template_redirect', array( $this, 'endpoint_template_redirect' ) );
 		}
 
 		/**
@@ -64,17 +64,60 @@ namespace RRZE\Tos {
 		}
 
 		/**
+		 * Callback get_tos_content function to replace variable from template.
+		 *
+		 * @param array $matches Variable found in template.
+		 *
+		 * @return string
+		 */
+		public function get_option_values( $matches ) {
+			$option_values = (array) get_option( 'rrze_tos' );
+			$value         = isset( $option_values[ $matches[1] ] ) ? $option_values[ $matches[1] ] : '';
+
+			return $value;
+		}
+
+		/**
+		 * Callback get_tos_content function to check if-else condition.
+		 *
+		 * @param array $matches if variable found in template.
+		 *
+		 * @return string
+		 */
+		public function check_if_else_condition( $matches ) {
+			$option_values = (array) get_option( 'rrze_tos' );
+			if ( isset( $option_values[ $matches[1] ] ) && '1' === $option_values[ $matches[1] ] ) {
+				return $matches[2];
+			} elseif ( isset( $matches[3] ) ) {
+				return $matches[3];
+			}
+
+			return '';
+		}
+
+		/**
 		 * Include content part into base template endpoint.
 		 */
 		public function get_tos_content() {
 			global $wp_query, $locale;
+
 			$this->default_options();
 			foreach ( $this->options as $key => $value ) {
 				if ( isset( $wp_query->query[ $value ] ) ) {
-//					$template_part = dirname( __FILE__ ) . '/templates/' . substr( $locale, 0, 2 ) . '/' . $key . '-template.php';
-					$template_part = dirname( __FILE__ ) . '/templates/' . $key . '-template.php';
+					$template_part = plugin_dir_path( __FILE__ ) . 'templates/' . substr( $locale, 0, 2 ) . "/$key-template.php";
 					if ( file_exists( $template_part ) ) {
-						include_once $template_part;
+						$template = file_get_contents( $template_part );
+						$content  = preg_replace_callback(
+							'/{{[\s]*?([\w]+)[\s]*?}}/',
+							[ $this, 'get_option_values' ],
+							$template
+						);
+						$content  = preg_replace_callback(
+							'/{{[\s]*?if[\s]+?([\w]+)(.*?)(?:else(.*?))*?endif[\s]*?}}/s',
+							[ $this, 'check_if_else_condition' ],
+							$content
+						);
+						eval( $content );
 					}
 				}
 			}
@@ -124,9 +167,8 @@ namespace RRZE\Tos {
 			// Find the correct FAU template to be included.
 			$styledir = '';
 			foreach ( self::$allowed_stylesheets as $dir => $style ) {
-				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ),
-					array_map( 'strtolower', $style ), true ) ) {
-					$styledir = dirname( __FILE__ ) . "/templates/themes/$dir/";
+				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ), array_map( 'strtolower', $style ), true ) ) {
+					$styledir = plugin_dir_path( __FILE__ ) . "/templates/themes/$dir/";
 					break;
 				}
 			}

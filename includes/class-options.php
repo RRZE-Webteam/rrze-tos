@@ -51,6 +51,7 @@ namespace RRZE\Tos {
 			}
 			$options =
 				[
+					'rrze_tos_url'                    => preg_replace( '#^https?://#', '', get_option( 'siteurl' ) ),
 					'rrze_tos_title'                  => __( 'Accessibility Statement', 'rrze-tos' ),
 					'rrze_tos_conformity'             => '2',
 					'rrze_tos_no_reason'              => '',
