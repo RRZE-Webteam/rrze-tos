@@ -64,6 +64,8 @@ namespace RRZE\Tos {
 			} else {
 				$this->res = '';
 			}
+
+			add_action( 'wp_ajax_tos_update_fields', [ $this, 'tos_update_ajax_handler' ] );
 		}
 
 		/**
@@ -74,6 +76,7 @@ namespace RRZE\Tos {
 				'accessibility' => __( 'accessibility', 'rrze-tos' ),
 				'imprint'       => __( 'imprint', 'rrze-tos' ),
 				'privacy'       => __( 'privacy', 'rrze-tos' ),
+				'update'        => __( 'update', 'rrze-tos' ),
 			];
 
 			return $tabs;
@@ -102,15 +105,13 @@ namespace RRZE\Tos {
 		 * @return void
 		 */
 		public function admin_settings_page() {
-			$this->admin_settings_page = add_options_page( __( 'Accessibility',
-				'rrze-tos' ), __( 'Accessibility', 'rrze-tos' ),
+			$this->admin_settings_page = add_options_page( __( 'Accessibility', 'rrze-tos' ), __( 'Accessibility', 'rrze-tos' ),
 				'manage_options', $this->option_name,
 				[
 					$this,
 					'settings_page',
 				] );
-			add_action( 'load-' . $this->admin_settings_page, array( $this, 'admin_help_menu' ) );
-//			add_action( 'admin_notices', array( $this, 'my_error_notice' ) );
+			add_action( 'load-' . $this->admin_settings_page, [ $this, 'admin_help_menu' ] );
 		}
 
 		/**
@@ -121,17 +122,16 @@ namespace RRZE\Tos {
 		public function settings_page() {
 			$tabs    = self::options_page_tabs();
 			$current = self::current_tab( $_GET );
-
+			$nonce   = wp_create_nonce( 'my-nonce' );
 			?>
 			<div class="wrap">
-				<h2><?php esc_html_e( 'Settings &rsaquo; TOS',
-						'rrze-tos' ); ?></h2>
+				<h2><?php esc_html_e( 'Settings &rsaquo; TOS', 'rrze-tos' ); ?></h2>
 				<h3 class="nav-tab-wrapper">
 					<?php
 					// Add tabs to settings page
 					foreach ( $tabs as $tab => $name ) {
-						$class = ( $tab == $current ) ? ' nav-tab-active' : '';
-						echo "<a class='nav-tab$class' href='?page=$this->option_name&tab=$tab'>$name</a>";
+						$class = ( $tab === $current ) ? ' nav-tab-active' : '';
+						echo "<a class='nav-tab$class' href='?page=$this->option_name&tab=$tab&_wpnonce={$nonce}'>$name</a>";
 					}
 					?>
 				</h3>
@@ -152,8 +152,7 @@ namespace RRZE\Tos {
 		 * @return void
 		 */
 		public function admin_settings() {
-			register_setting( 'rrze_tos_options', $this->option_name,
-				array( $this, 'options_validate' ) );
+			register_setting( 'rrze_tos_options', $this->option_name, array( $this, 'options_validate' ) );
 			$tab = 'accessibility';
 			if ( isset( $_GET ) ) {
 				$tab = self::current_tab( $_GET );
@@ -532,6 +531,19 @@ namespace RRZE\Tos {
 						]
 					);
 					break;
+				case 'update':
+					add_settings_section( 'rrze_tos_section_update',
+						__( 'Update fields', 'rrze-tos' ),
+						'__return_false',
+						'rrze_tos_options'
+					);
+					add_settings_field( 'rrze_tos_update_fields',
+						__( 'Update fields', 'rrze-tos' ),
+						[ $this, 'rrze_tos_update_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_update'
+					);
+					break;
 			}
 
 		}
@@ -554,6 +566,7 @@ namespace RRZE\Tos {
 		 * @return array
 		 */
 		public function options_validate( $input ) {
+			if( isset( $input ) )
 			foreach ( $input as $key => $value ) {
 				if ( preg_match( '/email/i', $key ) ) {
 					$this->options->$key
@@ -561,13 +574,11 @@ namespace RRZE\Tos {
 						? sanitize_email( $_POST[ $this->option_name ][ $key ] )
 						: $this->options->$key;
 				} elseif ( preg_match( '/[\r\n\t ]+/', $value ) ) {
-					$this->options->$key
-						= isset( $_POST[ $this->option_name ][ $key ] )
+					$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
 						? sanitize_textarea_field( $_POST[ $this->option_name ][ $key ] )
 						: $this->options->$key;
 				} else {
-					$this->options->$key
-						= isset( $_POST[ $this->option_name ][ $key ] )
+					$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
 						? sanitize_text_field( $_POST[ $this->option_name ][ $key ] )
 						: $this->options->$key;
 				}
@@ -705,7 +716,7 @@ if ( array_key_exists( $name, $this->options ) ) {
 		 *
 		 * @param array $args All options than can be selected.
 		 */
-		public function cris_select_callback( $args ) {
+		public function rrze_tos_select_callback( $args ) {
 			$limit = [];
 			if ( array_key_exists( 'name', $args ) ) {
 				$name = esc_attr( $args['name'] );
@@ -736,6 +747,43 @@ if ( array_key_exists( $name, $this->options ) ) {
 				<p class="description"><?php esc_html_e( $description ); ?></p>
 				<?php
 			}
+		}
+
+		public function rrze_tos_update_callback(){
+			?>
+			<input type="button" class="button button-primary" name="update" value="<?php _e('Update all fields', 'rrze-tos' ); ?>" id="update">
+			<?php
+		}
+
+		/**
+		 * Take the option object and update fields using ajax request
+		 * TODO: change to for loop
+		 */
+		public function tos_update_ajax_handler(){
+			$wmp_option                                     = get_json_wmp();
+			$this->options->rrze_tos_responsible_name       = $wmp_option['verantwortlich']['name'];
+			$this->options->rrze_tos_responsible_street     = $wmp_option['verantwortlich']['street'];
+			$this->options->rrze_tos_responsible_postalcode = $wmp_option['verantwortlich']['postalcode'];
+			$this->options->rrze_tos_responsible_city       = $wmp_option['verantwortlich']['city'];
+			$this->options->rrze_tos_responsible_email      = $wmp_option['verantwortlich']['email'];
+
+			$this->options->rrze_tos_editor_name            = $wmp_option['verantwortlich']['name'];
+			$this->options->rrze_tos_editor_street          = $wmp_option['verantwortlich']['street'];
+			$this->options->rrze_tos_editor_postalcode      = $wmp_option['verantwortlich']['postalcode'];
+			$this->options->rrze_tos_editor_city            = $wmp_option['verantwortlich']['city'];
+			$this->options->rrze_tos_editor_email           = $wmp_option['verantwortlich']['email'];
+			$this->options->rrze_tos_editor_org             = $wmp_option['verantwortlich']['org'];
+
+			$this->options->rrze_tos_content_name           = $wmp_option['webmaster']['name'];
+			$this->options->rrze_tos_content_street         = $wmp_option['webmaster']['street'];
+			$this->options->rrze_tos_content_postalcode     = $wmp_option['webmaster']['postalcode'];
+			$this->options->rrze_tos_content_city           = $wmp_option['webmaster']['city'];
+			$this->options->rrze_tos_content_email          = $wmp_option['webmaster']['email'];
+			$this->options->rrze_tos_content_org            = $wmp_option['webmaster']['org'];
+
+			update_option('rrze_tos', $this->options  , true);
+			echo $_POST['title'].' (8) ';
+			wp_die();
 		}
 
 		/**

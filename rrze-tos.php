@@ -171,12 +171,17 @@ namespace RRZE\Tos {
 			'2.8.1',
 			true
 		);
-		wp_enqueue_script( 'tos_admin_script',
+		wp_enqueue_script( 'tos-admin-script',
 			plugins_url( 'rrze-tos/assets/js/tos-admin-script.js', dirname( __FILE__ ) ),
 			array( 'jquery', 'parsley-validator' ),
-			1.0,
+			'1.0',
 			true
 		);
+		$title_nonce = wp_create_nonce( 'rrze_tos_nonce' );
+		wp_localize_script( 'tos-admin-script', 'tos_ajax_obj', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => $title_nonce,
+		) );
 
 	}
 
