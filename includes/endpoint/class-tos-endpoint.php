@@ -58,7 +58,7 @@ namespace RRZE\Tos {
 		 * @return array
 		 */
 		public function default_options() {
-			$this->options = Settings::options_page_tabs();
+			$this->options = Settings::options_pages();
 
 			return $this->options;
 		}

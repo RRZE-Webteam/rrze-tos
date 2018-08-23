@@ -83,7 +83,7 @@ namespace RRZE\Tos {
 		];
 
 		// $slug_exists = the_slug_exists( 'barrierefreiheit' );!
-		$tos_menu_items = Settings::options_page_tabs();
+		$tos_menu_items = Settings::options_pages();
 
 		if ( in_array( $current_theme->get( 'Name' ), $themes_fau, true ) ) {
 			if ( has_nav_menu( 'meta-footer' ) ) {

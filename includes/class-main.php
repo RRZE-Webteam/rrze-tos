@@ -23,13 +23,13 @@ namespace RRZE\Tos {
 		/**
 		 * Options object type
 		 *
-		 * @var object Options
+		 * @var Options
 		 */
 		public $options;
 		/**
 		 * Settings object type
 		 *
-		 * @var object Settings
+		 * @var Settings
 		 */
 		public $settings;
 
