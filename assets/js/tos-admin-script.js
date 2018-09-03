@@ -36,15 +36,15 @@ jQuery(document).ready(function ($) {
      * settings class.
      *
      */
-    $("#tos-admin-form #update").click(function () {             //event
-        $('#ajax-response').removeClass("invisible notice-error").addClass("visible notice-success");
-        $('#ajax-response p').empty().append("Working ...");
+    $("#tos-admin-form #update").click(function (event) {    //event
+        event.preventDefault();
+        $(this).addClass("spinner-demo disabled");
 
-        $.post(tos_ajax_obj.ajax_url, {        //POST request
-            _ajax_nonce: tos_ajax_obj.nonce,   //nonce
-            action: "tos_update_fields",       //action
-            title: this.value                  //data
-        }, function (data) {                   //callback
+        $.post(tos_ajax_obj.ajax_url, {                 //POST request
+            _ajax_nonce: tos_ajax_obj.nonce,            //nonce
+            action: "tos_update_fields",                //action
+            title: this.value                           //data
+        }, function (data) {                            //callback
             let obj = JSON.parse(data);
             $.each(obj.verantwortlich, function (i, val) {
                 if (null != val)
@@ -55,13 +55,14 @@ jQuery(document).ready(function ($) {
                     $("input[name ='rrze_tos[rrze_tos_content_" + i + "]']").val(val);
             });
         }).done(function (e) {
-            console.log(e);
             let obj = JSON.parse(e);
-            $('#ajax-response').removeClass("invisible visible notice-error").addClass("visible notice-success");
+            $('#ajax-response').removeClass("invisible visible notice-error").fadeIn().addClass("visible notice-success is-dismissible").delay(4000).fadeOut();
             $('#ajax-response p').empty().append(obj.success);
         }).fail(function (e) {
-            $('#ajax-response').removeClass("invisible notice-error").addClass("visible notice-error");
+            $('#ajax-response').removeClass("invisible notice-error").fadeIn().addClass("visible notice-error").delay(4000).fadeOut();
             $('#ajax-response p').empty().append(e.responseText);
-        });
+        }).always(function () {
+            $(this).removeClass("spinner-demo disabled");
+        }.bind(this));
     });
 });

@@ -764,8 +764,12 @@ if ( array_key_exists( $name, $this->options ) ) {
 		 */
 		public function rrze_tos_update_callback() {
 			?>
-			<input type="button" class="button button-primary" name="update"
-			       value="<?php _e( 'Check info from Web Master Portal', 'rrze-tos' ); ?>" id="update">
+<!--			<input type="button" class="spinner-demo button button-primary" name="update"-->
+<!--			       value="--><?php //_e( 'Checking info from Web Master Portal', 'rrze-tos' ); ?><!--" id="update">-->
+
+			<button class=" button button-primary " name="update" id="update">
+				<span class=""><?php _e( 'Checking info from Web Master Portal', 'rrze-tos' ); ?></span>
+			</button>
 			<?php
 		}
 
