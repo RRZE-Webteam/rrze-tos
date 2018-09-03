@@ -66,6 +66,7 @@ namespace RRZE\Tos {
 			}
 
 			add_action( 'wp_ajax_tos_update_fields', [ $this, 'tos_update_ajax_handler' ] );
+			add_action( 'admin_notices', [ $this, 'my_error_notice' ] );
 		}
 
 		/**
@@ -75,9 +76,9 @@ namespace RRZE\Tos {
 		 */
 		public static function options_pages() {
 			$pages = [
-				'accessibility' => __( 'accessibility', 'rrze-tos' ),
 				'imprint'       => __( 'imprint', 'rrze-tos' ),
 				'privacy'       => __( 'privacy', 'rrze-tos' ),
+				'accessibility' => __( 'accessibility', 'rrze-tos' ),
 			];
 
 			return $pages;
@@ -89,10 +90,8 @@ namespace RRZE\Tos {
 		 * @return array
 		 */
 		public static function options_page_tabs() {
-			$tabs           = self::options_pages();
-			$tabs['update'] = __( 'update', 'rrze-tos' );
-
-			return $tabs;
+			$tabs['responsible'] = __( 'responsible', 'rrze-tos' );
+			return $tabs + self::options_pages();
 		}
 
 		/**
@@ -120,8 +119,8 @@ namespace RRZE\Tos {
 		 * @return void
 		 */
 		public function admin_settings_page() {
-			$this->admin_settings_page = add_options_page( __( 'Accessibility', 'rrze-tos' ),
-				__( 'Accessibility', 'rrze-tos' ),
+			$this->admin_settings_page = add_options_page( __( 'ToS', 'rrze-tos' ),
+				__( 'ToS', 'rrze-tos' ),
 				'manage_options', $this->option_name,
 				[
 					$this,
@@ -141,7 +140,7 @@ namespace RRZE\Tos {
 			$nonce   = wp_create_nonce( 'my-nonce' );
 			?>
 			<div class="wrap">
-				<h2><?php esc_html_e( 'Settings &rsaquo; TOS', 'rrze-tos' ); ?></h2>
+				<h2><?php esc_html_e( 'Settings &rsaquo; ToS', 'rrze-tos' ); ?></h2>
 				<h3 class="nav-tab-wrapper">
 					<?php
 					// Add tabs to settings page.
@@ -215,119 +214,19 @@ namespace RRZE\Tos {
 						'rrze_tos_section_general',
 						[
 							'name'        => 'rrze_tos_no_reason',
-							'description' => __( 'Please include all necessary details',
-								'rrze-tos' ),
+							'description' => __( 'Please include all necessary details', 'rrze-tos' ),
 						]
 					);
-
-					// --------
-					// Section Responsible
-					// --------
-					add_settings_section( 'rrze_tos_section_responsible',
-						__( 'Responsible', 'rrze-tos' ), '__return_false',
-						'rrze_tos_options' );
-
-					add_settings_field(
-						'rrze_tos_responsible_name', __( 'Name', 'rrze-tos' ),
-						[
-							$this,
-							'rrze_tos_textbox_callback',
-						],
-						'rrze_tos_options',
-						'rrze_tos_section_responsible',
-						[
-							'name'         => 'rrze_tos_responsible_name',
-							'autocomplete' => 'given-name',
-							'required'     => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_responsible_email',
-						__( 'E-Mail', 'rrze-tos' ), [
-						$this,
-						'rrze_tos_textbox_callback'
-					],
-						'rrze_tos_options',
-						'rrze_tos_section_responsible',
-						[
-							'name'         => 'rrze_tos_responsible_email',
-							'autocomplete' => 'email',
-							'required'     => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_responsible_street',
-						__( 'Street', 'rrze-tos' ), [
-						$this,
-						'rrze_tos_textbox_callback'
-					],
-						'rrze_tos_options',
-						'rrze_tos_section_responsible',
-						[
-							'name'         => 'rrze_tos_responsible_street',
-							'autocomplete' => 'address-line1',
-							'required'     => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_responsible_postalcode',
-						__( 'Postcode', 'rrze-tos' ), [
-						$this,
-						'rrze_tos_textbox_callback'
-					],
-						'rrze_tos_options',
-						'rrze_tos_section_responsible',
-						[
-							'name'     => 'rrze_tos_responsible_postalcode',
-							'required' => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_responsible_city', __( 'City', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_responsible',
-						[
-							'name'         => 'rrze_tos_responsible_city',
-							'autocomplete' => 'address-level2',
-							'required'     => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_responsible_phone', __( 'Phone', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_responsible',
-						[
-							'name'         => 'rrze_tos_responsible_phone',
-							'autocomplete' => 'tel',
-						]
-					);
-					if ( is_plugin_active( 'fau-person/fau-person.php' ) ) {
-						add_settings_field(
-							'rrze_tos_responsible_ID',
-							__( 'Person-ID', 'rrze-tos' ), [
-							$this,
-							'rrze_tos_textbox_callback'
-						],
-							'rrze_tos_options',
-							'rrze_tos_section_responsible',
-							[ 'name' => 'rrze_tos_responsible_ID' ]
-						);
-					}
 
 					// --------
 					// Section E-Mail Settings
 					// --------
 					add_settings_section( 'rrze_tos_section_email',
-						__( 'E-Mail Settings', 'rrze-tos' ), '__return_false',
-						'rrze_tos_options' );
+						__( 'E-Mail Settings', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
 
 					add_settings_field(
 						'rrze_tos_receiver_email',
-						__( 'Receiver E-Mail', 'rrze-tos' ), [
-						$this,
-						'rrze_tos_textbox_callback'
+						__( 'Receiver E-Mail', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback'
 					],
 						'rrze_tos_options',
 						'rrze_tos_section_email',
@@ -428,6 +327,139 @@ namespace RRZE\Tos {
 						]
 					);
 
+					break;
+				// --------
+				// Tab data_protection
+				// --------
+				case 'privacy':
+					// --------
+					// Section Content
+					// --------
+					add_settings_section( 'rrze_tos_section_privacy',
+						__( 'Newsletter', 'rrze-tos' ), '__return_false',
+						'rrze_tos_options' );
+					add_settings_field(
+						'rrze_tos_protection_newsletter',
+						__( 'Do you want to show the newsletter section?',
+							'rrze-tos' ),
+						[ $this, 'rrze_tos_radio_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_privacy',
+						[
+							'name'    => 'rrze_tos_protection_newsletter',
+							'options' =>
+								[
+									'1' => __( 'Yes', 'rrze-tos' ),
+									'2' => __( 'No', 'rrze-tos' ),
+								],
+						]
+					);
+					break;
+				case 'responsible':
+
+					// --------
+					// Section Responsible
+					// --------
+					add_settings_section( 'rrze_tos_section_responsible',
+						__( 'Responsible', 'rrze-tos' ), '__return_false',
+						'rrze_tos_options' );
+
+					add_settings_field( 'rrze_tos_update_fields', __( 'Update all fields', 'rrze-tos' ),
+						[ $this, 'rrze_tos_update_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible'
+					);
+
+					add_settings_field(
+						'rrze_tos_responsible_name', __( 'Name', 'rrze-tos' ),
+						[
+							$this,
+							'rrze_tos_textbox_callback',
+						],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name'         => 'rrze_tos_responsible_name',
+							'autocomplete' => 'given-name',
+							'required'     => 'required',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_responsible_email',
+						__( 'E-Mail', 'rrze-tos' ), [
+						$this,
+						'rrze_tos_textbox_callback'
+					],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name'         => 'rrze_tos_responsible_email',
+							'autocomplete' => 'email',
+							'required'     => 'required',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_responsible_street',
+						__( 'Street', 'rrze-tos' ), [
+						$this,
+						'rrze_tos_textbox_callback'
+					],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name'         => 'rrze_tos_responsible_street',
+							'autocomplete' => 'address-line1',
+							'required'     => 'required',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_responsible_postalcode',
+						__( 'Postcode', 'rrze-tos' ), [
+						$this,
+						'rrze_tos_textbox_callback'
+					],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name'     => 'rrze_tos_responsible_postalcode',
+							'required' => 'required',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_responsible_city', __( 'City', 'rrze-tos' ),
+						[ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name'         => 'rrze_tos_responsible_city',
+							'autocomplete' => 'address-level2',
+							'required'     => 'required',
+						]
+					);
+					add_settings_field(
+						'rrze_tos_responsible_phone', __( 'Phone', 'rrze-tos' ),
+						[ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name'         => 'rrze_tos_responsible_phone',
+							'autocomplete' => 'tel',
+						]
+					);
+					if ( is_plugin_active( 'fau-person/fau-person.php' ) ) {
+						add_settings_field(
+							'rrze_tos_responsible_ID',
+							__( 'Person-ID', 'rrze-tos' ), [
+							$this,
+							'rrze_tos_textbox_callback'
+						],
+							'rrze_tos_options',
+							'rrze_tos_section_responsible',
+							[ 'name' => 'rrze_tos_responsible_ID' ]
+						);
+					}
+
+
 					// --------
 					// Section Content
 					// --------
@@ -522,46 +554,6 @@ namespace RRZE\Tos {
 					);
 
 					break;
-				// --------
-				// Tab data_protection
-				// --------
-				case 'privacy':
-					// --------
-					// Section Content
-					// --------
-					add_settings_section( 'rrze_tos_section_privacy',
-						__( 'Newsletter', 'rrze-tos' ), '__return_false',
-						'rrze_tos_options' );
-					add_settings_field(
-						'rrze_tos_protection_newsletter',
-						__( 'Do you want to show the newsletter section?',
-							'rrze-tos' ),
-						[ $this, 'rrze_tos_radio_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_privacy',
-						[
-							'name'    => 'rrze_tos_protection_newsletter',
-							'options' =>
-								[
-									'1' => __( 'Yes', 'rrze-tos' ),
-									'2' => __( 'No', 'rrze-tos' ),
-								],
-						]
-					);
-					break;
-				case 'update':
-					add_settings_section( 'rrze_tos_section_update',
-						__( 'Update fields', 'rrze-tos' ),
-						'__return_false',
-						'rrze_tos_options'
-					);
-					add_settings_field( 'rrze_tos_update_fields',
-						__( 'Update fields', 'rrze-tos' ),
-						[ $this, 'rrze_tos_update_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_update'
-					);
-					break;
 			}
 
 		}
@@ -569,7 +561,7 @@ namespace RRZE\Tos {
 
 		public function my_error_notice() {
 			?>
-			<div class="updated settings-error notice is-dismissible">
+			<div class="notice invisible" id="ajax-response">
 				<p><?php _e( 'There has been an error. Bummer!',
 						'my_plugin_textdomain' ); ?></p>
 			</div>
@@ -665,21 +657,20 @@ namespace RRZE\Tos {
 			}
 			?>
 			<?php if ( isset( $name ) ) { ?>
-				<textarea name="<?php printf( '%s[' . $name . ']',
-					$this->option_name ); ?>" cols="50" rows="8"
+				<textarea name="<?php printf( '%s[' . $name . ']', $this->option_name ); ?>" cols="50" rows="8"
 				          title="<?php echo __( 'If the field has no data, please fill it manually',
 					          'rrze-tos' ); ?>">
-				<?php
-				if ( array_key_exists( $name, $this->options ) ) {
-					if ( is_array( $this->options->$name ) && count( $this->options->$name ) > 0
-					     && $this->options->$name[0] !== '' ) {
-						echo implode( "\n", $this->options->$name );
-					} else {
-						echo $this->options->$name;
-					}
-				}
-				?>
-				</textarea><br/>
+<?php
+if ( array_key_exists( $name, $this->options ) ) {
+	if ( is_array( $this->options->$name ) && count( $this->options->$name ) > 0
+	     && $this->options->$name[0] !== '' ) {
+		echo implode( "\n", $this->options->$name );
+	} else {
+		echo $this->options->$name;
+	}
+}
+?>
+</textarea><br/>
 			<?php } ?>
 			<?php if ( isset( $description ) ) { ?>
 				<span
@@ -774,7 +765,7 @@ namespace RRZE\Tos {
 		public function rrze_tos_update_callback() {
 			?>
 			<input type="button" class="button button-primary" name="update"
-			       value="<?php _e( 'Update all fields', 'rrze-tos' ); ?>" id="update">
+			       value="<?php _e( 'Check info from Web Master Portal', 'rrze-tos' ); ?>" id="update">
 			<?php
 		}
 
@@ -783,25 +774,34 @@ namespace RRZE\Tos {
 		 *
 		 */
 		public function tos_update_ajax_handler() {
-			$wmp_option = get_json_wmp();
-			foreach ( $wmp_option as $wmp_key => $wmp_sub_array ) {
-				foreach ( $wmp_sub_array as $wmp_sub_key => $wmp_value ) {
+
+			$status_code = check_wmp();
+			if ( 200 === $status_code ) {
+				$wmp_option = get_json_wmp();
+
+				foreach ( $wmp_option['verantwortlich'] as $wmp_key => $wmp_value ) {
 					if ( ! is_null( $wmp_value ) ) {
-						foreach ( $this->options as $options_key => $options_value ) {
-							if ( 'rrze_tos_responsible_' . $wmp_sub_key == $options_key && $wmp_key === 'verantwortlich' ) {
-								$this->options->$options_key = $wmp_option[ $wmp_key ][ $wmp_sub_key ];
-							} elseif ( 'rrze_tos_editor_' . $wmp_sub_key == $options_key  && $wmp_key === 'verantwortlich' ) {
-								$this->options->$options_key = $wmp_option[ $wmp_key ][ $wmp_sub_key ];
-							} elseif ( 'rrze_tos_content_' . $wmp_sub_key == $options_key  && $wmp_key === 'webmaster' ) {
-								$this->options->$options_key = $wmp_option[ $wmp_key ][ $wmp_sub_key ];
-							}
-						}
+						$options_key1                 = "rrze_tos_responsible_$wmp_key";
+						$options_key2                 = "rrze_tos_editor_$wmp_key";
+						$this->options->$options_key1 = $wmp_value;
+						$this->options->$options_key2 = $wmp_value;
 					}
 				}
+				foreach ( $wmp_option['webmaster'] as $wmp_key => $wmp_value ) {
+					if ( ! is_null( $wmp_value ) ) {
+						$options_key                 = "rrze_tos_content_$wmp_key";
+						$this->options->$options_key = $wmp_value;
+					}
+				}
+
+				update_option( 'rrze_tos', $this->options, true );
+				$wmp_option['success'] = __( 'All fields were updated!', 'rrze-tos' );
+				echo json_encode( $wmp_option );
+			}else{
+				echo header('HTTP/1.0 404 Not Found');
+				_e( 'Can not connect to the server', 'rrze-tos' );
 			}
 
-			update_option( 'rrze_tos', $this->options, true );
-			echo $_POST['title'] . ' (8) ';
 			wp_die();
 		}
 

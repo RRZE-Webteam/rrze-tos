@@ -26,20 +26,42 @@ jQuery(document).ready(function ($) {
 
     /**
      * Validate client-side form before send data
+     * to wp option page.
      */
     $("#tos-admin-form").parsley();
 
+    /**
+     * WordPress ajax ToS update,
+     * This method is connected with tos_update_ajax_handler() function inside
+     * settings class.
+     *
+     */
     $("#tos-admin-form #update").click(function () {             //event
-        $('#wpbody-content .wrap').prepend('<div class="updated settings-error notice is-dismissible"><p>Updating data</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Diese Meldung ausblenden.</span></button></div>');
+        $('#ajax-response').removeClass("invisible notice-error").addClass("visible notice-success");
+        $('#ajax-response p').empty().append("Working ...");
 
         $.post(tos_ajax_obj.ajax_url, {        //POST request
             _ajax_nonce: tos_ajax_obj.nonce,   //nonce
             action: "tos_update_fields",       //action
             title: this.value                  //data
-        }, function (data) {                    //callback
-            console.log(data);
-            $('.updated').remove();
-            $('#wpbody-content .wrap').prepend('<div class="updated settings-error notice is-dismissible"><p>Updated</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Diese Meldung ausblenden.</span></button></div>').delay(100);
+        }, function (data) {                   //callback
+            let obj = JSON.parse(data);
+            $.each(obj.verantwortlich, function (i, val) {
+                if (null != val)
+                    $("input[name ='rrze_tos[rrze_tos_responsible_" + i + "]']").val(val);
+            });
+            $.each(obj.webmaster, function (i, val) {
+                if (null != val)
+                    $("input[name ='rrze_tos[rrze_tos_content_" + i + "]']").val(val);
+            });
+        }).done(function (e) {
+            console.log(e);
+            let obj = JSON.parse(e);
+            $('#ajax-response').removeClass("invisible visible notice-error").addClass("visible notice-success");
+            $('#ajax-response p').empty().append(obj.success);
+        }).fail(function (e) {
+            $('#ajax-response').removeClass("invisible notice-error").addClass("visible notice-error");
+            $('#ajax-response p').empty().append(e.responseText);
         });
     });
 });

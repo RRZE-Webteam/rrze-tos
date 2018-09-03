@@ -80,3 +80,21 @@
 .dashicons.dashicons-awards {
   font-size: 30px;
   padding-right: 10px; }
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+  display: none;
+}
+
+.element {
+@include invisible(visible);
+}
+
+.element {
+@include invisible(hidden);
+}
+

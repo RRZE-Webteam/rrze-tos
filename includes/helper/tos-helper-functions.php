@@ -9,7 +9,7 @@ namespace RRZE\Tos {
 	 */
 	function check_wmp() {
 		$host        = $_SERVER['SERVER_NAME'];
-//		$host        = 'www.map.tf.fau.de';
+		$host        = 'www.map.tf.fau.de';
 		$response    = wp_remote_get( esc_url_raw( "https://www.wmp.rrze.fau.de/suche/impressum/$host/format/json" ) );
 		$status_code = wp_remote_retrieve_response_code( $response );
 
@@ -23,7 +23,7 @@ namespace RRZE\Tos {
 	 */
 	function get_json_wmp() {
 		$host     = $_SERVER['SERVER_NAME'];
-//		$host     = 'www.map.tf.fau.de';
+		$host     = 'www.map.tf.fau.de';
 		$response = wp_remote_get( esc_url_raw( "https://www.wmp.rrze.fau.de/suche/impressum/$host/format/json" ) );
 		$json     = wp_remote_retrieve_body( $response );
 		$res      = json_decode( $json, true );
