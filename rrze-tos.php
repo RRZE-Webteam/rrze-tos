@@ -151,11 +151,12 @@ namespace RRZE\Tos {
 	}
 
 	/**
-	 * Enqueue admin styles.
+	 * Enqueue admin styles & scripts.
 	 *
 	 * @return void
 	 */
 	function rrze_tos_admin_scripts() {
+		// TODO: load script only in current plugin.
 		wp_enqueue_style( 'admin-styles', plugins_url( 'rrze-tos/assets/css/admin.css', dirname( __FILE__ ) ) );
 		wp_enqueue_style( 'parsley-validator-styles', plugins_url( 'rrze-tos/assets/css/parsley.css', dirname( __FILE__ ) ) );
 
