@@ -113,7 +113,7 @@ namespace RRZE\Tos {
 							$template
 						);
 						$content  = preg_replace_callback(
-							'/{{[\s]*?if[\s]+?([\w]+)(.*?)(?:else(.*?))*?endif[\s]*?}}/s',
+							'/{{[\s]*?if[\s]+?([\w]+)(.*?)(?:elseif(.*?))*?endif[\s]*?}}/s',
 							[ $this, 'check_if_else_condition' ],
 							$content
 						);

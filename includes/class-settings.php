@@ -135,16 +135,16 @@ namespace RRZE\Tos {
 		 * @return void
 		 */
 		public function settings_page() {
+			global $wp_settings_sections;
+
 			$tabs    = self::options_page_tabs();
 			$current = self::current_tab( $_GET );
 			$nonce   = wp_create_nonce( 'my-nonce' );
 			?>
-			<div class="wrap">
-				<h2><?php esc_html_e( 'Settings &rsaquo; ToS', 'rrze-tos' ); ?></h2>
+			<h2><?php esc_html_e( 'Settings &rsaquo; ToS', 'rrze-tos' ); ?></h2>
 				<h3 class="nav-tab-wrapper">
 					<?php
 					// Add tabs to settings page.
-
 					foreach ( $tabs as $tab => $name ) {
 						$name  = ucfirst( $name );
 						$class = ( $tab === $current ) ? 'nav-tab-active' : '';
@@ -153,13 +153,38 @@ namespace RRZE\Tos {
 					?>
 				</h3>
 				<form method="post" action="options.php" id="tos-admin-form">
-					<?php
-					settings_fields( 'rrze_tos_options' );
-					do_settings_sections( 'rrze_tos_options' );
-					submit_button();
-					?>
+					<?php settings_fields( 'rrze_tos_options' ); ?>
+					<?php do_settings_sections( 'rrze_tos_options' ); ?>
+					<?php submit_button(); ?>
 				</form>
-			</div>
+
+<!--			<div class="wrap">-->
+<!--				<div id="tabs">-->
+<!--					<ul>-->
+<!--						<li><a href="#tabs-1">Nunc tincidunt</a></li>-->
+<!--						<li><a href="#tabs-2">Proin dolor</a></li>-->
+<!--						<li><a href="#tabs-3">Aenean lacinia</a></li>-->
+<!--					</ul>-->
+<!--					</h3>-->
+<!--					<form method="post" action="options.php" id="tos-admin-form">-->
+<!--						<div id="tabs-1">-->
+<!--							--><?php //settings_fields( 'rrze_tos_options' ); ?>
+<!--							--><?php //do_settings_sections( 'rrze_tos_options' ); ?>
+<!--							--><?php //do_settings_fields( 'rrze_tos_options', 'rrze_tos_section_general' ); ?>
+<!--							--><?php //submit_button(); ?>
+<!--						</div>-->
+<!--						<div id="tabs-2">-->
+<!--							<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc.-->
+<!--								Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor.-->
+<!--								Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing.-->
+<!--								Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis.-->
+<!--								Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis.-->
+<!--								Mauris consectetur tortor et purus.</p>-->
+<!--						</div>-->
+<!--					</form>-->
+<!--				</div>-->
+<!--			</div>-->
+
 			<?php
 		}
 
@@ -265,67 +290,78 @@ namespace RRZE\Tos {
 					// --------
 					// Section Editor
 					// --------
-					add_settings_section( 'rrze_tos_section_editor',
-						__( 'Editor', 'rrze-tos' ), '__return_false',
-						'rrze_tos_options' );
-					add_settings_field(
-						'rrze_tos_editor_name', __( 'Name', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_editor',
+					add_settings_section( 'rrze_tos_section_websites', __( 'Websites', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
+					add_settings_field( 'rrze_tos_url_list',
+						__( 'Websites', 'rrze-tos' ),
 						[
-							'name'        => 'rrze_tos_editor_name',
-							'description' => __( 'Full name of the editor',
-								'rrze-tos' ),
-							'required'    => 'required',
+							$this,
+							'rrze_tos_textarea_callback',
+						],
+						'rrze_tos_options',
+						'rrze_tos_section_websites',
+						[
+							'name'        => 'rrze_tos_url_list',
+							'description' => __( 'Please include one website url per line', 'rrze-tos' ),
 						]
 					);
-					add_settings_field(
-						'rrze_tos_editor_street', __( 'Street', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_editor',
-						[
-							'name'        => 'rrze_tos_editor_street',
-							'description' => __( 'Street Number', 'rrze-tos' ),
-							'required'    => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_editor_postalcode',
-						__( 'Postcode', 'rrze-tos' ), [
-						$this,
-						'rrze_tos_textbox_callback'
-					],
-						'rrze_tos_options',
-						'rrze_tos_section_editor',
-						[
-							'name'        => 'rrze_tos_editor_postalcode',
-							'description' => __( 'Postcode', 'rrze-tos' ),
-							'required'    => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_editor_city', __( 'Place', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_editor',
-						[
-							'name'        => 'rrze_tos_editor_city',
-							'description' => __( 'City', 'rrze-tos' ),
-							'required'    => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_editor_org', __( 'Faculty, institution or chair', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_editor',
-						[
-							'name'     => 'rrze_tos_editor_org',
-							'required' => 'required',
-						]
-					);
+//					add_settings_field(
+//						'rrze_tos_editor_name', __( 'Name', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_editor',
+//						[
+//							'name'        => 'rrze_tos_editor_name',
+//							'description' => __( 'Full name of the editor',
+//								'rrze-tos' ),
+//							'required'    => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_editor_street', __( 'Street', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_editor',
+//						[
+//							'name'        => 'rrze_tos_editor_street',
+//							'description' => __( 'Street Number', 'rrze-tos' ),
+//							'required'    => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_editor_postalcode',
+//						__( 'Postcode', 'rrze-tos' ), [
+//						$this,
+//						'rrze_tos_textbox_callback'
+//					],
+//						'rrze_tos_options',
+//						'rrze_tos_section_editor',
+//						[
+//							'name'        => 'rrze_tos_editor_postalcode',
+//							'description' => __( 'Postcode', 'rrze-tos' ),
+//							'required'    => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_editor_city', __( 'Place', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_editor',
+//						[
+//							'name'        => 'rrze_tos_editor_city',
+//							'description' => __( 'City', 'rrze-tos' ),
+//							'required'    => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_editor_org', __( 'Faculty, institution or chair', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_editor',
+//						[
+//							'name'     => 'rrze_tos_editor_org',
+//							'required' => 'required',
+//						]
+//					);
 
 					break;
 				// --------
@@ -352,6 +388,20 @@ namespace RRZE\Tos {
 									'1' => __( 'Yes', 'rrze-tos' ),
 									'2' => __( 'No', 'rrze-tos' ),
 								],
+						]
+					);
+
+					add_settings_section( 'rrze_tos_section_extra', __( 'New section', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
+					add_settings_field( 'rrze_tos_protectio_new_section', __( 'Type all text you want to include', 'rrze-tos' ),
+						[
+							$this,
+							'rrze_tos_editor_callback',
+						],
+						'rrze_tos_options',
+						'rrze_tos_section_extra',
+						[
+							'name'        => 'rrze_tos_protection_new_section',
+							'description' => __( 'Type all text you want to include.', 'rrze-tos' ),
 						]
 					);
 					break;
@@ -446,6 +496,15 @@ namespace RRZE\Tos {
 							'autocomplete' => 'tel',
 						]
 					);
+					add_settings_field(
+						'rrze_tos_responsible_org', __( 'Organization', 'rrze-tos' ),
+						[ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_responsible',
+						[
+							'name'         => 'rrze_tos_responsible_org'
+						]
+					);
 					if ( is_plugin_active( 'fau-person/fau-person.php' ) ) {
 						add_settings_field(
 							'rrze_tos_responsible_ID',
@@ -461,101 +520,187 @@ namespace RRZE\Tos {
 
 
 					// --------
-					// Section Content
+					// Section Webmaster
 					// --------
-					add_settings_section( 'rrze_tos_section_content',
-						__( 'Content Manager', 'rrze-tos' ), '__return_false',
-						'rrze_tos_options' );
+					add_settings_section( 'rrze_tos_section_webmaster', __( 'Webmaster', 'rrze-tos' ), '__return_false', 'rrze_tos_options' );
+
 					add_settings_field(
-						'rrze_tos_content_name', __( 'Name', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_content',
-						[
-							'name'        => 'rrze_tos_content_name',
-							'description' => __( 'Full name of the content manager',
-								'rrze-tos' ),
-							'required'    => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_content_email', __( 'E-mail', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_content',
-						[
-							'name' => 'rrze_tos_content_email',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_content_street', __( 'Street', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_content',
-						[
-							'name'        => 'rrze_tos_content_street',
-							'description' => __( 'Street Number', 'rrze-tos' ),
-							'required'    => 'required',
-						]
-					);
-					add_settings_field(
-						'rrze_tos_content_postalcode',
-						__( 'Postcode', 'rrze-tos' ), [
+						'rrze_tos_webmaster_name', __( 'Name', 'rrze-tos' ), [
 						$this,
 						'rrze_tos_textbox_callback'
 					],
 						'rrze_tos_options',
-						'rrze_tos_section_content',
+						'rrze_tos_section_webmaster',
+						[ 'name' => 'rrze_tos_webmaster_name' ]
+					);
+					add_settings_field(
+						'rrze_tos_webmaster_street', __( 'Street', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_webmaster',
+						[ 'name' => 'rrze_tos_webmaster_street' ]
+					);
+					add_settings_field(
+						'rrze_tos_webmaster_city', __( 'City', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_webmaster',
+						[ 'name' => 'rrze_tos_webmaster_city' ]
+					);
+					add_settings_field(
+						'rrze_tos_webmaster_phone', __( 'Phone', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_webmaster',
+						[ 'name' => 'rrze_tos_webmaster_phone', 'description' => __( 'Direct dialing', 'rrze-tos' ) ]
+					);
+					add_settings_field(
+						'rrze_tos_webmaster_fax', __( 'Fax', 'rrze-tos' ),
+						[ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_options',
+						'rrze_tos_section_webmaster',
 						[
-							'name'     => 'rrze_tos_content_postalcode',
-							'required' => 'required',
+							'name'        => 'rrze_tos_webmaster_fax',
+							'description' => __( 'Fax number, if still available', 'rrze-tos' ),
 						]
 					);
 					add_settings_field(
-						'rrze_tos_content_city', __( 'City', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_webmaster_email', __( 'E-Mail', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
-						'rrze_tos_section_content',
-						[
-							'name'     => 'rrze_tos_content_city',
-							'required' => 'required',
-						]
+						'rrze_tos_section_webmaster',
+						[ 'name' => 'rrze_tos_webmaster_email' ]
 					);
 					add_settings_field(
-						'rrze_tos_content_phone', __( 'Phone', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
+						'rrze_tos_webmaster_org', __( 'Organization', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
-						'rrze_tos_section_content',
-						[
-							'name'        => 'rrze_tos_content_phone',
-							'description' => __( 'Direct dialing', 'rrze-tos' ),
-						]
+						'rrze_tos_section_webmaster',
+						[ 'name' => 'rrze_tos_webmaster_org' ]
 					);
-					add_settings_field(
-						'rrze_tos_content_fax', __( 'Fax', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_content',
-						[
-							'name'        => 'rrze_tos_content_fax',
-							'description' => __( 'Fax number, if still available',
-								'rrze-tos' ),
-						]
-					);
-					add_settings_field(
-						'rrze_tos_content_org', __( 'Faculty, institution or chair', 'rrze-tos' ),
-						[ $this, 'rrze_tos_textbox_callback' ],
-						'rrze_tos_options',
-						'rrze_tos_section_content',
-						[
-							'name'     => 'rrze_tos_content_org',
-							'required' => 'required',
-						]
-					);
+					if ( is_plugin_active( 'fau-person/fau-person.php' ) ) {
+						add_settings_field(
+							'rrze_tos_webmaster_ID', __( 'Person-ID', 'rrze-tos' ), [
+							$this,
+							'rrze_tos_textbox_callback'
+						],
+							'rrze_tos_options',
+							'rrze_tos_section_webmaster',
+							[ 'name' => 'rrze_tos_webmaster_ID' ]
+						);
+					}
+//
+//
+//					// --------
+//					// Section Content
+//					// --------
+//					add_settings_section( 'rrze_tos_section_content',
+//						__( 'Content Manager', 'rrze-tos' ), '__return_false',
+//						'rrze_tos_options' );
+//					add_settings_field(
+//						'rrze_tos_content_name', __( 'Name', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name'        => 'rrze_tos_content_name',
+//							'description' => __( 'Full name of the content manager',
+//								'rrze-tos' ),
+//							'required'    => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_content_email', __( 'E-mail', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name' => 'rrze_tos_content_email',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_content_street', __( 'Street', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name'        => 'rrze_tos_content_street',
+//							'description' => __( 'Street Number', 'rrze-tos' ),
+//							'required'    => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_content_postalcode',
+//						__( 'Postcode', 'rrze-tos' ), [
+//						$this,
+//						'rrze_tos_textbox_callback'
+//					],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name'     => 'rrze_tos_content_postalcode',
+//							'required' => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_content_city', __( 'City', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name'     => 'rrze_tos_content_city',
+//							'required' => 'required',
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_content_phone', __( 'Phone', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name'        => 'rrze_tos_content_phone',
+//							'description' => __( 'Direct dialing', 'rrze-tos' ),
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_content_fax', __( 'Fax', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name'        => 'rrze_tos_content_fax',
+//							'description' => __( 'Fax number, if still available',
+//								'rrze-tos' ),
+//						]
+//					);
+//					add_settings_field(
+//						'rrze_tos_content_org', __( 'Faculty, institution or chair', 'rrze-tos' ),
+//						[ $this, 'rrze_tos_textbox_callback' ],
+//						'rrze_tos_options',
+//						'rrze_tos_section_content',
+//						[
+//							'name'     => 'rrze_tos_content_org',
+//							'required' => 'required',
+//						]
+//					);
 
 					break;
 			}
 
+		}
+
+		public function rrze_tos_editor_callback($args){
+			if ( array_key_exists( 'name', $args ) ) {
+				$editor_id = esc_attr( $args['name'] );
+			}
+			$content = '';
+			if ( array_key_exists( $editor_id, $this->options ) ) {
+				$content = $this->options->$editor_id;
+			}
+
+
+			$settings = [
+				'media_buttons' => false,
+				'textarea_name' => $this->option_name . '[' . $editor_id . ']',
+			];
+
+//			TODO:check for do_shortcode();
+			wp_editor( $content, $editor_id, $settings );
 		}
 
 
@@ -583,10 +728,12 @@ namespace RRZE\Tos {
 							= isset( $_POST[ $this->option_name ][ $key ] )
 							? sanitize_email( $_POST[ $this->option_name ][ $key ] )
 							: $this->options->$key;
-					} elseif ( preg_match( '/[\r\n\t ]+/', $value ) ) {
+					} elseif ( $key != 'rrze_tos_protection_new_section' && preg_match( '/[\r\n\t ]+/', $value ) ) {
 						$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
-							? sanitize_textarea_field( $_POST[ $this->option_name ][ $key ] )
-							: $this->options->$key;
+							? sanitize_textarea_field( $_POST[ $this->option_name ][ $key ] ) : $this->options->$key;
+					} elseif ( $key == 'rrze_tos_protection_new_section' ) {
+						$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
+							? wp_kses_post( $_POST[ $this->option_name ][ $key ] ) : $this->options->$key;
 					} else {
 						$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
 							? sanitize_text_field( $_POST[ $this->option_name ][ $key ] )
@@ -768,7 +915,7 @@ if ( array_key_exists( $name, $this->options ) ) {
 <!--			       value="--><?php //_e( 'Checking info from Web Master Portal', 'rrze-tos' ); ?><!--" id="update">-->
 
 			<button class=" button button-primary " name="update" id="update">
-				<span class=""><?php _e( 'Checking info from Web Master Portal', 'rrze-tos' ); ?></span>
+				<span class=""><?php _e( 'Update info from Web Master Portal (WMP)', 'rrze-tos' ); ?></span>
 			</button>
 			<?php
 		}
@@ -786,14 +933,14 @@ if ( array_key_exists( $name, $this->options ) ) {
 				foreach ( $wmp_option['verantwortlich'] as $wmp_key => $wmp_value ) {
 					if ( ! is_null( $wmp_value ) ) {
 						$options_key1                 = "rrze_tos_responsible_$wmp_key";
-						$options_key2                 = "rrze_tos_editor_$wmp_key";
+//						$options_key2                 = "rrze_tos_editor_$wmp_key";
 						$this->options->$options_key1 = $wmp_value;
-						$this->options->$options_key2 = $wmp_value;
+//						$this->options->$options_key2 = $wmp_value;
 					}
 				}
 				foreach ( $wmp_option['webmaster'] as $wmp_key => $wmp_value ) {
 					if ( ! is_null( $wmp_value ) ) {
-						$options_key                 = "rrze_tos_content_$wmp_key";
+						$options_key                 = "rrze_tos_webmaster_$wmp_key";
 						$this->options->$options_key = $wmp_value;
 					}
 				}

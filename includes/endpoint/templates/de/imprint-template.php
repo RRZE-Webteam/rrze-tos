@@ -17,14 +17,14 @@
 
 	<h3>Herausgeber</h3>
 	<p>
-		{{ rrze_tos_editor_name }}<br>
-		{{ rrze_tos_editor_street }}<br>
-		{{ rrze_tos_editor_postalcode }}
-		{{ rrze_tos_editor_city }}<br>
+		{{ rrze_tos_responsible_name }}<br>
+		{{ rrze_tos_responsible_street }}<br>
+		{{ rrze_tos_responsible_postalcode }}
+		{{ rrze_tos_responsible_city }}<br>
 	</p>
 
 	<h4>Vertreten durch</h4>
-	<p><strong><em>{{ rrze_tos_content_org }}</em></strong>
+	<p><strong><em>{{ rrze_tos_webmaster_org }}</em></strong>
 		ist eine Einrichtung des
 		Öffentlichen Rechts innerhalb der <a href="https://www.fau.de">Friedrich-Alexander-Universität
 			Erlangen-Nürnberg
@@ -38,16 +38,15 @@
 
 	<h3>Verantwortlich für den Inhalt</h3>
 	<p>
-		{{ rrze_tos_content_name }}<br>
-		{{ rrze_tos_content_street }}<br>
-		{{ rrze_tos_content_postalcode }}
-		{{ rrze_tos_content_city }}<br>
+		{{ rrze_tos_webmaster_name }}<br>
+		{{ rrze_tos_webmaster_street }}<br>
+		{{ rrze_tos_webmaster_postalcode }}
+		{{ rrze_tos_webmaster_city }}<br>
 	</p>
 	<p>
-		<strong>Telefon:</strong> +49 9131 85-{{ rrze_tos_content_phone }}<br>
-		<strong>Fax: </strong> +49 9131 {{ rrze_tos_content_fax }}<br>
-		<strong>E-mail:</strong> {{ rrze_tos_content_email }}<br>
-
+		<strong>Telefon:</strong> +49 9131 85-{{ rrze_tos_webmaster_phone }}<br>
+		<strong>Fax: </strong> +49 9131 {{ rrze_tos_webmaster_fax }}<br>
+		<strong>E-mail:</strong> {{ rrze_tos_webmaster_email }}<br>
 	</p>
 
 	<h4>Zuständige Aufsichtsbehörde</h4>
@@ -192,4 +191,6 @@
 		Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
 		Rechtsverletzungen werden wir derartige Links umgehend
 		entfernen.</p>
+
+	<p><?php echo str_replace("\n","<br/>","{{ rrze_tos_url_list }}"); ?></p>
 </div>

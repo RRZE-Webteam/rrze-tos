@@ -13,25 +13,15 @@
 
 <div class="alert" role="alert">
 	<h2>Name und Anschrift des Verantwortlichen</h2>
-	<p>
-		{{ rrze_tos_responsible_name }}<br>
-		{{ rrze_tos_responsible_street }}<br>
-
-		{{ rrze_tos_responsible_postalcode }}
-		{{ rrze_tos_responsible_city }}<br>
-		{{ rrze_tos_responsible_phone }}<br>
-		{{ rrze_tos_responsible_email }}
-		<br>
-	</p>
 	<p>Für die Webangebote und Webauftritte der Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU) ist der
 		Verantwortliche im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie
 		sonstiger datenschutzrechtlicher Bestimmungen die FAU. Sie wird durch ihren Präsidenten gesetzlich vertreten.
-		Die Kontaktinformationen erhalten Sie im&nbsp;<a href="https://www.fau.de/impressum">Impressum</a> des zentralen
-		Webauftritts der FAU.</p>
+		Die Kontaktinformationen erhalten Sie im&nbsp;<a href="https://www.fau.de/impressum">Impressum des zentralen
+		Webauftritts der FAU.</a></p>
 	<p>Für die angebotenen Inhalte auf den Webangeboten und Webauftritten der Friedrich-Alexander-Universität
 		Erlangen-Nürnberg (FAU) sind die jeweiligen Einrichtungen der FAU verantwortlich. Für Fragen im Zusammenhang mit
 		einer betreffenden Angebot wenden Sie sich bitte an den jeweiligen verantwortlichen Ansprechpartner oder die
-		jeweilige verantwortliche Ansprechpartnerin, wie er oder sie im Impressum des jeweiligen Webauftritts genannt
+		jeweilige verantwortliche Ansprechpartnerin, wie er oder sie im <a href="<?php echo get_home_url(); ?>/impressum">Impressum des jeweiligen Webauftritts</a> genannt
 		ist.</p>
 	<p>&nbsp;</p>
 	<p><span style="color: #003366; font-family: inherit; font-size: 1.6rem; font-weight: bold;">Name und Anschrift des Datenschutzbeauftragten</span>
@@ -207,6 +197,9 @@
 		Daten jederzeit widersprechen. In einem solchen Fall kann die Konversation nicht fortgeführt werden.<br>
 		Alle personenbezogenen Daten, die im Zuge der Kontaktaufnahme gespeichert wurden, werden in diesem Fall
 		gelöscht.</p>
+
+	{{ rrze_tos_protection_new_section }}
+
 	<h2>SSL-Verschlüsselung</h2>
 	<p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum
 		Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte

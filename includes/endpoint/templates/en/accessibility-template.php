@@ -23,14 +23,14 @@
 	<span class="wcag-pass"></span>The criteria are fulfilled.
 </div>
 
-else
+elseif
 
 <div class="alert alert-danger" role="alert">
 	<span class="wcag-fail"></span>The criteria are not fulfilled.<br>
-</div>
-<div>
-	<strong>Reason:</strong><br>
-	{{ rrze_tos_no_reason }}
+	<div>
+		<h5>Reason:</h5>
+		{{ rrze_tos_no_reason }}
+	</div>
 </div>
 
 endif }}

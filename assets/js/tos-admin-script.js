@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
             });
             $.each(obj.webmaster, function (i, val) {
                 if (null != val)
-                    $("input[name ='rrze_tos[rrze_tos_content_" + i + "]']").val(val);
+                    $("input[name ='rrze_tos[rrze_tos_webmaster_" + i + "]']").val(val);
             });
         }).done(function (e) {
             let obj = JSON.parse(e);
@@ -65,4 +65,15 @@ jQuery(document).ready(function ($) {
             $(this).removeClass("spinner-demo disabled");
         }.bind(this));
     });
+
+    /**
+     * Switch Tabs function
+     */
+
+    $("#tabs").tabs({
+        activate: function (event, ui) {
+            window.location.hash = ui.newPanel.attr('id');
+        }
+    });
+
 });

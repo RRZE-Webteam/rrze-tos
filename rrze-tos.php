@@ -174,7 +174,7 @@ namespace RRZE\Tos {
 		);
 		wp_enqueue_script( 'tos-admin-script',
 			plugins_url( 'rrze-tos/assets/js/tos-admin-script.js', dirname( __FILE__ ) ),
-			array( 'jquery', 'parsley-validator' ),
+			array( 'jquery', 'jquery-ui-tabs', 'jquery-effects-fade', 'parsley-validator' ),
 			'1.0',
 			true
 		);

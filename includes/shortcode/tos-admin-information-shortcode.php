@@ -31,11 +31,11 @@ namespace RRZE\Tos {
 			$store['verantwortlich']['ort']     = isset( $values['rrze_tos_responsible_city'] ) ? $values['rrze_tos_responsible_city'] : '';
 			$store['verantwortlich']['telefon'] = isset( $values['rrze_tos_responsible_phone'] ) ? $values['rrze_tos_responsible_phone'] : '';
 			$store['verantwortlich']['email']   = isset( $values['rrze_tos_responsible_email'] ) ? $values['rrze_tos_responsible_email'] : '';
-			$store['webmaster']['name']         = isset( $values['rrze_tos_content_name'] ) ? $values['rrze_tos_content_name'] : '';
-			$store['webmaster']['strasse']      = isset( $values['rrze_tos_content_street'] ) ? $values['rrze_tos_content_street'] : '';
-			$store['webmaster']['ort']          = isset( $values['rrze_tos_content_city'] ) ? $values['rrze_tos_content_city'] : '';
-			$store['webmaster']['telefon']      = isset( $values['rrze_tos_content_phone'] ) ? $values['rrze_tos_content_phone'] : '';
-			$store['webmaster']['email']        = isset( $values['rrze_tos_content_email'] ) ? $values['rrze_tos_content_email'] : '';
+			$store['webmaster']['name']         = isset( $values['rrze_tos_webmaster_name'] ) ? $values['rrze_tos_webmaster_name'] : '';
+			$store['webmaster']['strasse']      = isset( $values['rrze_tos_webmaster_street'] ) ? $values['rrze_tos_webmaster_street'] : '';
+			$store['webmaster']['ort']          = isset( $values['rrze_tos_webmaster_city'] ) ? $values['rrze_tos_webmaster_city'] : '';
+			$store['webmaster']['telefon']      = isset( $values['rrze_tos_webmaster_phone'] ) ? $values['rrze_tos_webmaster_phone'] : '';
+			$store['webmaster']['email']        = isset( $values['rrze_tos_webmaster_email'] ) ? $values['rrze_tos_webmaster_email'] : '';
 
 			if ( ! empty( $store ) ) {
 				foreach ( $store as $key => $value ) {
