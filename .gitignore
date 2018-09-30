@@ -1,1 +1,8 @@
 nbproject/*
+.idea
+.idea/*
+.DS_Store
+*/.DS_Store
+*.map
+*.pot~
+*.po~

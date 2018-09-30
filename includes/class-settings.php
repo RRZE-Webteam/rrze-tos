@@ -49,7 +49,7 @@ namespace RRZE\Tos {
 		/**
 		 * Settings constructor.
 		 *
-		 * @param Main $main
+		 * @param Main $main Object with initial values.
 		 */
 		public function __construct( Main $main ) {
 			$this->main        = $main;
@@ -135,8 +135,7 @@ namespace RRZE\Tos {
 		 */
 		public function settings_page() {
 			$tabs    = self::options_page_tabs();
-			$current = self::current_tab( $_GET );
-			$nonce   = wp_create_nonce( 'my-nonce' );
+			$current = self::current_tab( $_GET ); // input var okay!
 			?>
 			<h2><?php esc_html_e( 'Settings &rsaquo; ToS', 'rrze-tos' ); ?></h2>
 				<h3 class="nav-tab-wrapper">
@@ -145,7 +144,7 @@ namespace RRZE\Tos {
 					foreach ( $tabs as $tab => $name ) {
 						$name  = ucfirst( $name );
 						$class = ( $tab === $current ) ? 'nav-tab-active' : '';
-						echo "<a class='nav-tab $class' href='?page=$this->option_name&tab=$tab&_wpnonce={$nonce}'>$name</a>";
+						printf( "<a class='nav-tab %s' href='?page=%s&tab=%s'>%s</a>", esc_attr( $class ), esc_attr( $this->option_name ), esc_attr( $tab ), esc_attr( $name ) );
 					}
 					?>
 				</h3>
@@ -165,8 +164,8 @@ namespace RRZE\Tos {
 		public function admin_settings() {
 			register_setting( 'rrze_tos_options', $this->option_name, array( $this, 'options_validate' ) );
 			$tab = 'accessibility';
-			if ( isset( $_GET ) ) {
-				$tab = self::current_tab( $_GET );
+			if ( isset( $_GET ) ) { // input var okay!
+				$tab = self::current_tab( $_GET ); // input var okay!
 			}
 
 			switch ( $tab ) {
@@ -413,8 +412,6 @@ namespace RRZE\Tos {
 							[ 'name' => 'rrze_tos_responsible_ID' ]
 						);
 					}
-
-
 					// --------
 					// Section Webmaster
 					// --------
@@ -443,7 +440,10 @@ namespace RRZE\Tos {
 						'rrze_tos_webmaster_phone', __( 'Phone', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_phone', 'description' => __( 'Direct dialing', 'rrze-tos' ) ]
+						[
+							'name'        => 'rrze_tos_webmaster_phone',
+							'description' => __( 'Direct dialing', 'rrze-tos' ),
+						]
 					);
 					add_settings_field(
 						'rrze_tos_webmaster_fax', __( 'Fax', 'rrze-tos' ),
@@ -486,6 +486,7 @@ namespace RRZE\Tos {
 		 * @param array $args Option for custom wp editor.
 		 */
 		public function rrze_tos_editor_callback( $args ) {
+			$editor_id = '';
 			if ( array_key_exists( 'name', $args ) ) {
 				$editor_id = esc_attr( $args['name'] );
 			}
@@ -493,7 +494,6 @@ namespace RRZE\Tos {
 			if ( array_key_exists( $editor_id, $this->options ) ) {
 				$content = $this->options->$editor_id;
 			}
-
 
 			$settings = [
 				'media_buttons' => false,
@@ -523,23 +523,19 @@ namespace RRZE\Tos {
 		 * @return array
 		 */
 		public function options_validate( $input ) {
+
 			if ( isset( $input ) ) {
 				foreach ( $input as $key => $value ) {
-					if ( preg_match( '/email/i', $key ) ) {
-						$this->options->$key
-							= isset( $_POST[ $this->option_name ][ $key ] )
-							? sanitize_email( $_POST[ $this->option_name ][ $key ] )
-							: $this->options->$key;
-					} elseif ( $key != 'rrze_tos_protection_new_section' && preg_match( '/[\r\n\t ]+/', $value ) ) {
-						$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
-							? sanitize_textarea_field( $_POST[ $this->option_name ][ $key ] ) : $this->options->$key;
-					} elseif ( $key == 'rrze_tos_protection_new_section' ) {
-						$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
-							? wp_kses_post( $_POST[ $this->option_name ][ $key ] ) : $this->options->$key;
-					} else {
-						$this->options->$key = isset( $_POST[ $this->option_name ][ $key ] )
-							? sanitize_text_field( $_POST[ $this->option_name ][ $key ] )
-							: $this->options->$key;
+					if ( isset( $_POST[ $this->option_name ][ $key ], $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'rrze_tos_options-options' ) ) {
+						if ( preg_match( '/email/i', $key ) ) {
+							$this->options->$key = sanitize_email( wp_unslash( $_POST[ $this->option_name ][ $key ] ) ); // input var okay!
+						} elseif ( 'rrze_tos_protection_new_section' !== $key && preg_match( '/[\r\n\t ]+/', $value ) ) {
+							$this->options->$key = sanitize_textarea_field( wp_unslash( $_POST[ $this->option_name ][ $key ] ) ); // input var okay!
+						} elseif ( 'rrze_tos_protection_new_section' === $key ) {
+							$this->options->$key = wp_kses_post( wp_unslash( $_POST[ $this->option_name ][ $key ] ) ); // input var okay!
+						} else {
+							$this->options->$key = sanitize_text_field( wp_unslash( $_POST[ $this->option_name ][ $key ] ) ); // input var okay!
+						}
 					}
 				}
 			}
@@ -568,25 +564,24 @@ namespace RRZE\Tos {
 
 			?>
 			<?php if ( isset( $name ) ) { ?>
-				<input <?php if ( isset( $required ) ) {
-					echo $required;
-				} ?> size="50" name="<?php printf( '%s[' . $name . ']',
-					$this->option_name ); ?>" type='text'
-				     title="<?php echo __( 'If the field has no data, please fill it manually',
-					     'rrze-tos' ); ?>"
-
-				     value="<?php if ( array_key_exists( $name,
-					     $this->options ) ) {
-					     echo $this->options->$name;
-				     } ?>"
+				<input
+					<?php
+					if ( isset( $required ) ) {
+						echo esc_attr( $required );
+					}
+					?>
+					size="50"
+					name="<?php printf( '%s[' . esc_attr( $name ) . ']', esc_attr( $this->option_name ) ); ?>"
+					type='text'
+					title="<?php esc_attr_e( 'If the field has no data, please fill it manually', 'rrze-tos' ); ?>"
+					value="<?php if ( array_key_exists( $name, $this->options ) ) { echo esc_attr( $this->options->$name ); } ?>"
 					<?php if ( isset( $autocomplete ) ) { ?>
-						autocomplete="<?php echo $autocomplete; ?>"
+						autocomplete="<?php echo esc_attr( $autocomplete ); ?>"
 					<?php } ?>
 				>
 				<br/>
 				<?php if ( isset( $description ) ) { ?>
-					<span
-						class="description"><?php esc_html_e( $description ); ?></span>
+					<span class="description"><?php echo esc_attr( $description ); ?></span>
 					<?php
 				}
 			}
@@ -606,24 +601,25 @@ namespace RRZE\Tos {
 			}
 			?>
 			<?php if ( isset( $name ) ) { ?>
-				<textarea name="<?php printf( '%s[' . $name . ']', $this->option_name ); ?>" cols="50" rows="8"
-				          title="<?php echo __( 'If the field has no data, please fill it manually',
-					          'rrze-tos' ); ?>">
+				<textarea
+					name="<?php printf( '%s[' . esc_attr( $name ) . ']', esc_attr( $this->option_name ) ); ?>"
+					cols="50"
+					rows="8"
+					title="<?php echo esc_attr_e( 'If the field has no data, please fill it manually', 'rrze-tos' ); ?>">
 <?php
-if ( array_key_exists( $name, $this->options ) ) {
-	if ( is_array( $this->options->$name ) && count( $this->options->$name ) > 0
-	     && $this->options->$name[0] !== '' ) {
-		echo implode( "\n", $this->options->$name );
-	} else {
-		echo $this->options->$name;
-	}
-}
-?>
+				if ( array_key_exists( $name, $this->options ) ) {
+					if ( is_array( $this->options->$name ) && count( $this->options->$name ) > 0 && '' !== $this->options->$name[0] ) {
+						echo esc_attr( implode( [ "\n" ], $this->options->$name ) );
+					} else {
+						echo esc_attr( $this->options->$name );
+					}
+				}
+				?>
 </textarea><br/>
 			<?php } ?>
 			<?php if ( isset( $description ) ) { ?>
 				<span
-					class="description"><?php esc_html_e( $description ); ?></span>
+					class="description"><?php echo esc_attr( $description ); ?></span>
 				<?php
 			}
 		}
@@ -648,24 +644,24 @@ if ( array_key_exists( $name, $this->options ) ) {
 				foreach ( $radios as $_k => $_v ) {
 					?>
 					<label>
-						<input name="<?php printf( '%s[' . $name . ']',
-							$this->option_name ); ?>"
-						       type='radio'
-						       value='<?php print $_k; ?>'
+						<input
+							name="<?php printf( '%s[' . esc_attr( $name ) . ']', esc_attr( $this->option_name ) ); ?>"
+							type='radio'
+							value='<?php echo esc_attr( $_k ); ?>'
 							<?php
 							if ( array_key_exists( $name, $this->options ) ) {
 								checked( $this->options->$name, $_k );
 							}
 							?>
 						>
-						<?php print $_v; ?>
+						<?php echo esc_attr( $_v ); ?>
 					</label><br/>
 					<?php
 				}
 			}
 			if ( isset( $description ) ) {
 				?>
-				<p class="description"><?php esc_html_e( $description ); ?></p>
+				<p class="description"><?php echo esc_attr( $description ); ?></p>
 				<?php
 			}
 		}
@@ -685,25 +681,27 @@ if ( array_key_exists( $name, $this->options ) ) {
 			}
 			if ( array_key_exists( 'options', $args ) ) {
 				$limit = $args['options'];
-			} ?>
+			}
+			?>
 			<?php if ( isset( $name ) ) { ?>
-				<select name="<?php printf( '%s[' . $name . ']',
-					$this->option_name ); ?>"
-				        title="<?php __( 'Please select one', 'rrze-tos' ) ?>">
+				<select
+					name="<?php printf( '%s[' . esc_attr( $name ) . ']', esc_attr( $this->option_name ) ); ?>"
+					title="<?php __( 'Please select one', 'rrze-tos' ); ?>">
 					<?php foreach ( $limit as $_k => $_v ) { ?>
-						<option value='<?php print $_k; ?>'
-							<?php if ( array_key_exists( $name,
-								$this->options ) ) {
+						<option value='<?php echo esc_attr( $_k ); ?>'
+							<?php
+							if ( array_key_exists( $name, $this->options ) ) {
 								selected( $this->options->$name, $_k );
-							} ?>>
-							<?php print $_v; ?>
+							}
+							?>
+						>
+							<?php echo esc_attr( $_v ); ?>
 						</option>
 					<?php } ?>
 				</select>
 			<?php } ?>
-			<?php
-			if ( isset( $description ) ) { ?>
-				<p class="description"><?php esc_html_e( $description ); ?></p>
+			<?php if ( isset( $description ) ) { ?>
+				<p class="description"><?php echo esc_attr( $description ); ?></p>
 				<?php
 			}
 		}
@@ -715,14 +713,13 @@ if ( array_key_exists( $name, $this->options ) ) {
 			?>
 
 			<button class=" button button-primary " name="update" id="update">
-				<span class=""><?php _e( 'Update info from Web Master Portal (WMP)', 'rrze-tos' ); ?></span>
+				<span class=""><?php esc_html_e( 'Update info from Web Master Portal (WMP)', 'rrze-tos' ); ?></span>
 			</button>
 			<?php
 		}
 
 		/**
 		 * Take the option object and update fields using ajax request from the web master portal RRZE.
-		 *
 		 */
 		public function tos_update_ajax_handler() {
 
@@ -733,9 +730,7 @@ if ( array_key_exists( $name, $this->options ) ) {
 				foreach ( $wmp_option['verantwortlich'] as $wmp_key => $wmp_value ) {
 					if ( ! is_null( $wmp_value ) ) {
 						$options_key1                 = "rrze_tos_responsible_$wmp_key";
-//						$options_key2                 = "rrze_tos_editor_$wmp_key";
 						$this->options->$options_key1 = $wmp_value;
-//						$this->options->$options_key2 = $wmp_value;
 					}
 				}
 				foreach ( $wmp_option['webmaster'] as $wmp_key => $wmp_value ) {
@@ -747,10 +742,10 @@ if ( array_key_exists( $name, $this->options ) ) {
 
 				update_option( 'rrze_tos', $this->options, true );
 				$wmp_option['success'] = __( 'All fields were updated!', 'rrze-tos' );
-				echo json_encode( $wmp_option );
-			}else{
-				echo header('HTTP/1.0 404 Not Found');
-				_e( 'Can not connect to the server', 'rrze-tos' );
+				echo wp_json_encode( $wmp_option );
+			} else {
+				echo esc_html( header( 'HTTP/1.0 404 Not Found' ) );
+				esc_html_e( 'Can not connect to the server', 'rrze-tos' );
 			}
 
 			wp_die();
@@ -768,7 +763,6 @@ if ( array_key_exists( $name, $this->options ) ) {
 				. '</p>',
 			);
 
-
 			$help_tab = array(
 				'id'      => $this->admin_settings_page,
 				'title'   => __( 'Overview', 'rrze-tos' ),
@@ -782,7 +776,7 @@ if ( array_key_exists( $name, $this->options ) ) {
 
 			$screen = get_current_screen();
 
-			if ( $screen->id != $this->admin_settings_page ) {
+			if ( $screen->id !== $this->admin_settings_page ) {
 				return;
 			}
 
