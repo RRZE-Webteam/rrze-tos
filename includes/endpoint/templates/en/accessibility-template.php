@@ -25,10 +25,10 @@
 
 elseif
 
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-fail" role="alert">
 	<span class="wcag-fail"></span>The criteria are not fulfilled.<br>
 	<div>
-		<h5>Reason:</h5>
+		<h4>Reason:</h4>
 		{{ rrze_tos_no_reason }}
 	</div>
 </div>
