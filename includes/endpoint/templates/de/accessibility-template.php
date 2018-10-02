@@ -28,7 +28,7 @@ elseif
 <div class="alert alert-info" role="alert">
 	<span class="wcag-fail"></span>Die Kriterien werden nicht erfüllt.<br>
 	<div>
-		<h4>Grund:</h4>
+		<h4>Begründung:</h4>
 		{{ rrze_tos_no_reason }}
 	</div>
 </div>
