@@ -492,7 +492,7 @@ namespace RRZE\Tos {
 			}
 			$content = '';
 			if ( array_key_exists( $editor_id, $this->options ) ) {
-				$content = $this->options->$editor_id;
+				$content = wp_unslash( $this->options->$editor_id );
 			}
 
 			$settings = [
@@ -500,7 +500,6 @@ namespace RRZE\Tos {
 				'textarea_name' => $this->option_name . '[' . $editor_id . ']',
 			];
 
-			// TODO:check for do_shortcode()!
 			wp_editor( $content, $editor_id, $settings );
 		}
 
