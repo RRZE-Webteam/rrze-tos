@@ -25,7 +25,7 @@
 
 elseif
 
-<div class="alert alert-fail" role="alert">
+<div class="alert alert-info" role="alert">
 	<span class="wcag-fail"></span>The criteria are not fulfilled.<br>
 	<div>
 		<h4>Reason:</h4>

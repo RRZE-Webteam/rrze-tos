@@ -10,6 +10,10 @@
 */
 
 ?>
+<?php
+$phone = '{{ rrze_tos_webmaster_phone }}';
+$fax   = '{{ rrze_tos_webmaster_fax }}';
+?>
 
 <div class="alert" role="alert">
 	<p>Dieses Impressum gilt für den Webauftritt unter der Adresse
@@ -43,12 +47,15 @@
 		{{ rrze_tos_webmaster_postalcode }}
 		{{ rrze_tos_webmaster_city }}<br>
 	</p>
-	<p>
-		<strong>Telefon:</strong> +49 9131 85-{{ rrze_tos_webmaster_phone }}<br>
-		<strong>Fax: </strong> +49 9131 {{ rrze_tos_webmaster_fax }}<br>
-		<strong>E-mail:</strong> {{ rrze_tos_webmaster_email }}<br>
-	</p>
-
+	<?php
+	if ( ! empty( $phone ) ) {
+		printf( '<strong>Telefon:</strong>%s<br>', esc_html( $phone ) );
+	}
+	if ( ! empty( $fax ) ) {
+		printf( '<strong>Fax: </strong>%s<br>', esc_html( $fax ) );
+	}
+	?>
+	<strong>E-mail:</strong> {{ rrze_tos_webmaster_email }}<br>
 	<h4>Zuständige Aufsichtsbehörde</h4>
 	<p>Bayerisches Staatsministerium für Wissenschaft und Kunst<br>
 		Salvatorstraße 2<br>

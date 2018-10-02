@@ -422,7 +422,10 @@ namespace RRZE\Tos {
 						[ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_name' ]
+						[
+							'name'     => 'rrze_tos_webmaster_name',
+							'required' => 'required',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_webmaster_street', __( 'Street', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
@@ -442,7 +445,7 @@ namespace RRZE\Tos {
 						'rrze_tos_section_webmaster',
 						[
 							'name'        => 'rrze_tos_webmaster_phone',
-							'description' => __( 'Direct dialing', 'rrze-tos' ),
+							'description' => __( 'Dialing number', 'rrze-tos' ),
 						]
 					);
 					add_settings_field(
@@ -459,7 +462,10 @@ namespace RRZE\Tos {
 						'rrze_tos_webmaster_email', __( 'E-Mail', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
 						'rrze_tos_options',
 						'rrze_tos_section_webmaster',
-						[ 'name' => 'rrze_tos_webmaster_email' ]
+						[
+							'name'     => 'rrze_tos_webmaster_email',
+							'required' => 'required',
+						]
 					);
 					add_settings_field(
 						'rrze_tos_webmaster_org', __( 'Organization', 'rrze-tos' ), [ $this, 'rrze_tos_textbox_callback' ],
