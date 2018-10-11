@@ -152,11 +152,15 @@ namespace RRZE\Tos {
 
 	/**
 	 * Enqueue admin styles & scripts.
+	 * Only load scripts if load user is in plugin site.
 	 *
-	 * @return void
+	 * @param string $hook Current name file.
 	 */
-	function rrze_tos_admin_scripts() {
-		// TODO: load script only in current plugin.
+	function rrze_tos_admin_scripts( $hook ) {
+		// load script only in current plugin.
+		if ( 'settings_page_rrze_tos' !== $hook ) {
+			return;
+		}
 		wp_enqueue_style( 'admin-styles', plugins_url( 'rrze-tos/assets/css/admin.css', dirname( __FILE__ ) ) );
 		wp_enqueue_style( 'parsley-validator-styles', plugins_url( 'rrze-tos/assets/css/parsley.css', dirname( __FILE__ ) ) );
 

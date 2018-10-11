@@ -7,8 +7,20 @@
 * @since      3.4.0
 */
 
+namespace RRZE\Tos
 ?>
 
+<?php
+$tos_erros = isset( $GLOBALS['tos_erros'] ) ? $GLOBALS['tos_erros'] : '';
+if ( $tos_erros instanceof \WP_Error ) {
+	if ( ! empty( $tos_erros->get_error_codes() ) ) {
+		\RRZE\Tos\my_contact_form_generate_response( 'error', $tos_erros );
+	} else {
+		\RRZE\Tos\my_contact_form_generate_response( 'success', __( 'The mail has been sent successfully.', 'rrze-tos' ) );
+	}
+}
+
+?>
 <p>
 	Die öffentlichen Stellen sind gemäß der
 	<a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1" target="_blank"> EU
@@ -48,14 +60,8 @@ endif }}
 </p>
 <h3>Feedback-Form</h3>
 <?php
-echo do_shortcode( '[contact 
-field-name="name,text,name-id,rrze-name" 
-field-email="email,text,email-id,rrze-email" 
-field-feedback="feedback,textarea,textarea-id"
-field-captcha="captcha,text,captcha-id"
-field-answer="answer,hidden,hidden-id"
-field-timeout="timeout,hidden,timeout-id"
-]' ); ?>
+echo do_shortcode( '[tos-contact-form]' );
+?>
 <p class="complaint">Wenn Sie das Gefühl, dass Sie nicht wird geholfen werden, können Sie den Kontakt
 	<a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html" target="_blank">arbitration board.</a>
 <p>

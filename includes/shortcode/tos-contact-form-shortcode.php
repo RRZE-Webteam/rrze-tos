@@ -1,240 +1,212 @@
 <?php
 /**
- * WordPress TOS contact form
+ * WordPress TOS contact form shortcode
  *
- * @package WordPress
+ * @package    WordPress
  * @subpackage TOS
- * @since 3.4.0
+ * @since      3.4.0
  */
 
 namespace RRZE\Tos {
 
-	add_shortcode( 'contact', 'RRZE\Tos\contact_shortcode' );
-
 	/**
+	 * Create a front-end contact form shortcode to be used inside templates.
 	 *
-	 * @param $atts
+	 * @param array $atts list of comments.
+	 *
+	 * @return string
 	 */
-	function contact_shortcode( $atts ) {
+	function contact_form_shortcode( $atts ) {
+		global $form_error;
+		if ( ! $form_error instanceof \WP_Error ) {
 
+		}
+		global $name, $email, $message;
+
+		// Attributes!
 		$atts = shortcode_atts(
 			array(
-				'field-name'   => '',
-				'field-email'   => '',
-				'field-feedback' => '',
-				'field-captcha'  => '',
-				'field-answer'  => '',
-				'field-timeout'   => '',
-				'timeout'     => 3,
-			), $atts );
+				'captcha' => 'true',
+			),
+			$atts,
+			'tos-contact-form'
+		);
 
-		$filter = array_filter( $atts );
+		if ( isset( $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'tos_contact_form' ) ) {
+			if ( isset( $_POST['message_name'] ) ) {
+				$name = sanitize_text_field( wp_unslash( $_POST['message_name'] ) ); // input var okay!
+			}
+			if ( isset( $_POST['message_email'] ) ) {
+				$email = sanitize_email( wp_unslash( $_POST['message_email'] ) ); // input var okay!
+			}
+			if ( isset( $_POST['message_feedback'] ) ) {
+				$message = sanitize_textarea_field( wp_unslash( $_POST['message_feedback'] ) ); // input var okay!
+			}
+			// validate the user form input.
+			validate_form( $name, $email, $message );
 
-		foreach ( $filter as $key => $value ) {
-			$fields[] = explode( ",", $value );
+			// send the mail.
+			send_mail( $name, $email, $message );
 		}
-
-		/*echo '<pre>';
-		print_r($fields);
-		echo '</pre>';*/
-
-		return generate_form( $fields );
+		$output  = '<form method="post">';
+		$output .= wp_nonce_field( 'tos_contact_form' );
+		$output .= '
+  <div class="form-group">
+    <label class="form-control-label" style="display: inherit;" for="message_name">'.esc_attr__( 'Name', 'rrze-tos' ).'</label>
+    <input type="text" class="form-control form-control-success" name="message_name" value="' . $name . '" placeholder="'.esc_attr__( 'Enter name', 'rrze-tos' ).'">';
+		if ( isset( $_POST['message_name'] ) && $form_error->get_error_message( 'empty_name' ) ) {
+			$output .= '
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>';// input var okay!
+			$output .= $form_error->get_error_message( 'empty_name' );
+			$output .= '</div>';
+		}
+		$output .= '
+  </div>
+    <div class="form-group">
+    <label  class="form-control-label" style="display: inherit;" for="message_email">'.esc_attr__( 'Email', 'rrze-tos' ).'</label>
+    <input type="text" class="form-control" name="message_email" value="' . $email . '" placeholder="' . esc_attr__( 'Enter email', 'rrze-tos' ) . '">';
+		if ( isset( $_POST['message_email'] ) && $form_error->get_error_message( 'empty_email' ) ) {
+			$output .= '
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>';// input var okay!
+			$output .= ! empty( $form_error->get_error_message( 'invalid_email' ) ) ? $form_error->get_error_message( 'invalid_email' ) : $form_error->get_error_message( 'empty_email' );
+			$output .= '</div>';
+		}
+		$output .= '
+  </div>
+  <div class="form-group">
+    <label style="display: inherit;"  for="message_name">'.esc_attr__( 'Feedback', 'rrze-tos' ).'</label>
+    <textarea type="text" class="form-control" name="message_feedback" id="message_feedback" style="
+    margin-bottom: 10px;">' . $message . '</textarea>';
+		if ( isset( $_POST['message_feedback'] ) && $form_error->get_error_message( 'empty_message' ) ) {
+			$output .= '
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>';// input var okay!
+			$output .= $form_error->get_error_message( 'empty_message' );
+			$output .= '</div>';
+		}
+		$output .= '</div>';
+		if ( 'true' === $atts['captcha'] ) {
+			$output .= '<div class="form-group">
+			<label for="message_human">' . esc_attr__( 'Verification', 'rrze-tos' ) . '</label>
+			<input type="text" class="form-control form-control-success" name="message_human" id="message_human" placeholder="'.esc_attr__( 'Enter result', 'rrze-tos' ).'">
+			</div>';
+		}
+		$output .= '
+  <input type="submit" class="btn">
+</form>';
+		return $output;
 	}
 
 	/**
+	 * Validate form fields before send email.
 	 *
-	 * @param $values
+	 * @param string $name    Name of the person who send the email.
+	 * @param string $email   Email of the person to be contacted.
+	 * @param string $message Feedback message.
+	 *
+	 * @return \WP_Error
 	 */
-	function generate_form( $values ) {
+	function validate_form( $name, $email, $message ) {
+		$empty_name    = __( 'Name field should not be empty.', 'rrze-tos' );
+		$empty_email   = __( 'Email field should not be empty.', 'rrze-tos' );
+		$empty_message = __( 'Feedback field should not be empty.', 'rrze-tos' );
+		$invalid_email = __( 'Email Address Invalid.', 'rrze-tos' );
+//		$not_human     = __( "Human verification incorrect.", 'rrze-tos' );
+		// Make the WP_Error object global.
+		global $form_error;
 
-		$salt          = get_salt();
-		$captcha_array = getCaptcha();
-		$encrypted     = md5( $captcha_array['task_encrypted'] . $salt );
-		$flag          = 0;
+		// instantiate the class.
+		$form_error = new \WP_Error();
 
-		$fields  = $values;
-		$timeout = array_pop( $fields );
+		// Check empty fields.
+		if ( empty( $name ) ) {
+			$form_error->add( 'empty_name', $empty_name );
+		}
+		if ( empty( $email ) ) {
+			$form_error->add( 'empty_email', $empty_email );
+		}
+		if ( empty( $message ) ) {
+			$form_error->add( 'empty_message', $empty_message );
+		}
 
-		if ( isset( $_POST['submit'] ) ) {
+		// Check valid email.
+		if ( ! is_email( $email ) ) {
+			$form_error->add( 'invalid_email', $invalid_email );
+		}
+		return $form_error;
+	}
 
-			$values = assign_post_values( $_POST );
+	/**
+	 * Send feedback email.
+	 *
+	 * @param string $name    Name of the person who send the email.
+	 * @param string $email   Email of the person to be contacted.
+	 * @param string $message Feedback message.
+	 */
+	function send_mail( $name, $email, $message ) {
+		$values = (array) get_option( 'rrze_tos' );
+		global $form_error;
 
-			/*echo '<pre>';
-			print_r($values);
-			echo '</pre>';*/
+		// Ensure WP_Error object ($form_error) contain no error.
+		if ( $form_error instanceof \WP_Error && 1 > count( $form_error->get_error_messages() ) ) {
 
-			$current_time = time();
-			$submitted    = $values['timeout'] + $timeout[0];
+			// sanitize user form input.
+			$name      = sanitize_text_field( $name );
+			$email     = sanitize_email( $email );
+			$subject   = sanitize_text_field( $values['rrze_tos_subject'] );
+			$message   = esc_textarea( $message );
+			$email_to  = $values['rrze_tos_receiver_email'];
+			$headers[] = "From: $name <$email>";
+			if ( ! empty( $values['rrze_tos_cc'] ) ) {
+				$email_cc  = sanitize_email( $values['rrze_tos_cc'] );
+				$headers[] = "CC: <$email_cc>";
+			}
 
-			$has_errors = check_errors( $values );
-			$ans       = $values['captcha'];
-			$checksum  = md5( $ans );
-			$salted    = md5( $checksum . $salt );
-			$clean     = array_filter( $has_errors );
+			// If email has been process for sending, display a success message.
+			if ( wp_mail( $email_to, $subject, $message, $headers ) ) {
+				global $name, $email, $message;
+				$name    = '';
+				$email   = '';
+				$message = '';
+			}
+		}
+	}
 
-			if ( isset( $clean ) && ! count( $clean ) ) {
-				if ( $current_time < $submitted ) {
-					_e( 'Your are a bot!', 'rrze-tos' );
-				} elseif ( $salted === $values['answer'] ) {
-					echo '<h2>' . __( 'Many Thanks! We will contact you immediately!', 'rrze-tos' ) . '</h2>';
-					send_mail( $values['feedback'], $values['rrze-email'], $values['rrze-name'] );
-					$flag = 1;
-				} else {
-					$flag                 = 0;
-					$has_errors['captcha'] = __( 'Wrong solution! Try it again.', 'rrze-tos' );
+	/**
+	 * Create a message to the user.
+	 *
+	 * @param string        $type    It defines which message to show success/error.
+	 * @param string|Object $message An specific string message or an Object with array of massages.
+	 */
+	function my_contact_form_generate_response( $type, $message ) {
+		global $form_error;
+		if ( 'success' === $type ) {
+			echo '<div class="alert alert-success">' . esc_html( $message ) . '</div>';
+		} else {
+			if ( $_POST && $form_error instanceof \WP_Error && is_wp_error( $message ) ) { // input var okay!
+				foreach ( $form_error->get_error_messages() as $error ) {
+					echo '<div class="alert alert-warning" role="alert">';
+					echo '<strong>ERROR</strong>:';
+					echo esc_html( $error ) . '<br/>';
+					echo '</div>';
 				}
-
 			}
-		}
-
-		if ( $flag == 0 ) {
-			?>
-			<form method="post" id="feedback_form">
-				<?php
-				for ( $i = 0; $i < sizeof( $fields ); $i ++ ) {
-					switch ( $fields[ $i ][1] ) {
-						case 'text':
-							if ( $fields[ $i ][0] == 'captcha' ) { ?>
-								<p>
-								<?php if ( isset( $_POST['submit'] ) && isset( $has_errors ) && array_key_exists( $fields[ $i ][0], $has_errors ) ) { ?>
-									<div class="error"><?php echo $has_errors[ $fields[ $i ][0] ] ?></div>
-								<?php } ?>
-								<label for="check"><?php _e( 'Solve the following task:', 'rrze-tos' ) ?></label><br/>
-								<?php echo $captcha_array['task_string'] . ' ' ?><input type="text" name="captcha"
-								                                                        id="check">
-								</p>
-							<?php } else { ?>
-								<p>
-								<?php if ( isset( $_POST['submit'] ) && isset( $has_errors ) && array_key_exists( $fields[ $i ][3], $has_errors ) ) { ?>
-									<div class="error"><?php echo $has_errors[ $fields[ $i ][3] ] ?></div>
-								<?php } ?>
-								<label
-									for=<?php echo $fields[ $i ][2] ?>><?php echo( $fields[ $i ][0] == 'email' ? 'E-Mail' : ucfirst( $fields[ $i ][0] ) ) ?>
-									:</label><br/>
-								<input type="text" name=<?php echo $fields[ $i ][3] ?> id=<?php echo $fields[ $i ][2] ?>
-								       placeholder=<?php echo( $fields[ $i ][0] == 'email' ? 'E-Mail' : ucfirst( $fields[ $i ][0] ) ) ?> value=<?php echo ( isset( $_POST['submit'] ) ) ? $values[ $fields[ $i ][3] ] : '' ?> >
-								</p><?php }
-							break;
-						case 'textarea': ?>
-							<p>
-							<?php if ( isset( $_POST['submit'] ) && isset( $has_errors ) && array_key_exists( $fields[ $i ][0], $has_errors ) ) { ?>
-								<div class="error"><?php echo $has_errors[ $fields[ $i ][0] ] ?></div>
-							<?php } ?>
-							<label for=<?php echo $fields[ $i ][2] ?>><?php echo ucfirst( $fields[ $i ][0] ) ?>:</label>
-							<textarea name=<?php echo $fields[ $i ][0] ?>  id=<?php echo $fields[ $i ][2] ?> cols="150"
-							          rows="10"><?php echo ( isset( $_POST['submit'] ) ) ? $values[ $fields[ $i ][0] ] : '' ?></textarea>
-							</p><?php break;
-						case 'hidden':
-							if ( $fields[ $i ][0] == 'answer' ) { ?>
-								<p>
-								<input type="hidden" class="form-control"
-								       name=<?php echo $fields[ $i ][0] . '[]' ?> value=<?php echo $encrypted ?>>
-								</p><?php
-							} else { ?>
-								<p>
-								<input type="hidden" class="form-control"
-								       name=<?php echo $fields[ $i ][0] ?> value=<?php echo time() ?>>
-								</p><?php break;
-							}
-					}
-				} ?>
-				<input type="submit" class="submit_tos_form" name="submit" form="feedback_form" value="Senden">
-			</form>
-			<?php
 		}
 	}
 
-	/**
-	 *
-	 * @param $post
-	 *
-	 * @return mixed
-	 */
-	function assign_post_values( $post ) {
+	// Passing error to template.
+	if ( isset( $_POST['message_name'] ) ) {
+		$name    = isset( $_POST['message_name'] ) ? sanitize_text_field( wp_unslash( $_POST['message_name'] ) ) : ''; // input var okay!
+		$email   = isset( $_POST['message_email'] ) ? sanitize_email( wp_unslash( $_POST['message_email'] ) ) : ''; // input var okay!
+		$message = isset( $_POST['message_feedback'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message_feedback'] ) ) : ''; // input var okay!
 
-		foreach ( $post as $key => $value ) {
-			if ( $key != 'answer' ) {
-				$a[ $key ] = strip_tags( htmlspecialchars( $value ) );
-			} else {
-				$a[ $key ] = strip_tags( htmlspecialchars( $value[0] ) );
-			}
-		}
-
-		return $a;
+		$GLOBALS['tos_erros'] = validate_form( $name, $email, $message );// input var okay!
 	}
 
-	/**
-	 *
-	 * @param $values
-	 *
-	 * @return mixed
-	 */
-	function check_errors( $values ) {
-		foreach ( $values as $key1 => $value1 ) {
-			if ( $value1 === '' ) {
-				if ( preg_match( '/email/', $key1 ) ) {
-					$hasErrors[ $key1 ] = __( 'Please enter e-mail', 'rrze-tos' );
-				} elseif ( preg_match( '/name/', $key1 ) ) {
-					$hasErrors[ $key1 ] = __( 'Please enter name', 'rrze-tos' );
-				} else {
-					$hasErrors[ $key1 ] = __( 'Please enter ', 'rrze-tos' ) . ucfirst( $key1 );
-				}
-			} elseif ( preg_match( '/email/', $key1 ) && ! filter_var( $value1, FILTER_VALIDATE_EMAIL ) ) {
-				$hasErrors[ $key1 ] = __( 'Wrong e-mail format.', 'rrze-tos' );
-			} elseif ( $key1 == 'captcha' && ! preg_match( '/^[0-9]{1,2}$/', $_POST['captcha'] ) ) {
-				$hasErrors[ $key1 ] = __( 'You can enter a maximum of two digits.', 'rrze-tos' );
-			} else {
-				$hasErrors['error'] = '';
-			}
-		}
-
-		return $hasErrors;
-	}
-
-	/**
-	 *
-	 * @param $feedback
-	 * @param $from
-	 * @param $name
-	 */
-	function send_mail( $feedback, $from, $name ) {
-
-		$values = get_option( 'rrze_tos' );
-
-		if ( ! $values ) {
-
-			$status_code = check_wmp();
-
-			if ( 200 === $status_code ) {
-				$res = get_json_wmp();
-			}
-
-		}
-
-		/*$to = (!empty($values['rrze_tos_receiver_email']) ? $values['rrze_tos_receiver_email'] : $res['metadata']['webmaster']['email']);
-		$subject = $values['rrze_tos_subject'];
-		$message = $feedback;
-		$headers[] = "From: <$from>";
-		$cc = (!empty($values['rrze_tos_cc']) ? $values['rrze_tos_cc'] : '');
-		if(!empty($cc)) {
-			$headers[] = "CC: <$cc>";
-		}
-
-		wp_mail( $to, $subject, $message, $headers );*/
-
-		$to        = ( ! empty( $values['rrze_tos_receiver_email'] ) ? $values['rrze_tos_receiver_email'] : $res['metadata']['webmaster']['email'] );
-		$subject   = $values['rrze_tos_subject'];
-		$message   = $feedback;
-		$headers[] = "From: $name <$from>";
-		$cc        = ( ! empty( $values['rrze_tos_cc'] ) ? $values['rrze_tos_cc'] : '' );
-		$cc_addr   = explode( ",", $cc );
-		if ( ! empty( $cc ) ) {
-			foreach ( $cc_addr as $cc => $value ) {
-				$headers[] = "CC: <$value>";
-			}
-		}
-
-		wp_mail( $to, $subject, $message, $headers );
-
-	}
+	add_shortcode( 'tos-contact-form', 'RRZE\Tos\contact_form_shortcode' );
 }
