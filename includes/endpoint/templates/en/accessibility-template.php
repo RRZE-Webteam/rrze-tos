@@ -23,7 +23,7 @@ if ( $tos_erros instanceof \WP_Error ) {
 ?>
 <p>
 	Public authorities are required by the
-	<a target="_blank" href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1">EU
+	<a target="_blank" href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32018D1523">EU
 		Directive</a> on Accessibility to Sites and Mobile Applications of Public
 	Agencies to implement their websites in accordance with WCAG criteria. This website has been reviewed in accordance
 	with WCAG conformity criteria.<br>

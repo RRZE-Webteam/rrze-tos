@@ -23,7 +23,7 @@ if ( $tos_erros instanceof \WP_Error ) {
 ?>
 <p>
 	Die öffentlichen Stellen sind gemäß der
-	<a href="http://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&rid=1" target="_blank"> EU
+	<a href="https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32018D1523" target="_blank"> EU
 		Directive</a> über den barrierefreien Zugang zu den Webseites und mobilen Anwendungen öffentlicher Stellen
 		verpflichtet Ihre Websites entsprechend den WCAG Kriterien umzusetzen. Diese Webseite wurde gemäß den
 		Konformitätsbedingungen der WCAG geprüft.<br>

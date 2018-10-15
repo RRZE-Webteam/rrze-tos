@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMS-Basis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-03 13:12+0000\n"
+"POT-Creation-Date: 2018-10-15 13:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: RRZE-Webteam <webmaster@rrze.fau.de>\n"
@@ -43,6 +43,54 @@ msgstr ""
 msgid "Accessibility Statement"
 msgstr ""
 
+#: includes/strings.php:16
+#, php-format
+msgid ""
+"Public authorities are required by the %1sEU Directive%2s on Accessibility "
+"to Sites and Mobile Applications of Public Agencies to implement their "
+"websites in accordance with WCAG criteria. This website has been reviewed in "
+"accordance with WCAG conformity criteria."
+msgstr ""
+
+#: includes/strings.php:17
+msgid "Are the conformity criteria currently fulfilled?"
+msgstr ""
+
+#: includes/strings.php:18
+msgid "The criteria are fulfilled."
+msgstr ""
+
+#: includes/strings.php:19
+msgid "The criteria are not fulfilled."
+msgstr ""
+
+#: includes/strings.php:20
+msgid "Reason"
+msgstr ""
+
+#: includes/strings.php:21
+msgid "Problems with the operation of the site?"
+msgstr ""
+
+#: includes/strings.php:22
+msgid "The following people are responsible for this website:"
+msgstr ""
+
+#: includes/strings.php:23
+#, php-format
+msgid ""
+"If you have any problems using this website, please write an email to %1s or "
+"fill out the feedback form!"
+msgstr ""
+
+#: includes/strings.php:24
+msgid "Feedback-Form"
+msgstr ""
+
+#: includes/strings.php:25
+msgid "If you feel that you are not being helped, you can contact the "
+msgstr ""
+
 #: includes/class-settings.php:79
 msgid "imprint"
 msgstr ""
@@ -59,240 +107,235 @@ msgstr ""
 msgid "responsible"
 msgstr ""
 
-#: includes/class-settings.php:122 includes/class-settings.php:123
+#: includes/class-settings.php:123 includes/class-settings.php:124
 msgid "ToS"
 msgstr ""
 
-#: includes/class-settings.php:143
+#: includes/class-settings.php:140
 msgid "Settings &rsaquo; ToS"
 msgstr ""
 
-#: includes/class-settings.php:185
+#: includes/class-settings.php:178
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:190
+#: includes/class-settings.php:182
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr ""
 
-#: includes/class-settings.php:202 includes/class-settings.php:352
+#: includes/class-settings.php:193 includes/class-settings.php:293
 msgid "Yes"
 msgstr ""
 
-#: includes/class-settings.php:203 includes/class-settings.php:353
+#: includes/class-settings.php:194 includes/class-settings.php:294
 msgid "No"
 msgstr ""
 
-#: includes/class-settings.php:208
+#: includes/class-settings.php:199
 msgid "If not, with what reason"
 msgstr ""
 
-#: includes/class-settings.php:217
+#: includes/class-settings.php:208
 msgid "Please include all necessary details"
 msgstr ""
 
-#: includes/class-settings.php:225
+#: includes/class-settings.php:216
 msgid "E-Mail Settings"
 msgstr ""
 
-#: includes/class-settings.php:229
+#: includes/class-settings.php:220
 msgid "Receiver E-Mail"
 msgstr ""
 
-#: includes/class-settings.php:240
+#: includes/class-settings.php:230
 msgid "Subject"
 msgstr ""
 
-#: includes/class-settings.php:250
+#: includes/class-settings.php:240
 msgid "CC"
 msgstr ""
 
+#: includes/class-settings.php:258 includes/class-settings.php:260
+msgid "Websites"
+msgstr ""
+
 #: includes/class-settings.php:269
-msgid "Editor"
+msgid "Please include one website url per line"
 msgstr ""
 
-#: includes/class-settings.php:272 includes/class-settings.php:374
-#: includes/class-settings.php:470
-msgid "Name"
-msgstr ""
-
-#: includes/class-settings.php:278
-msgid "Full name of the editor"
-msgstr ""
-
-#: includes/class-settings.php:284 includes/class-settings.php:403
-#: includes/class-settings.php:491
-msgid "Street"
-msgstr ""
-
-#: includes/class-settings.php:290 includes/class-settings.php:497
-msgid "Street Number"
-msgstr ""
-
-#: includes/class-settings.php:296 includes/class-settings.php:304
-#: includes/class-settings.php:417 includes/class-settings.php:503
-msgid "Postcode"
-msgstr ""
-
-#: includes/class-settings.php:309
-msgid "Place"
-msgstr ""
-
-#: includes/class-settings.php:315 includes/class-settings.php:429
-#: includes/class-settings.php:515
-msgid "City"
-msgstr ""
-
-#: includes/class-settings.php:320 includes/class-settings.php:546
-msgid "Faculty, institution or chair"
-msgstr ""
-
-#: includes/class-settings.php:339
+#: includes/class-settings.php:282
 msgid "Newsletter"
 msgstr ""
 
-#: includes/class-settings.php:343
+#: includes/class-settings.php:285
 msgid "Do you want to show the newsletter section?"
 msgstr ""
 
-#: includes/class-settings.php:364
+#: includes/class-settings.php:299
+msgid "New section"
+msgstr ""
+
+#: includes/class-settings.php:300
+msgid "Type all text you want to include"
+msgstr ""
+
+#: includes/class-settings.php:309
+msgid "Type all text you want to include."
+msgstr ""
+
+#: includes/class-settings.php:318
 #: includes/shortcode/tos-admin-information-shortcode.php:45
 msgid "Responsible"
 msgstr ""
 
-#: includes/class-settings.php:367
+#: includes/class-settings.php:321
 msgid "Update all fields"
 msgstr ""
 
-#: includes/class-settings.php:389
+#: includes/class-settings.php:328 includes/class-settings.php:421
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:74
+#: includes/shortcode/tos-contact-form-shortcode.php:55
+msgid "Name"
+msgstr ""
+
+#: includes/class-settings.php:342 includes/class-settings.php:462
 msgid "E-Mail"
 msgstr ""
 
-#: includes/class-settings.php:440 includes/class-settings.php:525
+#: includes/class-settings.php:353 includes/class-settings.php:431
+msgid "Street"
+msgstr ""
+
+#: includes/class-settings.php:364
+msgid "Postcode"
+msgstr ""
+
+#: includes/class-settings.php:377 includes/class-settings.php:437
+msgid "City"
+msgstr ""
+
+#: includes/class-settings.php:388 includes/class-settings.php:443
 msgid "Phone"
 msgstr ""
 
-#: includes/class-settings.php:452
+#: includes/class-settings.php:398 includes/class-settings.php:471
+msgid "Organization"
+msgstr ""
+
+#: includes/class-settings.php:408 includes/class-settings.php:478
 msgid "Person-ID"
 msgstr ""
 
-#: includes/class-settings.php:467
-msgid "Content Manager"
+#: includes/class-settings.php:418
+msgid "Webmaster"
 msgstr ""
 
-#: includes/class-settings.php:476
-msgid "Full name of the content manager"
+#: includes/class-settings.php:448
+msgid "Dialing number"
 msgstr ""
 
-#: includes/class-settings.php:482
-msgid "E-mail"
-msgstr ""
-
-#: includes/class-settings.php:531
-msgid "Direct dialing"
-msgstr ""
-
-#: includes/class-settings.php:535
+#: includes/class-settings.php:452
 msgid "Fax"
 msgstr ""
 
-#: includes/class-settings.php:541
+#: includes/class-settings.php:458
 msgid "Fax number, if still available"
 msgstr ""
 
-#: includes/class-settings.php:626 includes/class-settings.php:661
+#: includes/class-settings.php:581 includes/class-settings.php:613
 msgid "If the field has no data, please fill it manually"
 msgstr ""
 
-#: includes/class-settings.php:743
+#: includes/class-settings.php:694
 msgid "Please select one"
 msgstr ""
 
-#: includes/class-settings.php:768
-msgid "Checking info from Web Master Portal"
+#: includes/class-settings.php:721
+msgid "Update info from Web Master Portal (WMP)"
 msgstr ""
 
-#: includes/class-settings.php:798
+#: includes/class-settings.php:749
 msgid "All fields were updated!"
 msgstr ""
 
-#: includes/class-settings.php:802
+#: includes/class-settings.php:753
 msgid "Can not connect to the server"
 msgstr ""
 
-#: includes/class-settings.php:816
+#: includes/class-settings.php:767
 msgid "Here comes the Context Help content."
 msgstr ""
 
-#: includes/class-settings.php:823
+#: includes/class-settings.php:773
 msgid "Overview"
 msgstr ""
 
-#: includes/class-settings.php:829
+#: includes/class-settings.php:779
 msgid "For more information"
 msgstr ""
 
-#: includes/class-settings.php:830
+#: includes/class-settings.php:780
 msgid "RRZE Webteam on Github"
 msgstr ""
 
-#: includes/strings.php:16
-#, php-format
-msgid ""
-"Public authorities are required by the %1sEU Directive%2s on Accessibility "
-"to Sites and Mobile Applications of Public Agencies to implement their "
-"websites in accordance with WCAG criteria. This website has been reviewed in "
-"accordance with WCAG conformity criteria."
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:49
+msgid "Human verification incorrect."
 msgstr ""
 
-#: includes/strings.php:17
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:53
-msgid "Are the conformity criteria currently fulfilled?"
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:50
+msgid "Please supply all information."
 msgstr ""
 
-#: includes/strings.php:18
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:57
-msgid "The criteria are fulfilled."
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:51
+#: includes/shortcode/tos-contact-form-shortcode.php:118
+msgid "Email Address Invalid."
 msgstr ""
 
-#: includes/strings.php:19
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:59
-msgid "The criteria are not fulfilled."
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:52
+msgid "Message was not sent. Try Again."
 msgstr ""
 
-#: includes/strings.php:20
-msgid "Reason"
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:53
+msgid "Thanks! Your message has been sent."
 msgstr ""
 
-#: includes/strings.php:21
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:64
-msgid "Problems with the operation of the site?"
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:76
+#: includes/shortcode/tos-contact-form-shortcode.php:68
+msgid "Email"
 msgstr ""
 
-#: includes/strings.php:22
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:65
-msgid "The following people are responsible for this website:"
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:78
+#: includes/shortcode/tos-contact-form-shortcode.php:81
+msgid "Feedback"
 msgstr ""
 
-#: includes/strings.php:23
-#, php-format
-msgid ""
-"If you have any problems using this website, please write an email to %1s or "
-"fill out the feedback form!"
+#: includes/shortcode/tos-contact-form-shortcode_bk.php:81
+#: includes/shortcode/tos-contact-form-shortcode.php:95
+msgid "Verification"
 msgstr ""
 
-#: includes/strings.php:24
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:71
-msgid "Feedback-Form"
+#: includes/shortcode/tos-contact-form-shortcode.php:56
+msgid "Enter name"
 msgstr ""
 
-#: includes/strings.php:25
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:81
-msgid "If you feel that you are not being helped, you can contact the "
+#: includes/shortcode/tos-contact-form-shortcode.php:69
+msgid "Enter email"
 msgstr ""
 
-#: includes/menu/tos-add-footer-menu.php:77
-msgid "FAU-Einrichtungen"
+#: includes/shortcode/tos-contact-form-shortcode.php:96
+msgid "Enter result"
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:115
+msgid "Name field should not be empty."
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:116
+msgid "Email field should not be empty."
+msgstr ""
+
+#: includes/shortcode/tos-contact-form-shortcode.php:117
+msgid "Feedback field should not be empty."
 msgstr ""
 
 #: includes/shortcode/tos-contact-form-captcha.php:48
@@ -336,79 +379,49 @@ msgstr ""
 msgid "times"
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:77
+#: includes/shortcode/contact-form-shortcode.php:77
 msgid "Your are a bot!"
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:79
+#: includes/shortcode/contact-form-shortcode.php:79
 msgid "Many Thanks! We will contact you immediately!"
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:84
+#: includes/shortcode/contact-form-shortcode.php:84
 msgid "Wrong solution! Try it again."
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:102
+#: includes/shortcode/contact-form-shortcode.php:102
 msgid "Solve the following task:"
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:176
+#: includes/shortcode/contact-form-shortcode.php:176
 msgid "Please enter e-mail"
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:178
+#: includes/shortcode/contact-form-shortcode.php:178
 msgid "Please enter name"
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:180
+#: includes/shortcode/contact-form-shortcode.php:180
 msgid "Please enter "
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:183
+#: includes/shortcode/contact-form-shortcode.php:183
 msgid "Wrong e-mail format."
 msgstr ""
 
-#: includes/shortcode/tos-contact-form-shortcode.php:185
+#: includes/shortcode/contact-form-shortcode.php:185
 msgid "You can enter a maximum of two digits."
 msgstr ""
 
-#: includes/endpoint/templates/themes/fau/tos-privacy-template.php:49
-msgid "TOS Privacy"
+#: includes/menu/tos-add-footer-menu.php:77
+msgid "FAU-Einrichtungen"
 msgstr ""
 
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:48
-msgid "TOS review"
-msgstr ""
-
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:50
-msgid "Public authorities are required by the "
-msgstr ""
-
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:51
-msgid "EU Directive"
-msgstr ""
-
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:51
-msgid ""
-" on Accessibility to Sites and Mobile Applications of Public Agencies to "
-"implement their websites in accordance with WCAG criteria. This website has "
-"been reviewed in accordance with WCAG conformity criteria."
-msgstr ""
-
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:61
-msgid "Reason:"
-msgstr ""
-
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:68
-msgid "If you have any problems using this website, please write an email to "
-msgstr ""
-
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:69
-msgid " or fill out the feedback form!"
-msgstr ""
-
-#: includes/endpoint/templates/themes/fau/tos-template-copy.php:82
-msgid "arbitration board."
+#: includes/endpoint/templates/de/accessibility-template.php:19
+#: includes/endpoint/templates/en/accessibility-template.php:19
+msgid "The mail has been sent successfully."
 msgstr ""
 
 #. Name of the plugin
