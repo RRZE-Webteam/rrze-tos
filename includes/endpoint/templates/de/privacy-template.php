@@ -11,6 +11,7 @@
 
 ?>
 
+<div class="alert" role="alert">
 	<h2>Name und Anschrift des Verantwortlichen</h2>
 	<p>Für die Webangebote und Webauftritte der Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU) ist der
 		Verantwortliche im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie
@@ -407,3 +408,4 @@
 		Die Aufsichtsbehörde, bei der die Beschwerde eingereicht wurde, unterrichtet den Beschwerdeführer über den Stand
 		und die Ergebnisse der Beschwerde einschließlich der Möglichkeit eines gerichtlichen Rechtsbehelfs nach Art. 78
 		DSGVO.</p>
+</div>
