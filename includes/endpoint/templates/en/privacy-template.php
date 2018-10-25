@@ -22,9 +22,7 @@
 		einer betreffenden Angebot wenden Sie sich bitte an den jeweiligen verantwortlichen Ansprechpartner oder die
 		jeweilige verantwortliche Ansprechpartnerin, wie er oder sie im <a href="<?php echo get_home_url(); ?>/imprint">Impressum des jeweiligen Webauftritts</a> genannt
 		ist.</p>
-	<p>&nbsp;</p>
-	<p><span style="color: #003366; font-family: inherit; font-size: 1.6rem; font-weight: bold;">Name und Anschrift des Datenschutzbeauftragten</span>
-	</p>
+	<h2>Name und Anschrift des Datenschutzbeauftragten</h2>
 	<p>Norbert Gärtner, RD<br>
 		Schloßplatz 4<br>
 		91054 Erlangen</p>
