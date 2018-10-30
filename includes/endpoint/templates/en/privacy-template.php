@@ -11,7 +11,6 @@
 
 ?>
 
-<div class="alert" role="alert">
 	<h2>Name und Anschrift des Verantwortlichen</h2>
 	<p>Für die Webangebote und Webauftritte der Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU) ist der
 		Verantwortliche im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie
@@ -23,9 +22,7 @@
 		einer betreffenden Angebot wenden Sie sich bitte an den jeweiligen verantwortlichen Ansprechpartner oder die
 		jeweilige verantwortliche Ansprechpartnerin, wie er oder sie im <a href="<?php echo get_home_url(); ?>/imprint">Impressum des jeweiligen Webauftritts</a> genannt
 		ist.</p>
-	<p>&nbsp;</p>
-	<p><span style="color: #003366; font-family: inherit; font-size: 1.6rem; font-weight: bold;">Name und Anschrift des Datenschutzbeauftragten</span>
-	</p>
+	<h2>Name und Anschrift des Datenschutzbeauftragten</h2>
 	<p>Norbert Gärtner, RD<br>
 		Schloßplatz 4<br>
 		91054 Erlangen</p>
@@ -406,4 +403,3 @@
 		Die Aufsichtsbehörde, bei der die Beschwerde eingereicht wurde, unterrichtet den Beschwerdeführer über den Stand
 		und die Ergebnisse der Beschwerde einschließlich der Möglichkeit eines gerichtlichen Rechtsbehelfs nach Art. 78
 		DSGVO.</p>
-</div>

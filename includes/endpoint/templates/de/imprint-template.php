@@ -47,15 +47,16 @@ $fax   = '{{ rrze_tos_webmaster_fax }}';
 		{{ rrze_tos_webmaster_postalcode }}
 		{{ rrze_tos_webmaster_city }}<br>
 	</p>
+        <p>
 	<?php
 	if ( ! empty( $phone ) ) {
-		printf( '<strong>Telefon:</strong>%s<br>', esc_html( $phone ) );
+		printf( '<strong>Telefon:</strong> %s<br>', esc_html( $phone ) );
 	}
 	if ( ! empty( $fax ) ) {
-		printf( '<strong>Fax: </strong>%s<br>', esc_html( $fax ) );
+		printf( '<strong>Fax:</strong>%s<br>', esc_html( $fax ) );
 	}
 	?>
-	<strong>E-mail:</strong> {{ rrze_tos_webmaster_email }}<br>
+	<strong>E-Mail:</strong> {{ rrze_tos_webmaster_email }}</p>
 	<h4>Zuständige Aufsichtsbehörde</h4>
 	<p>Bayerisches Staatsministerium für Wissenschaft und Kunst<br>
 		Salvatorstraße 2<br>

@@ -64,4 +64,4 @@ echo do_shortcode( '[tos-contact-form]' );
 
 <p class="complaint">If you feel that you are not being helped, you can contact the
 	<a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html" target="_blank">arbitration board.</a>
-<p>
+</p>

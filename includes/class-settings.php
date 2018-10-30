@@ -445,7 +445,6 @@ namespace RRZE\Tos {
 						'rrze_tos_section_webmaster',
 						[
 							'name'        => 'rrze_tos_webmaster_phone',
-							'description' => __( 'Dialing number', 'rrze-tos' ),
 						]
 					);
 					add_settings_field(
@@ -455,7 +454,7 @@ namespace RRZE\Tos {
 						'rrze_tos_section_webmaster',
 						[
 							'name'        => 'rrze_tos_webmaster_fax',
-							'description' => __( 'Fax number, if still available', 'rrze-tos' ),
+							'description' => __( 'If available', 'rrze-tos' ),
 						]
 					);
 					add_settings_field(
