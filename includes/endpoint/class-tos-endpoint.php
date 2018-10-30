@@ -74,7 +74,7 @@ namespace RRZE\Tos {
 			$option_values = (array) get_option( 'rrze_tos' );
 			$value         = isset( $option_values[ $matches[1] ] ) ? $option_values[ $matches[1] ] : '';
 
-			return $value;
+			return wp_slash( $value );
 		}
 
 		/**
@@ -87,9 +87,9 @@ namespace RRZE\Tos {
 		public function check_if_else_condition( $matches ) {
 			$option_values = (array) get_option( 'rrze_tos' );
 			if ( isset( $option_values[ $matches[1] ] ) && '1' === $option_values[ $matches[1] ] ) {
-				return $matches[2];
+				return wp_slash( $matches[2] );
 			} elseif ( isset( $matches[3] ) ) {
-				return $matches[3];
+				return wp_slash( $matches[3] );
 			}
 
 			return '';
@@ -99,13 +99,15 @@ namespace RRZE\Tos {
 		 * Include content part into base template endpoint.
 		 */
 		public function get_tos_content() {
-			global $wp_query, $locale;
+			// WP_Filesystem();!
+			global $wp_query, $locale,$wp_filesystem;
 
 			$this->default_options();
 			foreach ( $this->options as $key => $value ) {
 				if ( isset( $wp_query->query[ $value ] ) ) {
 					$template_part = plugin_dir_path( __FILE__ ) . 'templates/' . substr( $locale, 0, 2 ) . "/$key-template.php";
 					if ( file_exists( $template_part ) ) {
+						// $template = $wp_filesystem->get_contents( $template_part );!
 						$template = file_get_contents( $template_part );
 						$content  = preg_replace_callback(
 							'/{{[\s]*?([\w]+)[\s]*?}}/',

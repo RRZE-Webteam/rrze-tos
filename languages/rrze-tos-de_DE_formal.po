@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: RRZE WCAG\n"
+"Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-15 13:56+0000\n"
-"PO-Revision-Date: 2018-10-15 14:12+0000\n"
+"PO-Revision-Date: 2018-10-15 14:40+0000\n"
 "Last-Translator: santiago.rendon@fau.de <santiagorendonv@gmail.com>\n"
 "Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
@@ -112,7 +112,6 @@ msgid "accessibility"
 msgstr "barrierefreiheit"
 
 #: includes/class-settings.php:93
-#, fuzzy
 msgid "responsible"
 msgstr "verantwortlicher"
 
