@@ -11,13 +11,24 @@
 
 ?>
 <?php
-$phone = '{{ rrze_tos_webmaster_phone }}';
-$fax   = '{{ rrze_tos_webmaster_fax }}';
+$phone             = '{{ rrze_tos_webmaster_phone }}';
+$fax               = '{{ rrze_tos_webmaster_fax }}';
+$rrze_tos_url_list = '{{ rrze_tos_url_list }}';
+
 ?>
 
 <div class="alert" role="alert">
-	<p>Dieses Impressum gilt für den Webauftritt unter der Adresse
-		<strong><em>{{ rrze_tos_url }}</em></strong>.</p>
+	<p>Dieses Impressum gilt für den Webauftritt unter der Adresse</p>
+	<?php
+	if ( isset( $rrze_tos_url_list ) && '' !== $rrze_tos_url_list ) {
+		echo '<ul>';
+		echo '<li>';
+		echo str_replace( "\n", "<li>", $rrze_tos_url_list );
+		echo '</ul>';
+	}else{
+		echo '<strong><em>{{ rrze_tos_url }}</em></strong>';
+	}
+	?>
 
 	<h3>Herausgeber</h3>
 	<p>
@@ -199,6 +210,4 @@ $fax   = '{{ rrze_tos_webmaster_fax }}';
 		Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
 		Rechtsverletzungen werden wir derartige Links umgehend
 		entfernen.</p>
-
-	<p><?php echo str_replace("\n","<br/>","{{ rrze_tos_url_list }}"); ?></p>
 </div>

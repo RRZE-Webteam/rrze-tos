@@ -74,7 +74,7 @@ namespace RRZE\Tos {
 			$option_values = (array) get_option( 'rrze_tos' );
 			$value         = isset( $option_values[ $matches[1] ] ) ? $option_values[ $matches[1] ] : '';
 
-			return wp_slash( $value );
+			return wp_unslash( $value );
 		}
 
 		/**
@@ -87,9 +87,9 @@ namespace RRZE\Tos {
 		public function check_if_else_condition( $matches ) {
 			$option_values = (array) get_option( 'rrze_tos' );
 			if ( isset( $option_values[ $matches[1] ] ) && '1' === $option_values[ $matches[1] ] ) {
-				return wp_slash( $matches[2] );
+				return wp_unslash( $matches[2] );
 			} elseif ( isset( $matches[3] ) ) {
-				return wp_slash( $matches[3] );
+				return wp_unslash( $matches[3] );
 			}
 
 			return '';

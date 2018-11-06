@@ -17,7 +17,8 @@ $fax   = '{{ rrze_tos_webmaster_fax }}';
 
 <div class="alert" role="alert">
 	<p>Dieses Impressum gilt für den Webauftritt unter der Adresse
-		<strong><em>{{ rrze_tos_url }}</em></strong>.</p>
+	<ul><li><strong><em>{{ rrze_tos_url }}</em></strong></li></ul>
+	</p>
 
 	<h3>Herausgeber</h3>
 	<p>
