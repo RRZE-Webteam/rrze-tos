@@ -44,6 +44,9 @@ input:not(:disabled):not([type="submit"]) {
     padding: 10px;
 }
 
+.complaint {
+    padding-top: 20px; }
+
 @media (min-width: 768px) {
     .wcag-pass:before {
         font-size: 1em;

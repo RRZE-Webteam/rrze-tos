@@ -62,6 +62,8 @@ endif }}
 <?php
 echo do_shortcode( '[tos-contact-form]' );
 ?>
-<p class="complaint">Wenn Sie das Gefühl, dass Sie nicht wird geholfen werden, können Sie den Kontakt
-	<a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html" target="_blank">arbitration board.</a>
-</p>
+<div class="complaint">
+	<p>Wenn Sie das Gefühl, dass Sie nicht wird geholfen werden, können Sie den Kontakt
+		<a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html" target="_blank">arbitration board.</a>
+	</p>
+</div>
