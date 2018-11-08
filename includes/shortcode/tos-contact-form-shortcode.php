@@ -18,10 +18,11 @@ namespace RRZE\Tos {
 	 */
 	function contact_form_shortcode( $atts ) {
 		global $form_error;
+		global $captcha;
 		if ( ! $form_error instanceof \WP_Error ) {
 
 		}
-		global $name, $email, $message;
+		global $name, $email, $message, $result, $solution;
 
 		// Attributes!
 		$atts = shortcode_atts(
@@ -31,6 +32,8 @@ namespace RRZE\Tos {
 			$atts,
 			'tos-contact-form'
 		);
+
+		$captcha = random_number();
 
 		if ( isset( $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'tos_contact_form' ) ) {
 			if ( isset( $_POST['message_name'] ) ) {
@@ -42,15 +45,24 @@ namespace RRZE\Tos {
 			if ( isset( $_POST['message_feedback'] ) ) {
 				$message = sanitize_textarea_field( wp_unslash( $_POST['message_feedback'] ) ); // input var okay!
 			}
+			if ( isset( $_POST['message_human'] ) ) {
+				$result = sanitize_text_field( wp_unslash( $_POST['message_human'] ) ); // input var okay!
+			}
+			if ( isset( $_POST['message_solution'] ) ) {
+				$solution = sanitize_text_field( wp_unslash( $_POST['message_solution'] ) ); // input var okay!
+			}
+
 			// validate the user form input.
-			validate_form( $name, $email, $message );
+			validate_form( $name, $email, $message, $result, $solution );
 
 			// send the mail.
 			send_mail( $name, $email, $message );
 		}
+
 		$output  = '<form method="post">';
 		$output .= wp_nonce_field( 'tos_contact_form' );
 		$output .= '
+<input type="hidden" value="'. $captcha[2] .'" name="message_solution">
   <div class="form-group">
     <label class="form-control-label" style="display: inherit;" for="message_name">'.esc_attr__( 'Name', 'rrze-tos' ).'</label>
     <input type="text" class="form-control form-control-success" name="message_name" value="' . $name . '" placeholder="'.esc_attr__( 'Enter name', 'rrze-tos' ).'">';
@@ -92,8 +104,18 @@ namespace RRZE\Tos {
 		$output .= '</div>';
 		if ( 'true' === $atts['captcha'] ) {
 			$output .= '<div class="form-group">
-			<label for="message_human">' . esc_attr__( 'Verification', 'rrze-tos' ) . '</label>
-			<input type="text" class="form-control form-control-success" name="message_human" id="message_human" placeholder="'.esc_attr__( 'Enter result', 'rrze-tos' ).'">
+			<label for="message_human"  style="display: inherit;">' . esc_attr__( 'Verification', 'rrze-tos' ) . ': '.$captcha[0] . ' times '. $captcha[1].' </label>
+			<input type="text" class="form-control form-control-success" name="message_human" id="message_human" placeholder="'.esc_attr__( 'Enter result', 'rrze-tos' ).'">';
+			if ( isset( $_POST['message_human'] ) && ( $form_error->get_error_message( 'empty_result' ) || $form_error->get_error_message( 'invalid_result' ) ) ) {
+				$output .= '
+				<div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>';// input var okay!
+				$output .= ! empty( $form_error->get_error_message( 'invalid_result' ) ) ? $form_error->get_error_message( 'invalid_result' ) : $form_error->get_error_message( 'empty_result' );
+				$output .= '</div>';
+			}
+			$output .= '
+			
 			</div>';
 		}
 		$output .= '
@@ -109,16 +131,22 @@ namespace RRZE\Tos {
 	 * @param string $email   Email of the person to be contacted.
 	 * @param string $message Feedback message.
 	 *
+	 * @param        $result
+	 *
+	 * @param        $solution
+	 *
 	 * @return \WP_Error
 	 */
-	function validate_form( $name, $email, $message ) {
+	function validate_form( $name, $email, $message, $result, $solution ) {
 		$empty_name    = __( 'Name field should not be empty.', 'rrze-tos' );
 		$empty_email   = __( 'Email field should not be empty.', 'rrze-tos' );
 		$empty_message = __( 'Feedback field should not be empty.', 'rrze-tos' );
+		$empty_result  = __( 'Result field should not be empty.', 'rrze-tos' );
 		$invalid_email = __( 'Email Address Invalid.', 'rrze-tos' );
-//		$not_human     = __( "Human verification incorrect.", 'rrze-tos' );
+		$not_human     = __( "Human verification incorrect.", 'rrze-tos' );
 		// Make the WP_Error object global.
 		global $form_error;
+		global $captcha;
 
 		// instantiate the class.
 		$form_error = new \WP_Error();
@@ -132,6 +160,12 @@ namespace RRZE\Tos {
 		}
 		if ( empty( $message ) ) {
 			$form_error->add( 'empty_message', $empty_message );
+		}
+		if ( empty( $result ) ) {
+			$form_error->add( 'empty_result', $empty_result );
+		}
+		if ( $result !== $solution ) {
+			$form_error->add( 'invalid_result', $not_human );
 		}
 
 		// Check valid email.
@@ -201,11 +235,38 @@ namespace RRZE\Tos {
 
 	// Passing error to template.
 	if ( isset( $_POST['message_name'] ) ) {
-		$name    = isset( $_POST['message_name'] ) ? sanitize_text_field( wp_unslash( $_POST['message_name'] ) ) : ''; // input var okay!
-		$email   = isset( $_POST['message_email'] ) ? sanitize_email( wp_unslash( $_POST['message_email'] ) ) : ''; // input var okay!
-		$message = isset( $_POST['message_feedback'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message_feedback'] ) ) : ''; // input var okay!
+		$name     = isset( $_POST['message_name'] ) ? sanitize_text_field( wp_unslash( $_POST['message_name'] ) ) : ''; // input var okay!
+		$email    = isset( $_POST['message_email'] ) ? sanitize_email( wp_unslash( $_POST['message_email'] ) ) : ''; // input var okay!
+		$message  = isset( $_POST['message_feedback'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message_feedback'] ) ) : ''; // input var okay!
+		$result   = isset( $_POST['message_human'] ) ? sanitize_text_field( wp_unslash( $_POST['message_human'] ) ) : ''; // input var okay!
+		$solution = isset( $_POST['message_solution'] ) ? sanitize_text_field( wp_unslash( $_POST['message_solution'] ) ) : ''; // input var okay!
 
-		$GLOBALS['tos_erros'] = validate_form( $name, $email, $message );// input var okay!
+		$GLOBALS['tos_erros'] = validate_form( $name, $email, $message, $result, $solution);// input var okay!
+	}
+
+	/**
+	 * @return array
+	 */
+	function random_number() {
+		$numbers = [
+			__( 'zero', 'rrze-tos' ),
+			__( 'one', 'rrze-tos' ),
+			__( 'two', 'rrze-tos' ),
+			__( 'three', 'rrze-tos' ),
+			__( 'four', 'rrze-tos' ),
+			__( 'five', 'rrze-tos' ),
+			__( 'six', 'rrze-tos' ),
+			__( 'seven', 'rrze-tos' ),
+			__( 'eight', 'rrze-tos' ),
+			__( 'nine', 'rrze-tos' ),
+		];
+
+		$num_1      = mt_rand( 1, 9 );
+		$num_2      = mt_rand( 1, 9 );
+		$text_num_1 = $numbers[ $num_1 ];
+		$result     = $num_1 * $num_2;
+
+		return [ $text_num_1, $num_2, $result ];
 	}
 
 	add_shortcode( 'tos-contact-form', 'RRZE\Tos\contact_form_shortcode' );
