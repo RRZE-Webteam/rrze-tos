@@ -195,10 +195,10 @@
 		Alle personenbezogenen Daten, die im Zuge der Kontaktaufnahme gespeichert wurden, werden in diesem Fall
 		gelöscht.</p>
 
-	<?php
-	$shortcode = wp_unslash( '{{ rrze_tos_protection_new_section }}' );
-	echo do_shortcode( $shortcode );
-	?>
+<?php
+$shortcode = wp_unslash( '{{ rrze_tos_protection_new_section }}' );
+echo do_shortcode( $shortcode );
+?>
 
 	<h2>SSL-Verschlüsselung</h2>
 	<p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum

@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress TOS Class
+ * WordPress Options Class
  *
  * @package    WordPress
  * @subpackage TOS
@@ -69,11 +69,6 @@ namespace RRZE\Tos {
 					'rrze_tos_subject'                => 'Feedback-Formular Barrierefreiheit',
 					'rrze_tos_cc_email'               => '',
 					// Editor.
-//					'rrze_tos_editor_name'            => ( isset( $res['verantwortlich']['name'] ) ? $res['verantwortlich']['name'] : '' ),
-//					'rrze_tos_editor_street'          => ( isset( $res['verantwortlich']['street'] ) ? $res['verantwortlich']['street'] : '' ),
-//					'rrze_tos_editor_postalcode'      => ( isset( $res['verantwortlich']['postalcode'] ) ? $res['verantwortlich']['postalcode'] : '' ),
-//					'rrze_tos_editor_city'            => ( isset( $res['verantwortlich']['city'] ) ? $res['verantwortlich']['city'] : '' ),
-//					'rrze_tos_editor_org'             => ( isset( $res['verantwortlich']['org'] ) ? $res['verantwortlich']['org'] : '' ),
 					// Content & Webmaster!
 					'rrze_tos_webmaster_name'         => ( isset( $res['webmaster']['name'] ) ? $res['webmaster']['name'] : '' ),
 					'rrze_tos_webmaster_street'       => ( isset( $res['webmaster']['street'] ) ? $res['webmaster']['street'] : '' ),

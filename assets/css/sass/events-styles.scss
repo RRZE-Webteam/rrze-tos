@@ -10,7 +10,7 @@
     color: red;
 }
 
-input:not(:disabled):not([type="submit"]) {
+.wcag-contact-form input:not(:disabled):not([type="submit"]) {
     width: 400px;
 }
 
@@ -58,8 +58,8 @@ input:not(:disabled):not([type="submit"]) {
     .wcag-fail {
         font-size: 1em;
     }
-    
-    textarea {
+
+    .wcag-contact-form textarea {
         width: 750px !important;
         display:block;
     }

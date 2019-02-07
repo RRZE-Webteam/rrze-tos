@@ -126,9 +126,9 @@ namespace RRZE\Tos {
 	 * @return void
 	 */
 	function rrze_tos_scripts() {
-		wp_register_style( 'tos_styles', plugins_url( 'rrze-tos/assets/css/styles.css', dirname( __FILE__ ) ) );
-		wp_register_style( 'tos_styles_rrze', plugins_url( 'rrze-tos/assets/css/rrze-styles.css', dirname( __FILE__ ) ) );
-		wp_register_style( 'tos_styles_events', plugins_url( 'rrze-tos/assets/css/events-styles.css', dirname( __FILE__ ) ) );
+//		wp_register_style( 'tos_styles', plugins_url( 'rrze-tos/assets/css/styles.min.css', dirname( __FILE__ ) ) );
+//		wp_register_style( 'tos_styles_rrze', plugins_url( 'rrze-tos/assets/css/rrze-styles.min.css', dirname( __FILE__ ) ) );
+		wp_register_style( 'tos_styles_events', plugins_url( 'rrze-tos/assets/css/events-styles.min.css', dirname( __FILE__ ) ) );
 
 		$current_theme = wp_get_theme();
 		$themes_fau    = array(
@@ -161,8 +161,8 @@ namespace RRZE\Tos {
 		if ( 'settings_page_rrze_tos' !== $hook ) {
 			return;
 		}
-		wp_enqueue_style( 'admin-styles', plugins_url( 'rrze-tos/assets/css/admin.css', dirname( __FILE__ ) ) );
-		wp_enqueue_style( 'parsley-validator-styles', plugins_url( 'rrze-tos/assets/css/parsley.css', dirname( __FILE__ ) ) );
+		wp_enqueue_style( 'admin-styles', plugins_url( 'rrze-tos/assets/css/admin.min.css', dirname( __FILE__ ) ) );
+		wp_enqueue_style( 'parsley-validator-styles', plugins_url( 'rrze-tos/assets/css/parsley.min.css', dirname( __FILE__ ) ) );
 
 		wp_enqueue_script( 'parsley-validator',
 			plugins_url( 'rrze-tos/assets/js/parsley.min.js', dirname( __FILE__ ) ),

@@ -1,6 +1,6 @@
 <?php
 /**
- * WordPress TOS Class
+ * WordPress Main Class
  *
  * @package    WordPress
  * @subpackage TOS

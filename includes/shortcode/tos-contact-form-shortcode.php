@@ -59,7 +59,7 @@ namespace RRZE\Tos {
 			send_mail( $name, $email, $message );
 		}
 
-		$output  = '<form method="post">';
+		$output  = '<form method="post" class="wcag-contact-form">';
 		$output .= wp_nonce_field( 'tos_contact_form' );
 		$output .= '
 <input type="hidden" value="'. $captcha[2] .'" name="message_solution">
