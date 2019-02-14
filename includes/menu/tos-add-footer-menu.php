@@ -116,24 +116,11 @@ namespace RRZE\Tos {
 				if ( empty( $menu_items ) ) {
 					tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
 
-				} else {
-					$id_tos_menu_id = tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
-//					foreach ( $menu_items as $item ) {
-//						$title = $item->title;
-
-//						wp_update_nav_menu_item( $id_tos_menu_id, 0,
-//							[
-//								'menu-item-title'   => ucfirst( $value ),
-//								'menu-item-classes' => 'tos',
-//								'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
-//								'menu-item-status'  => 'publish',
-//							]
-//						);
-//					}
 				}
 			}
 		}
 	}
+
 
 	/**
 	 * Create nav menu, add items and activate it.
