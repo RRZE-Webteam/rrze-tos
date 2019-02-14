@@ -69,6 +69,11 @@ namespace RRZE\Tos {
 
 	/**
 	 * Check if footer items exist and create links.
+	 *
+	 * Workflow
+	 * 1. Create TOS basic menu (3 tabs) for FAU themes.
+	 * 2. Copy items from old menu to rrze-tos-menu-footer.
+	 * 3. Activate new menu.
 	 */
 	function add_page_to_footer_menu() {
 
@@ -82,72 +87,86 @@ namespace RRZE\Tos {
 			'FAU-Medfak',
 		];
 
-		// $slug_exists = the_slug_exists( 'barrierefreiheit' );!
 		$tos_menu_items = Settings::options_pages();
+		$tos_menu_name  = 'rrze-tos-menu-footer';
 		$menu_location  = 'meta-footer';
+		//
+		// Create TOS menu for FAU themes.
+		//
 		if ( in_array( $current_theme->get( 'Name' ), $themes_fau, true ) ) {
-			if ( has_nav_menu( 'meta-footer' ) ) {
+			if ( ! has_nav_menu( $menu_location ) ) {
+				//
+				// - Create TOS basic menu (3 tabs) for FAU themes if not exit.
+				// - Activate menu.
+				//
+				tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
 
+			} else {
+				//
+				// - Copy items from old menu to rrze-tos-menu-footer if any.
+				//
 				$menu_id    = wp_get_nav_menu_object( get_nav_menu_locations()[ $menu_location ] )->term_id;
 				$menu_items = wp_get_nav_menu_items( $menu_id );
-				if ( ! $menu_items ) {
-					foreach ( $tos_menu_items as $tos_menu_item => $value ) {
-						wp_update_nav_menu_item( $menu_id, 0,
-							[
-								'menu-item-title'   => ucfirst( $value ),
-								'menu-item-classes' => 'tos',
-								'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
-								'menu-item-status'  => 'publish',
-							]
-						);
-					}
+
+				//
+				// Create menu if current menu inside $menu_location has no items.
+				// otherwise copy items from old menu to ne menu.
+				//
+
+				if ( empty( $menu_items ) ) {
+					tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
+
 				} else {
-					$title_exist = false;
-					foreach ( $tos_menu_items as $tos_menu_item => $value ) {
-						foreach ( $menu_items as $item ) {
-							$title = $item->title;
-							if ( ucfirst( $value ) === $title ) {
-								$title_exist = true;
-							}
-						}
-						if ( ! $title_exist ) {
-							wp_update_nav_menu_item( $menu_id, 0,
-								[
-									'menu-item-title'   => ucfirst( $value ),
-									'menu-item-classes' => 'tos',
-									'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
-									'menu-item-status'  => 'publish',
-								]
-							);
-						}
-						$title_exist = false;
-					}
-				}
-			} else {
-				add_action( 'wp_dashboard_setup', 'RRZE\Tos\tos_add_dashboard_menu_widgets' );
-				//
-				// Create menu if it does not exit with items in footer location.
-				//
-				$menu_name = 'rrze-tos';
-				$menu_id   = wp_create_nav_menu( $menu_name );
-				$menu      = get_term_by( 'name', $menu_name, 'nav_menu' );
+					$id_tos_menu_id = tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
+//					foreach ( $menu_items as $item ) {
+//						$title = $item->title;
 
-				foreach ( $tos_menu_items as $tos_menu_item => $value ) {
-					wp_update_nav_menu_item( $menu->term_id, 0,
-						[
-							'menu-item-title'   => ucfirst( $value ),
-							'menu-item-classes' => 'tos',
-							'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
-							'menu-item-status'  => 'publish',
-						]
-					);
+//						wp_update_nav_menu_item( $id_tos_menu_id, 0,
+//							[
+//								'menu-item-title'   => ucfirst( $value ),
+//								'menu-item-classes' => 'tos',
+//								'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
+//								'menu-item-status'  => 'publish',
+//							]
+//						);
+//					}
 				}
-
-				$locations                   = get_theme_mod( 'nav_menu_locations' );
-				$locations[ $menu_location ] = $menu->term_id;
-				set_theme_mod( 'nav_menu_locations', $locations );
 			}
 		}
+	}
+
+	/**
+	 * Create nav menu, add items and activate it.
+	 *
+	 * @param $tos_menu_name
+	 * @param $tos_menu_items
+	 * @param $menu_location
+	 *
+	 * @return int|\WP_Error
+	 */
+	function tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location ) {
+		$menu_id = null;
+		if ( ! is_nav_menu( $tos_menu_name ) ) {
+			$menu_id = wp_create_nav_menu( $tos_menu_name );
+			$menu    = get_term_by( 'name', $tos_menu_name, 'nav_menu' );
+
+			foreach ( $tos_menu_items as $tos_menu_item => $value ) {
+				wp_update_nav_menu_item( $menu->term_id, 0,
+					[
+						'menu-item-title'   => ucfirst( $value ),
+						'menu-item-classes' => 'tos',
+						'menu-item-url'     => home_url( '/' . strtolower( $value ) ),
+						'menu-item-status'  => 'publish',
+					]
+				);
+			}
+
+			$locations                   = get_theme_mod( 'nav_menu_locations' );
+			$locations[ $menu_location ] = $menu->term_id;
+			set_theme_mod( 'nav_menu_locations', $locations );
+		}
+
+		return $menu_id;
 	}
 
 	add_action( 'init', 'RRZE\Tos\add_page_to_footer_menu' );
