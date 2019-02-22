@@ -72,7 +72,6 @@ namespace RRZE\Tos {
 	 *
 	 * Workflow
 	 * 1. Create TOS basic menu (3 tabs) for FAU themes.
-	 * 2. Copy items from old menu to rrze-tos-menu-footer.
 	 * 3. Activate new menu.
 	 */
 	function add_page_to_footer_menu() {
@@ -94,30 +93,18 @@ namespace RRZE\Tos {
 		// Create TOS menu for FAU themes.
 		//
 		if ( in_array( $current_theme->get( 'Name' ), $themes_fau, true ) ) {
-			if ( ! has_nav_menu( $menu_location ) ) {
-				//
-				// - Create TOS basic menu (3 tabs) for FAU themes if not exit.
-				// - Activate menu.
-				//
-				tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
+			//
+			// - Create TOS basic menu (3 tabs) for FAU themes if not exit.
+			// - Activate menu.
+			//
+			tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location, true );
 
-			} else {
-				//
-				// - Copy items from old menu to rrze-tos-menu-footer if any.
-				//
-				$menu_id    = wp_get_nav_menu_object( get_nav_menu_locations()[ $menu_location ] )->term_id;
-				$menu_items = wp_get_nav_menu_items( $menu_id );
-
-				//
-				// Create menu if current menu inside $menu_location has no items.
-				// otherwise copy items from old menu to ne menu.
-				//
-
-				if ( empty( $menu_items ) ) {
-					tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
-
-				}
-			}
+		} else {
+			//
+			// - Create TOS basic menu (3 tabs) for general themes if not exit.
+			// - No activate menu.
+			//
+			tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location );
 		}
 	}
 
@@ -125,13 +112,15 @@ namespace RRZE\Tos {
 	/**
 	 * Create nav menu, add items and activate it.
 	 *
-	 * @param $tos_menu_name
-	 * @param $tos_menu_items
-	 * @param $menu_location
+	 * @param      $tos_menu_name
+	 * @param      $tos_menu_items
+	 * @param      $menu_location
+	 *
+	 * @param bool $activate
 	 *
 	 * @return int|\WP_Error
 	 */
-	function tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location ) {
+	function tos_create_nav_menu( $tos_menu_name, $tos_menu_items, $menu_location, $activate = false ) {
 		$menu_id = null;
 		if ( ! is_nav_menu( $tos_menu_name ) ) {
 			$menu_id = wp_create_nav_menu( $tos_menu_name );
@@ -148,9 +137,11 @@ namespace RRZE\Tos {
 				);
 			}
 
-			$locations                   = get_theme_mod( 'nav_menu_locations' );
-			$locations[ $menu_location ] = $menu->term_id;
-			set_theme_mod( 'nav_menu_locations', $locations );
+			if ( true === $activate ) {
+				$locations                   = get_theme_mod( 'nav_menu_locations' );
+				$locations[ $menu_location ] = $menu->term_id;
+				set_theme_mod( 'nav_menu_locations', $locations );
+			}
 		}
 
 		return $menu_id;

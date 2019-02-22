@@ -6,13 +6,26 @@
  * Version:         0.1.2
  * Author:          RRZE-Webteam
  * Author URI:      https://blogs.fau.de/webworking/
- * License:         GNU General Public License v2
+ * License:         GPL-3.0
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.html
  * Domain Path:     /languages
  * Text Domain:     rrze-tos
  *
  * @package    WordPress
  * @subpackage TOS
+ *
+RRZE TOS is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+RRZE TOS is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with RRZE TOS. If not, see https://www.gnu.org/licenses/old-licenses/gpl-3.0.txt.
  */
 
 namespace RRZE\Tos {
@@ -22,7 +35,7 @@ namespace RRZE\Tos {
 	defined( 'ABSPATH' ) || exit;
 
 	const RRZE_PHP_VERSION = '7.1';
-	const RRZE_WP_VERSION  = '4.9';
+	const RRZE_WP_VERSION  = '5.0';
 
 	register_activation_hook( __FILE__, 'RRZE\Tos\activation' );
 	register_deactivation_hook( __FILE__, 'RRZE\Tos\deactivation' );

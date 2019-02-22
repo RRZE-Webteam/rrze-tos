@@ -100,14 +100,15 @@ namespace RRZE\Tos {
 		 */
 		public function get_tos_content() {
 			// WP_Filesystem();!
-			global $wp_query, $locale,$wp_filesystem;
+			global $wp_query, $locale, $wp_filesystem;
 
 			$this->default_options();
 			foreach ( $this->options as $key => $value ) {
 				if ( isset( $wp_query->query[ $value ] ) ) {
-					$template_part = plugin_dir_path( __FILE__ ) . 'templates/' . substr( $locale, 0, 2 ) . "/$key-template.php";
+					$template_part = plugin_dir_path( __FILE__ ) . 'templates/' . substr( $locale, 0, 2 )
+					                 . "/$key-template.php";
 					if ( file_exists( $template_part ) ) {
-						// $template = $wp_filesystem->get_contents( $template_part );!
+//						 $template = $wp_filesystem->get_contents( $template_part );!
 						$template = file_get_contents( $template_part );
 						$content  = preg_replace_callback(
 							'/{{[\s]*?([\w]+)[\s]*?}}/',
@@ -169,7 +170,8 @@ namespace RRZE\Tos {
 			// Find the correct FAU template to be included.
 			$styledir = '';
 			foreach ( self::$allowed_stylesheets as $dir => $style ) {
-				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ), array_map( 'strtolower', $style ), true ) ) {
+				if ( in_array( strtolower( $current_theme->__get( 'stylesheet' ) ), array_map( 'strtolower', $style ),
+					true ) ) {
 					$styledir = plugin_dir_path( __FILE__ ) . "/templates/themes/$dir/";
 					break;
 				}
