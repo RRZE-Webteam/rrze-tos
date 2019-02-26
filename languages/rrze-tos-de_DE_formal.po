@@ -1,0 +1,400 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: RRZE WCAG\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-25 09:20+0000\n"
+"PO-Revision-Date: 2018-10-25 09:27+0000\n"
+"Last-Translator: barbara <barbara.bothe@fau.de>\n"
+"Language-Team: Deutsch (Sie)\n"
+"Language: de_DE_formal\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .."
+
+#: rrze-tos.php:86
+#, php-format
+msgid ""
+"Your server is running PHP version %1$s. Please upgrade at least to PHP "
+"version %2$s."
+msgstr ""
+"Ihre PHP-Version %1$s ist veraltet. Bitte aktualisieren Sie mindestens auf "
+"die PHP-Version %2$s."
+
+#: rrze-tos.php:90
+#, php-format
+msgid ""
+"Your WordPress version is %1$s. Please upgrade at least to WordPress version "
+"%2$s."
+msgstr ""
+"Ihre Wordpress-Version %1$s ist veraltet. Bitte aktualisieren Sie mindestens "
+"auf die Wordpress-Version %2$s."
+
+#: rrze-tos.php:135
+msgid "FAU-Institutions"
+msgstr "FAU-Einrichtungen"
+
+#: includes/class-options.php:55 includes/strings.php:15
+msgid "Accessibility Statement"
+msgstr "Barrierefreiheitserklärung"
+
+#: includes/class-settings.php:79
+msgid "imprint"
+msgstr "impressum"
+
+#: includes/class-settings.php:80
+msgid "privacy"
+msgstr "datenschutz"
+
+#: includes/class-settings.php:81
+msgid "accessibility"
+msgstr "barrierefreiheit"
+
+#: includes/class-settings.php:93
+msgid "responsible"
+msgstr "verantwortliche"
+
+#: includes/class-settings.php:123 includes/class-settings.php:124
+msgid "ToS"
+msgstr "ToS"
+
+#: includes/class-settings.php:140
+msgid "Settings &rsaquo; ToS"
+msgstr "Einstellungen &rsaquo; ToS"
+
+#: includes/class-settings.php:178
+msgid "General"
+msgstr "Allgemein"
+
+#: includes/class-settings.php:182
+msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
+msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
+
+#: includes/class-settings.php:193 includes/class-settings.php:293
+msgid "Yes"
+msgstr "Ja"
+
+#: includes/class-settings.php:194 includes/class-settings.php:294
+msgid "No"
+msgstr "Nein"
+
+#: includes/class-settings.php:199
+msgid "If not, with what reason"
+msgstr "Wenn nein, mit welcher Begründung"
+
+#: includes/class-settings.php:208
+msgid "Please include all necessary details"
+msgstr "Bitte geben Sie alle notwendigen Details an"
+
+#: includes/class-settings.php:216
+msgid "E-Mail Settings"
+msgstr "E-Mail Einstellungen"
+
+#: includes/class-settings.php:220
+msgid "Receiver E-Mail"
+msgstr "Empfänger"
+
+#: includes/class-settings.php:230
+msgid "Subject"
+msgstr "Betreff"
+
+#: includes/class-settings.php:240
+msgid "CC"
+msgstr "CC"
+
+#: includes/class-settings.php:258 includes/class-settings.php:260
+msgid "Websites"
+msgstr "Websites"
+
+#: includes/class-settings.php:269
+msgid "Please include one website url per line"
+msgstr "Bitte fügen Sie pro Zeile eine Website-URL hinzu"
+
+#: includes/class-settings.php:282
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: includes/class-settings.php:285
+msgid "Do you want to show the newsletter section?"
+msgstr "Möchten Sie den Newsletterbereich anzeigen?"
+
+#: includes/class-settings.php:299
+msgid "New section"
+msgstr "Neuer Bereich"
+
+#: includes/class-settings.php:300
+msgid "Type all text you want to include"
+msgstr "Geben Sie den gesamten Text ein, den Sie einschließen möchten"
+
+#: includes/class-settings.php:309
+msgid "Type all text you want to include."
+msgstr "Geben Sie den gesamten Text ein, den Sie einschließen möchten."
+
+#: includes/class-settings.php:318
+#: includes/shortcode/tos-admin-information-shortcode.php:45
+msgid "Responsible"
+msgstr "Verantwortlicher"
+
+#: includes/class-settings.php:321
+msgid "Update all fields"
+msgstr "Aktualisieren Sie alle Felder"
+
+#: includes/class-settings.php:328 includes/class-settings.php:421
+#: includes/shortcode/tos-contact-form-shortcode.php:55
+msgid "Name"
+msgstr "Name"
+
+#: includes/class-settings.php:342 includes/class-settings.php:461
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: includes/class-settings.php:353 includes/class-settings.php:431
+msgid "Street"
+msgstr "Straße"
+
+#: includes/class-settings.php:364
+msgid "Postcode"
+msgstr "PLZ"
+
+#: includes/class-settings.php:377 includes/class-settings.php:437
+msgid "City"
+msgstr "Ort"
+
+#: includes/class-settings.php:388 includes/class-settings.php:443
+msgid "Phone"
+msgstr "Telefon"
+
+#: includes/class-settings.php:398 includes/class-settings.php:470
+msgid "Organization"
+msgstr "Organisation"
+
+#: includes/class-settings.php:408 includes/class-settings.php:477
+msgid "Person-ID"
+msgstr "Person-ID"
+
+#: includes/class-settings.php:418
+msgid "Webmaster"
+msgstr "Webmaster"
+
+#: includes/class-settings.php:451
+msgid "Fax"
+msgstr "Fax"
+
+#: includes/class-settings.php:457
+msgid "If available"
+msgstr "Falls vorhanden"
+
+#: includes/class-settings.php:580 includes/class-settings.php:612
+msgid "If the field has no data, please fill it manually"
+msgstr "Wenn keine Daten vorhanden sind, füllen Sie diese bitte manuell aus."
+
+#: includes/class-settings.php:693
+msgid "Please select one"
+msgstr "Bitte wählen Sie eine aus"
+
+#: includes/class-settings.php:720
+msgid "Update info from Web Master Portal (WMP)"
+msgstr "Informationen vom Web Master Portal (WMP) aktualisieren"
+
+#: includes/class-settings.php:748
+msgid "All fields were updated!"
+msgstr "Alle Felder wurden aktualisiert!"
+
+#: includes/class-settings.php:752
+msgid "Can not connect to the server"
+msgstr "Kann nicht mit dem Server verbinden."
+
+#: includes/class-settings.php:766
+msgid "Here comes the Context Help content."
+msgstr ""
+
+#: includes/class-settings.php:772
+msgid "Overview"
+msgstr "Überblick"
+
+#: includes/class-settings.php:778
+msgid "For more information"
+msgstr "Weitere Informationen"
+
+#: includes/class-settings.php:779
+msgid "RRZE Webteam on Github"
+msgstr "RRZE Webteam auf Github"
+
+#: includes/strings.php:16
+#, php-format
+msgid ""
+"Public authorities are required by the %1sEU Directive%2s on Accessibility "
+"to Sites and Mobile Applications of Public Agencies to implement their "
+"websites in accordance with WCAG criteria. This website has been reviewed in "
+"accordance with WCAG conformity criteria."
+msgstr ""
+"Die öffentlichen Stellen sind gemäß der %1sEU Directive%2s über den "
+"barrierefreien Zugang zu den Webseites und mobilen Anwendungen öffentlicher "
+"Stellen verpflichtet Ihre Websites entsprechend den WCAG Kriterien "
+"umzusetzen. Diese Webseite wurde gemäß den Konformitätsbedingungen der WCAG "
+"geprüft."
+
+#: includes/strings.php:17
+msgid "Are the conformity criteria currently fulfilled?"
+msgstr "Sind die Konformitätskriterien derzeit erfüllt?"
+
+#: includes/strings.php:18
+msgid "The criteria are fulfilled."
+msgstr "Die Kriterien werden erfüllt."
+
+#: includes/strings.php:19
+msgid "The criteria are not fulfilled."
+msgstr "Die Kriterien werden nicht erfüllt."
+
+#: includes/strings.php:20
+msgid "Reason"
+msgstr "Begründung"
+
+#: includes/strings.php:21
+msgid "Problems with the operation of the site?"
+msgstr "Probleme bei der Bedienung der Seite?"
+
+#: includes/strings.php:22
+msgid "The following people are responsible for this website:"
+msgstr "Für diesen Webauftritt sind folgende Personen verantwortlich:"
+
+#: includes/strings.php:23
+#, php-format
+msgid ""
+"If you have any problems using this website, please write an email to %1s or "
+"fill out the feedback form!"
+msgstr ""
+"Wenn Sie Probleme bei der Benutzung dieser Website haben, schreiben Sie eine "
+"E-Mail an %1s oder füllen Sie das Feedback-Formular aus!"
+
+#: includes/strings.php:24
+msgid "Feedback-Form"
+msgstr "Feedback-Form"
+
+#: includes/strings.php:25
+msgid "If you feel that you are not being helped, you can contact the "
+msgstr ""
+"Wenn Sie das Gefühl, dass Sie nicht wird geholfen werden, können Sie den "
+"Kontakt"
+
+#: includes/menu/tos-add-footer-menu.php:77
+msgid "FAU-Einrichtungen"
+msgstr "FAU facilities"
+
+#: includes/shortcode/tos-contact-form-captcha.php:48
+msgid "one"
+msgstr "ein"
+
+#: includes/shortcode/tos-contact-form-captcha.php:49
+msgid "two"
+msgstr "zwei"
+
+#: includes/shortcode/tos-contact-form-captcha.php:50
+msgid "three"
+msgstr "Drei"
+
+#: includes/shortcode/tos-contact-form-captcha.php:51
+msgid "four"
+msgstr "vier"
+
+#: includes/shortcode/tos-contact-form-captcha.php:52
+msgid "five"
+msgstr "fünf"
+
+#: includes/shortcode/tos-contact-form-captcha.php:53
+msgid "six"
+msgstr "Sechs"
+
+#: includes/shortcode/tos-contact-form-captcha.php:54
+msgid "seven"
+msgstr "Sieben"
+
+#: includes/shortcode/tos-contact-form-captcha.php:55
+msgid "eight"
+msgstr "acht"
+
+#: includes/shortcode/tos-contact-form-captcha.php:56
+msgid "nine"
+msgstr "neun"
+
+#: includes/shortcode/tos-contact-form-captcha.php:75
+#: includes/shortcode/tos-contact-form-captcha.php:99
+msgid "times"
+msgstr "mal"
+
+#: includes/shortcode/tos-contact-form-shortcode.php:56
+msgid "Enter name"
+msgstr "Name eingeben"
+
+#: includes/shortcode/tos-contact-form-shortcode.php:68
+msgid "Email"
+msgstr "E-Mail"
+
+#: includes/shortcode/tos-contact-form-shortcode.php:69
+msgid "Enter email"
+msgstr "E-Mail eingeben"
+
+#: includes/shortcode/tos-contact-form-shortcode.php:81
+msgid "Feedback"
+msgstr "Feedback"
+
+#: includes/shortcode/tos-contact-form-shortcode.php:95
+msgid "Verification"
+msgstr "Prüfung"
+
+#: includes/shortcode/tos-contact-form-shortcode.php:96
+msgid "Enter result"
+msgstr "Geben Sie das Ergebnis ein"
+
+#: includes/shortcode/tos-contact-form-shortcode.php:115
+msgid "Name field should not be empty."
+msgstr "Das Namensfeld darf nicht leer sein."
+
+#: includes/shortcode/tos-contact-form-shortcode.php:116
+msgid "Email field should not be empty."
+msgstr "Das E-Mail-Feld darf nicht leer sein."
+
+#: includes/shortcode/tos-contact-form-shortcode.php:117
+msgid "Feedback field should not be empty."
+msgstr "Feedback-Feld darf nicht leer sein."
+
+#: includes/shortcode/tos-contact-form-shortcode.php:118
+msgid "Email Address Invalid."
+msgstr "E-Mail-Adresse ungültig"
+
+#: includes/endpoint/templates/de/accessibility-template.php:19
+#: includes/endpoint/templates/en/accessibility-template.php:19
+msgid "The mail has been sent successfully."
+msgstr "Die E-Mail wurde erfolgreich gesendet."
+
+#. Name of the plugin
+msgid "RRZE TOS"
+msgstr "RRZE TOS"
+
+#. Description of the plugin
+msgid ""
+"WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den "
+"Konformitätskriterien der TOS."
+msgstr ""
+"WordPress-Plugin: Prüfung einer Website aus dem FAU-Netzwerk gemäß den "
+"Konformitätskriterien der TOS."
+
+#. URI of the plugin
+msgid "https://github.com/RRZE-Webteam/rrze-tos.git"
+msgstr "https://github.com/RRZE-Webteam/rrze-tos.git"
+
+#. Author of the plugin
+msgid "RRZE-Webteam"
+msgstr "RRZE-Webteam"
+
+#. Author URI of the plugin
+msgid "https://blogs.fau.de/webworking/"
+msgstr "https://blogs.fau.de/webworking/"
