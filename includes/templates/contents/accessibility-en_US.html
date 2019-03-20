@@ -1,0 +1,78 @@
+<p>
+    Public authorities are required by the
+    <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32018D1523" target="_blank">EU Directive</a>
+    on Accessibility to Sites and Mobile Applications of Public Agencies to implement their websites in accordance with WCAG criteria.
+    This website has been reviewed in accordance with WCAG conformity criteria.
+</p>
+
+<h3>Are the conformity criteria currently fulfilled?</h3>
+{{rrze_tos_conformity}}
+<div class="alert alert-success" role="alert">
+    <span class="wcag-pass"></span>The criteria are fulfilled.
+</div>
+
+{{:rrze_tos_conformity}}
+<div class="alert alert-info" role="alert">
+    <span class="wcag-fail"></span>The criteria are not fulfilled.<br>
+    <div>
+        <h4>Justification:</h4>
+        {{=rrze_tos_no_reason}}
+    </div>
+</div>
+{{/rrze_tos_conformity}}
+
+<h3>Problems with the operation of the site?</h3>
+<h4 class="wcag-h3">The following people are responsible for this website:</h4>
+
+<div class="table-wrapper">
+    <div class="scrollable">
+        <table width="" border="1">
+            <tbody>
+                <tr>
+                    <td>
+                        {{rrze_tos_responsible_name}}
+                        {{=rrze_tos_responsible_name}}<br>
+                        {{=rrze_tos_responsible_street}}<br>
+                        {{=rrze_tos_responsible_city}}<br>
+                        {{rrze_tos_responsible_phone}}
+                        <strong>Phone:</strong> {{=rrze_tos_responsible_phone}}<br>
+                        {{/rrze_tos_responsible_phone}}
+                        {{rrze_tos_responsible_email}}
+                        <strong>Email:</strong> {{=rrze_tos_responsible_email}}<br>
+                        {{/rrze_tos_responsible_email}}
+                        {{/rrze_tos_responsible_name}}
+                    </td>
+                    <td>
+						{{rrze_tos_webmaster_name}}
+                        {{=rrze_tos_webmaster_name}}<br>
+                        {{=rrze_tos_webmaster_street}}<br>
+                        {{=rrze_tos_webmaster_city}}<br>
+						{{rrze_tos_webmaster_phone}}
+                        <strong>Phone:</strong> {{=rrze_tos_webmaster_phone}}<br>
+						{{/rrze_tos_webmaster_phone}}
+						{{rrze_tos_webmaster_email}}
+                        <strong>Email:</strong> {{=rrze_tos_webmaster_email}}<br>
+						{{/rrze_tos_webmaster_email}}
+						{{/rrze_tos_webmaster_name}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{contact_form}}
+<p>
+    If you have any problems using this website, please write an email to
+    <a href="mailto:{{=rrze_tos_receiver_email}}?subject={{=rrze_tos_subject}}">{{=rrze_tos_receiver_email}}</a>
+    or fill out the feedback form!
+</p>
+<h3>Feedback</h3>
+{{=contact_form}}
+{{/contact_form}}
+
+<div class="complaint">
+    <p>If you feel that you are not being helped, you can contact the
+        <a href="https://www.behindertenbeauftragter.de/EN/ArbitrationService/EN/EN_node.html" target="_blank">Arbitration Service.</a>
+    </p>
+</div>

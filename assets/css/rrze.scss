@@ -1,0 +1,48 @@
+.error {
+    color: red;
+}
+
+input[type="text"] {
+    width: 350px !important;
+}
+
+.wcag-pass {
+    &:before {
+        font-family: FontAwesome;
+        font-size: 2em;
+        content: "\f00c";
+        color: green;
+        padding-right: 13px;
+        vertical-align: -20%;
+    }
+    font-size: 1em;
+    color: green;
+}
+
+.wcag-fail {
+    &:before {
+        font-family: FontAwesome;
+        font-size: 2em;
+        content: "\f00d";
+        color: red;
+        padding-right: 13px;
+        vertical-align: -15%;
+    }
+    font-size: 1em;
+    color: red;
+}
+
+.wcag-submit {
+    padding: 13px 0;
+}
+
+@media (min-width: 768px) {
+    textarea {
+        width: 750px !important;
+        display: block;
+    }
+
+    #feedback_form {
+        margin-bottom: 100px;
+    }
+}

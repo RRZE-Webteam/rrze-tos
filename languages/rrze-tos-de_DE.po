@@ -1,14 +1,13 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-20 15:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"PO-Revision-Date: 2019-03-20 15:50+0000\n"
+"Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
+"Language-Team: Deutsch\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,6 +20,8 @@ msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
 "version %2$s."
 msgstr ""
+"Auf dem Server läuft PHP Version %1$s. Das Plugin benötigt mindestens PHP "
+"Version %2$s."
 
 #: rrze-tos.php:66
 #, php-format
@@ -28,258 +29,262 @@ msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
 "WordPress version %2$s."
 msgstr ""
+"The server is running WordPress version %1$s. The Plugin requires at least "
+"WordPress version %2$s."
 
 #: includes/Settings.php:79
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: includes/Settings.php:92
 msgid "Imprint"
-msgstr ""
+msgstr "Impressum"
 
 #: includes/Settings.php:93
 msgid "Privacy"
-msgstr ""
+msgstr "Datenschutz"
 
 #: includes/Settings.php:94
 msgid "Accessibility"
-msgstr ""
+msgstr "Barrierefreiheit"
 
 #: includes/Settings.php:110 includes/Settings.php:111
 msgid "ToS"
-msgstr ""
+msgstr "ToS"
 
 #: includes/Settings.php:166
 msgid "Settings &rsaquo; ToS"
-msgstr ""
+msgstr "Einstellungen &rsaquo; ToS"
 
 #: includes/Settings.php:229
 msgid "WMP API"
-msgstr ""
+msgstr "WMP-Schnittstelle"
 
 #: includes/Settings.php:236
 msgid "Server name"
-msgstr ""
+msgstr "Servername"
 
 #: includes/Settings.php:246
 msgid ""
 "Please enter a valid server name to request the imprint by using the WMP API."
 msgstr ""
+"Bitte geben Sie einen gültigen Servernamen ein, um das Impressum über die "
+"WMP-API anzufordern."
 
 #: includes/Settings.php:270
 msgid "Responsible"
-msgstr ""
+msgstr "Verantwortlich"
 
 #: includes/Settings.php:277 includes/Settings.php:409
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: includes/Settings.php:292 includes/Settings.php:479
 #: includes/Settings.php:654
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 #: includes/Settings.php:307 includes/Settings.php:423
 msgid "Street"
-msgstr ""
+msgstr "Straße"
 
 #: includes/Settings.php:322
 msgid "Postcode"
-msgstr ""
+msgstr "PLZ"
 
 #: includes/Settings.php:336 includes/Settings.php:437
 msgid "City"
-msgstr ""
+msgstr "Ort"
 
 #: includes/Settings.php:351 includes/Settings.php:451
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: includes/Settings.php:366 includes/Settings.php:493
 msgid "Organization"
-msgstr ""
+msgstr "Organisation"
 
 #: includes/Settings.php:381 includes/Settings.php:508
 msgid "Person-ID"
-msgstr ""
+msgstr "Person-ID"
 
 #: includes/Settings.php:402
 msgid "Webmaster"
-msgstr ""
+msgstr "Webmaster"
 
 #: includes/Settings.php:465
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: includes/Settings.php:529
 msgid "Newsletter"
-msgstr ""
+msgstr "Newsletter"
 
 #: includes/Settings.php:536
 msgid "Show the newsletter section?"
-msgstr ""
+msgstr "Den Newsletter-Bereich anzeigen?"
 
 #: includes/Settings.php:547 includes/Settings.php:579
 #: includes/Settings.php:625
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: includes/Settings.php:548 includes/Settings.php:580
 #: includes/Settings.php:626
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: includes/Settings.php:561
 msgid "New section"
-msgstr ""
+msgstr "Neuer Abschnitt"
 
 #: includes/Settings.php:568
 msgid "Add a new section?"
-msgstr ""
+msgstr "Neuen Abschnitt hinzufügen?"
 
 #: includes/Settings.php:587
 msgid "Content of the new section"
-msgstr ""
+msgstr "Inhalt des neuen Abschnitts"
 
 #: includes/Settings.php:607
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: includes/Settings.php:614
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
-msgstr ""
+msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
 
 #: includes/Settings.php:633
 msgid "If not, with what reason"
-msgstr ""
+msgstr "Wenn nein, mit welcher Begründung"
 
 #: includes/Settings.php:642
 msgid "Please include all necessary details"
-msgstr ""
+msgstr "Bitte geben Sie alle notwendigen Details an"
 
 #: includes/Settings.php:661
 msgid "Receiver email"
-msgstr ""
+msgstr "Empfänger-E-Mail"
 
 #: includes/Settings.php:677
 msgid "Subject"
-msgstr ""
+msgstr "Subjekt"
 
 #: includes/Settings.php:692
 msgid "CC"
-msgstr ""
+msgstr "CC"
 
 #: includes/Settings.php:826
 msgid "Please select one"
-msgstr ""
+msgstr "Bitte wählen Sie eine aus"
 
 #: includes/Settings.php:883
 msgid "Update imprint data by using the WMP API"
-msgstr ""
+msgstr "Aktualisierung der Impressum-Daten über die WMP-API"
 
 #: includes/Settings.php:908
 msgid "All fields were updated!"
-msgstr ""
+msgstr "Alle Felder wurden aktualisiert!"
 
 #: includes/Settings.php:912
 msgid "Can not connect to the server"
-msgstr ""
+msgstr "Keine Verbindung zum Server möglich"
 
 #: includes/ContactForm.php:72
 msgid "The message could not be sent."
-msgstr ""
+msgstr "Die Nachricht konnte nicht gesendet werden."
 
 #: includes/ContactForm.php:79
 msgid "Thank you for contacting us."
-msgstr ""
+msgstr "Vielen Dank für Ihre Kontaktaufnahme."
 
 #: includes/ContactForm.php:142
 msgid "Name field should not be empty."
-msgstr ""
+msgstr "Das Namensfeld sollte nicht leer sein."
 
 #: includes/ContactForm.php:145
 msgid "Email field should not be empty."
-msgstr ""
+msgstr "Das E-Mail-Feld sollte nicht leer sein."
 
 #: includes/ContactForm.php:147
 msgid "Email Address Invalid."
-msgstr ""
+msgstr "E-Mail-Adresse ungültig."
 
 #: includes/ContactForm.php:150
 msgid "Message field should not be empty."
-msgstr ""
+msgstr "Das Nachrichtenfeld sollte nicht leer sein."
 
 #: includes/ContactForm.php:153
 msgid "Result field should not be empty."
-msgstr ""
+msgstr "Das Ergebnisfeld sollte nicht leer sein."
 
 #: includes/ContactForm.php:155
 msgid "Human verification incorrect."
-msgstr ""
+msgstr "Menschliche Verifizierung falsch."
 
 #: includes/ContactForm.php:199
 msgid "zero"
-msgstr ""
+msgstr "null"
 
 #: includes/ContactForm.php:200
 msgid "one"
-msgstr ""
+msgstr "eins"
 
 #: includes/ContactForm.php:201
 msgid "two"
-msgstr ""
+msgstr "zwei"
 
 #: includes/ContactForm.php:202
 msgid "three"
-msgstr ""
+msgstr "drei"
 
 #: includes/ContactForm.php:203
 msgid "four"
-msgstr ""
+msgstr "vier"
 
 #: includes/ContactForm.php:204
 msgid "five"
-msgstr ""
+msgstr "fünf"
 
 #: includes/ContactForm.php:205
 msgid "six"
-msgstr ""
+msgstr "sechs"
 
 #: includes/ContactForm.php:206
 msgid "seven"
-msgstr ""
+msgstr "sieben"
 
 #: includes/ContactForm.php:207
 msgid "eight"
-msgstr ""
+msgstr "acht"
 
 #: includes/ContactForm.php:208
 msgid "nine"
-msgstr ""
+msgstr "neun"
 
 #: includes/Endpoint.php:39
 msgid "imprint"
-msgstr ""
+msgstr "impressum"
 
 #: includes/Endpoint.php:40
 msgid "privacy"
-msgstr ""
+msgstr "datenschutz"
 
 #: includes/Endpoint.php:41
 msgid "accessibility"
-msgstr ""
+msgstr "barrierefreiheit"
 
 #: includes/HelpMenu.php:32
 msgid "Here comes the Context Help content."
-msgstr ""
+msgstr "Hier kommt der Inhalt der Kontexthilfe."
 
 #: includes/HelpMenu.php:36
 msgid "Overview"
-msgstr ""
+msgstr "Übersicht"
 
 #: includes/HelpMenu.php:41
 msgid "For more information"
-msgstr ""
+msgstr "Für weitere Informationen"
 
 #: includes/HelpMenu.php:42
 msgid "RRZE Webteam on Github"
