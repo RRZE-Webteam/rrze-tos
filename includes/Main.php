@@ -6,6 +6,9 @@ defined('ABSPATH') || exit;
 
 class Main
 {
+    /**
+     * [__construct description]
+     */
     public function __construct()
     {
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
@@ -14,9 +17,12 @@ class Main
         new Settings();
         new Endpoint();
 
-        NavMenu::addTosFooterMenu();
+        NavMenu::addTosMenu();
     }
 
+    /**
+     * [enqueueScripts description]
+     */
     public function enqueueScripts()
     {
         wp_register_style(
@@ -40,6 +46,10 @@ class Main
         wp_enqueue_style('rrze-tos-' . $stylesheetGroup);
     }
 
+    /**
+     * [adminEnqueueScripts description]
+     * @param string $hook [description]
+     */
     public function adminEnqueueScripts($hook)
     {
         if ('settings_page_rrze-tos' !== $hook) {

@@ -10,54 +10,58 @@ defined('ABSPATH') || exit;
       * [protected description]
       * @var string
       */
-     protected static $tosFooterMenuName = 'rrze-tos-footer-menu';
+     protected static $tosMenuName = 'rrze-tos-menu';
 
      /**
-      * [protected description]
-      * @var string
+      * [menuLocations description]
+      * @return array [description]
       */
-     protected static $fauFooterMenuLocation = 'meta-footer';
-
-     /**
-      * [addTosFooterMenu description]
-      */
-     public static function addTosFooterMenu()
+     protected static function menuLocations()
      {
-         add_action('init', [__CLASS__, 'setTosFooterMenu']);
+         return [
+             'fau' => 'meta-footer',
+         ];
      }
 
      /**
-      * [setTosFooterMenu description]
+      * [addTosMenu description]
       */
-     public static function setTosFooterMenu()
+     public static function addTosMenu()
      {
-         if (! is_nav_menu(self::$tosFooterMenuName)) {
-             self::createTosFooterMenu();
+         add_action('init', [__CLASS__, 'setTosMenu']);
+     }
+
+     /**
+      * [setTosMenu description]
+      */
+     public static function setTosMenu()
+     {
+         if (! is_nav_menu(self::$tosMenuName)) {
+             self::createTosMenu();
          }
      }
 
      /**
-      * [createTosFooterMenu description]
-      * @return [type] [description]
+      * [createTosMenu description]
       */
-     protected static function createTosFooterMenu()
+     protected static function createTosMenu()
      {
+         $menuLocations = self::menuLocations();
          $stylesheetGroup = Theme::getCurrentStylesheetGroup();
 
          $menuItems = Endpoint::getEndPoints();
          $menuName  = self::$tosFooterMenuName;
-         $menuLocation = $stylesheetGroup == 'fau' ? self::$fauFooterMenuLocation : '';
+         $menuLocation = isset($menuLocations[$stylesheetGroup]) ? $menuLocations[$stylesheetGroup] : '';
 
          self::createNavMenu($menuName, $menuItems, $menuLocation);
      }
 
      /**
       * [createNavMenu description]
-      * @param  [type]  $menuName  [description]
-      * @param  [type]  $menuItems [description]
-      * @param  [type]  $menuLocation  [description]
-      * @param  boolean $activate       [description]
-      * @return mixed                  [description]
+      * @param  [type]  $menuName     [description]
+      * @param  [type]  $menuItems    [description]
+      * @param  [type]  $menuLocation [description]
+      * @return mixed                 [description]
       */
      protected static function createNavMenu($menuName, $menuItems, $menuLocation = '')
      {
