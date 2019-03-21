@@ -4,7 +4,7 @@
 Plugin Name:     RRZE TOS
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-tos
 Description:     Prüfung einer Website aus dem FAU-Netzwerk gemäß den Konformitätskriterien der TOS.
-Version:         1.1.1
+Version:         1.2.0
 Author:          RRZE-Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -45,19 +45,19 @@ register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
 /**
- * [load_textdomain description]
+ * [loadTextdomain description]
  * @return void
  */
-function load_textdomain()
+function loadTextdomain()
 {
     load_plugin_textdomain('rrze-tos', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 
 /**
- * [system_requirements description]
+ * [systemRequirements description]
  * @return string error message
  */
-function system_requirements()
+function systemRequirements()
 {
     $error = '';
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
@@ -74,9 +74,9 @@ function system_requirements()
  */
 function activation()
 {
-    load_textdomain();
+    loadTextdomain();
 
-    if ($error = system_requirements()) {
+    if ($error = systemRequirements()) {
         deactivate_plugins(plugin_basename(__FILE__), false, true);
         wp_die($error);
     }
@@ -100,9 +100,9 @@ function deactivation()
  */
 function loaded()
 {
-    load_textdomain();
+    loadTextdomain();
 
-    if ($error = system_requirements()) {
+    if ($error = systemRequirements()) {
         include_once(ABSPATH . 'wp-admin/includes/plugin.php');
         $plugin_data = get_plugin_data(__FILE__);
         $plugin_name = $plugin_data['Name'];
