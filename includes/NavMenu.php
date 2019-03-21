@@ -50,7 +50,7 @@ defined('ABSPATH') || exit;
          $stylesheetGroup = Theme::getCurrentStylesheetGroup();
 
          $menuItems = Endpoint::getEndPoints();
-         $menuName  = self::$tosFooterMenuName;
+         $menuName  = self::$tosMenuName;
          $menuLocation = isset($menuLocations[$stylesheetGroup]) ? $menuLocations[$stylesheetGroup] : '';
 
          self::createNavMenu($menuName, $menuItems, $menuLocation);
