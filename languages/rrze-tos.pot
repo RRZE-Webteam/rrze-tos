@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-20 15:46+0000\n"
+"POT-Creation-Date: 2019-03-21 15:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -29,160 +29,167 @@ msgid ""
 "WordPress version %2$s."
 msgstr ""
 
-#: includes/Settings.php:79
+#: includes/Settings.php:68
 msgid "Settings"
 msgstr ""
 
-#: includes/Settings.php:92
+#: includes/Settings.php:81
 msgid "Imprint"
 msgstr ""
 
-#: includes/Settings.php:93
+#: includes/Settings.php:82
 msgid "Privacy"
 msgstr ""
 
-#: includes/Settings.php:94
+#: includes/Settings.php:83
 msgid "Accessibility"
 msgstr ""
 
-#: includes/Settings.php:110 includes/Settings.php:111
+#: includes/Settings.php:105 includes/Settings.php:106
 msgid "ToS"
 msgstr ""
 
-#: includes/Settings.php:166
+#: includes/Settings.php:170
 msgid "Settings &rsaquo; ToS"
 msgstr ""
 
-#: includes/Settings.php:229
+#: includes/Settings.php:185
+msgid "Save Changes"
+msgstr ""
+
+#: includes/Settings.php:187
+msgid "Update data by using the WMP API"
+msgstr ""
+
+#: includes/Settings.php:232
 msgid "WMP API"
 msgstr ""
 
-#: includes/Settings.php:236
+#: includes/Settings.php:239
 msgid "Server name"
 msgstr ""
 
-#: includes/Settings.php:246
-msgid ""
-"Please enter a valid server name to request the imprint by using the WMP API."
+#: includes/Settings.php:249
+msgid "Enter a valid server name to request data using the WMP API."
 msgstr ""
 
-#: includes/Settings.php:270
+#: includes/Settings.php:261
 msgid "Responsible"
 msgstr ""
 
-#: includes/Settings.php:277 includes/Settings.php:409
+#: includes/Settings.php:268 includes/Settings.php:400
 msgid "Name"
 msgstr ""
 
-#: includes/Settings.php:292 includes/Settings.php:479
-#: includes/Settings.php:654
+#: includes/Settings.php:283 includes/Settings.php:470
+#: includes/Settings.php:645
 msgid "Email"
 msgstr ""
 
-#: includes/Settings.php:307 includes/Settings.php:423
+#: includes/Settings.php:298 includes/Settings.php:414
 msgid "Street"
 msgstr ""
 
-#: includes/Settings.php:322
+#: includes/Settings.php:313
 msgid "Postcode"
 msgstr ""
 
-#: includes/Settings.php:336 includes/Settings.php:437
+#: includes/Settings.php:327 includes/Settings.php:428
 msgid "City"
 msgstr ""
 
-#: includes/Settings.php:351 includes/Settings.php:451
+#: includes/Settings.php:342 includes/Settings.php:442
 msgid "Phone"
 msgstr ""
 
-#: includes/Settings.php:366 includes/Settings.php:493
+#: includes/Settings.php:357 includes/Settings.php:484
 msgid "Organization"
 msgstr ""
 
-#: includes/Settings.php:381 includes/Settings.php:508
+#: includes/Settings.php:372 includes/Settings.php:499
 msgid "Person-ID"
 msgstr ""
 
-#: includes/Settings.php:402
+#: includes/Settings.php:393
 msgid "Webmaster"
 msgstr ""
 
-#: includes/Settings.php:465
+#: includes/Settings.php:456
 msgid "Fax"
 msgstr ""
 
-#: includes/Settings.php:529
+#: includes/Settings.php:520
 msgid "Newsletter"
 msgstr ""
 
-#: includes/Settings.php:536
+#: includes/Settings.php:527
 msgid "Show the newsletter section?"
 msgstr ""
 
-#: includes/Settings.php:547 includes/Settings.php:579
-#: includes/Settings.php:625
+#: includes/Settings.php:538 includes/Settings.php:570
+#: includes/Settings.php:616
 msgid "Yes"
 msgstr ""
 
-#: includes/Settings.php:548 includes/Settings.php:580
-#: includes/Settings.php:626
+#: includes/Settings.php:539 includes/Settings.php:571
+#: includes/Settings.php:617
 msgid "No"
 msgstr ""
 
-#: includes/Settings.php:561
+#: includes/Settings.php:552
 msgid "New section"
 msgstr ""
 
-#: includes/Settings.php:568
+#: includes/Settings.php:559
 msgid "Add a new section?"
 msgstr ""
 
-#: includes/Settings.php:587
+#: includes/Settings.php:578
 msgid "Content of the new section"
 msgstr ""
 
-#: includes/Settings.php:607
+#: includes/Settings.php:598
 msgid "General"
 msgstr ""
 
-#: includes/Settings.php:614
+#: includes/Settings.php:605
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr ""
 
-#: includes/Settings.php:633
+#: includes/Settings.php:624
 msgid "If not, with what reason"
 msgstr ""
 
-#: includes/Settings.php:642
+#: includes/Settings.php:633
 msgid "Please include all necessary details"
 msgstr ""
 
-#: includes/Settings.php:661
+#: includes/Settings.php:652
 msgid "Receiver email"
 msgstr ""
 
-#: includes/Settings.php:677
+#: includes/Settings.php:668
 msgid "Subject"
 msgstr ""
 
-#: includes/Settings.php:692
+#: includes/Settings.php:683
 msgid "CC"
 msgstr ""
 
-#: includes/Settings.php:826
+#: includes/Settings.php:824
 msgid "Please select one"
 msgstr ""
 
-#: includes/Settings.php:883
-msgid "Update imprint data by using the WMP API"
+#: includes/Settings.php:880
+msgid "Can not connect to the server."
 msgstr ""
 
-#: includes/Settings.php:908
-msgid "All fields were updated!"
+#: includes/Settings.php:885
+msgid "Response is empty."
 msgstr ""
 
-#: includes/Settings.php:912
-msgid "Can not connect to the server"
+#: includes/Settings.php:890 includes/Settings.php:901
+msgid "Key not available."
 msgstr ""
 
 #: includes/ContactForm.php:72
@@ -269,19 +276,19 @@ msgstr ""
 msgid "accessibility"
 msgstr ""
 
-#: includes/HelpMenu.php:32
+#: includes/HelpMenu.php:31
 msgid "Here comes the Context Help content."
 msgstr ""
 
-#: includes/HelpMenu.php:36
+#: includes/HelpMenu.php:35
 msgid "Overview"
 msgstr ""
 
-#: includes/HelpMenu.php:41
+#: includes/HelpMenu.php:40
 msgid "For more information"
 msgstr ""
 
-#: includes/HelpMenu.php:42
+#: includes/HelpMenu.php:41
 msgid "RRZE Webteam on Github"
 msgstr ""
 

@@ -48,7 +48,8 @@ class Main
 
     /**
      * [adminEnqueueScripts description]
-     * @param string $hook [description]
+     * @param  string $hook [description]
+     * @return void
      */
     public function adminEnqueueScripts($hook)
     {

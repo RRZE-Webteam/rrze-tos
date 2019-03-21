@@ -13,7 +13,7 @@ class Endpoint
      */
     public function __construct()
     {
-        $this->options = Options::get_options();
+        $this->options = Options::getOptions();
 
         add_action('init', [__CLASS__, 'addRewrite']);
         add_action('template_redirect', [$this, 'templateRedirect']);

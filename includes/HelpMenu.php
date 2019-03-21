@@ -24,7 +24,6 @@ class HelpMenu
 
     /**
      * [setMenu description]
-     * @return void
      */
     protected function setMenu()
     {

@@ -10,20 +10,20 @@ class Options
      * Option name
      * @var string
      */
-    protected static $option_name = 'rrze_tos';
+    protected static $optionName = 'rrze_tos';
 
     /**
-     * [default_options description]
+     * [defaultOptions description]
      * @return array default options
      */
-    protected static function default_options()
+    protected static function defaultOptions()
     {
-        $admin_email = is_multisite() ? get_site_option('admin_email') : get_option('admin_email');
-        $siteurl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
+        $adminMail = is_multisite() ? get_site_option('admin_email') : get_option('admin_email');
+        $siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 
         $options = [
             // Imprint
-            'rrze_tos_url'                    => $siteurl,
+            'rrze_tos_url'                    => $siteUrl,
             'rrze_tos_conformity'             => '1',
             'rrze_tos_no_reason'              => '',
             // Responsible
@@ -32,7 +32,7 @@ class Options
             'rrze_tos_responsible_postalcode' => '',
             'rrze_tos_responsible_city'       => '',
             'rrze_tos_responsible_org'        => '',
-            'rrze_tos_responsible_email'      => $admin_email,
+            'rrze_tos_responsible_email'      => $adminMail,
             'rrze_tos_responsible_phone'      => '',
             'rrze_tos_responsible_id'         => '',
             // Webmaster
@@ -50,7 +50,7 @@ class Options
             'rrze_tos_protection_new_section' => '0',
             'rrze_tos_protection_new_section_text' => '',
             // Feedback email
-            'rrze_tos_receiver_email'         => $admin_email,
+            'rrze_tos_receiver_email'         => $adminMail,
             'rrze_tos_subject'                => 'Barrierefreiheit Feedback-Formular',
             'rrze_tos_cc_email'               => ''
         ];
@@ -59,14 +59,14 @@ class Options
     }
 
     /**
-     * [get_options description]
+     * [getOptions description]
      * @return object settings options
      */
-    public static function get_options()
+    public static function getOptions()
     {
-        $defaults = self::default_options();
+        $defaults = self::defaultOptions();
 
-        $options = (array) get_option(self::$option_name);
+        $options = (array) get_option(self::$optionName);
         $options = wp_parse_args($options, $defaults);
         $options = array_intersect_key($options, $defaults);
 
@@ -74,11 +74,11 @@ class Options
     }
 
     /**
-     * [get_option_name description]
+     * [getOptionName description]
      * @return string option name
      */
-    public static function get_option_name()
+    public static function getOptionName()
     {
-        return self::$option_name;
+        return self::$optionName;
     }
 }

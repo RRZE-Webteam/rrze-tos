@@ -16,7 +16,7 @@ class WMP
     public static function checkApiResponse($host = null)
     {
         if (is_null($host)) {
-            $host = wp_unslash($_SERVER['SERVER_NAME']);
+            return 0;
         }
 
         $response = wp_remote_get(esc_url_raw(sprintf('%1$s/%2$s/format/json', self::$wmpApiUrl, $host)));
@@ -33,7 +33,7 @@ class WMP
     public static function getJsonApiResponse($host = null)
     {
         if (is_null($host)) {
-            $host = wp_unslash($_SERVER['SERVER_NAME']);
+            return 0;
         }
         $response = wp_remote_get(esc_url_raw(sprintf('%1$s/%2$s/format/json', self::$wmpApiUrl, $host)));
         $returns = json_decode(wp_remote_retrieve_body($response), true);

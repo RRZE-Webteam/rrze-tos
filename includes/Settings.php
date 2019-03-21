@@ -2,7 +2,7 @@
 
 namespace RRZE\Tos;
 
-use RRZE\Tos\Main;
+use \WP_Error;
 
 defined('ABSPATH') || exit;
 
@@ -12,7 +12,7 @@ class Settings
      * [protected description]
      * @var string
      */
-    protected $option_name;
+    protected $optionName;
 
     /**
      * [protected description]
@@ -27,31 +27,20 @@ class Settings
     protected $settingsScreenId;
 
     /**
-     * [protected description]
-     * @var array
-     */
-    protected $settings_page_slugs;
-
-    /**
-     * Settings-Klasse wird instanziiert.
+     * [__construct description]
      */
     public function __construct()
     {
-        $this->option_name = Options::get_option_name();
-        $this->options = Options::get_options();
+        $this->optionName = Options::getOptionName();
+        $this->options = Options::getOptions();
 
         add_action(
             'admin_menu',
-            [$this, 'admin_settings_page']
+            [$this, 'adminSettingsPage']
         );
         add_action(
             'admin_init',
-            [$this, 'admin_settings']
-        );
-
-        add_action(
-            'wp_ajax_tos_update_fields',
-            [$this, 'tos_update_ajax_handler']
+            [$this, 'adminSettings']
         );
 
         add_filter(
@@ -95,16 +84,22 @@ class Settings
         ];
     }
 
-    protected function get_query_var($var, $default = '')
+    /**
+     * [getQueryVar description]
+     * @param  string $var     [description]
+     * @param  string $default [description]
+     * @return [type]          [description]
+     */
+    protected function getQueryVar($var, $default = '')
     {
-        return ! empty($_GET['current-tab']) ? esc_attr($_GET['current-tab']) : $default;
+        return ! empty($_GET[$var]) ? esc_attr($_GET[$var]) : $default;
     }
 
     /**
-     * [admin_settings_page description]
+     * [adminSettingsPage description]
      * @return [type] [description]
      */
-    public function admin_settings_page()
+    public function adminSettingsPage()
     {
         $this->settingsScreenId = add_options_page(
             __('ToS', 'rrze-tos'),
@@ -113,7 +108,7 @@ class Settings
             'rrze-tos',
             [
                 $this,
-                'settings_page'
+                'settingsPage'
             ]
         );
 
@@ -121,88 +116,96 @@ class Settings
             'load-' . $this->settingsScreenId,
             [
                 $this,
-                'admin_help_menu'
+                'adminHelpMenu'
             ]
         );
     }
 
-    public function admin_help_menu()
+    /**
+     * [adminHelpMenu description]
+     */
+    public function adminHelpMenu()
     {
         new HelpMenu($this->settingsScreenId);
     }
 
-    public function options_validate($input)
+    /**
+     * [optionsValidate description]
+     * @param  array $input [description]
+     * @return object       [description]
+     */
+    public function optionsValidate($input)
     {
-        if (isset($input)) {
-            foreach ($input as $key => $value) {
-                if (
-                    isset($_POST[$this->option_name][$key], $_POST['_wpnonce'])
-                    && wp_verify_nonce(sanitize_key($_POST['_wpnonce']), 'rrze_tos_options-options')
-                ) {
-                    if (preg_match('/email/i', $key)) {
-                        $this->options->$key = sanitize_email(wp_unslash($_POST[ $this->option_name ][$key]));
-                    } elseif ('rrze_tos_protection_new_section_text' !== $key && preg_match('/[\r\n\t ]+/', $value)) {
-                        $this->options->$key = sanitize_textarea_field(wp_unslash($_POST[$this->option_name][$key]));
-                    } elseif ('rrze_tos_protection_new_section_text' === $key) {
-                        $this->options->$key = wp_kses_post(wp_unslash($_POST[ $this->option_name ][$key]));
-                    } else {
-                        $this->options->$key = sanitize_text_field(wp_unslash($_POST[ $this->option_name ][$key]));
-                    }
+        if (isset($input) && is_array($input) && isset($_POST['_wpnonce'])
+            && wp_verify_nonce(sanitize_key($_POST['_wpnonce']), 'rrze_tos_options-options')
+        ) {
+            foreach ($input as $_k => $_v) {
+                if (preg_match('/email/i', $_k)) {
+                    $this->options->$_k = sanitize_email(wp_unslash($_v));
+                } elseif ('rrze_tos_protection_new_section_text' !== $_k && preg_match('/[\r\n\t ]+/', $_v)) {
+                    $this->options->$_k = sanitize_textarea_field(wp_unslash($_v));
+                } elseif ('rrze_tos_protection_new_section_text' === $_k) {
+                    $this->options->$_k = wp_kses_post(wp_unslash($_v));
+                } else {
+                    $this->options->$_k = sanitize_text_field(wp_unslash($_v));
                 }
+            }
+
+            if (isset($_POST['rrze-tos-api-request'])) {
+                $this->updateFromApi();
             }
         }
         return $this->options;
     }
 
     /**
-     * [settings_page description]
-     * @return void
+     * [settingsPage description]
      */
-    public function settings_page()
+    public function settingsPage()
     {
-        ?>
+        $slugs = self::getSettingsPageSlug();
+        $default = array_keys($slugs)[0];
+        $currentTab = $this->getQueryVar('current-tab', $default); ?>
         <div class="wrap">
-            <h2>
-                <?php echo __('Settings &rsaquo; ToS', 'rrze-tos'); ?>
+            <h1><?php echo __('Settings &rsaquo; ToS', 'rrze-tos'); ?></h1>
+            <h2 class="nav-tab-wrapper wp-clearfix">
+            <?php foreach ($slugs as $tab => $name) :
+                $class = $tab == $currentTab ? 'nav-tab-active' : '';
+                printf('<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
+                    esc_attr($class),
+                    esc_attr($tab),
+                    esc_attr($name)
+                );
+            endforeach; ?>
             </h2>
-            <h3 class="nav-tab-wrapper">
-                <?php
-                $slugs = self::getSettingsPageSlug();
-                $default = array_keys($slugs)[0];
-                foreach ($slugs as $tab => $name) {
-                    $class = ($tab == $this->get_query_var('current-tab', $default)) ? 'nav-tab-active' : '';
-                    printf(
-                        '<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
-                        esc_attr($class),
-                        esc_attr($tab),
-                        esc_attr($name)
-                    );
-                } ?>
-            </h3>
             <form method="post" action="options.php" id="tos-admin-form">
                 <?php settings_fields('rrze_tos_options'); ?>
                 <?php do_settings_sections('rrze_tos_options'); ?>
-                <?php submit_button(); ?>
+                <p class="submit">
+                    <?php submit_button(esc_html__('Save Changes', 'rrze-tos'), 'primary', 'rrze-tos-submit', false); ?>
+                    <?php if ($currentTab == 'imprint') :
+                        submit_button(esc_html__('Update data by using the WMP API', 'rrze-tos'), 'secondary', 'rrze-tos-api-request', false);
+                    endif; ?>
+                </p>
             </form>
         </div>
         <?php
     }
 
     /**
-     * [admin_settings description]
-     * @return void
+     * [adminSettings description]
      */
-    public function admin_settings()
+    public function adminSettings()
     {
         register_setting(
             'rrze_tos_options',
-            $this->option_name,
-            [$this, 'options_validate']
+            $this->optionName,
+            [$this, 'optionsValidate']
         );
 
         $slugs = self::getSettingsPageSlug();
         $default = array_keys($slugs)[0];
-        switch ($this->get_query_var('current-tab', $default)) {
+        switch ($this->getQueryVar('current-tab', $default)) {
             case 'imprint':
                 $this->addWmpSection();
                 $this->addResponsibleSection();
@@ -241,23 +244,11 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_wmp',
             [
-                'name' => 'rrze_tos_url',
-                'required'     => 'required',
-                'description' => __('Please enter a valid server name to request the imprint by using the WMP API.', 'rrze-tos')
+                'name'        => 'rrze_tos_url',
+                'required'    => 'required',
+                'description' => __('Enter a valid server name to request data using the WMP API.', 'rrze-tos')
             ]
         );
-
-        add_settings_field(
-            'rrze_tos_update_fields',
-            __('', 'rrze-tos'),
-            [
-                $this,
-                'rrze_tos_update_callback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_wmp'
-        );
-
     }
 
     /**
@@ -414,7 +405,7 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_webmaster',
             [
-                'name'     => 'rrze_tos_webmaster_name'
+                'name' => 'rrze_tos_webmaster_name'
             ]
         );
 
@@ -484,7 +475,7 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_webmaster',
             [
-                'name'     => 'rrze_tos_webmaster_email'
+                'name' => 'rrze_tos_webmaster_email'
             ]
         );
 
@@ -536,7 +527,7 @@ class Settings
             __('Show the newsletter section?', 'rrze-tos'),
             [
                 $this,
-                'rrze_tos_radio_callback'
+                'inputRadioCallback'
             ],
             'rrze_tos_options',
             'rrze_tos_section_privacy',
@@ -568,7 +559,7 @@ class Settings
             __('Add a new section?', 'rrze-tos'),
             [
                 $this,
-                'rrze_tos_radio_callback'
+                'inputRadioCallback'
             ],
             'rrze_tos_options',
             'rrze_tos_section_extra',
@@ -614,7 +605,7 @@ class Settings
             __('Are the conformity conditions of the WCAG 2.0 AA fulfilled?', 'rrze-tos'),
             [
                 $this,
-                'rrze_tos_radio_callback',
+                'inputRadioCallback',
             ],
             'rrze_tos_options',
             'rrze_tos_section_general',
@@ -706,7 +697,6 @@ class Settings
     /**
      * [inputTextCallback description]
      * @param  array $args [description]
-     * @return void
      */
     public function inputTextCallback($args)
     {
@@ -731,7 +721,7 @@ class Settings
             $required = esc_attr($args['required']);
         } ?>
         <input
-            name="<?php printf('%1$s[%2$s]', esc_attr($this->option_name), esc_attr($name)); ?>"
+            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
             type="text"
             class="<?php echo isset($class) ? esc_attr($class) : 'regular-text'; ?>"
             value="<?php echo isset($value) ? $value : ''; ?>"
@@ -746,6 +736,10 @@ class Settings
         <?php endif;
     }
 
+    /**
+     * [textareaCallback description]
+     * @param array $args [description]
+     */
     public function textareaCallback($args)
     {
         if (! array_key_exists('name', $args)) {
@@ -760,7 +754,7 @@ class Settings
             $description = esc_attr($args['description']);
         } ?>
         <textarea
-            name="<?php printf('%1$s[%2$s]', esc_attr($this->option_name), esc_attr($name)); ?>"
+            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
             cols="50"
             rows="8"
         ><?php echo isset($value) ? $value : ''; ?></textarea>
@@ -770,7 +764,11 @@ class Settings
         <?php endif;
     }
 
-    public function rrze_tos_radio_callback($args)
+    /**
+     * [inputRadioCallback description]
+     * @param array $args [description]
+     */
+    public function inputRadioCallback($args)
     {
         if (! array_key_exists('name', $args)) {
             return;
@@ -791,12 +789,12 @@ class Settings
         foreach ($radios as $_k => $_v) : ?>
             <label>
                 <input
-                    name="<?php printf('%1$s[%2$s]', esc_attr($this->option_name), esc_attr($name)); ?>"
+                    name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
                     type="radio"
                     value="<?php echo esc_attr($_k); ?>"
                     <?php if (array_key_exists($name, $this->options)) :
                         checked($this->options->$name, $_k);
-        endif; ?>
+                    endif; ?>
                 >
                 <?php echo esc_attr($_v); ?>
             </label>
@@ -807,7 +805,7 @@ class Settings
         <?php endif;
     }
 
-    public function rrze_tos_select_callback($args)
+    public function selectCallback($args)
     {
         $limit = [];
         if (array_key_exists('name', $args)) {
@@ -822,20 +820,16 @@ class Settings
         <?php if (isset($name)) {
             ?>
             <select
-                name="<?php printf('%1$s[%2$s]', esc_attr($this->option_name), esc_attr($name)); ?>"
+                name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
                 title="<?php __('Please select one', 'rrze-tos'); ?>">
-                <?php foreach ($limit as $_k => $_v) {
-                ?>
-                    <option value='<?php echo esc_attr($_k); ?>'
+                <?php foreach ($limit as $_k => $_v) : ?>
+                    <option value="<?php echo esc_attr($_k); ?>"
                         <?php
                         if (array_key_exists($name, $this->options)) {
                             selected($this->options->$name, $_k);
                         } ?>
-                    >
-                        <?php echo esc_attr($_v); ?>
-                    </option>
-                <?php
-            } ?>
+                    ><?php echo esc_attr($_v); ?></option>
+                <?php endforeach; ?>
             </select>
         <?php
         } ?>
@@ -847,7 +841,6 @@ class Settings
     /**
      * [wpEditor description]
      * @param  array $args [description]
-     * @return void
      */
     public function wpEditor($args)
     {
@@ -867,7 +860,7 @@ class Settings
         $settings = [
             'editor_height' => 300,
             'media_buttons' => false,
-            'textarea_name' => sprintf('%1$s[%2$s]', esc_attr($this->option_name), esc_attr($name)),
+            'textarea_name' => sprintf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name))
         ];
 
         wp_editor($content, $name, $settings);
@@ -876,42 +869,44 @@ class Settings
         <?php endif;
     }
 
-    public function rrze_tos_update_callback()
+    /**
+     * [updateFromApi description]
+     * @return mixed [description]
+     */
+    protected function updateFromApi()
     {
-        ?>
-        <button class=" button button-primary " name="update" id="update">
-            <span class=""><?php esc_html_e('Update imprint data by using the WMP API', 'rrze-tos'); ?></span>
-        </button>
-        <?php
-    }
-
-    public function tos_update_ajax_handler()
-    {
-        $status_code = WMP::checkApiResponse($this->options->rrze_tos_url);
-        if (200 == $status_code) {
-            $wmp_option = WMP::getJsonApiResponse($this->options->rrze_tos_url);
-            foreach ($wmp_option['verantwortlich'] as $wmp_key => $wmp_value) {
-                if (! is_null($wmp_value)) {
-                    $options_key1                 = "rrze_tos_responsible_$wmp_key";
-                    $this->options->$options_key1 = $wmp_value;
-                }
-            }
-
-            foreach ($wmp_option['webmaster'] as $wmp_key => $wmp_value) {
-                if (! is_null($wmp_value)) {
-                    $options_key                 = "rrze_tos_webmaster_$wmp_key";
-                    $this->options->$options_key = $wmp_value;
-                }
-            }
-
-            update_option('rrze_tos', $this->options, true);
-            $wmp_option['success'] = __('All fields were updated!', 'rrze-tos');
-            echo wp_json_encode($wmp_option);
-        } else {
-            echo esc_html(header('HTTP/1.0 404 Not Found'));
-            esc_html_e('Can not connect to the server', 'rrze-tos');
+        $statusCode = WMP::checkApiResponse($this->options->rrze_tos_url);
+        if ($statusCode !== 200) {
+            return new WP_Error($statusCode, __('Can not connect to the server.', 'rrze-tos'));
         }
 
-        wp_die();
+        $wmpOptions = WMP::getJsonApiResponse($this->options->rrze_tos_url);
+        if (! is_array($wmpOptions)) {
+            return new WP_Error('empty-response', __('Response is empty.', 'rrze-tos'));
+        }
+
+        $responsibleKey = 'verantwortlich';
+        if (! array_key_exists($responsibleKey, $wmpOptions)) {
+            return new WP_Error('key-not-available', __('Key not available.', 'rrze-tos'));
+        }
+        foreach ($wmpOptions[$responsibleKey] as $_k => $_v) {
+            if (! is_null($_v)) {
+                $optionKey = "rrze_tos_responsible_$_k";
+                $this->options->$optionKey = $_v;
+            }
+        }
+
+        $webmasterKey = 'webmaster';
+        if (! array_key_exists($webmasterKey, $wmpOptions)) {
+            return new WP_Error('key-not-available', __('Key not available.', 'rrze-tos'));
+        }
+        foreach ($wmpOptions[$webmasterKey] as $_k => $_v) {
+            if (! is_null($_v)) {
+                $optionKey = "rrze_tos_webmaster_$_k";
+                $this->options->$optionKey = $_v;
+            }
+        }
+
+        return update_option($this->optionName, $this->options, true);
     }
 }

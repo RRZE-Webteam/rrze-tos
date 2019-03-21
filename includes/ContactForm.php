@@ -13,7 +13,7 @@ class ContactForm
     public function __construct()
     {
         $this->error = false;
-        $this->options = Options::get_options();
+        $this->options = Options::getOptions();
     }
 
     public function setForm()
