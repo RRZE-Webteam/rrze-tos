@@ -165,7 +165,7 @@ class Settings
             <h2>
                 <?php echo __('Settings &rsaquo; ToS', 'rrze-tos'); ?>
             </h2>
-            <h3 class="nav-tab-wrapper">
+            <h2 class="nav-tab-wrapper wp-clearfix">
                 <?php
                 $slugs = self::getSettingsPageSlug();
                 $default = array_keys($slugs)[0];
@@ -178,7 +178,7 @@ class Settings
                         esc_attr($name)
                     );
                 } ?>
-            </h3>
+            </h2>
             <form method="post" action="options.php" id="tos-admin-form">
                 <?php settings_fields('rrze_tos_options'); ?>
                 <?php do_settings_sections('rrze_tos_options'); ?>
