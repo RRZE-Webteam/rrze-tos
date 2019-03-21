@@ -36,7 +36,7 @@ class Locale
 
     /**
      * [getLangCode description]
-     * @return [type] [description]
+     * @return string [description]
      */
     public static function getLangCode()
     {
