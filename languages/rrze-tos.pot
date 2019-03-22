@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-21 15:45+0000\n"
+"POT-Creation-Date: 2019-03-22 14:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -49,146 +49,156 @@ msgstr ""
 msgid "ToS"
 msgstr ""
 
-#: includes/Settings.php:170
+#: includes/Settings.php:172
 msgid "Settings &rsaquo; ToS"
 msgstr ""
 
-#: includes/Settings.php:185
+#: includes/Settings.php:187
 msgid "Save Changes"
 msgstr ""
 
-#: includes/Settings.php:187
+#: includes/Settings.php:189
 msgid "Update data by using the WMP API"
 msgstr ""
 
-#: includes/Settings.php:232
-msgid "WMP API"
+#: includes/Settings.php:241
+msgid "WMP search term"
 msgstr ""
 
-#: includes/Settings.php:239
-msgid "Server name"
+#: includes/Settings.php:251
+msgid ""
+"Website that is used as a search term to obtain imprint data using the WMP "
+"API."
 msgstr ""
 
-#: includes/Settings.php:249
-msgid "Enter a valid server name to request data using the WMP API."
+#: includes/Settings.php:257
+msgid "Websites"
 msgstr ""
 
-#: includes/Settings.php:261
+#: includes/Settings.php:268
+msgid "One or more websites referred to in the imprint."
+msgstr ""
+
+#: includes/Settings.php:280
 msgid "Responsible"
 msgstr ""
 
-#: includes/Settings.php:268 includes/Settings.php:400
+#: includes/Settings.php:287 includes/Settings.php:419
 msgid "Name"
 msgstr ""
 
-#: includes/Settings.php:283 includes/Settings.php:470
-#: includes/Settings.php:645
+#: includes/Settings.php:302 includes/Settings.php:489
+#: includes/Settings.php:680
 msgid "Email"
 msgstr ""
 
-#: includes/Settings.php:298 includes/Settings.php:414
+#: includes/Settings.php:317 includes/Settings.php:433
 msgid "Street"
 msgstr ""
 
-#: includes/Settings.php:313
+#: includes/Settings.php:332
 msgid "Postcode"
 msgstr ""
 
-#: includes/Settings.php:327 includes/Settings.php:428
+#: includes/Settings.php:346 includes/Settings.php:447
 msgid "City"
 msgstr ""
 
-#: includes/Settings.php:342 includes/Settings.php:442
+#: includes/Settings.php:361 includes/Settings.php:461
 msgid "Phone"
 msgstr ""
 
-#: includes/Settings.php:357 includes/Settings.php:484
+#: includes/Settings.php:376 includes/Settings.php:503
 msgid "Organization"
 msgstr ""
 
-#: includes/Settings.php:372 includes/Settings.php:499
+#: includes/Settings.php:391 includes/Settings.php:518
 msgid "Person-ID"
 msgstr ""
 
-#: includes/Settings.php:393
+#: includes/Settings.php:412
 msgid "Webmaster"
 msgstr ""
 
-#: includes/Settings.php:456
+#: includes/Settings.php:475
 msgid "Fax"
 msgstr ""
 
-#: includes/Settings.php:520
+#: includes/Settings.php:533
+msgid "Additional information"
+msgstr ""
+
+#: includes/Settings.php:554
 msgid "Newsletter"
 msgstr ""
 
-#: includes/Settings.php:527
+#: includes/Settings.php:561
 msgid "Show the newsletter section?"
 msgstr ""
 
-#: includes/Settings.php:538 includes/Settings.php:570
-#: includes/Settings.php:616
+#: includes/Settings.php:572 includes/Settings.php:604
+#: includes/Settings.php:650
 msgid "Yes"
 msgstr ""
 
-#: includes/Settings.php:539 includes/Settings.php:571
-#: includes/Settings.php:617
+#: includes/Settings.php:573 includes/Settings.php:605
+#: includes/Settings.php:651
 msgid "No"
 msgstr ""
 
-#: includes/Settings.php:552
+#: includes/Settings.php:586
 msgid "New section"
 msgstr ""
 
-#: includes/Settings.php:559
+#: includes/Settings.php:593
 msgid "Add a new section?"
 msgstr ""
 
-#: includes/Settings.php:578
+#: includes/Settings.php:612
 msgid "Content of the new section"
 msgstr ""
 
-#: includes/Settings.php:598
+#: includes/Settings.php:632
 msgid "General"
 msgstr ""
 
-#: includes/Settings.php:605
+#: includes/Settings.php:639
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr ""
 
-#: includes/Settings.php:624
+#: includes/Settings.php:658
 msgid "If not, with what reason"
 msgstr ""
 
-#: includes/Settings.php:633
+#: includes/Settings.php:668
 msgid "Please include all necessary details"
 msgstr ""
 
-#: includes/Settings.php:652
+#: includes/Settings.php:687
 msgid "Receiver email"
 msgstr ""
 
-#: includes/Settings.php:668
+#: includes/Settings.php:703
 msgid "Subject"
 msgstr ""
 
-#: includes/Settings.php:683
+#: includes/Settings.php:718
 msgid "CC"
 msgstr ""
 
-#: includes/Settings.php:824
+#: includes/Settings.php:862
 msgid "Please select one"
 msgstr ""
 
-#: includes/Settings.php:880
+#: includes/Settings.php:926
 msgid "Can not connect to the server."
 msgstr ""
 
-#: includes/Settings.php:885
+#: includes/Settings.php:931
 msgid "Response is empty."
 msgstr ""
 
-#: includes/Settings.php:890 includes/Settings.php:901
+#: includes/Settings.php:936 includes/Settings.php:947
 msgid "Key not available."
 msgstr ""
 

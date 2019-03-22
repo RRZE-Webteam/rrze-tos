@@ -9,12 +9,12 @@ jQuery(document).ready(function($) {
     }
 
     function checkNewSection() {
-        var rrzeTosNewSection = $("input[name='rrze_tos[rrze_tos_protection_new_section]']:checked", "#tos-admin-form").val();
+        var rrzeTosNewSection = $("input[name='rrze_tos[rrze_tos_privacy_new_section]']:checked", "#tos-admin-form").val();
         console.log(rrzeTosNewSection);
         if ('1' === rrzeTosNewSection) {
-            $("#wp-rrze_tos_protection_new_section_text-wrap").parents('tr').show();
+            $("#wp-rrze_tos_privacy_new_section_text-wrap").parents('tr').show();
         } else {
-            $("#wp-rrze_tos_protection_new_section_text-wrap").parents('tr').hide();
+            $("#wp-rrze_tos_privacy_new_section_text-wrap").parents('tr').hide();
         }
     }
 

@@ -142,10 +142,14 @@ class Settings
             foreach ($input as $_k => $_v) {
                 if (preg_match('/email/i', $_k)) {
                     $this->options->$_k = sanitize_email(wp_unslash($_v));
-                } elseif ('rrze_tos_protection_new_section_text' !== $_k && preg_match('/[\r\n\t ]+/', $_v)) {
-                    $this->options->$_k = sanitize_textarea_field(wp_unslash($_v));
-                } elseif ('rrze_tos_protection_new_section_text' === $_k) {
+                } elseif ('rrze_tos_webmaster_more' == $_k) {
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
+                } elseif ('rrze_tos_privacy_new_section_text' == $_k) {
+                    $this->options->$_k = wp_kses_post(wp_unslash($_v));
+                } elseif ('rrze_tos_no_reason' == $_k) {
+                    $this->options->$_k = wp_kses_post(wp_unslash($_v));
+                } elseif ('rrze_tos_websites' == $_k) {
+                    $this->options->$_k = implode(PHP_EOL, array_map('sanitize_text_field', explode(PHP_EOL, wp_unslash($_v))));
                 } else {
                     $this->options->$_k = sanitize_text_field(wp_unslash($_v));
                 }
@@ -228,25 +232,42 @@ class Settings
     protected function addWmpSection()
     {
         add_settings_section(
-            'rrze_tos_section_wmp',
-            __('WMP API', 'rrze-tos'),
+            'rrze_tos_section_url',
+            '',
             '__return_false',
             'rrze_tos_options'
         );
 
         add_settings_field(
-            'rrze_tos_url',
-            __('Server name', 'rrze-tos'),
+            'rrze_tos_wmp_search_term',
+            __('WMP search term', 'rrze-tos'),
             [
                 $this,
-                'inputTextCallback',
+                'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_wmp',
+            'rrze_tos_section_url',
             [
-                'name'        => 'rrze_tos_url',
+                'name'        => 'rrze_tos_wmp_search_term',
                 'required'    => 'required',
-                'description' => __('Enter a valid server name to request data using the WMP API.', 'rrze-tos')
+                'description' => __('Website that is used as a search term to obtain imprint data using the WMP API.', 'rrze-tos')
+            ]
+        );
+
+        add_settings_field(
+            'rrze_tos_websites',
+            __('Websites', 'rrze-tos'),
+            [
+                $this,
+                'textareaCallback',
+            ],
+            'rrze_tos_options',
+            'rrze_tos_section_url',
+            [
+                'name'        => 'rrze_tos_websites',
+                'required'    => 'required',
+                'rows'        => 4,
+                'description' => __('One or more websites referred to in the imprint.', 'rrze-tos')
             ]
         );
     }
@@ -508,6 +529,21 @@ class Settings
                 ]
             );
         }
+
+        add_settings_field(
+            'rrze_tos_webmaster_more',
+            __('Additional information', 'rrze-tos'),
+            [
+                $this,
+                'wpEditor'
+            ],
+            'rrze_tos_options',
+            'rrze_tos_section_webmaster',
+            [
+                'name'   => 'rrze_tos_webmaster_more',
+                'height' => 200,
+            ]
+        );
     }
 
     /**
@@ -523,7 +559,7 @@ class Settings
         );
 
         add_settings_field(
-            'rrze_tos_protection_newsletter',
+            'rrze_tos_privacy_newsletter',
             __('Show the newsletter section?', 'rrze-tos'),
             [
                 $this,
@@ -532,7 +568,7 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_privacy',
             [
-                'name'    => 'rrze_tos_protection_newsletter',
+                'name'    => 'rrze_tos_privacy_newsletter',
                 'options' =>
                     [
                         '1' => __('Yes', 'rrze-tos'),
@@ -555,7 +591,7 @@ class Settings
         );
 
         add_settings_field(
-            'rrze_tos_protection_new_section',
+            'rrze_tos_privacy_new_section',
             __('Add a new section?', 'rrze-tos'),
             [
                 $this,
@@ -564,7 +600,7 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_extra',
             [
-                'name'    => 'rrze_tos_protection_new_section',
+                'name'    => 'rrze_tos_privacy_new_section',
                 'options' =>
                     [
                         '1' => __('Yes', 'rrze-tos'),
@@ -574,7 +610,7 @@ class Settings
         );
 
         add_settings_field(
-            'rrze_tos_protection_new_section_text',
+            'rrze_tos_privacy_new_section_text',
             __('Content of the new section', 'rrze-tos'),
             [
                 $this,
@@ -583,7 +619,7 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_extra',
             [
-                'name' => 'rrze_tos_protection_new_section_text'
+                'name' => 'rrze_tos_privacy_new_section_text'
             ]
         );
     }
@@ -624,12 +660,13 @@ class Settings
             __('If not, with what reason', 'rrze-tos'),
             [
                 $this,
-                'textareaCallback',
+                'wpEditor',
             ],
             'rrze_tos_options',
             'rrze_tos_section_general',
             [
                 'name'        => 'rrze_tos_no_reason',
+                'height'      => 200,
                 'description' => __('Please include all necessary details', 'rrze-tos'),
             ]
         );
@@ -750,13 +787,16 @@ class Settings
         if (array_key_exists($name, $this->options)) {
             $value = sanitize_textarea_field($this->options->$name);
         }
+        if (array_key_exists('rows', $args)) {
+            $rows = absint($args['rows']);
+        }
         if (array_key_exists('description', $args)) {
             $description = esc_attr($args['description']);
         } ?>
         <textarea
             name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
             cols="50"
-            rows="8"
+            rows="<?php echo isset($rows) && $rows > 0 ? $rows : 8; ?>"
         ><?php echo isset($value) ? $value : ''; ?></textarea>
         <br>
         <?php if (isset($description)) : ?>
@@ -853,12 +893,20 @@ class Settings
         if (array_key_exists($name, $this->options)) {
             $content = wp_unslash($this->options->$name);
         }
+        if (array_key_exists('wpautop', $args)) {
+            $wpautop = esc_attr($args['wpautop']);
+        }
+        if (array_key_exists('height', $args)) {
+            $height = esc_attr($args['height']);
+        }
         if (array_key_exists('description', $args)) {
             $description = esc_attr($args['description']);
         }
 
         $settings = [
-            'editor_height' => 300,
+            'teeny'         => true,
+            'wpautop'       => false,
+            'editor_height' => isset($height) && $height > 150 ? $height : 250,
             'media_buttons' => false,
             'textarea_name' => sprintf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name))
         ];
@@ -875,12 +923,12 @@ class Settings
      */
     protected function updateFromApi()
     {
-        $statusCode = WMP::checkApiResponse($this->options->rrze_tos_url);
+        $statusCode = WMP::checkApiResponse($this->options->rrze_tos_wmp_search_term);
         if ($statusCode !== 200) {
             return new WP_Error($statusCode, __('Can not connect to the server.', 'rrze-tos'));
         }
 
-        $wmpOptions = WMP::getJsonApiResponse($this->options->rrze_tos_url);
+        $wmpOptions = WMP::getJsonApiResponse($this->options->rrze_tos_wmp_search_term);
         if (! is_array($wmpOptions)) {
             return new WP_Error('empty-response', __('Response is empty.', 'rrze-tos'));
         }

@@ -23,36 +23,39 @@ class Options
 
         $options = [
             // Imprint
-            'rrze_tos_url'                    => $siteUrl,
-            'rrze_tos_conformity'             => '1',
-            'rrze_tos_no_reason'              => '',
+            'rrze_tos_wmp_search_term'          => $siteUrl,
+            'rrze_tos_websites'                 => $siteUrl,
+            'rrze_tos_websites_more'            => '0',
+            'rrze_tos_conformity'               => '1',
+            'rrze_tos_no_reason'                => '',
             // Responsible
-            'rrze_tos_responsible_name'       => '',
-            'rrze_tos_responsible_street'     => '',
-            'rrze_tos_responsible_postalcode' => '',
-            'rrze_tos_responsible_city'       => '',
-            'rrze_tos_responsible_org'        => '',
-            'rrze_tos_responsible_email'      => $adminMail,
-            'rrze_tos_responsible_phone'      => '',
-            'rrze_tos_responsible_id'         => '',
+            'rrze_tos_responsible_name'         => '',
+            'rrze_tos_responsible_street'       => '',
+            'rrze_tos_responsible_postalcode'   => '',
+            'rrze_tos_responsible_city'         => '',
+            'rrze_tos_responsible_org'          => '',
+            'rrze_tos_responsible_email'        => $adminMail,
+            'rrze_tos_responsible_phone'        => '',
+            'rrze_tos_responsible_id'           => '',
             // Webmaster
-            'rrze_tos_webmaster_name'         => '',
-            'rrze_tos_webmaster_street'       => '',
-            'rrze_tos_webmaster_postalcode'   => '',
-            'rrze_tos_webmaster_city'         => '',
-            'rrze_tos_webmaster_org'          => '',
-            'rrze_tos_webmaster_email'        => '',
-            'rrze_tos_webmaster_phone'        => '',
-            'rrze_tos_webmaster_fax'          => '',
-            'rrze_tos_webmaster_id'           => '',
+            'rrze_tos_webmaster_name'           => '',
+            'rrze_tos_webmaster_street'         => '',
+            'rrze_tos_webmaster_postalcode'     => '',
+            'rrze_tos_webmaster_city'           => '',
+            'rrze_tos_webmaster_org'            => '',
+            'rrze_tos_webmaster_email'          => '',
+            'rrze_tos_webmaster_phone'          => '',
+            'rrze_tos_webmaster_fax'            => '',
+            'rrze_tos_webmaster_id'             => '',
+            'rrze_tos_webmaster_more'           => '',
             // Privacy
-            'rrze_tos_protection_newsletter'  => '1',
-            'rrze_tos_protection_new_section' => '0',
-            'rrze_tos_protection_new_section_text' => '',
+            'rrze_tos_privacy_newsletter'       => '1',
+            'rrze_tos_privacy_new_section'      => '0',
+            'rrze_tos_privacy_new_section_text' => '',
             // Feedback email
-            'rrze_tos_receiver_email'         => $adminMail,
-            'rrze_tos_subject'                => 'Barrierefreiheit Feedback-Formular',
-            'rrze_tos_cc_email'               => ''
+            'rrze_tos_receiver_email'           => $adminMail,
+            'rrze_tos_subject'                  => 'Barrierefreiheit Feedback-Formular',
+            'rrze_tos_cc_email'                 => ''
         ];
 
         return $options;

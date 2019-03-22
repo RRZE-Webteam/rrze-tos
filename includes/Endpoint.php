@@ -75,6 +75,9 @@ class Endpoint
         );
 
         $title = mb_convert_case($endpointName, MB_CASE_TITLE, 'UTF-8');
+        $rrze_tos_websites = explode(PHP_EOL, $this->options->rrze_tos_websites);
+        $this->options->rrze_tos_websites_more = count($rrze_tos_websites) > 1 ? 1 : 0;
+        $this->options->websites = implode(', ', $rrze_tos_websites);
 
         $this->options->imprint_url = home_url($endPoints['imprint']);
         $this->options->privacy_url = home_url($endPoints['privacy']);
