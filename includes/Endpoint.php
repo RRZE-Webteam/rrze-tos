@@ -65,7 +65,8 @@ class Endpoint
         if (! $endpointName) {
             return;
         }
-
+        
+        $wp_query->is_home = false;
         $stylesheetGroup = Theme::getCurrentStylesheetGroup();
 
         $styleFile = sprintf(
