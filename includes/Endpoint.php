@@ -65,7 +65,7 @@ class Endpoint
         if (! $endpointName) {
             return;
         }
-        
+
         $wp_query->is_home = false;
         $stylesheetGroup = Theme::getCurrentStylesheetGroup();
 
@@ -79,6 +79,8 @@ class Endpoint
         $rrze_tos_websites = explode(PHP_EOL, $this->options->rrze_tos_websites);
         $this->options->rrze_tos_websites_more = count($rrze_tos_websites) > 1 ? 1 : 0;
         $this->options->websites = implode(', ', $rrze_tos_websites);
+        $this->options->webmaster_more = do_shortcode($this->options->rrze_tos_webmaster_more);
+        $this->options->privacy_new_section_text = do_shortcode($this->options->rrze_tos_privacy_new_section_text);
 
         $this->options->imprint_url = home_url($endPoints['imprint']);
         $this->options->privacy_url = home_url($endPoints['privacy']);
