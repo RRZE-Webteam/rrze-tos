@@ -3,6 +3,7 @@
 namespace RRZE\Tos;
 
 use \WP_Error;
+use \sync_helper;
 
 defined('ABSPATH') || exit;
 
@@ -155,8 +156,10 @@ class Settings
                 }
             }
 
-            if (isset($_POST['rrze-tos-api-request'])) {
-                $this->updateFromApi();
+            if (isset($_POST['rrze-tos-wmp-search-responsible'])) {
+                $this->getResponsibleWmpData();
+            } elseif (isset($_POST['rrze-tos-wmp-search-webmaster'])) {
+                $this->getWebmasterWmpData();
             }
         }
         return $this->options;
@@ -175,21 +178,19 @@ class Settings
             <h2 class="nav-tab-wrapper wp-clearfix">
             <?php foreach ($slugs as $tab => $name) :
                 $class = $tab == $currentTab ? 'nav-tab-active' : '';
-                printf('<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
+        printf(
+                    '<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
                     esc_attr($class),
                     esc_attr($tab),
                     esc_attr($name)
                 );
-            endforeach; ?>
+        endforeach; ?>
             </h2>
             <form method="post" action="options.php" id="tos-admin-form">
                 <?php settings_fields('rrze_tos_options'); ?>
                 <?php do_settings_sections('rrze_tos_options'); ?>
                 <p class="submit">
                     <?php submit_button(esc_html__('Save Changes', 'rrze-tos'), 'primary', 'rrze-tos-submit', false); ?>
-                    <?php if ($currentTab == 'imprint') :
-                        submit_button(esc_html__('Update data by using the WMP API', 'rrze-tos'), 'secondary', 'rrze-tos-api-request', false);
-                    endif; ?>
                 </p>
             </form>
         </div>
@@ -236,22 +237,6 @@ class Settings
             '',
             '__return_false',
             'rrze_tos_options'
-        );
-
-        add_settings_field(
-            'rrze_tos_wmp_search_term',
-            __('WMP search term', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_url',
-            [
-                'name'        => 'rrze_tos_wmp_search_term',
-                'required'    => 'required',
-                'description' => __('Website that is used as a search term to obtain imprint data using the WMP API.', 'rrze-tos')
-            ]
         );
 
         add_settings_field(
@@ -387,21 +372,28 @@ class Settings
             ]
         );
 
-        if (is_plugin_active('fau-person/fau-person.php')) {
-            add_settings_field(
-                'rrze_tos_responsible_id',
-                __('Person-ID', 'rrze-tos'),
-                [
-                    $this,
-                    'inputTextCallback'
+        add_settings_field(
+            'rrze_tos_wmp_search_responsible',
+            __('WMP search', 'rrze-tos'),
+            [
+                $this,
+                'inputTextCallback'
+            ],
+            'rrze_tos_options',
+            'rrze_tos_section_responsible',
+            [
+                'name'        => 'rrze_tos_wmp_search_responsible',
+                'description' => [
+                    __('Search term (website) to get the data of the responsible using WMP API.', 'rrze-tos'),
+                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->rrze_tos_wmp_search_responsible
                 ],
-                'rrze_tos_options',
-                'rrze_tos_section_responsible',
-                [
-                    'name' => 'rrze_tos_responsible_id'
+                'button'      => [
+                    'text' => __('Retrieve data', 'rrze-tos'),
+                    'type' => 'secondary',
+                    'name' => 'rrze-tos-wmp-search-responsible'
                 ]
-            );
-        }
+            ]
+        );
     }
 
     /**
@@ -514,21 +506,28 @@ class Settings
             ]
         );
 
-        if (is_plugin_active('fau-person/fau-person.php')) {
-            add_settings_field(
-                'rrze_tos_webmaster_ID',
-                __('Person-ID', 'rrze-tos'),
-                [
-                    $this,
-                    'inputTextCallback'
-                ],
-                'rrze_tos_options',
-                'rrze_tos_section_webmaster',
-                [
-                    'name' => 'rrze_tos_webmaster_ID'
+        add_settings_field(
+            'rrze_tos_wmp_search_webmaster',
+            __('WMP search', 'rrze-tos'),
+            [
+                $this,
+                'inputTextCallback'
+            ],
+            'rrze_tos_options',
+            'rrze_tos_section_webmaster',
+            [
+                'name'        => 'rrze_tos_wmp_search_webmaster',
+                'description' => [
+                    __('Search term (website) to get the data of the webmaster using WMP API.', 'rrze-tos'),
+                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->rrze_tos_wmp_search_webmaster
+                 ],
+                'button'      => [
+                    'text' => __('Retrieve data', 'rrze-tos'),
+                    'type' => 'secondary',
+                    'name' => 'rrze-tos-wmp-search-webmaster'
                 ]
-            );
-        }
+            ]
+        );
 
         add_settings_field(
             'rrze_tos_webmaster_more',
@@ -749,13 +748,16 @@ class Settings
             $class = esc_attr($args['class']);
         }
         if (array_key_exists('description', $args)) {
-            $description = esc_attr($args['description']);
+            $description = $args['description'];
         }
         if (array_key_exists('autocomplete', $args)) {
             $autocomplete = esc_attr($args['autocomplete']);
         }
         if (array_key_exists('required', $args)) {
             $required = esc_attr($args['required']);
+        }
+        if (array_key_exists('button', $args)) {
+            $button = $args['button'];
         } ?>
         <input
             name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
@@ -767,9 +769,13 @@ class Settings
                 autocomplete="<?php echo esc_attr($autocomplete); ?>"
             <?php endif; ?>
         >
+        <?php if (isset($button) && is_array($button)) :
+            $this->submitButton($button);
+        endif; ?>
         <br>
-        <?php if (isset($description)) : ?>
-            <p class="description"><?php echo esc_attr($description); ?></p>
+        <?php if (isset($description)) :
+            $description = is_array($description) ? implode('<br>', array_map('esc_attr', $description)) : esc_attr($description); ?>
+            <p class="description"><?php echo make_clickable($description); ?></p>
         <?php endif;
     }
 
@@ -834,7 +840,7 @@ class Settings
                     value="<?php echo esc_attr($_k); ?>"
                     <?php if (array_key_exists($name, $this->options)) :
                         checked($this->options->$name, $_k);
-                    endif; ?>
+        endif; ?>
                 >
                 <?php echo esc_attr($_v); ?>
             </label>
@@ -917,44 +923,57 @@ class Settings
         <?php endif;
     }
 
-    /**
-     * [updateFromApi description]
-     * @return mixed [description]
-     */
-    protected function updateFromApi()
+    protected function submitButton($args)
     {
-        $statusCode = WMP::checkApiResponse($this->options->rrze_tos_wmp_search_term);
-        if ($statusCode !== 200) {
-            return new WP_Error($statusCode, __('Can not connect to the server.', 'rrze-tos'));
+        $text = array_key_exists('text', $args) ? esc_html($args['text']) : '';
+        $type = array_key_exists('type', $args) ? esc_attr($args['type']) : 'secondary';
+        $name = array_key_exists('name', $args) ? esc_attr($args['name']) : '';
+
+        submit_button($text, $type, $name, false);
+    }
+
+    protected function getResponsibleWmpData()
+    {
+        $this->updateFromWmpData(
+            [
+                'search' => $this->options->rrze_tos_wmp_search_responsible,
+                'key' => 'verantwortlich',
+                'prefix' => 'rrze_tos_responsible_'
+            ]
+        );
+    }
+
+    protected function getWebmasterWmpData()
+    {
+        $this->updateFromWmpData(
+            [
+                'search' => $this->options->rrze_tos_wmp_search_webmaster,
+                'key' => 'webmaster',
+                'prefix' => 'rrze_tos_webmaster_'
+            ]
+        );
+    }
+
+    protected function updateFromWmpData($args)
+    {
+        $search = array_key_exists('search', $args) ? esc_attr($args['search']) : '';
+        $key = array_key_exists('key', $args) ? esc_attr($args['key']) : '';
+        $prefix = array_key_exists('prefix', $args) ? esc_attr($args['prefix']) : '';
+
+        $data = WMP::getJsonData($search);
+        if (is_wp_error($data)) {
+            return $data;
         }
 
-        $wmpOptions = WMP::getJsonApiResponse($this->options->rrze_tos_wmp_search_term);
-        if (! is_array($wmpOptions)) {
-            return new WP_Error('empty-response', __('Response is empty.', 'rrze-tos'));
+        if (! array_key_exists($key, $data)) {
+            return new WP_Error('wmp-key-is-not-available', __('WMP key is not available.', 'rrze-tos'));
         }
-
-        $responsibleKey = 'verantwortlich';
-        if (! array_key_exists($responsibleKey, $wmpOptions)) {
-            return new WP_Error('key-not-available', __('Key not available.', 'rrze-tos'));
-        }
-        foreach ($wmpOptions[$responsibleKey] as $_k => $_v) {
+        foreach ($data[$key] as $_k => $_v) {
             if (! is_null($_v)) {
-                $optionKey = "rrze_tos_responsible_$_k";
+                $optionKey = sprintf('%1$s%2$s', $prefix, $_k);
                 $this->options->$optionKey = $_v;
             }
         }
-
-        $webmasterKey = 'webmaster';
-        if (! array_key_exists($webmasterKey, $wmpOptions)) {
-            return new WP_Error('key-not-available', __('Key not available.', 'rrze-tos'));
-        }
-        foreach ($wmpOptions[$webmasterKey] as $_k => $_v) {
-            if (! is_null($_v)) {
-                $optionKey = "rrze_tos_webmaster_$_k";
-                $this->options->$optionKey = $_v;
-            }
-        }
-
         return update_option($this->optionName, $this->options, true);
     }
 }

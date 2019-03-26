@@ -2,18 +2,35 @@
 
 namespace RRZE\Tos;
 
+use \WP_Error;
+
 defined('ABSPATH') || exit;
 
 class WMP
 {
     protected static $wmpApiUrl = 'https://www.wmp.rrze.fau.de/suche/impressum';
 
+    public static function getJsonData($search = '')
+    {
+        $statusCode = self::checkApiResponse($search);
+        if ($statusCode !== 200) {
+            return new WP_Error($statusCode, __('Can not retrieve data from WMP.', 'rrze-tos'));
+        }
+
+        $data = self::getJsonApiResponse($search);
+        if (! is_array($data)) {
+            return new WP_Error('wmp-empty-data', __('WMP data is empty.', 'rrze-tos'));
+        }
+
+        return $data;
+    }
+
     /**
      * Check connection with remote server.
      * @param null|string $host Hostname to check connection
      * @return int|string
      */
-    public static function checkApiResponse($host = null)
+    protected static function checkApiResponse($host = null)
     {
         if (is_null($host)) {
             return 0;
@@ -30,7 +47,7 @@ class WMP
      * @param null|string $host Hostname to retrieve information.
      * @return array|string
      */
-    public static function getJsonApiResponse($host = null)
+    protected static function getJsonApiResponse($host = null)
     {
         if (is_null($host)) {
             return 0;
