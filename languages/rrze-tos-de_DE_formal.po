@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-22 14:24+0000\n"
-"PO-Revision-Date: 2019-03-22 14:26+0000\n"
+"POT-Creation-Date: 2019-03-26 14:48+0000\n"
+"PO-Revision-Date: 2019-03-26 14:50+0000\n"
 "Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
 "Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
@@ -33,180 +33,180 @@ msgstr ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
 "WordPress version %2$s."
 
-#: includes/Settings.php:68
+#: includes/WMP.php:16
+msgid "Can not retrieve data from WMP."
+msgstr "Kann keine Daten aus WMP abrufen."
+
+#: includes/WMP.php:21
+msgid "WMP data is empty."
+msgstr "WMP-Daten sind leer."
+
+#: includes/Settings.php:69
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/Settings.php:81
+#: includes/Settings.php:82
 msgid "Imprint"
 msgstr "Impressum"
 
-#: includes/Settings.php:82
+#: includes/Settings.php:83
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: includes/Settings.php:83
+#: includes/Settings.php:84
 msgid "Accessibility"
 msgstr "Barrierefreiheit"
 
-#: includes/Settings.php:105 includes/Settings.php:106
+#: includes/Settings.php:106 includes/Settings.php:107
 msgid "ToS"
 msgstr "ToS"
 
-#: includes/Settings.php:172
+#: includes/Settings.php:177
 msgid "Settings &rsaquo; ToS"
 msgstr "Einstellungen &rsaquo; ToS"
 
-#: includes/Settings.php:187
+#: includes/Settings.php:192
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: includes/Settings.php:189
-msgid "Update data by using the WMP API"
-msgstr "Aktualisierung der Daten über die WMP-API"
-
-#: includes/Settings.php:241
-msgid "WMP search term"
-msgstr "WMP-Suchbegriff"
-
-#: includes/Settings.php:251
-msgid ""
-"Website that is used as a search term to obtain imprint data using the WMP "
-"API."
-msgstr ""
-"Website, die als Suchbegriff verwendet wird, um Impressumsdaten über die WMP-"
-"API zu erhalten."
-
-#: includes/Settings.php:257
+#: includes/Settings.php:243
 msgid "Websites"
 msgstr "Websites"
 
-#: includes/Settings.php:268
+#: includes/Settings.php:254
 msgid "One or more websites referred to in the imprint."
 msgstr "Eine oder mehrere Websites, auf die im Impressum verwiesen wird."
 
-#: includes/Settings.php:280
+#: includes/Settings.php:266
 msgid "Responsible"
 msgstr "Verantwortlich"
 
-#: includes/Settings.php:287 includes/Settings.php:419
+#: includes/Settings.php:273 includes/Settings.php:413
 msgid "Name"
 msgstr "Name"
 
-#: includes/Settings.php:302 includes/Settings.php:489
-#: includes/Settings.php:680
+#: includes/Settings.php:288 includes/Settings.php:483
+#: includes/Settings.php:681
 msgid "Email"
 msgstr "E-Mail"
 
-#: includes/Settings.php:317 includes/Settings.php:433
+#: includes/Settings.php:303 includes/Settings.php:427
 msgid "Street"
 msgstr "Straße"
 
-#: includes/Settings.php:332
+#: includes/Settings.php:318
 msgid "Postcode"
 msgstr "PLZ"
 
-#: includes/Settings.php:346 includes/Settings.php:447
+#: includes/Settings.php:332 includes/Settings.php:441
 msgid "City"
 msgstr "Ort"
 
-#: includes/Settings.php:361 includes/Settings.php:461
+#: includes/Settings.php:347 includes/Settings.php:455
 msgid "Phone"
 msgstr "Telefon"
 
-#: includes/Settings.php:376 includes/Settings.php:503
+#: includes/Settings.php:362 includes/Settings.php:497
 msgid "Organization"
 msgstr "Organisation"
 
-#: includes/Settings.php:391 includes/Settings.php:518
-msgid "Person-ID"
-msgstr "Person-ID"
+#: includes/Settings.php:376 includes/Settings.php:511
+msgid "WMP search"
+msgstr "WMP-Suche"
 
-#: includes/Settings.php:412
+#: includes/Settings.php:386
+msgid "Search term (website) to get the data of the responsible using WMP API."
+msgstr ""
+"Suchbegriff (Website), um die Daten des Verantwortlichen über die WMP-API zu "
+"erhalten."
+
+#: includes/Settings.php:390 includes/Settings.php:525
+msgid "Retrieve data"
+msgstr "Daten abrufen"
+
+#: includes/Settings.php:406
 msgid "Webmaster"
 msgstr "Webmaster"
 
-#: includes/Settings.php:475
+#: includes/Settings.php:469
 msgid "Fax"
 msgstr "Fax"
 
-#: includes/Settings.php:533
+#: includes/Settings.php:521
+msgid "Search term (website) to get the data of the webmaster using WMP API."
+msgstr ""
+"Suchbegriff (Website), um die Daten des Webmasters über die WMP-API zu "
+"erhalten."
+
+#: includes/Settings.php:534
 msgid "Additional information"
 msgstr ""
 
-#: includes/Settings.php:554
+#: includes/Settings.php:555
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: includes/Settings.php:561
+#: includes/Settings.php:562
 msgid "Show the newsletter section?"
 msgstr "Den Newsletter-Bereich anzeigen?"
 
-#: includes/Settings.php:572 includes/Settings.php:604
-#: includes/Settings.php:650
+#: includes/Settings.php:573 includes/Settings.php:605
+#: includes/Settings.php:651
 msgid "Yes"
 msgstr "Ja"
 
-#: includes/Settings.php:573 includes/Settings.php:605
-#: includes/Settings.php:651
+#: includes/Settings.php:574 includes/Settings.php:606
+#: includes/Settings.php:652
 msgid "No"
 msgstr "Nein"
 
-#: includes/Settings.php:586
+#: includes/Settings.php:587
 msgid "New section"
 msgstr "Neuer Abschnitt"
 
-#: includes/Settings.php:593
+#: includes/Settings.php:594
 msgid "Add a new section?"
 msgstr "Neuen Abschnitt hinzufügen?"
 
-#: includes/Settings.php:612
+#: includes/Settings.php:613
 msgid "Content of the new section"
 msgstr "Inhalt des neuen Abschnitts"
 
-#: includes/Settings.php:632
+#: includes/Settings.php:633
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/Settings.php:639
+#: includes/Settings.php:640
 msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
 msgstr "Sind die Konformitätskriterien der WCAG 2.0 AA derzeit erfüllt?"
 
-#: includes/Settings.php:658
+#: includes/Settings.php:659
 msgid "If not, with what reason"
 msgstr "Wenn nein, mit welcher Begründung"
 
-#: includes/Settings.php:668
+#: includes/Settings.php:669
 msgid "Please include all necessary details"
 msgstr "Bitte geben Sie alle notwendigen Details an"
 
-#: includes/Settings.php:687
+#: includes/Settings.php:688
 msgid "Receiver email"
 msgstr "Empfänger-E-Mail"
 
-#: includes/Settings.php:703
+#: includes/Settings.php:704
 msgid "Subject"
 msgstr "Subjekt"
 
-#: includes/Settings.php:718
+#: includes/Settings.php:719
 msgid "CC"
 msgstr "CC"
 
-#: includes/Settings.php:862
+#: includes/Settings.php:871
 msgid "Please select one"
 msgstr "Bitte wählen Sie eine aus"
 
-#: includes/Settings.php:926
-msgid "Can not connect to the server."
-msgstr "Die Verbindung zum Server kann nicht hergestellt werden."
-
-#: includes/Settings.php:931
-msgid "Response is empty."
-msgstr "Die Antwort ist leer."
-
-#: includes/Settings.php:936 includes/Settings.php:947
-msgid "Key not available."
-msgstr "Schlüssel nicht verfügbar."
+#: includes/Settings.php:966
+msgid "WMP key is not available."
+msgstr ""
 
 #: includes/ContactForm.php:72
 msgid "The message could not be sent."
