@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-26 14:48+0000\n"
+"POT-Creation-Date: 2019-05-20 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -29,11 +29,11 @@ msgid ""
 "WordPress version %2$s."
 msgstr ""
 
-#: includes/WMP.php:16
+#: includes/WMP.php:17
 msgid "Can not retrieve data from WMP."
 msgstr ""
 
-#: includes/WMP.php:21
+#: includes/WMP.php:22
 msgid "WMP data is empty."
 msgstr ""
 
@@ -61,60 +61,60 @@ msgstr ""
 msgid "Settings &rsaquo; ToS"
 msgstr ""
 
-#: includes/Settings.php:192
+#: includes/Settings.php:193
 msgid "Save Changes"
 msgstr ""
 
-#: includes/Settings.php:243
+#: includes/Settings.php:244
 msgid "Websites"
 msgstr ""
 
-#: includes/Settings.php:254
+#: includes/Settings.php:255
 msgid "One or more websites referred to in the imprint."
 msgstr ""
 
-#: includes/Settings.php:266
+#: includes/Settings.php:267
 msgid "Responsible"
 msgstr ""
 
-#: includes/Settings.php:273 includes/Settings.php:413
+#: includes/Settings.php:274 includes/Settings.php:413
 msgid "Name"
 msgstr ""
 
-#: includes/Settings.php:288 includes/Settings.php:483
+#: includes/Settings.php:289 includes/Settings.php:483
 #: includes/Settings.php:681
 msgid "Email"
 msgstr ""
 
-#: includes/Settings.php:303 includes/Settings.php:427
+#: includes/Settings.php:304 includes/Settings.php:427
 msgid "Street"
 msgstr ""
 
-#: includes/Settings.php:318
+#: includes/Settings.php:319
 msgid "Postcode"
 msgstr ""
 
-#: includes/Settings.php:332 includes/Settings.php:441
+#: includes/Settings.php:333 includes/Settings.php:441
 msgid "City"
 msgstr ""
 
-#: includes/Settings.php:347 includes/Settings.php:455
+#: includes/Settings.php:348 includes/Settings.php:455
 msgid "Phone"
 msgstr ""
 
-#: includes/Settings.php:362 includes/Settings.php:497
+#: includes/Settings.php:363 includes/Settings.php:497
 msgid "Organization"
 msgstr ""
 
-#: includes/Settings.php:376 includes/Settings.php:511
+#: includes/Settings.php:377 includes/Settings.php:511
 msgid "WMP search"
 msgstr ""
 
-#: includes/Settings.php:386
+#: includes/Settings.php:387
 msgid "Search term (website) to get the data of the responsible using WMP API."
 msgstr ""
 
-#: includes/Settings.php:390 includes/Settings.php:525
+#: includes/Settings.php:391 includes/Settings.php:525
 msgid "Retrieve data"
 msgstr ""
 
@@ -192,11 +192,11 @@ msgstr ""
 msgid "CC"
 msgstr ""
 
-#: includes/Settings.php:871
+#: includes/Settings.php:870
 msgid "Please select one"
 msgstr ""
 
-#: includes/Settings.php:966
+#: includes/Settings.php:969
 msgid "WMP key is not available."
 msgstr ""
 
@@ -306,8 +306,8 @@ msgstr ""
 
 #. Description of the plugin
 msgid ""
-"Prüfung einer Website aus dem FAU-Netzwerk gemäß den Konformitätskriterien "
-"der TOS."
+"Testing of a website from the FAU network according to the conformity "
+"criteria of the TOS."
 msgstr ""
 
 #. URI of the plugin
@@ -315,7 +315,7 @@ msgid "https://github.com/RRZE-Webteam/rrze-tos"
 msgstr ""
 
 #. Author of the plugin
-msgid "RRZE-Webteam"
+msgid "RRZE Webteam"
 msgstr ""
 
 #. Author URI of the plugin
