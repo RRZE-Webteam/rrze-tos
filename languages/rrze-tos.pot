@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 13:31+0000\n"
+"POT-Creation-Date: 2019-05-21 14:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -82,7 +82,7 @@ msgid "Name"
 msgstr ""
 
 #: includes/Settings.php:289 includes/Settings.php:483
-#: includes/Settings.php:681
+#: includes/Settings.php:684
 msgid "Email"
 msgstr ""
 
@@ -143,12 +143,10 @@ msgid "Show the newsletter section?"
 msgstr ""
 
 #: includes/Settings.php:573 includes/Settings.php:605
-#: includes/Settings.php:651
 msgid "Yes"
 msgstr ""
 
 #: includes/Settings.php:574 includes/Settings.php:606
-#: includes/Settings.php:652
 msgid "No"
 msgstr ""
 
@@ -168,35 +166,51 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: includes/Settings.php:640
-msgid "Are the conformity conditions of the WCAG 2.0 AA fulfilled?"
+#: includes/Settings.php:643
+msgid "This website"
 msgstr ""
 
-#: includes/Settings.php:659
+#: includes/Settings.php:654
+msgid "fully complies with § 1 BayBITV."
+msgstr ""
+
+#: includes/Settings.php:655
+msgid "does not comply with § 1 BayBITV."
+msgstr ""
+
+#: includes/Settings.php:662
 msgid "If not, with what reason"
 msgstr ""
 
-#: includes/Settings.php:669
+#: includes/Settings.php:672
 msgid "Please include all necessary details"
 msgstr ""
 
-#: includes/Settings.php:688
+#: includes/Settings.php:691
 msgid "Receiver email"
 msgstr ""
 
-#: includes/Settings.php:704
+#: includes/Settings.php:707
 msgid "Subject"
 msgstr ""
 
-#: includes/Settings.php:719
+#: includes/Settings.php:722
 msgid "CC"
 msgstr ""
 
-#: includes/Settings.php:870
+#: includes/Settings.php:742
+msgid ""
+"Public institutions are required by Directive (EU) 2016/2102 of the European "
+"Parliament and of the Council to make their websites and/or mobile "
+"applications accessible. For public authorities, the directive was "
+"implemented in Art. 13 BayBGG and BayBITV."
+msgstr ""
+
+#: includes/Settings.php:887
 msgid "Please select one"
 msgstr ""
 
-#: includes/Settings.php:969
+#: includes/Settings.php:986
 msgid "WMP key is not available."
 msgstr ""
 
