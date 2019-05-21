@@ -179,10 +179,10 @@ class Settings
             <?php foreach ($slugs as $tab => $name) :
                 $class = $tab == $currentTab ? 'nav-tab-active' : '';
         printf(
-                    '<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
-                    esc_attr($class),
-                    esc_attr($tab),
-                    esc_attr($name)
+            '<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
+            esc_attr($class),
+            esc_attr($tab),
+            esc_attr($name)
                 );
         endforeach; ?>
             </h2>
@@ -631,13 +631,16 @@ class Settings
         add_settings_section(
             'rrze_tos_section_general',
             __('General', 'rrze-tos'),
-            '__return_false',
+            [
+                $this,
+                'generalSectionContent'
+            ],
             'rrze_tos_options'
         );
 
         add_settings_field(
             'rrze_tos_conformity',
-            __('Are the conformity conditions of the WCAG 2.0 AA fulfilled?', 'rrze-tos'),
+            __('This website', 'rrze-tos'),
             [
                 $this,
                 'inputRadioCallback',
@@ -648,8 +651,8 @@ class Settings
                 'name'    => 'rrze_tos_conformity',
                 'options' =>
                     [
-                        '1' => __('Yes', 'rrze-tos'),
-                        '0' => __('No', 'rrze-tos')
+                        '1' => __('fully complies with § 1 BayBITV.', 'rrze-tos'),
+                        '0' => __('does not comply with § 1 BayBITV.', 'rrze-tos')
                     ]
             ]
         );
@@ -728,6 +731,15 @@ class Settings
                 'autocomplete' => 'email'
             ]
         );
+    }
+
+    /**
+     * [generalSectionContent description]
+     * @return void
+     */
+    public function generalSectionContent()
+    {
+        _e('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos');
     }
 
     /**
@@ -851,6 +863,11 @@ class Settings
         <?php endif;
     }
 
+    /**
+     * [selectCallback description]
+     * @param  array $args [description]
+     * @return void
+     */
     public function selectCallback($args)
     {
         $limit = [];
