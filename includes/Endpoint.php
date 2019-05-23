@@ -76,15 +76,30 @@ class Endpoint
         );
 
         $title = mb_convert_case($endpointName, MB_CASE_TITLE, 'UTF-8');
-        $rrze_tos_websites = explode(PHP_EOL, $this->options->rrze_tos_websites);
-        $this->options->rrze_tos_websites_more = count($rrze_tos_websites) > 1 ? 1 : 0;
-        $this->options->websites = implode(', ', $rrze_tos_websites);
+
+        $rrzeTosWebsites = explode(PHP_EOL, $this->options->rrze_tos_websites);
+        $this->options->rrze_tos_websites_more = count($rrzeTosWebsites) > 1 ? 1 : 0;
+        $this->options->websites = implode(', ', $rrzeTosWebsites);
         $this->options->webmaster_more = do_shortcode($this->options->rrze_tos_webmaster_more);
         $this->options->privacy_new_section_text = do_shortcode($this->options->rrze_tos_privacy_new_section_text);
 
         $this->options->imprint_url = home_url($endPoints['imprint']);
         $this->options->privacy_url = home_url($endPoints['privacy']);
         $this->options->accessibility_url = home_url($endPoints['accessibility']);
+
+        $accessibilityConformityOptions = Options::getAccessibilityConformity();
+        $accessibilityConformity = $this->options->accessibility_conformity;
+        if ($accessibilityConformity !== 1) {
+            $this->options->accessibility_conformity = 0;
+        }
+        $this->options->accessibility_conformity_val = isset($accessibilityConformityOptions[$accessibilityConformity]) ? $accessibilityConformityOptions[$accessibilityConformity] : '';
+
+        $this->options->accessibility_creation_date_val = date_i18n(get_option('date_format'), strtotime($this->options->accessibility_creation_date));
+        $this->options->accessibility_last_review_date_val = date_i18n(get_option('date_format'), strtotime($this->options->accessibility_last_review_date));
+
+        $accessibilityMethodologyOptions = Options::getAccessibilityMethodology();
+        $accessibilityMethodology = $this->options->accessibility_methodology;
+        $this->options->accessibility_methodology_val = isset($accessibilityMethodologyOptions[$accessibilityMethodology]) ? $accessibilityMethodologyOptions[$accessibilityMethodology] : '';
 
         $contactForm = new ContactForm();
         $this->options->contact_form = $contactForm->setForm();

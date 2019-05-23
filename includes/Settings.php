@@ -147,7 +147,7 @@ class Settings
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
                 } elseif ('rrze_tos_privacy_new_section_text' == $_k) {
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
-                } elseif ('rrze_tos_no_reason' == $_k) {
+                } elseif ('accessibility_non_accessible_content' == $_k) {
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
                 } elseif ('rrze_tos_websites' == $_k) {
                     $this->options->$_k = implode(PHP_EOL, array_map('sanitize_text_field', explode(PHP_EOL, wp_unslash($_v))));
@@ -223,7 +223,7 @@ class Settings
             case 'accessibility':
             default:
                 $this->addGeneralSection();
-                $this->addEmailSection();
+                $this->addFeedbackSection();
         }
     }
 
@@ -639,7 +639,7 @@ class Settings
         );
 
         add_settings_field(
-            'rrze_tos_conformity',
+            'accessibility_conformity',
             __('This website', 'rrze-tos'),
             [
                 $this,
@@ -648,18 +648,14 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_general',
             [
-                'name'    => 'rrze_tos_conformity',
-                'options' =>
-                    [
-                        '1' => __('fully complies with § 1 BayBITV.', 'rrze-tos'),
-                        '0' => __('does not comply with § 1 BayBITV.', 'rrze-tos')
-                    ]
+                'name'    => 'accessibility_conformity',
+                'options' => Options::getAccessibilityConformity()
             ]
         );
 
         add_settings_field(
-            'rrze_tos_no_reason',
-            __('If not, with what reason', 'rrze-tos'),
+            'accessibility_non_accessible_content',
+            __('Non-accessible content', 'rrze-tos'),
             [
                 $this,
                 'wpEditor',
@@ -667,21 +663,66 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_general',
             [
-                'name'        => 'rrze_tos_no_reason',
+                'name'        => 'accessibility_non_accessible_content',
                 'height'      => 200,
-                'description' => __('Please include all necessary details', 'rrze-tos'),
+                'description' => __('Which accessible alternatives are available?', 'rrze-tos'),
+            ]
+        );
+
+        add_settings_field(
+            'accessibility_creation_date',
+            __('Creation date', 'rrze-tos'),
+            [
+                $this,
+                'inputTextCallback'
+            ],
+            'rrze_tos_options',
+            'rrze_tos_section_general',
+            [
+                'name' => 'accessibility_creation_date',
+                'type' => 'date'
+            ]
+        );
+
+        add_settings_field(
+            'accessibility_methodology',
+            __('Methodology', 'rrze-tos'),
+            [
+                $this,
+                'inputRadioCallback',
+            ],
+            'rrze_tos_options',
+            'rrze_tos_section_general',
+            [
+                'name'    => 'accessibility_methodology',
+                'options' => Options::getAccessibilityMethodology()
+            ]
+        );
+
+        add_settings_field(
+            'accessibility_last_review_date',
+            __('Last review date', 'rrze-tos'),
+            [
+                $this,
+                'inputTextCallback'
+            ],
+            'rrze_tos_options',
+            'rrze_tos_section_general',
+            [
+                'name' => 'accessibility_last_review_date',
+                'type' => 'date'
             ]
         );
     }
 
     /**
-     * [addEmailSection description]
+     * [addFeedbackSection description]
      */
-    protected function addEmailSection()
+    protected function addFeedbackSection()
     {
         add_settings_section(
             'rrze_tos_section_email',
-            __('Email', 'rrze-tos'),
+            __('Feedback', 'rrze-tos'),
             '__return_false',
             'rrze_tos_options'
         );
@@ -756,6 +797,9 @@ class Settings
         if (array_key_exists($name, $this->options)) {
             $value = esc_attr($this->options->$name);
         }
+        if (array_key_exists('type', $args)) {
+            $type = esc_attr($args['type']);
+        }
         if (array_key_exists('class', $args)) {
             $class = esc_attr($args['class']);
         }
@@ -773,7 +817,7 @@ class Settings
         } ?>
         <input
             name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
-            type="text"
+            type="<?php echo isset($type) ? $type : 'text'; ?>"
             class="<?php echo isset($class) ? esc_attr($class) : 'regular-text'; ?>"
             value="<?php echo isset($value) ? $value : ''; ?>"
             <?php echo isset($required) ? $required : ''; ?>
