@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-21 14:10+0000\n"
-"PO-Revision-Date: 2019-05-21 15:21+0000\n"
+"POT-Creation-Date: 2019-05-23 10:41+0000\n"
+"PO-Revision-Date: 2019-05-23 10:43+0000\n"
 "Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
-"Language-Team: \n"
+"Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.2; wp-5.2\n"
+"X-Loco-Version: 2.2.2; wp-5.2.1\n"
 "X-Loco-Template: languages/rrze-tos-de_DE.po"
 
 #: rrze-tos.php:64
@@ -86,7 +86,6 @@ msgid "Name"
 msgstr "Name"
 
 #: includes/Settings.php:289 includes/Settings.php:483
-#: includes/Settings.php:684
 msgid "Email"
 msgstr "E-Mail"
 
@@ -178,35 +177,43 @@ msgstr "Allgemein"
 msgid "This website"
 msgstr "Dieser Webauftritt"
 
-#: includes/Settings.php:654
-msgid "fully complies with § 1 BayBITV."
-msgstr "entspricht vollständig § 1 BayBITV."
+#: includes/Settings.php:658
+msgid "Non-accessible content"
+msgstr "Nicht barrierefrei zugängliche Inhalte"
 
-#: includes/Settings.php:655
-msgid "does not comply with § 1 BayBITV."
-msgstr "entspricht nicht § 1 BayBITV."
+#: includes/Settings.php:668
+msgid "Which accessible alternatives are available?"
+msgstr "Welche barrierefreien Alternativen stehen zur Verfügung?"
 
-#: includes/Settings.php:662
-msgid "If not, with what reason"
-msgstr "Wenn nein, mit welcher Begründung"
+#: includes/Settings.php:674
+msgid "Creation date"
+msgstr "Erstellungsdatum"
 
-#: includes/Settings.php:672
-msgid "Please include all necessary details"
-msgstr "Bitte geben Sie alle notwendigen Details an"
+#: includes/Settings.php:689
+msgid "Methodology"
+msgstr "Methodik"
 
-#: includes/Settings.php:691
+#: includes/Settings.php:704
+msgid "Last review date"
+msgstr "Letzte Überprüfung"
+
+#: includes/Settings.php:725
+msgid "Feedback"
+msgstr "Feedback"
+
+#: includes/Settings.php:732
 msgid "Receiver email"
 msgstr "Empfänger-E-Mail"
 
-#: includes/Settings.php:707
+#: includes/Settings.php:748
 msgid "Subject"
 msgstr "Subjekt"
 
-#: includes/Settings.php:722
+#: includes/Settings.php:763
 msgid "CC"
 msgstr "CC"
 
-#: includes/Settings.php:742
+#: includes/Settings.php:783
 msgid ""
 "Public institutions are required by Directive (EU) 2016/2102 of the European "
 "Parliament and of the Council to make their websites and/or mobile "
@@ -219,11 +226,11 @@ msgstr ""
 "öffentlicher Gewalt wurde die Richtlinie in Art. 13 BayBGG und der BayBITV "
 "umgesetzt."
 
-#: includes/Settings.php:887
+#: includes/Settings.php:931
 msgid "Please select one"
 msgstr "Bitte wählen Sie eine aus"
 
-#: includes/Settings.php:986
+#: includes/Settings.php:1030
 msgid "WMP key is not available."
 msgstr "Der WMP-Key ist nicht verfügbar."
 
@@ -298,6 +305,26 @@ msgstr "acht"
 #: includes/ContactForm.php:208
 msgid "nine"
 msgstr "neun"
+
+#: includes/Options.php:94
+msgid "fully complies with § 1 BayBITV"
+msgstr "entspricht/entsprechen vollständig § 1 BayBITV"
+
+#: includes/Options.php:95
+msgid "is partly in accordance with § 1 BayBITV"
+msgstr "stimmt teilweise mit der § 1 BayBITV überein"
+
+#: includes/Options.php:96
+msgid "does not comply with § 1 BayBITV"
+msgstr "entspricht nicht § 1 BayBITV"
+
+#: includes/Options.php:103
+msgid "Self-evaluation"
+msgstr "Selbstbewertung"
+
+#: includes/Options.php:104
+msgid "Third party evaluation"
+msgstr "Bewertung durch Dritte"
 
 #: includes/Endpoint.php:39
 msgid "imprint"

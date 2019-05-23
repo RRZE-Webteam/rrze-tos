@@ -23,39 +23,42 @@ class Options
 
         $options = [
             // imprint
-            'rrze_tos_websites'                 => $siteUrl,
-            'rrze_tos_websites_more'            => '0',
+            'rrze_tos_websites'                     => $siteUrl,
+            'rrze_tos_websites_more'                => '0',
             // imprint/responsible
-            'rrze_tos_responsible_name'         => '',
-            'rrze_tos_responsible_street'       => '',
-            'rrze_tos_responsible_postalcode'   => '',
-            'rrze_tos_responsible_city'         => '',
-            'rrze_tos_responsible_org'          => '',
-            'rrze_tos_responsible_email'        => '',
-            'rrze_tos_responsible_phone'        => '',
-            'rrze_tos_wmp_search_responsible'   => $siteUrl,
+            'rrze_tos_responsible_name'             => '',
+            'rrze_tos_responsible_street'           => '',
+            'rrze_tos_responsible_postalcode'       => '',
+            'rrze_tos_responsible_city'             => '',
+            'rrze_tos_responsible_org'              => '',
+            'rrze_tos_responsible_email'            => '',
+            'rrze_tos_responsible_phone'            => '',
+            'rrze_tos_wmp_search_responsible'       => $siteUrl,
             // imprint/webmaster
-            'rrze_tos_webmaster_name'           => '',
-            'rrze_tos_webmaster_street'         => '',
-            'rrze_tos_webmaster_postalcode'     => '',
-            'rrze_tos_webmaster_city'           => '',
-            'rrze_tos_webmaster_org'            => '',
-            'rrze_tos_webmaster_email'          => $adminMail,
-            'rrze_tos_webmaster_phone'          => '',
-            'rrze_tos_webmaster_fax'            => '',
-            'rrze_tos_wmp_search_webmaster'     => $siteUrl,
-            'rrze_tos_webmaster_more'           => '',
+            'rrze_tos_webmaster_name'               => '',
+            'rrze_tos_webmaster_street'             => '',
+            'rrze_tos_webmaster_postalcode'         => '',
+            'rrze_tos_webmaster_city'               => '',
+            'rrze_tos_webmaster_org'                => '',
+            'rrze_tos_webmaster_email'              => $adminMail,
+            'rrze_tos_webmaster_phone'              => '',
+            'rrze_tos_webmaster_fax'                => '',
+            'rrze_tos_wmp_search_webmaster'         => $siteUrl,
+            'rrze_tos_webmaster_more'               => '',
             // privacy
-            'rrze_tos_privacy_newsletter'       => '1',
-            'rrze_tos_privacy_new_section'      => '0',
-            'rrze_tos_privacy_new_section_text' => '',
+            'rrze_tos_privacy_newsletter'           => '1',
+            'rrze_tos_privacy_new_section'          => '0',
+            'rrze_tos_privacy_new_section_text'     => '',
             // accessibility
-            'rrze_tos_conformity'               => '1',
-            'rrze_tos_no_reason'                => '',
+            'accessibility_conformity'              => '',
+            'accessibility_non_accessible_content'  => '',
+            'accessibility_creation_date'           => '',
+            'accessibility_methodology'             => '',
+            'accessibility_last_review_date'        => '',
             // accessibility/feedback email
-            'rrze_tos_receiver_email'           => $adminMail,
-            'rrze_tos_subject'                  => 'Barrierefreiheit Feedback-Formular',
-            'rrze_tos_cc_email'                 => ''
+            'rrze_tos_receiver_email'               => $adminMail,
+            'rrze_tos_subject'                      => 'Barrierefreiheit Feedback-Formular',
+            'rrze_tos_cc_email'                     => ''
         ];
 
         return $options;
@@ -83,5 +86,22 @@ class Options
     public static function getOptionName()
     {
         return self::$optionName;
+    }
+
+    public static function getAccessibilityConformity()
+    {
+        return [
+            '1' => __('fully complies with § 1 BayBITV', 'rrze-tos'),
+            '2' => __('is partly in accordance with § 1 BayBITV', 'rrze-tos'),
+            '0' => __('does not comply with § 1 BayBITV', 'rrze-tos')
+        ];
+    }
+
+    public static function getAccessibilityMethodology()
+    {
+        return [
+            '1' => __('Self-evaluation', 'rrze-tos'),
+            '2' => __('Third party evaluation', 'rrze-tos')
+        ];
     }
 }

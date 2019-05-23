@@ -6,19 +6,36 @@
     umgesetzt. Dieser Webauftritt wurde gemäß der obigen Richtlinie geprüft.
 </p>
 
-{{rrze_tos_conformity}}
+{{accessibility_conformity}}
 <div class="alert alert-success" role="alert">
-    <span class="wcag-pass"></span>Dieser Webauftritt entspricht vollständig § 1 BayBITV.
+    <span class="wcag-pass"></span>Dieser Webauftritt {{=accessibility_conformity_val}}
 </div>
-{{:rrze_tos_conformity}}
+{{:accessibility_conformity}}
 <div class="alert alert-info" role="alert">
-    <span class="wcag-fail"></span>Dieser Webauftritt entspricht nicht § 1 BayBITV.
-    <h4>Begründung:</h4>
-    {{=rrze_tos_no_reason}}
+    <span class="wcag-fail"></span>Dieser Webauftritt {{=accessibility_conformity_val}}
+    <h4>Nicht barrierefrei zugängliche Inhalte</h4>
+    {{=accessibility_non_accessible_content}}
 </div>
-{{/rrze_tos_conformity}}
-<h3>Probleme bei der Bedienung des Webauftrittes?</h3>
-<h4 class="wcag-h3">Für diesen Webauftritt sind folgende Personen verantwortlich:</h4>
+{{/accessibility_conformity}}
+
+<p>
+    Erstellungsdatum: {{=accessibility_creation_date_val}}<br>
+    Methodik: {{=accessibility_methodology_val}}<br>
+    Letzte Überprüfung: {{=accessibility_last_review_date_val}}
+</p>
+
+<h3>Feedback</h3>
+<p>
+    Sie können uns als Nutzer Mängel bei der Einhaltung der Anforderungen an
+    die Barrierefreiheit mitteilen oder Informationen, die nicht barrierefrei
+    dargestellt werden müssen, barrierefrei anfordern.
+</p>
+
+<h4>Kontaktinformationen</h4>
+
+<p>
+    Für diesen Webauftritt sind folgende Personen verantwortlich:
+</p>
 
 <div class="table-wrapper">
     <div class="scrollable">
@@ -61,16 +78,26 @@
 <p>
     Wenn Sie Probleme bei der Benutzung dieses Webauftrittes haben, schreiben Sie eine E-Mail an
     <a href="mailto:{{=rrze_tos_receiver_email}}?subject={{=rrze_tos_subject}}">{{=rrze_tos_receiver_email}}</a>
-    oder füllen Sie das Feedback-Formular aus.
+    oder füllen Sie das folgende Formular aus.
 </p>
-<h3>Feedback</h3>
 {{=contact_form}}
 {{/contact_form}}
 
-<div class="complaint">
-    <p>
-        Sollten Sie auch nach Rücksprache mit unseren KollegInnen keine Lösung zu Ihrem Problem erhalten, können Sie die
-        <a href="https://www.behindertenbeauftragte.de/DE/SchlichtungsstelleBGG/SchlichtungsstelleBGG_node.html" target="_blank">Schlich­tungs­stel­le nach § 16 BGG</a>
-        kontaktieren.
-    </p>
-</div>
+<h4>Durchsetzungsverfahren</h4>
+<p>
+    Bleibt eine Anfrage über die Kontaktmöglichkeit innerhalb von sechs Wochen
+    ganz oder teilweise unbeantwortet, prüft das Landesamt für Digitalisierung,
+    Breitband und Vermessung auf Antrag des Nutzers, ob im Rahmen der
+    Überwachung gegenüber dem Verpflichteten Maßnahmen erforderlich sind.
+</p>
+
+<h4>Kontaktinformation der für das Durchsetzungsverfahen zuständigen Einrichtung</h4>
+<p>
+    Landesamt für Digitalisierung, Breitband und Vermessung
+    Alexandrastraße 4<br>
+    80538 München<br>
+    Telefon: +49 89 2129-1111<br>
+    Telefax: +49 89 2129-1113<br>
+    E-Mail: service@geodaten.bayern.de<br>
+    https://www.ldbv.bayern.de/service/kontakt.html<br>
+</p>
