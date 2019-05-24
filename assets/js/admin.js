@@ -1,20 +1,20 @@
 jQuery(document).ready(function($) {
     function checkConformity() {
-        var rrzeTosConformity = $("input[name='rrze_tos[rrze_tos_conformity]']:checked", "#tos-admin-form").val();
+        var rrzeTosConformity = $("input[name='rrze_tos[accessibility_conformity]']:checked", "#tos-admin-form").val();
         if ('1' === rrzeTosConformity) {
-            $("textarea[name='rrze_tos[rrze_tos_no_reason]']").parents('tr').hide();
+            $("textarea[name='rrze_tos[accessibility_non_accessible_content]']").parents('tr').hide();
         } else {
-            $("textarea[name='rrze_tos[rrze_tos_no_reason]']").parents('tr').show();
+            $("textarea[name='rrze_tos[accessibility_non_accessible_content]']").parents('tr').show();
         }
     }
 
     function checkNewSection() {
-        var rrzeTosNewSection = $("input[name='rrze_tos[rrze_tos_privacy_new_section]']:checked", "#tos-admin-form").val();
+        var rrzeTosNewSection = $("input[name='rrze_tos[privacy_section_extra]']:checked", "#tos-admin-form").val();
         console.log(rrzeTosNewSection);
         if ('1' === rrzeTosNewSection) {
-            $("#wp-rrze_tos_privacy_new_section_text-wrap").parents('tr').show();
+            $("#wp-privacy_section_extra_text-wrap").parents('tr').show();
         } else {
-            $("#wp-rrze_tos_privacy_new_section_text-wrap").parents('tr').hide();
+            $("#wp-privacy_section_extra_text-wrap").parents('tr').hide();
         }
     }
 

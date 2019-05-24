@@ -77,11 +77,11 @@ class Endpoint
 
         $title = mb_convert_case($endpointName, MB_CASE_TITLE, 'UTF-8');
 
-        $rrzeTosWebsites = explode(PHP_EOL, $this->options->rrze_tos_websites);
-        $this->options->rrze_tos_websites_more = count($rrzeTosWebsites) > 1 ? 1 : 0;
-        $this->options->websites = implode(', ', $rrzeTosWebsites);
-        $this->options->webmaster_more = do_shortcode($this->options->rrze_tos_webmaster_more);
-        $this->options->privacy_new_section_text = do_shortcode($this->options->rrze_tos_privacy_new_section_text);
+        $imprintWebsites = explode(PHP_EOL, $this->options->imprint_websites);
+        $this->options->imprint_websites_extra = count($imprintWebsites) > 1 ? 1 : 0;
+        $this->options->websites = implode(', ', $imprintWebsites);
+        $this->options->webmaster_more = do_shortcode($this->options->imprint_section_extra_text);
+        $this->options->privacy_new_section_text = do_shortcode($this->options->privacy_section_extra_text);
 
         $this->options->imprint_url = home_url($endPoints['imprint']);
         $this->options->privacy_url = home_url($endPoints['privacy']);

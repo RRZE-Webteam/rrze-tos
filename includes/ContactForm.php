@@ -123,8 +123,8 @@ class ContactForm
 
     protected function sendMail($name, $from, $message)
     {
-        $to = sanitize_email($this->options->rrze_tos_receiver_email);
-        $subject = sanitize_text_field($this->options->rrze_tos_subject);
+        $to = sanitize_email($this->options->feedback_receiver_email);
+        $subject = sanitize_text_field($this->options->feedback_subject);
         $headers = [
             'Content-Type: text/html; charset=UTF-8',
             sprintf('From: %1$s <%2$s>', sanitize_text_field($name), sanitize_text_field($from))
