@@ -65,14 +65,9 @@ class Main
         wp_enqueue_script(
             'rrze-tos-admin',
             plugins_url('assets/js/admin.min.js', plugin_basename(RRZE_PLUGIN_FILE)),
-            ['jquery', 'jquery-ui-tabs', 'jquery-effects-fade'],
-            '1.0',
+            ['jquery', 'jquery-ui-tabs', 'jquery-effects-fade', 'jquery-ui-datepicker'],
+            false,
             true
         );
-
-        wp_localize_script('rrze-tos-admin', 'tos_ajax_obj', [
-            'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('rrze_tos_nonce'),
-        ]);
     }
 }
