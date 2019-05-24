@@ -151,6 +151,8 @@ class Settings
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
                 } elseif ('imprint_websites' == $_k) {
                     $this->options->$_k = implode(PHP_EOL, array_map('sanitize_text_field', explode(PHP_EOL, wp_unslash($_v))));
+                } elseif (in_array($_k, ['accessibility_creation_date', 'accessibility_last_review_date'])) {
+                    $this->options->$_k = date('Y-m-d', strtotime($_v));
                 } else {
                     $this->options->$_k = sanitize_text_field(wp_unslash($_v));
                 }
