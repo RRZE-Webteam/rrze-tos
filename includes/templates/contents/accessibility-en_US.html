@@ -1,40 +1,40 @@
 <p>
-    Die öffentlichen Stellen sind gemäß der Richtlinie (EU) 2016/2102 des
-    Europäischen Parlaments und des Rates dazu verpflichtet, ihre Webauftritte
-    und/ oder mobilen Anwendungen barrierefrei zugänglich zu machen. Für Träger
-    öffentlicher Gewalt wurde die Richtlinie in Art. 13 BayBGG und der BayBITV
-    umgesetzt. Dieser Webauftritt wurde gemäß der obigen Richtlinie geprüft.
+    According to Directive (EU) 2016/2102 of the European Parliament and of the
+    Council, public institutions are obliged to make their websites and/or
+    mobile applications accessible. For public authorities, the directive was
+    implemented in Art. 13 BayBGG and BayBITV. This website has been tested in
+    accordance with the above directive.
 </p>
 
 {{accessibility_conformity}}
 <div class="alert alert-success" role="alert">
-    <span class="wcag-pass"></span>Dieser Webauftritt {{=accessibility_conformity_val}}.
+    <span class="wcag-pass"></span>This website {{=accessibility_conformity_val}}.
 </div>
 {{:accessibility_conformity}}
 <div class="alert alert-info" role="alert">
-    <span class="wcag-fail"></span>Dieser Webauftritt {{=accessibility_conformity_val}}.
-    <h4>Nicht barrierefrei zugängliche Inhalte</h4>
+    <span class="wcag-fail"></span>This website {{=accessibility_conformity_val}}.
+    <h4>Non-accessible content</h4>
     {{=accessibility_non_accessible_content}}
 </div>
 {{/accessibility_conformity}}
 
 <p>
-    Erstellungsdatum: {{=accessibility_creation_date_val}}<br>
-    Methodik: {{=accessibility_methodology_val}}<br>
-    Letzte Überprüfung: {{=accessibility_last_review_date_val}}
+    Creation date: {{=accessibility_creation_date_val}}<br>
+    Methodology: {{=accessibility_methodology_val}}<br>
+    Last review date: {{=accessibility_last_review_date_val}}
 </p>
 
 <h3>Feedback</h3>
 <p>
-    Sie können uns als Nutzer Mängel bei der Einhaltung der Anforderungen an
-    die Barrierefreiheit mitteilen oder Informationen, die nicht barrierefrei
-    dargestellt werden müssen, barrierefrei anfordern.
+    As a user, you can inform us of any shortcomings in complying with the
+    accessibility requirements or request information that does not have to be
+    accessibility compliant.
 </p>
 
-<h4>Kontaktinformationen</h4>
+<h4>Contact</h4>
 
 <p>
-    Für diesen Webauftritt sind folgende Personen verantwortlich:
+    The following persons are responsible for this website:
 </p>
 
 <div class="table-wrapper">
@@ -43,30 +43,30 @@
             <tbody>
                 <tr>
 					<td>
-                        {{rrze_tos_responsible_name}}
-                        {{=rrze_tos_responsible_name}}<br>
-                        {{=rrze_tos_responsible_street}}<br>
-                        {{=rrze_tos_responsible_city}}<br>
-                        {{rrze_tos_responsible_phone}}
-                        <strong>Telefon:</strong> {{=rrze_tos_responsible_phone}}<br>
-                        {{/rrze_tos_responsible_phone}}
-                        {{rrze_tos_responsible_email}}
-                        <strong>E-Mail:</strong> {{=rrze_tos_responsible_email}}<br>
-                        {{/rrze_tos_responsible_email}}
-                        {{/rrze_tos_responsible_name}}
+                        {{imprint_responsible_name}}
+                        {{=imprint_responsible_name}}<br>
+                        {{=imprint_responsible_street}}<br>
+                        {{=imprint_responsible_city}}<br>
+                        {{imprint_responsible_phone}}
+                        <strong>Phone:</strong> {{=imprint_responsible_phone}}<br>
+                        {{/imprint_responsible_phone}}
+                        {{imprint_responsible_email}}
+                        <strong>Email:</strong> {{=imprint_responsible_email}}<br>
+                        {{/imprint_responsible_email}}
+                        {{/imprint_responsible_name}}
                     </td>
                     <td>
-						{{rrze_tos_webmaster_name}}
-                        {{=rrze_tos_webmaster_name}}<br>
-                        {{=rrze_tos_webmaster_street}}<br>
-                        {{=rrze_tos_webmaster_city}}<br>
-						{{rrze_tos_webmaster_phone}}
-                        <strong>Telefon:</strong> {{=rrze_tos_webmaster_phone}}<br>
-						{{/rrze_tos_webmaster_phone}}
-						{{rrze_tos_webmaster_email}}
-                        <strong>E-Mail:</strong> {{=rrze_tos_webmaster_email}}<br>
-						{{/rrze_tos_webmaster_email}}
-						{{/rrze_tos_webmaster_name}}
+						{{imprint_webmaster_name}}
+                        {{=imprint_webmaster_name}}<br>
+                        {{=imprint_webmaster_street}}<br>
+                        {{=imprint_webmaster_city}}<br>
+						{{imprint_webmaster_phone}}
+                        <strong>Phone:</strong> {{=imprint_webmaster_phone}}<br>
+						{{/imprint_webmaster_phone}}
+						{{imprint_webmaster_email}}
+                        <strong>Email:</strong> {{=imprint_webmaster_email}}<br>
+						{{/imprint_webmaster_email}}
+						{{/imprint_webmaster_name}}
                     </td>
                 </tr>
             </tbody>
@@ -76,22 +76,22 @@
 
 {{contact_form}}
 <p>
-    Wenn Sie Probleme bei der Benutzung dieses Webauftrittes haben, schreiben Sie eine E-Mail an
-    <a href="mailto:{{=rrze_tos_receiver_email}}?subject={{=rrze_tos_subject}}">{{=rrze_tos_receiver_email}}</a>
-    oder füllen Sie das folgende Formular aus.
+    If you have any problems using this website, please send an email to
+    <a href="mailto:{{=feedback_receiver_email}}?subject={{=feedback_subject}}">{{=feedback_receiver_email}}</a>
+    or fill in the following form.
 </p>
 {{=contact_form}}
 {{/contact_form}}
 
-<h4>Durchsetzungsverfahren</h4>
+<h4>Enforcement procedure</h4>
 <p>
-    Bleibt eine Anfrage über die Kontaktmöglichkeit innerhalb von sechs Wochen
-    ganz oder teilweise unbeantwortet, prüft das Landesamt für Digitalisierung,
-    Breitband und Vermessung auf Antrag des Nutzers, ob im Rahmen der
-    Überwachung gegenüber dem Verpflichteten Maßnahmen erforderlich sind.
+    If a request for contact remains unanswered in whole or in part within six
+    weeks, the State Office for Digitisation, Broadband and Surveying shall, at
+    the request of the user, examine whether measures are necessary in
+    connection with the monitoring of the obligated party.
 </p>
 
-<h4>Kontaktinformation der für das Durchsetzungsverfahen zuständigen Einrichtung</h4>
+<h4>Contact responsible for the enforcement procedure</h4>
 <p>
     Landesamt für Digitalisierung, Breitband und Vermessung
     Alexandrastraße 4<br>
