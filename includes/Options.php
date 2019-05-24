@@ -23,42 +23,44 @@ class Options
 
         $options = [
             // imprint
-            'rrze_tos_websites'                     => $siteUrl,
-            'rrze_tos_websites_more'                => '0',
+            'imprint_websites'                     => $siteUrl,
+            'imprint_websites_extra'               => '0',
             // imprint/responsible
-            'rrze_tos_responsible_name'             => '',
-            'rrze_tos_responsible_street'           => '',
-            'rrze_tos_responsible_postalcode'       => '',
-            'rrze_tos_responsible_city'             => '',
-            'rrze_tos_responsible_org'              => '',
-            'rrze_tos_responsible_email'            => '',
-            'rrze_tos_responsible_phone'            => '',
-            'rrze_tos_wmp_search_responsible'       => $siteUrl,
+            'imprint_responsible_name'             => '',
+            'imprint_responsible_street'           => '',
+            'imprint_responsible_postalcode'       => '',
+            'imprint_responsible_city'             => '',
+            'imprint_tos_responsible_org'          => '',
+            'imprint_responsible_email'            => '',
+            'imprint_responsible_phone'            => '',
+            'imprint_wmp_search_responsible'       => $siteUrl,
             // imprint/webmaster
-            'rrze_tos_webmaster_name'               => '',
-            'rrze_tos_webmaster_street'             => '',
-            'rrze_tos_webmaster_postalcode'         => '',
-            'rrze_tos_webmaster_city'               => '',
-            'rrze_tos_webmaster_org'                => '',
-            'rrze_tos_webmaster_email'              => $adminMail,
-            'rrze_tos_webmaster_phone'              => '',
-            'rrze_tos_webmaster_fax'                => '',
-            'rrze_tos_wmp_search_webmaster'         => $siteUrl,
-            'rrze_tos_webmaster_more'               => '',
+            'imprint_webmaster_name'               => '',
+            'imprint_webmaster_street'             => '',
+            'imprint_webmaster_postalcode'         => '',
+            'imprint_webmaster_city'               => '',
+            'imprint_webmaster_org'                => '',
+            'imprint_webmaster_email'              => $adminMail,
+            'imprint_webmaster_phone'              => '',
+            'imprint_webmaster_fax'                => '',
+            'imprint_wmp_search_webmaster'         => $siteUrl,
+            // imprint/extra
+            'imprint_section_extra_text'           => '',
             // privacy
-            'rrze_tos_privacy_newsletter'           => '1',
-            'rrze_tos_privacy_new_section'          => '0',
-            'rrze_tos_privacy_new_section_text'     => '',
+            'privacy_newsletter'                   => '1',
+            // privacy/extra
+            'privacy_section_extra'                => '0',
+            'privacy_section_extra_text'           => '',
             // accessibility
-            'accessibility_conformity'              => '',
-            'accessibility_non_accessible_content'  => '',
-            'accessibility_creation_date'           => '',
-            'accessibility_methodology'             => '',
-            'accessibility_last_review_date'        => '',
-            // accessibility/feedback email
-            'rrze_tos_receiver_email'               => $adminMail,
-            'rrze_tos_subject'                      => 'Barrierefreiheit Feedback-Formular',
-            'rrze_tos_cc_email'                     => ''
+            'accessibility_conformity'             => '',
+            'accessibility_non_accessible_content' => '',
+            'accessibility_creation_date'          => '',
+            'accessibility_methodology'            => '',
+            'accessibility_last_review_date'       => '',
+            // accessibility/feedback
+            'feedback_receiver_email'              => $adminMail,
+            'feedback_subject'                     => __('Barrierefreiheit Feedback-Formular', 'rrze-tos'),
+            'feedback_cc_email'                    => ''
         ];
 
         return $options;

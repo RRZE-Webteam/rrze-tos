@@ -143,13 +143,13 @@ class Settings
             foreach ($input as $_k => $_v) {
                 if (preg_match('/email/i', $_k)) {
                     $this->options->$_k = sanitize_email(wp_unslash($_v));
-                } elseif ('rrze_tos_webmaster_more' == $_k) {
+                } elseif ('imprint_section_extra_text' == $_k) {
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
-                } elseif ('rrze_tos_privacy_new_section_text' == $_k) {
+                } elseif ('privacy_section_extra_text' == $_k) {
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
                 } elseif ('accessibility_non_accessible_content' == $_k) {
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
-                } elseif ('rrze_tos_websites' == $_k) {
+                } elseif ('imprint_websites' == $_k) {
                     $this->options->$_k = implode(PHP_EOL, array_map('sanitize_text_field', explode(PHP_EOL, wp_unslash($_v))));
                 } else {
                     $this->options->$_k = sanitize_text_field(wp_unslash($_v));
@@ -211,45 +211,46 @@ class Settings
         $slugs = self::getSettingsPageSlug();
         $default = array_keys($slugs)[0];
         switch ($this->getQueryVar('current-tab', $default)) {
-            case 'imprint':
-                $this->addWmpSection();
-                $this->addResponsibleSection();
-                $this->addWebmasterSection();
+            case 'accessibility':
+                $this->addAccessibilityGeneralSection();
+                $this->addFeedbackSection();
                 break;
             case 'privacy':
                 $this->addPrivacySection();
-                $this->addExtraSection();
+                $this->addPrivacyExtraSection();
                 break;
-            case 'accessibility':
+            case 'imprint':
             default:
-                $this->addGeneralSection();
-                $this->addFeedbackSection();
+                $this->addImprintWebsitesSection();
+                $this->addImprintResponsibleSection();
+                $this->addImprintWebmasterSection();
+                $this->addImprintExtraSection();
         }
     }
 
     /**
-     * [addWmpSection description]
+     * [addImprintWebsitesSection description]
      */
-    protected function addWmpSection()
+    protected function addImprintWebsitesSection()
     {
         add_settings_section(
-            'rrze_tos_section_url',
+            'rrze_tos_section_imprint_websites',
             '',
             '__return_false',
             'rrze_tos_options'
         );
 
         add_settings_field(
-            'rrze_tos_websites',
+            'imprint_websites',
             __('Websites', 'rrze-tos'),
             [
                 $this,
                 'textareaCallback',
             ],
             'rrze_tos_options',
-            'rrze_tos_section_url',
+            'rrze_tos_section_imprint_websites',
             [
-                'name'        => 'rrze_tos_websites',
+                'name'        => 'imprint_websites',
                 'required'    => 'required',
                 'rows'        => 4,
                 'description' => __('One or more websites referred to in the imprint.', 'rrze-tos')
@@ -258,134 +259,134 @@ class Settings
     }
 
     /**
-     * [addResponsibleSection description]
+     * [addImprintResponsibleSection description]
      */
-    protected function addResponsibleSection()
+    protected function addImprintResponsibleSection()
     {
         add_settings_section(
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             __('Responsible', 'rrze-tos'),
             '__return_false',
             'rrze_tos_options'
         );
 
         add_settings_field(
-            'rrze_tos_responsible_name',
+            'imprint_responsible_name',
             __('Name', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name'         => 'rrze_tos_responsible_name',
+                'name'         => 'imprint_responsible_name',
                 'autocomplete' => 'given-name'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_responsible_email',
+            'imprint_responsible_email',
             __('Email', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name'         => 'rrze_tos_responsible_email',
+                'name'         => 'imprint_responsible_email',
                 'autocomplete' => 'email'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_responsible_street',
+            'imprint_responsible_street',
             __('Street', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name'         => 'rrze_tos_responsible_street',
+                'name'         => 'imprint_responsible_street',
                 'autocomplete' => 'address-line1'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_responsible_postalcode',
+            'imprint_responsible_postalcode',
             __('Postcode', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback',
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name'     => 'rrze_tos_responsible_postalcode'
+                'name'     => 'imprint_responsible_postalcode'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_responsible_city',
+            'imprint_responsible_city',
             __('City', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name'         => 'rrze_tos_responsible_city',
+                'name'         => 'imprint_responsible_city',
                 'autocomplete' => 'address-level2'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_responsible_phone',
+            'imprint_responsible_phone',
             __('Phone', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name'         => 'rrze_tos_responsible_phone',
+                'name'         => 'imprint_responsible_phone',
                 'autocomplete' => 'tel'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_responsible_org',
+            'imprint_tos_responsible_org',
             __('Organization', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name' => 'rrze_tos_responsible_org'
+                'name' => 'imprint_tos_responsible_org'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_wmp_search_responsible',
+            'imprint_wmp_search_responsible',
             __('WMP search', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_responsible',
+            'rrze_tos_section_imprint_responsible',
             [
-                'name'        => 'rrze_tos_wmp_search_responsible',
+                'name'        => 'imprint_wmp_search_responsible',
                 'description' => [
                     __('Search term (website) to get the data of the responsible using WMP API.', 'rrze-tos'),
-                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->rrze_tos_wmp_search_responsible
+                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->imprint_wmp_search_responsible
                 ],
                 'button'      => [
                     'text' => __('Retrieve data', 'rrze-tos'),
@@ -397,129 +398,129 @@ class Settings
     }
 
     /**
-     * [addWebmasterSection description]
+     * [addImprintWebmasterSection description]
      */
-    protected function addWebmasterSection()
+    protected function addImprintWebmasterSection()
     {
         add_settings_section(
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             __('Webmaster', 'rrze-tos'),
             '__return_false',
             'rrze_tos_options'
         );
 
         add_settings_field(
-            'rrze_tos_webmaster_name',
+            'imprint_webmaster_name',
             __('Name', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name' => 'rrze_tos_webmaster_name'
+                'name' => 'imprint_webmaster_name'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_webmaster_street',
+            'imprint_webmaster_street',
             __('Street', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name' => 'rrze_tos_webmaster_street'
+                'name' => 'imprint_webmaster_street'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_webmaster_city',
+            'imprint_webmaster_city',
             __('City', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name' => 'rrze_tos_webmaster_city'
+                'name' => 'imprint_webmaster_city'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_webmaster_phone',
+            'imprint_webmaster_phone',
             __('Phone', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name' => 'rrze_tos_webmaster_phone'
+                'name' => 'imprint_webmaster_phone'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_webmaster_fax',
+            'imprint_webmaster_fax',
             __('Fax', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name' => 'rrze_tos_webmaster_fax'
+                'name' => 'imprint_webmaster_fax'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_webmaster_email',
+            'imprint_webmaster_email',
             __('Email', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name' => 'rrze_tos_webmaster_email'
+                'name' => 'imprint_webmaster_email'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_webmaster_org',
+            'imprint_webmaster_org',
             __('Organization', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name' => 'rrze_tos_webmaster_org'
+                'name' => 'imprint_webmaster_org'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_wmp_search_webmaster',
+            'imprint_wmp_search_webmaster',
             __('WMP search', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_webmaster',
             [
-                'name'        => 'rrze_tos_wmp_search_webmaster',
+                'name'        => 'imprint_wmp_search_webmaster',
                 'description' => [
                     __('Search term (website) to get the data of the webmaster using WMP API.', 'rrze-tos'),
-                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->rrze_tos_wmp_search_webmaster
+                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->imprint_wmp_search_webmaster
                  ],
                 'button'      => [
                     'text' => __('Retrieve data', 'rrze-tos'),
@@ -528,18 +529,31 @@ class Settings
                 ]
             ]
         );
+    }
+
+    /**
+     * [addImprintExtraSection description]
+     */
+    protected function addImprintExtraSection()
+    {
+        add_settings_section(
+            'rrze_tos_section_imprint_extra',
+            __('New section', 'rrze-tos'),
+            '__return_false',
+            'rrze_tos_options'
+        );
 
         add_settings_field(
-            'rrze_tos_webmaster_more',
-            __('Additional information', 'rrze-tos'),
+            'imprint_section_extra_text',
+            __('Add a new section?', 'rrze-tos'),
             [
                 $this,
                 'wpEditor'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_webmaster',
+            'rrze_tos_section_imprint_extra',
             [
-                'name'   => 'rrze_tos_webmaster_more',
+                'name'   => 'imprint_section_extra_text',
                 'height' => 200,
             ]
         );
@@ -558,7 +572,7 @@ class Settings
         );
 
         add_settings_field(
-            'rrze_tos_privacy_newsletter',
+            'privacy_newsletter',
             __('Show the newsletter section?', 'rrze-tos'),
             [
                 $this,
@@ -567,7 +581,7 @@ class Settings
             'rrze_tos_options',
             'rrze_tos_section_privacy',
             [
-                'name'    => 'rrze_tos_privacy_newsletter',
+                'name'    => 'privacy_newsletter',
                 'options' =>
                     [
                         '1' => __('Yes', 'rrze-tos'),
@@ -578,28 +592,28 @@ class Settings
     }
 
     /**
-     * [addExtraSection description]
+     * [addPrivacyExtraSection description]
      */
-    protected function addExtraSection()
+    protected function addPrivacyExtraSection()
     {
         add_settings_section(
-            'rrze_tos_section_extra',
+            'rrze_tos_section_privacy_extra',
             __('New section', 'rrze-tos'),
             '__return_false',
             'rrze_tos_options'
         );
 
         add_settings_field(
-            'rrze_tos_privacy_new_section',
+            'privacy_section_extra',
             __('Add a new section?', 'rrze-tos'),
             [
                 $this,
                 'inputRadioCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_extra',
+            'rrze_tos_section_privacy_extra',
             [
-                'name'    => 'rrze_tos_privacy_new_section',
+                'name'    => 'privacy_section_extra',
                 'options' =>
                     [
                         '1' => __('Yes', 'rrze-tos'),
@@ -609,31 +623,31 @@ class Settings
         );
 
         add_settings_field(
-            'rrze_tos_privacy_new_section_text',
+            'privacy_section_extra_text',
             __('Content of the new section', 'rrze-tos'),
             [
                 $this,
                 'wpEditor'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_extra',
+            'rrze_tos_section_privacy_extra',
             [
-                'name' => 'rrze_tos_privacy_new_section_text'
+                'name' => 'privacy_section_extra_text'
             ]
         );
     }
 
     /**
-     * [addGeneralSection description]
+     * [addAccessibilityGeneralSection description]
      */
-    protected function addGeneralSection()
+    protected function addAccessibilityGeneralSection()
     {
         add_settings_section(
-            'rrze_tos_section_general',
+            'rrze_tos_section_accessibility_general',
             __('General', 'rrze-tos'),
             [
                 $this,
-                'generalSectionContent'
+                'accessibilityGeneralSectionContent'
             ],
             'rrze_tos_options'
         );
@@ -646,7 +660,7 @@ class Settings
                 'inputRadioCallback',
             ],
             'rrze_tos_options',
-            'rrze_tos_section_general',
+            'rrze_tos_section_accessibility_general',
             [
                 'name'    => 'accessibility_conformity',
                 'options' => Options::getAccessibilityConformity()
@@ -661,7 +675,7 @@ class Settings
                 'wpEditor',
             ],
             'rrze_tos_options',
-            'rrze_tos_section_general',
+            'rrze_tos_section_accessibility_general',
             [
                 'name'        => 'accessibility_non_accessible_content',
                 'height'      => 200,
@@ -677,7 +691,7 @@ class Settings
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_general',
+            'rrze_tos_section_accessibility_general',
             [
                 'name' => 'accessibility_creation_date',
                 'type' => 'date'
@@ -692,7 +706,7 @@ class Settings
                 'inputRadioCallback',
             ],
             'rrze_tos_options',
-            'rrze_tos_section_general',
+            'rrze_tos_section_accessibility_general',
             [
                 'name'    => 'accessibility_methodology',
                 'options' => Options::getAccessibilityMethodology()
@@ -707,7 +721,7 @@ class Settings
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_general',
+            'rrze_tos_section_accessibility_general',
             [
                 'name' => 'accessibility_last_review_date',
                 'type' => 'date'
@@ -721,64 +735,64 @@ class Settings
     protected function addFeedbackSection()
     {
         add_settings_section(
-            'rrze_tos_section_email',
+            'rrze_tos_section_feedback',
             __('Feedback', 'rrze-tos'),
             '__return_false',
             'rrze_tos_options'
         );
 
         add_settings_field(
-            'rrze_tos_receiver_email',
+            'feedback_receiver_email',
             __('Receiver email', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_email',
+            'rrze_tos_section_feedback',
             [
-                'name'         => 'rrze_tos_receiver_email',
+                'name'         => 'feedback_receiver_email',
                 'autocomplete' => 'email',
                 'required'     => 'required'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_subject',
+            'feedback_subject',
             __('Subject', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_email',
+            'rrze_tos_section_feedback',
             [
-                'name'     => 'rrze_tos_subject',
+                'name'     => 'feedback_subject',
                 'required' => 'required'
             ]
         );
 
         add_settings_field(
-            'rrze_tos_cc_email',
+            'feedback_cc_email',
             __('CC', 'rrze-tos'),
             [
                 $this,
                 'inputTextCallback'
             ],
             'rrze_tos_options',
-            'rrze_tos_section_email',
+            'rrze_tos_section_feedback',
             [
-                'name'         => 'rrze_tos_cc_email',
+                'name'         => 'feedback_cc_email',
                 'autocomplete' => 'email'
             ]
         );
     }
 
     /**
-     * [generalSectionContent description]
+     * [accessibilityGeneralSectionContent description]
      * @return void
      */
-    public function generalSectionContent()
+    public function accessibilityGeneralSectionContent()
     {
         _e('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos');
     }
@@ -984,6 +998,11 @@ class Settings
         <?php endif;
     }
 
+    /**
+     * [submitButton description]
+     * @param  array $args [description]
+     * @return void
+     */
     protected function submitButton($args)
     {
         $text = array_key_exists('text', $args) ? esc_html($args['text']) : '';
@@ -993,28 +1012,41 @@ class Settings
         submit_button($text, $type, $name, false);
     }
 
+    /**
+     * [getResponsibleWmpData description]
+     * @return boolean|object [description]
+     */
     protected function getResponsibleWmpData()
     {
         $this->updateFromWmpData(
             [
-                'search' => $this->options->rrze_tos_wmp_search_responsible,
+                'search' => $this->options->imprint_wmp_search_responsible,
                 'key' => 'verantwortlich',
-                'prefix' => 'rrze_tos_responsible_'
+                'prefix' => 'imprint_responsible_'
             ]
         );
     }
 
+    /**
+     * [getWebmasterWmpData description]
+     * @return boolean|object [description]
+     */
     protected function getWebmasterWmpData()
     {
         $this->updateFromWmpData(
             [
-                'search' => $this->options->rrze_tos_wmp_search_webmaster,
+                'search' => $this->options->imprint_wmp_search_webmaster,
                 'key' => 'webmaster',
-                'prefix' => 'rrze_tos_webmaster_'
+                'prefix' => 'imprint_webmaster_'
             ]
         );
     }
 
+    /**
+     * [updateFromWmpData description]
+     * @param  array $args [description]
+     * @return boolean|object [description]
+     */
     protected function updateFromWmpData($args)
     {
         $search = array_key_exists('search', $args) ? esc_attr($args['search']) : '';
@@ -1029,6 +1061,7 @@ class Settings
         if (! array_key_exists($key, $data)) {
             return new WP_Error('wmp-key-is-not-available', __('WMP key is not available.', 'rrze-tos'));
         }
+
         foreach ($data[$key] as $_k => $_v) {
             if (! is_null($_v)) {
                 $optionKey = sprintf('%1$s%2$s', $prefix, $_k);
