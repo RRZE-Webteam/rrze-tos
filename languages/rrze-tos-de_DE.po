@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-24 09:27+0000\n"
-"PO-Revision-Date: 2019-05-24 09:28+0000\n"
+"POT-Creation-Date: 2019-05-24 13:33+0000\n"
+"PO-Revision-Date: 2019-05-24 13:33+0000\n"
 "Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -60,155 +60,155 @@ msgstr "Barrierefreiheit"
 msgid "ToS"
 msgstr "ToS"
 
-#: includes/Settings.php:177
+#: includes/Settings.php:179
 msgid "Settings &rsaquo; ToS"
 msgstr "Einstellungen &rsaquo; ToS"
 
-#: includes/Settings.php:193
+#: includes/Settings.php:195
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: includes/Settings.php:245
+#: includes/Settings.php:247
 msgid "Websites"
 msgstr "Webauftritte"
 
-#: includes/Settings.php:256
+#: includes/Settings.php:258
 msgid "One or more websites referred to in the imprint."
 msgstr "Eine oder mehrere Webauftritte, auf die im Impressum verwiesen wird."
 
-#: includes/Settings.php:268
+#: includes/Settings.php:270
 msgid "Responsible"
 msgstr "Verantwortlich"
 
-#: includes/Settings.php:275 includes/Settings.php:414
+#: includes/Settings.php:277 includes/Settings.php:416
 msgid "Name"
 msgstr "Name"
 
-#: includes/Settings.php:290 includes/Settings.php:484
+#: includes/Settings.php:292 includes/Settings.php:486
 msgid "Email"
 msgstr "E-Mail"
 
-#: includes/Settings.php:305 includes/Settings.php:428
+#: includes/Settings.php:307 includes/Settings.php:430
 msgid "Street"
 msgstr "Straße"
 
-#: includes/Settings.php:320
+#: includes/Settings.php:322
 msgid "Postcode"
 msgstr "PLZ"
 
-#: includes/Settings.php:334 includes/Settings.php:442
+#: includes/Settings.php:336 includes/Settings.php:444
 msgid "City"
 msgstr "Ort"
 
-#: includes/Settings.php:349 includes/Settings.php:456
+#: includes/Settings.php:351 includes/Settings.php:458
 msgid "Phone"
 msgstr "Telefon"
 
-#: includes/Settings.php:364 includes/Settings.php:498
+#: includes/Settings.php:366 includes/Settings.php:500
 msgid "Organization"
 msgstr "Organisation"
 
-#: includes/Settings.php:378 includes/Settings.php:512
+#: includes/Settings.php:380 includes/Settings.php:514
 msgid "WMP search"
 msgstr "WMP-Suche"
 
-#: includes/Settings.php:388
+#: includes/Settings.php:390
 msgid "Search term (website) to get the data of the responsible using WMP API."
 msgstr ""
 "Suchbegriff (Webauftritt), um die Daten des Verantwortlichen über die WMP-"
 "API zu erhalten."
 
-#: includes/Settings.php:392 includes/Settings.php:526
+#: includes/Settings.php:394 includes/Settings.php:528
 msgid "Retrieve data"
 msgstr "Daten abrufen"
 
-#: includes/Settings.php:407
+#: includes/Settings.php:409
 msgid "Webmaster"
 msgstr "Webmaster"
 
-#: includes/Settings.php:470
+#: includes/Settings.php:472
 msgid "Fax"
 msgstr "Fax"
 
-#: includes/Settings.php:522
+#: includes/Settings.php:524
 msgid "Search term (website) to get the data of the webmaster using WMP API."
 msgstr ""
 "Suchbegriff (Webauftritt), um die Daten des Webmasters über die WMP-API zu "
 "erhalten."
 
-#: includes/Settings.php:541 includes/Settings.php:601
+#: includes/Settings.php:543 includes/Settings.php:603
 msgid "New section"
 msgstr "Neuer Abschnitt"
 
-#: includes/Settings.php:548 includes/Settings.php:608
+#: includes/Settings.php:550 includes/Settings.php:610
 msgid "Add a new section?"
 msgstr "Neuen Abschnitt hinzufügen?"
 
-#: includes/Settings.php:569
+#: includes/Settings.php:571
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: includes/Settings.php:576
+#: includes/Settings.php:578
 msgid "Show the newsletter section?"
 msgstr "Den Newsletter-Bereich anzeigen?"
 
-#: includes/Settings.php:587 includes/Settings.php:619
+#: includes/Settings.php:589 includes/Settings.php:621
 msgid "Yes"
 msgstr "Ja"
 
-#: includes/Settings.php:588 includes/Settings.php:620
+#: includes/Settings.php:590 includes/Settings.php:622
 msgid "No"
 msgstr "Nein"
 
-#: includes/Settings.php:627
+#: includes/Settings.php:629
 msgid "Content of the new section"
 msgstr "Inhalt des neuen Abschnitts"
 
-#: includes/Settings.php:647
+#: includes/Settings.php:649
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/Settings.php:657
+#: includes/Settings.php:659
 msgid "This website"
 msgstr "Dieser Webauftritt"
 
-#: includes/Settings.php:672
+#: includes/Settings.php:674
 msgid "Non-accessible content"
 msgstr "Nicht barrierefrei zugängliche Inhalte"
 
-#: includes/Settings.php:682
+#: includes/Settings.php:684
 msgid "Which accessible alternatives are available?"
 msgstr "Welche barrierefreien Alternativen stehen zur Verfügung?"
 
-#: includes/Settings.php:688
+#: includes/Settings.php:690
 msgid "Creation date"
 msgstr "Erstellungsdatum"
 
-#: includes/Settings.php:703
+#: includes/Settings.php:705
 msgid "Methodology"
 msgstr "Methodik"
 
-#: includes/Settings.php:718
+#: includes/Settings.php:720
 msgid "Last review date"
 msgstr "Letzte Überprüfung"
 
-#: includes/Settings.php:739
+#: includes/Settings.php:741
 msgid "Feedback"
 msgstr "Feedback"
 
-#: includes/Settings.php:746
+#: includes/Settings.php:748
 msgid "Receiver email"
 msgstr "Empfänger-E-Mail"
 
-#: includes/Settings.php:762
+#: includes/Settings.php:764
 msgid "Subject"
 msgstr "Subjekt"
 
-#: includes/Settings.php:777
+#: includes/Settings.php:779
 msgid "CC"
 msgstr "CC"
 
-#: includes/Settings.php:797
+#: includes/Settings.php:799
 msgid ""
 "Public institutions are required by Directive (EU) 2016/2102 of the European "
 "Parliament and of the Council to make their websites and/or mobile "
@@ -221,11 +221,11 @@ msgstr ""
 "öffentlicher Gewalt wurde die Richtlinie in Art. 13 BayBGG und der BayBITV "
 "umgesetzt."
 
-#: includes/Settings.php:945
+#: includes/Settings.php:947
 msgid "Please select one"
 msgstr "Bitte wählen Sie eine aus"
 
-#: includes/Settings.php:1062
+#: includes/Settings.php:1064
 msgid "WMP key is not available."
 msgstr "Der WMP-Key ist nicht verfügbar."
 
