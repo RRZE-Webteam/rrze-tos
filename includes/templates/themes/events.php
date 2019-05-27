@@ -13,7 +13,9 @@ get_header();
 	<div class="content-wrap">
 		<div id="blog-wrap" class="blog-wrap cf">
 			<div id="primary" class="site-content cf rrze-calendar" role="main">
+			    <div id="rrze-tos">
 				<?php echo $content; ?>
+			    </div>
 			</div>
 		</div>
 	</div>

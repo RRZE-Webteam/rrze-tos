@@ -13,6 +13,7 @@ class Theme
     protected static function allowedStylesheets()
     {
         return [
+	    
             'fau' => [
                 'FAU-Einrichtungen',
                 'FAU-Einrichtungen-BETA',
@@ -51,5 +52,15 @@ class Theme
         }
 
         return 'default';
+    }
+    
+     /**
+     * Enqueue scripts and JS for the theme
+     */
+    public function enqueueScripts() {
+        $stylesheetGroup = Theme::getCurrentStylesheetGroup();
+	if ($stylesheetGroup !== 'none') {
+	    wp_enqueue_style('rrze-tos-' . $stylesheetGroup);
+	}
     }
 }

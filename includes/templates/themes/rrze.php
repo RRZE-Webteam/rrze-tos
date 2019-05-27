@@ -24,7 +24,9 @@ get_header(); ?>
                 </header><!-- .entry-header -->
 
                 <div class="entry-content">
+		     <div id="rrze-tos">
                     <?php echo $content; ?>
+		     </div>
                 </div><!-- .entry-content -->
 
             </article><!-- #rrze-tos -->
