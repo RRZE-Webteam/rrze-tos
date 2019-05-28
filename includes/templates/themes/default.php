@@ -12,7 +12,9 @@ get_header();
 ?>
 	<section id="primary" class="content-area">
 		<main id="main" class="site-main">
+		     <div id="rrze-tos">
 			<?php echo $content; ?>
+		    </div>
 		</main>
 	</section>
 <?php
