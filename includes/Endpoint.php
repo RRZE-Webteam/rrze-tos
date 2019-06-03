@@ -66,12 +66,10 @@ class Endpoint
             return;
         }
 
-	Theme::enqueueScripts();
-
-	
-	
         $wp_query->is_home = false;
         $stylesheetGroup = Theme::getCurrentStylesheetGroup();
+        
+        wp_enqueue_style('rrze-tos-' . $stylesheetGroup);
 
         $styleFile = sprintf(
             '%1$sincludes/templates/themes/%2$s.php',
@@ -109,12 +107,12 @@ class Endpoint
         $this->options->contact_form = $contactForm->setForm();
 
         $content = Template::getContent($template, $this->options);
-	
-	
+
+
         if (is_readable($styleFile)) {
             include $styleFile;
         }
 
-	exit;
+        exit;
     }
 }
