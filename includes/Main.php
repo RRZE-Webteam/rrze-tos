@@ -11,7 +11,7 @@ class Main
      */
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
+        add_action('init', [$this, 'registerScripts']);
         add_action('admin_enqueue_scripts', [$this, 'adminEnqueueScripts']);
 
         new Settings();
