@@ -11,7 +11,7 @@ class Main
      */
     public function __construct()
     {
-	Main::registerScripts();
+        add_action('wp_enqueue_scripts', [$this, 'registerScripts']);
         add_action('admin_enqueue_scripts', [$this, 'adminEnqueueScripts']);
 
         new Settings();
@@ -20,11 +20,12 @@ class Main
         NavMenu::addTosMenu();
     }
 
-   
-     /**
-     * register avaible scripts and css
-     */
-    public function registerScripts() {
+
+    /**
+    * register avaible scripts and css
+    */
+    public function registerScripts()
+    {
         wp_register_style(
             'rrze-tos-default',
             plugins_url('assets/css/default.min.css', plugin_basename(RRZE_PLUGIN_FILE))
@@ -41,7 +42,6 @@ class Main
             'rrze-tos-events',
             plugins_url('assets/css/events.min.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
-
     }
 
     /**
