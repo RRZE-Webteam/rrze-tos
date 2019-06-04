@@ -55,7 +55,7 @@ get_header(); ?>
 
 		<div class="row">
 			<div class="col-xs-12">
-				<main>
+				<main id="droppoint">
 					<div id="rrze-tos">
 					<?php echo $content; ?>
 					</div>    
