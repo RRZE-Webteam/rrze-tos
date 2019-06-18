@@ -42,7 +42,7 @@ class Template
     {
         $pluginDirPath = plugin_dir_path(RRZE_PLUGIN_FILE);
         $locale = Locale::getLocale();
-        $format = '%1$sincludes/templates/contents/%2$s-%3$s.html';
+        $format = '%1$stemplates/contents/%2$s-%3$s.html';
 
         $templateFile = sprintf($format, $pluginDirPath, $template, $locale);
         if (is_readable($templateFile)) {

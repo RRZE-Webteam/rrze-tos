@@ -68,11 +68,11 @@ class Endpoint
 
         $wp_query->is_home = false;
         $stylesheetGroup = Theme::getCurrentStylesheetGroup();
-        
+
         wp_enqueue_style('rrze-tos-' . $stylesheetGroup);
 
         $styleFile = sprintf(
-            '%1$sincludes/templates/themes/%2$s.php',
+            '%1$stemplates/themes/%2$s.php',
             plugin_dir_path(RRZE_PLUGIN_FILE),
             $stylesheetGroup
         );
