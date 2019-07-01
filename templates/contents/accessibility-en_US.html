@@ -13,8 +13,10 @@
 {{:accessibility_conformity}}
 <div class="alert alert-info" role="alert">
     <span class="wcag-fail"></span>This website {{=accessibility_conformity_val}}.
+    {{accessibility_non_accessible_content}}
     <h4>Non-accessible content</h4>
     {{=accessibility_non_accessible_content}}
+    {{/accessibility_non_accessible_content}}
 </div>
 {{/accessibility_conformity}}
 
