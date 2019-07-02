@@ -28,19 +28,19 @@ class Main
     {
         wp_register_style(
             'rrze-tos-default',
-            plugins_url('assets/css/default.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/default.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
         wp_register_style(
             'rrze-tos-fau',
-            plugins_url('assets/css/fau.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/fau.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
         wp_register_style(
             'rrze-tos-rrze',
-            plugins_url('assets/css/rrze.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/rrze.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
         wp_register_style(
             'rrze-tos-events',
-            plugins_url('assets/css/events.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/events.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
     }
 

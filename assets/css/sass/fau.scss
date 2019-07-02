@@ -1,0 +1,65 @@
+#rrze-tos {
+    input[type=text]:focus,
+    textarea:focus {
+	box-shadow: 0 0 5px #51cbee;
+	border: 1px solid #51cbee;
+    }
+
+    .error {
+	color: red;
+    }
+
+    .submit_tos_form {
+	margin-bottom: 30px;
+    }
+
+    .wcag-pass {
+	&:before {
+	    font-family: FontAwesome;
+	    font-size: 2em;
+	    content: "\f00c";
+	    color: green;
+	    padding-right: 13px;
+	    vertical-align: -20%;
+	}
+	font-size: 1em;
+	color: green;
+    }
+
+    .wcag-fail {
+	&:before {
+	    font-family: FontAwesome;
+	    font-size: 2em;
+	    content: "\f00d";
+	    color: red;
+	    padding-right: 13px;
+	    vertical-align: -20%;
+	}
+	font-size: 1em;
+	color: red;
+    }
+
+    .complaint {
+	padding-top: 20px;
+    }
+    
+
+    @media (min-width: 768px) {
+
+
+	.wcag-pass:before {
+	    vertical-align: -40%;
+	}
+
+	.wcag-fail:before {
+	    vertical-align: -35%;
+	}
+
+	textarea {
+	    width: 750px !important;
+	}
+    }
+
+}
+
+
