@@ -106,6 +106,26 @@ class Endpoint
         $contactForm = new ContactForm();
         $this->options->contact_form = $contactForm->setForm();
 
+	
+	// Load additional Templates
+	
+	if ($template == 'imprint') {
+	     foreach ($this->options->imprint as $n => $v) {
+		    if (preg_match('/^display_template_([a-z0-9]+)/i',$n, $key)) {
+			 
+			if ($v) {
+			    $subtemplate = $template.'-'.$key[1];
+			    $subcontent = Template::getContent($subtemplate, $this->options);
+			    $optname = 'imprint_template_'.$key[1];
+			    $this->options->$optname = $subcontent;
+			}
+		    }
+	    }
+	  
+	}
+	
+
+	
         $content = Template::getContent($template, $this->options);
 
 

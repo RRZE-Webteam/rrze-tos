@@ -60,7 +60,17 @@ class Options
             // accessibility/feedback
             'feedback_receiver_email'              => $adminMail,
             'feedback_subject'                     => __('Barrierefreiheit Feedback-Formular', 'rrze-tos'),
-            'feedback_cc_email'                    => ''
+            'feedback_cc_email'                    => '',
+	    
+	    
+	    'imprint'	=> array(
+		'display_template_itsec'		=> 1,
+		'display_template_idnumbers'	=> 1,
+		'display_template_supervisory'	=> 1,
+		'display_template_vertretung'	=> 1,
+		
+	    )
+	    
         ];
 
         return $options;

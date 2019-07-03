@@ -1,13 +1,5 @@
 
 
-<p>
-    {{imprint_websites_extra}}
-    Dieses Impressum gilt für die Webauftritte unter den Adressen:<br>
-    {{:imprint_websites_extra}}
-    Dieses Impressum gilt für den Webauftritt unter der Adresse:<br>
-    {{/imprint_websites_extra}}
-    {{=websites}}
-</p>
 
 <h2>Herausgeber</h2>
 <p>
@@ -17,17 +9,7 @@
     {{=imprint_responsible_city}}
 </p>
 
-<h3>Vertreten durch</h3>
-<p>
-    {{=imprint_webmaster_org}}
-    ist eine Einrichtung des Öffentlichen Rechts innerhalb der 
-    <a href="https://www.fau.de/">Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)</a>.
-</p>
-<p>
-    Gemäß Art. 20, 21 <abbr title="Bayerisches Hochschulrahmengesetz">BayHSchG</abbr>
-    wird die FAU als staatliche Einrichtung und Selbstverwaltungskörperschaft
-    des öffentlichen Rechts nach außen durch den Präsidenten vertreten.
-</p>
+{{=imprint_template_vertretung}}
 
 <h3>Verantwortlich für den Inhalt</h3>
 <p>
@@ -47,62 +29,15 @@
 </p>
 {{=webmaster_more}}
 
-<h3>Zuständige Aufsichtsbehörde</h3>
-<p>
-    Bayerisches Staatsministerium für Wissenschaft und Kunst<br>
-    Salvatorstraße 2<br>
-    80327 München
-</p>
-<p>
-    Webseite:
-    <a href="https://www.stmwk.bayern.de/">
-        https://www.stmwk.bayern.de/
-    </a>
-</p>
 
-<h3>Identifikationsnummern</h3>
-<table>
-    <tbody>
-        <tr>
-            <td>Umsatzsteuer-Identifikationsnummer<br>
-                (gemäß § 27a Umsatzsteuergesetz)</td>
-            <td>DE 132507686</td>
-        </tr>
-        <tr>
-            <td>Steuernummer</td>
-            <td>216/114/20045 (Finanzamt Erlangen)</td>
-        </tr>
-        <tr>
-            <td>DUNS-Nummer</td>
-            <td>327958716</td>
-        </tr>
-        <tr>
-            <td>EORI-Nummer</td>
-            <td>DE4204891</td>
-        </tr>
-        <tr>
-            <td>Bankverbindung</td>
-            <td>Bayerische Landesbank München
-                <ul>
-                    <li>SWIFT/BIC-Code: BYLADEMMXXX</li>
-                    <li>IBAN: DE66700500000301279280</li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
-</table>
 
-<h2>Sicherheitsvorfälle</h2>
-<h3>Meldung über Missbrauch von Computer- und Netzwerk-Ressourcen</h3>
-<p>
-    Sollte Ihnen irgendeine Form von Missbrauch der Computer- und
-    Netzwerk-Ressourcen an der Friedrich-Alexander-Universität Erlangen-Nürnberg
-    auffallen,
-    <a href="https://www.rrze.fau.de/infocenter/kontakt-hilfe/sicherheitsvorfaelle/">
-        informieren Sie bitte umgehend die für IT-Sicherheit
-    </a>
-    zuständige Stelle am RRZE.
-</p>
+{{=imprint_template_supervisory}}
+
+
+{{=imprint_template_idnumbers}}
+
+
+{{=imprint_template_itsec}}
 
 <h2>Nutzungsbedingungen</h2>
 <p>
@@ -146,9 +81,20 @@
 </p>
 
 <h2>Haftungsausschluss</h2>
+
 <p>
-    Für die Inhalte anderer Webangebote der FAU sind die jeweiligen
-    Einrichtungen verantwortlich.
+    {{imprint_websites_extra}}
+    Dieses Impressum gilt für die Webauftritte unter den Adressen:<br>
+    {{:imprint_websites_extra}}
+    Dieses Impressum gilt für den Webauftritt unter der Adresse:<br>
+    {{/imprint_websites_extra}}
+</p>
+<pre>
+{{=websites}}
+</pre>
+
+<p>
+    Für die Inhalte anderer Webangebote sind die jeweiligen Einrichtungen verantwortlich.
 </p>
 <p>
     Alle auf dieser Internetseite bereitgestellten Informationen haben wir nach
