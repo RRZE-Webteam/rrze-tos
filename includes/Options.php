@@ -61,8 +61,7 @@ class Options
             'feedback_receiver_email'              => $adminMail,
             'feedback_subject'                     => __('Barrierefreiheit Feedback-Formular', 'rrze-tos'),
             'feedback_cc_email'                    => '',
-	    
-	    
+	    	    
 	    'imprint'	=> array(
 		'display_template_itsec'		=> 1,
 		'display_template_idnumbers'	=> 1,
