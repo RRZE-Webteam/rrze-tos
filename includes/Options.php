@@ -22,6 +22,8 @@ class Options
         $siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 
         $options = [
+	    'version'				=> 1,
+		// Optiontable version
             // imprint
             'imprint_websites'                     => $siteUrl,
             'imprint_websites_extra'               => '0',
@@ -47,7 +49,7 @@ class Options
             // imprint/extra
             'imprint_section_extra_text'           => '',
             // privacy
-            'privacy_newsletter'                   => '1',
+        //    'privacy_newsletter'                   => '1',
             // privacy/extra
             'privacy_section_extra'                => '0',
             'privacy_section_extra_text'           => '',
@@ -67,6 +69,85 @@ class Options
 		'display_template_idnumbers'	=> 1,
 		'display_template_supervisory'	=> 1,
 		'display_template_vertretung'	=> 1,
+		'settings'  => array(
+		    'sections'	=> array(
+			'rrze_tos_section_imprint_optional'  => array(
+			    'title' => __('Optional Parts', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			)
+			
+		    ),
+		    'fields' => array(
+			'display_template_vertretung'   => array(
+			    'title'	=>  __('University Management', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Display legal notice for university management', 'rrze-tos'),
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'display_template_supervisory'   => array(
+			    'title'	=>  __('Supervisory', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Display supervisory for the university', 'rrze-tos'),
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'display_template_idnumbers'   => array(
+			    'title'	=>  __('ID Numbers', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Display offical and public ID numbers for the university', 'rrze-tos'),
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'display_template_itsec'   => array(
+			    'title'	=>  __('IT Security Notice', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Display a text for IT abuse contact informations.', 'rrze-tos'),
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			)
+		    ),
+		    
+		)
+	    ),
+	   
+	    'privacy'	=> array(
+		'display_template_newsletter'	=> 0,
+		'display_template_contactinfos'	=> 1,
+		'settings'  => array(
+		    'sections'	=> array(
+			'rrze_tos_section_privacy'  => array(
+			    'title' => __('Newsletter', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			)
+			
+		    ),
+		    'fields' => array(
+			'display_template_newsletter'   => array(
+			    'title'	=>  __('Show the newsletter section?', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Are you providing a newsletter?', 'rrze-tos'),
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			)
+		    ),
+		    
+		)
 		
 	    )
 	    
@@ -82,10 +163,10 @@ class Options
     public static function getOptions()
     {
         $defaults = self::defaultOptions();
-
         $options = (array) get_option(self::$optionName);
-        $options = wp_parse_args($options, $defaults);
-        $options = array_intersect_key($options, $defaults);
+       	
+	$options = wp_parse_args($options, $defaults);
+         $options = array_intersect_key($options, $defaults);
 
         return (object) $options;
     }

@@ -116,13 +116,27 @@ class Endpoint
 			if ($v) {
 			    $subtemplate = $template.'-'.$key[1];
 			    $subcontent = Template::getContent($subtemplate, $this->options);
-			    $optname = 'imprint_template_'.$key[1];
+			    $optname = $template.'_template_'.$key[1];
 			    $this->options->$optname = $subcontent;
 			}
 		    }
 	    }
 	  
 	}
+	if ($template == 'privacy') {
+	     foreach ($this->options->privacy as $n => $v) {
+		    if (preg_match('/^display_template_([a-z0-9]+)/i',$n, $key)) {
+			if ($v) {
+			    $subtemplate = $template.'-'.$key[1];
+			    $subcontent = Template::getContent($subtemplate, $this->options);
+			    $optname = $template.'_template_'.$key[1];
+			    $this->options->$optname = $subcontent;
+			    }
+		    }
+	    }
+	  
+	}
+	
 	
 
 	

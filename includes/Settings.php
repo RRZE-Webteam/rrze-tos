@@ -113,13 +113,13 @@ class Settings
             ]
         );
 
-        add_action(
-            'load-' . $this->settingsScreenId,
-            [
-                $this,
-                'adminHelpMenu'
-            ]
-        );
+     //   add_action(
+     //       'load-' . $this->settingsScreenId,
+     //       [
+     //           $this,
+     //           'adminHelpMenu'
+    //       ]
+    //    );
     }
 
     /**
@@ -131,17 +131,38 @@ class Settings
     }
 
     /**
-     * [optionsValidate description]
-     * @param  array $input [description]
-     * @return object       [description]
+     * Prüfung der Eingabewerte
      */
     public function optionsValidate($input)
     {
         if (isset($input) && is_array($input) && isset($_POST['_wpnonce'])
             && wp_verify_nonce(sanitize_key($_POST['_wpnonce']), 'rrze_tos_options-options')
         ) {
+	    
+
+	   $message = '';
+	
             foreach ($input as $_k => $_v) {
-                if (preg_match('/email/i', $_k)) {
+		
+		if (preg_match('/^privacy-([_a-z0-9]+)/i',$_k, $key)) {	
+		    $name	= $key[1];
+		    $fieldset	= 'privacy';
+		    $fieldset_opt = $this->options->$fieldset;
+		    $oldval	= $fieldset_opt[$name]; 
+		    $type	= $fieldset_opt['settings']['fields'][$name]['type'];
+		    $title	= $fieldset_opt['settings']['fields'][$name]['title'];
+
+		    switch($type) {
+			case 'inputRadioCallback':
+			    $val = intval($_v);
+			    if ($oldval !== $val) {
+				$this->options->$fieldset[$name] = $val;
+				$message .= "\"".$title."\" ".__("was updated", "rrze-tos");
+			    }
+			    break;
+		    }
+		    
+		} elseif (preg_match('/email/i', $_k)) {
                     $this->options->$_k = sanitize_email(wp_unslash($_v));
                 } elseif ('imprint_section_extra_text' == $_k) {
                     $this->options->$_k = wp_kses_post(wp_unslash($_v));
@@ -157,7 +178,16 @@ class Settings
                     $this->options->$_k = sanitize_text_field(wp_unslash($_v));
                 }
             }
-
+	    if (!empty($message)) {
+		add_settings_error(
+		       'rrze-tos-updatenotice',
+		       esc_attr( 'settings_updated' ),
+		       $message,
+		       'updated'
+		   );
+	    }
+ 
+ 
             if (isset($_POST['rrze-tos-wmp-search-responsible'])) {
                 $this->getResponsibleWmpData();
             } elseif (isset($_POST['rrze-tos-wmp-search-webmaster'])) {
@@ -218,11 +248,13 @@ class Settings
                 $this->addFeedbackSection();
                 break;
             case 'privacy':
-                $this->addPrivacySection();
+	       $this->addConfigSettings('privacy');
+      //          $this->addPrivacySection();
                 $this->addPrivacyExtraSection();
                 break;
             case 'imprint':
             default:
+		$this->addConfigSettings('imprint');
                 $this->addImprintWebsitesSection();
                 $this->addImprintResponsibleSection();
                 $this->addImprintWebmasterSection();
@@ -230,6 +262,94 @@ class Settings
         }
     }
 
+     /**
+     * Generate settings and fields for the adminpage by config definitions
+     */
+    public function addConfigSettings($fieldset = 'imprint') {
+	
+	 echo "addConfigSettings($fieldset)<br>";
+	
+
+	$fieldset_opt = $this->options->$fieldset;
+	if (!isset($fieldset_opt["settings"])) {
+	    echo "empty ". $fieldset_opt["settings"];
+	}
+	 foreach ($fieldset_opt["settings"] as $n => $v) {
+	    echo "option from $fieldset: $n -> $v<br>\n";
+	    if ($n == 'sections') {
+		foreach ($v as $field => $fielddata) {
+		    $id = $field;
+		    $title = $fielddata['title'];
+		    $page = $fielddata['page'];
+		    if (!isset($page)) {
+		       $page = 'rrze_tos_options';
+		    }
+		    if (isset($title)) {
+			echo "add_settings_section($id, $title, '__return_false', $page);";
+			add_settings_section($id, $title, '__return_false', $page);  
+		    }
+			
+		}
+	    } 
+	    if ($n == 'fields') {
+		$default = $id = $title = $section = $type = $page = '';
+		$required = $desc = '';
+		
+		foreach ($v as $field => $fielddata) {
+		    
+		    if (isset($fielddata['id'])) {
+			$id = $fielddata['id'];
+		    } else {
+			$id = $field;
+		    }
+		    
+		    $title = $fielddata['title'];
+		    $section = $fielddata['section'];
+		    $type = $fielddata['type'];
+		    $fieldoptions = $fielddata['options'];
+		    $required = $fielddata['required'];
+		    $rows = $fielddata['rows'];
+		    $desc = $fielddata['desc'];
+		    $page = $fielddata['page'];
+		    if (!isset($page)) {
+		       $page = 'rrze_tos_options';
+		    }
+		    
+		    if (isset($fieldset_opt[$field])) {
+			$default = $fieldset_opt[$field];
+		    }
+		    if ((isset($title)) && (isset($id))) {
+			echo "add_settings_field($id)";
+			   add_settings_field(
+			    $id, 
+			    $title,  
+			    [
+				$this,
+				$type,
+			    ],
+			    $page,
+			    $section,
+			    [
+				'fieldset'	=> $fieldset,
+				'name'		=> $id,
+				'required'	=> $required,
+				'rows'		=> $rows,
+				'description'	=> $desc,
+				'options'	=> $fieldoptions,
+				'default'	=> $default
+			    ]
+			);
+		    }
+			
+		}
+	    } 
+	 }
+    }
+    
+    
+
+    
+    
     /**
      * [addImprintWebsitesSection description]
      */
@@ -899,20 +1019,39 @@ class Settings
         if (array_key_exists('description', $args)) {
             $description = esc_attr($args['description']);
         }
-
+	if (array_key_exists('default', $args)) {
+            $default = sanitize_key($args['default']);
+        }
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	if (isset($fieldset)) {
+	    $oldval = $this->options->$fieldset->$name;
+	    if ((!isset($oldval)) && (isset($default))) {
+		$oldval = $default;
+	    }
+	} else {
+	    $oldval = $this->options->$name;
+	}
         $radios = [];
         if (array_key_exists('options', $args)) {
             $radios = $args['options'];
         }
+	
+	
+	if (isset($fieldset)) {
+	    $postname = $fieldset."-".$name;
+	} else {
+	    $postname = $name;
+	}
+	
         foreach ($radios as $_k => $_v) : ?>
             <label>
                 <input
-                    name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
+                    name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
                     type="radio"
                     value="<?php echo esc_attr($_k); ?>"
-                    <?php if (array_key_exists($name, $this->options)) :
-                        checked($this->options->$name, $_k);
-        endif; ?>
+                    <?php if (isset($oldval)): checked($oldval, $_k); endif; ?>
                 >
                 <?php echo esc_attr($_v); ?>
             </label>

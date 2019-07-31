@@ -184,7 +184,6 @@ class Parser
     {
         $matchTags = preg_replace_callback($this->blockRegex, [$this, 'matchTags'], $fragment);
         $replaceTags = preg_replace_callback($this->valRegex, [$this, 'replaceTags'], $matchTags);
-
         return $replaceTags;
     }
 
