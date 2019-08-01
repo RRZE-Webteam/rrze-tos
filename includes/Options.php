@@ -16,13 +16,12 @@ class Options
      * [defaultOptions description]
      * @return array default options
      */
-    protected static function defaultOptions()
-    {
+    protected static function defaultOptions() {
         $adminMail = is_multisite() ? get_site_option('admin_email') : get_option('admin_email');
         $siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 
         $options = [
-	    'version'				=> 1,
+	    'version'				=> 2,
 		// Optiontable version
             // imprint
             'imprint_websites'                     => $siteUrl,
@@ -69,7 +68,7 @@ class Options
 		'display_template_idnumbers'	=> 1,
 		'display_template_supervisory'	=> 1,
 		'display_template_vertretung'	=> 1,
-		'settings'  => array(
+		'_settings'  => array(
 		    'sections'	=> array(
 			'rrze_tos_section_imprint_optional'  => array(
 			    'title' => __('Optional Parts', 'rrze-tos'),
@@ -126,7 +125,7 @@ class Options
 	    'privacy'	=> array(
 		'display_template_newsletter'	=> 0,
 		'display_template_contactinfos'	=> 1,
-		'settings'  => array(
+		'_settings'  => array(
 		    'sections'	=> array(
 			'rrze_tos_section_privacy'  => array(
 			    'title' => __('Newsletter', 'rrze-tos'),
@@ -157,16 +156,13 @@ class Options
     }
 
     /**
-     * [getOptions description]
-     * @return object settings options
+     * getOptions()
+     * gets options from get_option() table and merges them with defaults
      */
-    public static function getOptions()
-    {
+    public static function getOptions() {
         $defaults = self::defaultOptions();
-        $options = (array) get_option(self::$optionName);
-       	
+     $options = (array) get_option(self::$optionName);
 	$options = wp_parse_args($options, $defaults);
-         $options = array_intersect_key($options, $defaults);
 
         return (object) $options;
     }

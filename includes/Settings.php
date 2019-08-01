@@ -143,15 +143,18 @@ class Settings
 	   $message = '';
 	
             foreach ($input as $_k => $_v) {
-		
-		if (preg_match('/^privacy-([_a-z0-9]+)/i',$_k, $key)) {	
-		    $name	= $key[1];
-		    $fieldset	= 'privacy';
+	//	$message .= "checking  $_k => $_v<br>";
+
+		if (preg_match('/^([a-z0-9]+)\-([_a-z0-9]+)/i',$_k, $key)) {	
+		    $name	= $key[2];
+		    $fieldset	= $key[1];
+		//    $fieldset	= 'privacy';
 		    $fieldset_opt = $this->options->$fieldset;
 		    $oldval	= $fieldset_opt[$name]; 
-		    $type	= $fieldset_opt['settings']['fields'][$name]['type'];
-		    $title	= $fieldset_opt['settings']['fields'][$name]['title'];
-
+		    $type	= $fieldset_opt['_settings']['fields'][$name]['type'];
+		    $title	= $fieldset_opt['_settings']['fields'][$name]['title'];
+	    // $message .= "name: $name, fieldset: $fieldset<br>";
+	    // $message .= " &nbsp; old: $oldval newval: $_v<br>";
 		    switch($type) {
 			case 'inputRadioCallback':
 			    $val = intval($_v);
@@ -225,6 +228,13 @@ class Settings
                     <?php submit_button(esc_html__('Save Changes', 'rrze-tos'), 'primary', 'rrze-tos-submit', false); ?>
                 </p>
             </form>
+	    <pre>
+	    <?php 
+	    
+	    var_dump($this->options);
+	    ?>
+	    </pre>
+	    
         </div>
         <?php
     }
@@ -266,16 +276,13 @@ class Settings
      * Generate settings and fields for the adminpage by config definitions
      */
     public function addConfigSettings($fieldset = 'imprint') {
-	
-	 echo "addConfigSettings($fieldset)<br>";
-	
 
 	$fieldset_opt = $this->options->$fieldset;
-	if (!isset($fieldset_opt["settings"])) {
-	    echo "empty ". $fieldset_opt["settings"];
+	if (!isset($fieldset_opt["_settings"])) {
+	    echo "empty ". $fieldset_opt["_settings"];
 	}
-	 foreach ($fieldset_opt["settings"] as $n => $v) {
-	    echo "option from $fieldset: $n -> $v<br>\n";
+	 foreach ($fieldset_opt["_settings"] as $n => $v) {
+	//    echo "option from $fieldset: $n -> $v<br>\n";
 	    if ($n == 'sections') {
 		foreach ($v as $field => $fielddata) {
 		    $id = $field;
@@ -285,7 +292,7 @@ class Settings
 		       $page = 'rrze_tos_options';
 		    }
 		    if (isset($title)) {
-			echo "add_settings_section($id, $title, '__return_false', $page);";
+	//		echo "add_settings_section($id, $title, '__return_false', $page);";
 			add_settings_section($id, $title, '__return_false', $page);  
 		    }
 			
@@ -319,7 +326,7 @@ class Settings
 			$default = $fieldset_opt[$field];
 		    }
 		    if ((isset($title)) && (isset($id))) {
-			echo "add_settings_field($id)";
+		//	echo "add_settings_field($id)";
 			   add_settings_field(
 			    $id, 
 			    $title,  
@@ -1003,8 +1010,7 @@ class Settings
     }
 
     /**
-     * [inputRadioCallback description]
-     * @param array $args [description]
+     * Radio Eingabe Felder
      */
     public function inputRadioCallback($args)
     {
