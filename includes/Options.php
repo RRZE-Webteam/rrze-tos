@@ -4,84 +4,176 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-class Options
-{
-    /**
-     * Option name
-     * @var string
-     */
+class Options {
+
     protected static $optionName = 'rrze_tos';
 
-    /**
-     * [defaultOptions description]
-     * @return array default options
-     */
+    /*-----------------------------------------------------------------------------------*/
+    /* Global Options that may be changed by user
+    /*-----------------------------------------------------------------------------------*/
     protected static function defaultOptions() {
         $adminMail = is_multisite() ? get_site_option('admin_email') : get_option('admin_email');
         $siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 
         $options = [
-	    'version'				=> 2,
+	    'version'				=> 3,
 		// Optiontable version
-            // imprint
+            
             'imprint_websites'                     => $siteUrl,
-            'imprint_websites_extra'               => '0',
-            // imprint/responsible
-            'imprint_responsible_name'             => '',
-            'imprint_responsible_street'           => '',
-            'imprint_responsible_postalcode'       => '',
-            'imprint_responsible_city'             => '',
-            'imprint_tos_responsible_org'          => '',
-            'imprint_responsible_email'            => '',
-            'imprint_responsible_phone'            => '',
             'imprint_wmp_search_responsible'       => $siteUrl,
-            // imprint/webmaster
-            'imprint_webmaster_name'               => '',
-            'imprint_webmaster_street'             => '',
-            'imprint_webmaster_postalcode'         => '',
-            'imprint_webmaster_city'               => '',
-            'imprint_webmaster_org'                => '',
             'imprint_webmaster_email'              => $adminMail,
-            'imprint_webmaster_phone'              => '',
-            'imprint_webmaster_fax'                => '',
             'imprint_wmp_search_webmaster'         => $siteUrl,
-            // imprint/extra
-            'imprint_section_extra_text'           => '',
-            // privacy
-        //    'privacy_newsletter'                   => '1',
-            // privacy/extra
-            'privacy_section_extra'                => '0',
-            'privacy_section_extra_text'           => '',
-            // accessibility
-            'accessibility_conformity'             => '',
-            'accessibility_non_accessible_content' => '',
-            'accessibility_creation_date'          => '',
-            'accessibility_methodology'            => '',
-            'accessibility_last_review_date'       => '',
-            // accessibility/feedback
             'feedback_receiver_email'              => $adminMail,
             'feedback_subject'                     => __('Barrierefreiheit Feedback-Formular', 'rrze-tos'),
             'feedback_cc_email'                    => '',
-	    	    
+
+        ];
+	   
+        return $options;
+    }
+
+    /*-----------------------------------------------------------------------------------*/
+    /* Avaible admin settings that will allow to define and overwrite options
+    /*-----------------------------------------------------------------------------------*/
+     protected static function defaultAdminSettings() {
+	 
+         $adminMail = is_multisite() ? get_site_option('admin_email') : get_option('admin_email');
+	$siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
+	
+	$settings = [  
 	    'imprint'	=> array(
-		'display_template_itsec'		=> 1,
-		'display_template_idnumbers'	=> 1,
-		'display_template_supervisory'	=> 1,
-		'display_template_vertretung'	=> 1,
-		'_settings'  => array(
+		'tabtitle' =>	 __('Imprint', 'rrze-tos'),
+		'settings'  => array(
 		    'sections'	=> array(
-			'rrze_tos_section_imprint_optional'  => array(
-			    'title' => __('Optional Parts', 'rrze-tos'),
-			    'page'  => 'rrze_tos_options',
-			)
 			
+			'rrze_tos_section_imprint_websites' => array(
+			    'title'	=> __('Range', 'rrze-tos'),
+			    'page'	=> 'rrze_tos_options',
+			),
+			'rrze_tos_section_imprint_responsible'  => array(
+			    'title'	=> __('Responsible person', 'rrze-tos'),
+			    'page'	=> 'rrze_tos_options',
+			    'desc'	=> __('Contact data for the responsible person in law for the website.','rrze-tos'),
+			),
+			'rrze_tos_section_imprint_webmaster'  => array(
+			    'title'	=> __('Webmaster', 'rrze-tos'),
+			    'page'	=> 'rrze_tos_options',
+			    'desc'	=> __('Contact data for webmaster or content team.','rrze-tos'),
+			),
+			'rrze_tos_section_imprint_optional'  => array(
+			    'title'	=> __('Optional Parts', 'rrze-tos'),
+			    'page'	=> 'rrze_tos_options',
+			    'desc'	=> __('This enables or deactivates optional paragraphs of the imprint.','rrze-tos'),
+			    'notice'	=> __('Organisations which are part of the FAU are advised to have all optional parts activated. Websites, that belong to cooperations or external organisations, may deactivate unrelevant parts.','rrze-tos'),
+			),
+		
+			
+
 		    ),
 		    'fields' => array(
+			'imprint_websites' => array(
+			    'title'	=>  __('Websites', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_websites',
+			    'type'	=> 'inputTextareaCallback',
+			    'desc'	=> __('Add one or more websites referred to in the imprint.','rrze-tos'),
+			    'default'	=> $siteUrl,
+			    'required'	=> 'required',
+			    'rows'        => 4,
+			),
+			
+			
+			
+			'imprint_webmaster_name'=> array(
+			    'title'	=>  __('Name', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_webmaster',
+			    'type'	=> 'inputTextCallback',
+			    'desc'	=> __('Name of webmaster or webteam', 'rrze-tos'),
+			    'default'	=> '',
+			    'required'	=> 1,
+			),
+			'imprint_webmaster_email'=> array(
+			    'title'	=>  __('EMail', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_webmaster',
+			    'type'	=> 'inputTextCallback',
+			    'desc'	=> __('Contact email', 'rrze-tos'),
+			    'default'	=> '',
+			    'required'	=> 1,
+			),
+			
+			'imprint_webmaster_phone'=> array(
+			    'title'	=>  __('Phone', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_webmaster',
+			    'desc'	=> __('Contact phone number', 'rrze-tos'),
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> '',
+			),
+			'imprint_webmaster_fax'=> array(
+			    'title'	=>  __('Fax number', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_webmaster',
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> ''
+			),
+
+			
+			
+			
+			'imprint_responsible_name'=> array(
+			    'title'	=>  __('Name', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'type'	=> 'inputTextCallback',
+			    'desc'	=> __('Responsible person for the website.', 'rrze-tos'),
+			    'default'	=> '',
+			    'required'	=> 1,
+			),
+			'imprint_responsible_email'=> array(
+			    'title'	=>  __('EMail', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'type'	=> 'inputTextCallback',
+			    'desc'	=> __('Contact email for responsible person', 'rrze-tos'),
+			    'default'	=> '',
+			    'required'	=> 1,
+			),
+			'imprint_responsible_street'=> array(
+			    'title'	=>  __('Street', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> 'Schlossplatz',
+			),
+			'imprint_responsible_postalcode'=> array(
+			    'title'	=>  __('Postal code', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> '91052',
+			),
+			'imprint_responsible_city'=> array(
+			    'title'	=>  __('City', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> 'Erlangen',
+			    
+			),
+			'imprint_responsible_phone'=> array(
+			    'title'	=>  __('Phone', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'desc'	=> __('Contact phone number for responsible person', 'rrze-tos'),
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> '',
+			),
+			'imprint_responsible_org'=> array(
+			    'title'	=>  __('Organisation', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'desc'	=> __('Department name', 'rrze-tos'),
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> 'Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)'
+			),
+			
+			
 			'display_template_vertretung'   => array(
 			    'title'	=>  __('University Management', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputRadioCallback',
 			    'desc'	=> __('Display legal notice for university management', 'rrze-tos'),
+			    'default'	=> 1,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
 				    '0' => __('No', 'rrze-tos')
@@ -92,6 +184,7 @@ class Options
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputRadioCallback',
 			    'desc'	=> __('Display supervisory for the university', 'rrze-tos'),
+			     'default'	=> 1,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
 				    '0' => __('No', 'rrze-tos')
@@ -102,6 +195,7 @@ class Options
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputRadioCallback',
 			    'desc'	=> __('Display offical and public ID numbers for the university', 'rrze-tos'),
+			     'default'	=> 1,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
 				    '0' => __('No', 'rrze-tos')
@@ -112,72 +206,191 @@ class Options
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputRadioCallback',
 			    'desc'	=> __('Display a text for IT abuse contact informations.', 'rrze-tos'),
+			     'default'	=> 1,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
 				    '0' => __('No', 'rrze-tos')
 				]
-			)
-		    ),
-		    
-		)
-	    ),
-	   
-	    'privacy'	=> array(
-		'display_template_newsletter'	=> 0,
-		'display_template_contactinfos'	=> 1,
-		'_settings'  => array(
-		    'sections'	=> array(
-			'rrze_tos_section_privacy'  => array(
-			    'title' => __('Newsletter', 'rrze-tos'),
-			    'page'  => 'rrze_tos_options',
+			),
+			'imprint_section_extra'   => array(
+			    'title'	=>  __('Add a new section?', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'default'	=> 0,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'imprint_section_extra_text'   => array(
+			    'title'	=>  __('Content', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputWPEditor',
+			    'desc'	=>  __('Content of the new section', 'rrze-tos'),
+			    'default'	=> '',
+			     'height' => 200,
 			)
 			
+			
+		    ),
+
+		)
+	    ),
+
+	    'privacy'	=> array(
+		'tabtitle'	 => __('Privacy', 'rrze-tos'),
+		'settings'  => array(
+		    'sections'	=> array(
+			'rrze_tos_section_privacy_fauservices'  => array(
+			    'title' => __('FAU services', 'rrze-tos'),
+			    'desc'	=> __('Check whether you are using FAU services, that are using or working with personal data.', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			),
+			'rrze_tos_section_privacy_externalservices'  => array(
+			    'title' => __('External services', 'rrze-tos'),
+			    'desc'	=> __('Check whether you are using external services, that are using or working with personal data.', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			),
+			'rrze_tos_section_privacy_optional'  => array(
+			    'title'	=> __('Optional Parts', 'rrze-tos'),
+			    'page'	=> 'rrze_tos_options',
+			    'desc'	=> __('This enables or deactivates optional paragraphs of the privacy.','rrze-tos'),
+			),
+
 		    ),
 		    'fields' => array(
 			'display_template_newsletter'   => array(
-			    'title'	=>  __('Show the newsletter section?', 'rrze-tos'),
-			    'section'	=> 'rrze_tos_section_privacy',
+			    'title'	=>  __('Do you provide a newsletter?', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_fauservices',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Are you providing a newsletter?', 'rrze-tos'),
+			    'desc'	=> __('Are you providing a newsletter by using IdM or RRZE mail services?', 'rrze-tos'),
+			     'default'	=> 0,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
 				    '0' => __('No', 'rrze-tos')
 				]
+			),
+			'display_template_contactform'   => array(
+			    'title'	=>  __('Contact Form', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_fauservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Do you use a contact form on this website?', 'rrze-tos'),
+			     'default'	=> 1,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'display_template_register_event'   => array(
+			    'title'	=>  __('Register form', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_fauservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Do you provide a contact form to register for an event?', 'rrze-tos'),
+			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			
+			'display_template_youtube'   => array(
+			    'title'	=>  __('YouTube Embeds', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_externalservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Do you embed videos from Youtube?', 'rrze-tos'),
+			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'display_template_slideshare'   => array(
+			    'title'	=>  __('Slideshare Embeds', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_externalservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Do you embed slides from Slideshare?', 'rrze-tos'),
+			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'display_template_vimeo'   => array(
+			    'title'	=>  __('Vimeo Embeds', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_externalservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Do you embed videos from Vimeo?', 'rrze-tos'),
+			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			
+			
+			
+			
+			'privacy_section_extra'   => array(
+			    'title'	=>  __('Add a new section?', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'default'	=> 0,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'privacy_section_extra_text'   => array(
+			    'title'	=>  __('Content', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_optional',
+			    'type'	=> 'inputWPEditor',
+			    'desc'	=>  __('Content of the new section', 'rrze-tos'),
+			    'default'	=> '',
+			     'height' => 200,
 			)
 		    ),
-		    
+
 		)
-		
+
+	    ),
+	    'accessibility' => array(
+		'tabtitle'	 => __('Accessibility', 'rrze-tos')    
 	    )
-	    
-        ];
-
-        return $options;
+	];
+	
+	return $settings;
     }
-
-    /**
-     * getOptions()
-     * gets options from get_option() table and merges them with defaults
-     */
+	
+    
+    /*-----------------------------------------------------------------------------------*/
+    /* gets options from get_option() table and merges them with defaults if needed
+    /*-----------------------------------------------------------------------------------*/
     public static function getOptions() {
         $defaults = self::defaultOptions();
-     $options = (array) get_option(self::$optionName);
+    // $options = (array) get_option(self::$optionName);
+	$options = array();
 	$options = wp_parse_args($options, $defaults);
-
+// $options = array_intersect_key($options, $defaults);
         return (object) $options;
     }
 
-    /**
-     * [getOptionName description]
-     * @return string option name
-     */
-    public static function getOptionName()
-    {
+    
+    /*-----------------------------------------------------------------------------------*/
+    /* get Adminsettings
+    /*-----------------------------------------------------------------------------------*/
+    public static function getAdminsettings() {
+      $defaults = self::defaultAdminSettings();
+         return (object) $defaults;
+    }
+    
+    /*-----------------------------------------------------------------------------------*/
+    /* getOptionName
+    /*-----------------------------------------------------------------------------------*/
+    public static function getOptionName() {
         return self::$optionName;
     }
 
-    public static function getAccessibilityConformity()
-    {
+    public static function getAccessibilityConformity()     {
         return [
             '1' => __('fully complies with § 1 BayBITV', 'rrze-tos'),
             '2' => __('is partly in accordance with § 1 BayBITV', 'rrze-tos'),

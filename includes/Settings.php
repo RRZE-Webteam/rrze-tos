@@ -7,56 +7,38 @@ use \sync_helper;
 
 defined('ABSPATH') || exit;
 
-class Settings
-{
-    /**
-     * [protected description]
-     * @var string
-     */
+class Settings {
     protected $optionName;
-
-    /**
-     * [protected description]
-     * @var object
-     */
     protected $options;
-
-    /**
-     * [protected description]
-     * @var string
-     */
+    protected $settings;
     protected $settingsScreenId;
 
-    /**
-     * [__construct description]
-     */
-    public function __construct()
-    {
-        $this->optionName = Options::getOptionName();
-        $this->options = Options::getOptions();
+    public function __construct()  {
+	$this->optionName = Options::getOptionName();
+	$this->options = Options::getOptions();
+	$this->settings = Options::getAdminsettings();
 
         add_action(
             'admin_menu',
             [$this, 'adminSettingsPage']
         );
         add_action(
-            'admin_init',
+           'admin_init',
             [$this, 'adminSettings']
         );
 
         add_filter(
             'plugin_action_links_' . plugin_basename(RRZE_PLUGIN_FILE),
             [$this, 'pluginActionLink']
-        );
-    }
+       );
+   }
 
     /**
      * [pluginActionLink description]
      * @param  array $links [description]
      * @return array        [description]
      */
-    public function pluginActionLink($links)
-    {
+    public function pluginActionLink($links) {
         if (! current_user_can('manage_options')) {
             return $links;
         }
@@ -72,36 +54,29 @@ class Settings
         );
     }
 
-    /**
-     * [getSettingsPageSlug description]
-     * @return array [description]
-     */
-    protected static function getSettingsPageSlug()
-    {
-        return [
-            'imprint'       => __('Imprint', 'rrze-tos'),
-            'privacy'       => __('Privacy', 'rrze-tos'),
-            'accessibility' => __('Accessibility', 'rrze-tos')
-        ];
+    /*-----------------------------------------------------------------------------------*/
+    /* Get Tab Slugs
+    /*-----------------------------------------------------------------------------------*/
+    public function getSettingsPageSlug() {
+	$tablist = array();
+	
+	foreach ($this->settings as $tab => $data) {
+	    $tablist[$tab] = $data['tabtitle'];
+	 }
+	return $tablist;
     }
 
-    /**
-     * [getQueryVar description]
-     * @param  string $var     [description]
-     * @param  string $default [description]
-     * @return [type]          [description]
-     */
-    protected function getQueryVar($var, $default = '')
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Parse Query
+    /*-----------------------------------------------------------------------------------*/
+    protected function getQueryVar($var, $default = '') {
         return ! empty($_GET[$var]) ? esc_attr($_GET[$var]) : $default;
     }
 
-    /**
-     * [adminSettingsPage description]
-     * @return [type] [description]
-     */
-    public function adminSettingsPage()
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Define settings page
+    /*-----------------------------------------------------------------------------------*/
+    public function adminSettingsPage() {
         $this->settingsScreenId = add_options_page(
             __('ToS', 'rrze-tos'),
             __('ToS', 'rrze-tos'),
@@ -122,19 +97,16 @@ class Settings
     //    );
     }
 
-    /**
-     * [adminHelpMenu description]
-     */
-    public function adminHelpMenu()
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Define Help Tab for settings page
+    /*-----------------------------------------------------------------------------------*/
+    public function adminHelpMenu() {
         new HelpMenu($this->settingsScreenId);
     }
-
-    /**
-     * Prüfung der Eingabewerte
-     */
-    public function optionsValidate($input)
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Prüfung der Eingabewerte
+    /*-----------------------------------------------------------------------------------*/
+    public function optionsValidate($input) {
         if (isset($input) && is_array($input) && isset($_POST['_wpnonce'])
             && wp_verify_nonce(sanitize_key($_POST['_wpnonce']), 'rrze_tos_options-options')
         ) {
@@ -148,21 +120,28 @@ class Settings
 		if (preg_match('/^([a-z0-9]+)\-([_a-z0-9]+)/i',$_k, $key)) {	
 		    $name	= $key[2];
 		    $fieldset	= $key[1];
-		//    $fieldset	= 'privacy';
-		    $fieldset_opt = $this->options->$fieldset;
-		    $oldval	= $fieldset_opt[$name]; 
-		    $type	= $fieldset_opt['_settings']['fields'][$name]['type'];
-		    $title	= $fieldset_opt['_settings']['fields'][$name]['title'];
+		    $fieldset_opt = $this->settings->$fieldset;
+		    $oldval	= $this->options->$name;
+		    
+		    $type	= $fieldset_opt['settings']['fields'][$name]['type'];
+		    $title	= $fieldset_opt['settings']['fields'][$name]['title'];
 	    // $message .= "name: $name, fieldset: $fieldset<br>";
 	    // $message .= " &nbsp; old: $oldval newval: $_v<br>";
 		    switch($type) {
 			case 'inputRadioCallback':
 			    $val = intval($_v);
 			    if ($oldval !== $val) {
-				$this->options->$fieldset[$name] = $val;
-				$message .= "\"".$title."\" ".__("was updated", "rrze-tos");
+				$this->options->$name = $val;
+				$message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
 			    }
 			    break;
+			case 'inputTextCallback':
+			    $val = sanitize_text_field(wp_unslash($_v));
+			    if ($oldval !== $val) {
+				$this->options->$name = $val;
+				$message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+			    }
+			    break;    
 		    }
 		    
 		} elseif (preg_match('/email/i', $_k)) {
@@ -182,6 +161,7 @@ class Settings
                 }
             }
 	    if (!empty($message)) {
+		$message = '<ul>'.$message.'</ul>';
 		add_settings_error(
 		       'rrze-tos-updatenotice',
 		       esc_attr( 'settings_updated' ),
@@ -200,11 +180,10 @@ class Settings
         return $this->options;
     }
 
-    /**
-     * [settingsPage description]
-     */
-    public function settingsPage()
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Create settings page
+    /*-----------------------------------------------------------------------------------*/
+    public function settingsPage() {
         $slugs = self::getSettingsPageSlug();
         $default = array_keys($slugs)[0];
         $currentTab = $this->getQueryVar('current-tab', $default); ?>
@@ -213,13 +192,12 @@ class Settings
             <h2 class="nav-tab-wrapper wp-clearfix">
             <?php foreach ($slugs as $tab => $name) :
                 $class = $tab == $currentTab ? 'nav-tab-active' : '';
-        printf(
-            '<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
-            esc_attr($class),
-            esc_attr($tab),
-            esc_attr($name)
+		printf('<a class="nav-tab %1$s" href="?page=rrze-tos&current-tab=%2$s">%3$s</a>',
+		    esc_attr($class),
+		    esc_attr($tab),
+		    esc_attr($name)
                 );
-        endforeach; ?>
+	     endforeach; ?>
             </h2>
             <form method="post" action="options.php" id="tos-admin-form">
                 <?php settings_fields('rrze_tos_options'); ?>
@@ -239,11 +217,10 @@ class Settings
         <?php
     }
 
-    /**
-     * [adminSettings description]
-     */
-    public function adminSettings()
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Create tabs within settings page 
+    /*-----------------------------------------------------------------------------------*/
+    public function adminSettings() {
         register_setting(
             'rrze_tos_options',
             $this->optionName,
@@ -254,35 +231,27 @@ class Settings
         $default = array_keys($slugs)[0];
         switch ($this->getQueryVar('current-tab', $default)) {
             case 'accessibility':
+		$this->addConfigSettings('accessibility');
                 $this->addAccessibilityGeneralSection();
                 $this->addFeedbackSection();
                 break;
             case 'privacy':
 	       $this->addConfigSettings('privacy');
-      //          $this->addPrivacySection();
-                $this->addPrivacyExtraSection();
                 break;
             case 'imprint':
             default:
 		$this->addConfigSettings('imprint');
-                $this->addImprintWebsitesSection();
-                $this->addImprintResponsibleSection();
-                $this->addImprintWebmasterSection();
-                $this->addImprintExtraSection();
         }
     }
 
-     /**
-     * Generate settings and fields for the adminpage by config definitions
-     */
+    
+    /*-----------------------------------------------------------------------------------*/
+    /* Erstelle Settings und EIngabefelder der jeewiligen Tab
+    /*-----------------------------------------------------------------------------------*/
     public function addConfigSettings($fieldset = 'imprint') {
 
-	$fieldset_opt = $this->options->$fieldset;
-	if (!isset($fieldset_opt["_settings"])) {
-	    echo "empty ". $fieldset_opt["_settings"];
-	}
-	 foreach ($fieldset_opt["_settings"] as $n => $v) {
-	//    echo "option from $fieldset: $n -> $v<br>\n";
+	$fieldset_opt = $this->settings->$fieldset;
+	foreach ($fieldset_opt["settings"] as $n => $v) {
 	    if ($n == 'sections') {
 		foreach ($v as $field => $fielddata) {
 		    $id = $field;
@@ -292,17 +261,15 @@ class Settings
 		       $page = 'rrze_tos_options';
 		    }
 		    if (isset($title)) {
-	//		echo "add_settings_section($id, $title, '__return_false', $page);";
-			add_settings_section($id, $title, '__return_false', $page);  
+			add_settings_section($id, $title, [$this, 'callback_SectionText' ], $page);  
 		    }
 			
 		}
 	    } 
 	    if ($n == 'fields') {
-		$default = $id = $title = $section = $type = $page = '';
-		$required = $desc = '';
-		
 		foreach ($v as $field => $fielddata) {
+		    $fieldoptions = array();
+		    $required = $rows = $desc = $default = '';
 		    
 		    if (isset($fielddata['id'])) {
 			$id = $fielddata['id'];
@@ -313,27 +280,39 @@ class Settings
 		    $title = $fielddata['title'];
 		    $section = $fielddata['section'];
 		    $type = $fielddata['type'];
-		    $fieldoptions = $fielddata['options'];
-		    $required = $fielddata['required'];
-		    $rows = $fielddata['rows'];
-		    $desc = $fielddata['desc'];
-		    $page = $fielddata['page'];
-		    if (!isset($page)) {
-		       $page = 'rrze_tos_options';
-		    }
 		    
-		    if (isset($fieldset_opt[$field])) {
-			$default = $fieldset_opt[$field];
+		    if (isset($fielddata['options'])) {
+			$fieldoptions = $fielddata['options'];
+		    }
+		    if (isset($fielddata['required'])) {
+			  $required = $fielddata['required'];
+		    }
+		    if (isset($fielddata['rows'])) {
+			$rows = $fielddata['rows'];
+		    }
+		    if (isset($fielddata['desc'])) {
+			$desc = $fielddata['desc'];
+		    }
+		    if (isset($fielddata['page'])) {
+			$page = $fielddata['page'];
+		    } else {
+			$page = 'rrze_tos_options';
+		    }
+		     if (isset($fielddata['default'])) {
+			$default = $fielddata['default'];
+		    }
+		    if (isset($fielddata['autocomplete'])) {
+			$default = $fielddata['autocomplete'];
+		    }
+   		    
+		    if (isset($this->options->$id)) {
+			$default = $this->options->$id;
 		    }
 		    if ((isset($title)) && (isset($id))) {
-		//	echo "add_settings_field($id)";
 			   add_settings_field(
 			    $id, 
 			    $title,  
-			    [
-				$this,
-				$type,
-			    ],
+			    [$this, $type ],
 			    $page,
 			    $section,
 			    [
@@ -343,7 +322,8 @@ class Settings
 				'rows'		=> $rows,
 				'description'	=> $desc,
 				'options'	=> $fieldoptions,
-				'default'	=> $default
+				'default'	=> $default,
+				'autocomplete'    => $autocomplete
 			    ]
 			);
 		    }
@@ -353,418 +333,29 @@ class Settings
 	 }
     }
     
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback für Tabs: prints infos
+    /*-----------------------------------------------------------------------------------*/    
+    public function callback_SectionText( $section_passed ) {
+       foreach ($this->settings as $tab => $name) {
+	   foreach ($name['settings']['sections'] as $s => $setid) {
+	       if ($s == $section_passed['id']) {
+		   if (isset($setid['desc'])) {
+		         echo "<p>".$setid['desc']."</p>"; 
+		   }
+		   if (isset($setid['notice'])) {
+		        echo '<div class="notice-info"><p>'.$setid['notice']."</p></div>"; 
+		   }
+		   if (isset($setid['warning'])) {
+		         echo '<div class="notice-warning"><p>'.$setid['warning']."</p></div>"; 
+		   }
+	       }
+	   }
+       }	
+    }
     
 
-    
-    
-    /**
-     * [addImprintWebsitesSection description]
-     */
-    protected function addImprintWebsitesSection()
-    {
-        add_settings_section(
-            'rrze_tos_section_imprint_websites',
-            '',
-            '__return_false',
-            'rrze_tos_options'
-        );
 
-        add_settings_field(
-            'imprint_websites',
-            __('Websites', 'rrze-tos'),
-            [
-                $this,
-                'textareaCallback',
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_websites',
-            [
-                'name'        => 'imprint_websites',
-                'required'    => 'required',
-                'rows'        => 4,
-                'description' => __('One or more websites referred to in the imprint.', 'rrze-tos')
-            ]
-        );
-    }
-
-    /**
-     * [addImprintResponsibleSection description]
-     */
-    protected function addImprintResponsibleSection()
-    {
-        add_settings_section(
-            'rrze_tos_section_imprint_responsible',
-            __('Responsible', 'rrze-tos'),
-            '__return_false',
-            'rrze_tos_options'
-        );
-
-        add_settings_field(
-            'imprint_responsible_name',
-            __('Name', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name'         => 'imprint_responsible_name',
-                'autocomplete' => 'given-name'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_responsible_email',
-            __('Email', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name'         => 'imprint_responsible_email',
-                'autocomplete' => 'email'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_responsible_street',
-            __('Street', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name'         => 'imprint_responsible_street',
-                'autocomplete' => 'address-line1'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_responsible_postalcode',
-            __('Postcode', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback',
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name'     => 'imprint_responsible_postalcode'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_responsible_city',
-            __('City', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name'         => 'imprint_responsible_city',
-                'autocomplete' => 'address-level2'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_responsible_phone',
-            __('Phone', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name'         => 'imprint_responsible_phone',
-                'autocomplete' => 'tel'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_tos_responsible_org',
-            __('Organization', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name' => 'imprint_tos_responsible_org'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_wmp_search_responsible',
-            __('WMP search', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_responsible',
-            [
-                'name'        => 'imprint_wmp_search_responsible',
-                'description' => [
-                    __('Search term (website) to get the data of the responsible using WMP API.', 'rrze-tos'),
-                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->imprint_wmp_search_responsible
-                ],
-                'button'      => [
-                    'text' => __('Retrieve data', 'rrze-tos'),
-                    'type' => 'secondary',
-                    'name' => 'rrze-tos-wmp-search-responsible'
-                ]
-            ]
-        );
-    }
-
-    /**
-     * [addImprintWebmasterSection description]
-     */
-    protected function addImprintWebmasterSection()
-    {
-        add_settings_section(
-            'rrze_tos_section_imprint_webmaster',
-            __('Webmaster', 'rrze-tos'),
-            '__return_false',
-            'rrze_tos_options'
-        );
-
-        add_settings_field(
-            'imprint_webmaster_name',
-            __('Name', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name' => 'imprint_webmaster_name'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_webmaster_street',
-            __('Street', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name' => 'imprint_webmaster_street'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_webmaster_city',
-            __('City', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name' => 'imprint_webmaster_city'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_webmaster_phone',
-            __('Phone', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name' => 'imprint_webmaster_phone'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_webmaster_fax',
-            __('Fax', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name' => 'imprint_webmaster_fax'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_webmaster_email',
-            __('Email', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name' => 'imprint_webmaster_email'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_webmaster_org',
-            __('Organization', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name' => 'imprint_webmaster_org'
-            ]
-        );
-
-        add_settings_field(
-            'imprint_wmp_search_webmaster',
-            __('WMP search', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_webmaster',
-            [
-                'name'        => 'imprint_wmp_search_webmaster',
-                'description' => [
-                    __('Search term (website) to get the data of the webmaster using WMP API.', 'rrze-tos'),
-                    'https://www.wmp.rrze.fau.de/suche/impressum/' . $this->options->imprint_wmp_search_webmaster
-                 ],
-                'button'      => [
-                    'text' => __('Retrieve data', 'rrze-tos'),
-                    'type' => 'secondary',
-                    'name' => 'rrze-tos-wmp-search-webmaster'
-                ]
-            ]
-        );
-    }
-
-    /**
-     * [addImprintExtraSection description]
-     */
-    protected function addImprintExtraSection()
-    {
-        add_settings_section(
-            'rrze_tos_section_imprint_extra',
-            __('New section', 'rrze-tos'),
-            '__return_false',
-            'rrze_tos_options'
-        );
-
-        add_settings_field(
-            'imprint_section_extra_text',
-            __('Add a new section?', 'rrze-tos'),
-            [
-                $this,
-                'wpEditor'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_imprint_extra',
-            [
-                'name'   => 'imprint_section_extra_text',
-                'height' => 200,
-            ]
-        );
-    }
-
-    /**
-     * [addPrivacySection description]
-     */
-    protected function addPrivacySection()
-    {
-        add_settings_section(
-            'rrze_tos_section_privacy',
-            __('Newsletter', 'rrze-tos'),
-            '__return_false',
-            'rrze_tos_options'
-        );
-
-        add_settings_field(
-            'privacy_newsletter',
-            __('Show the newsletter section?', 'rrze-tos'),
-            [
-                $this,
-                'inputRadioCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_privacy',
-            [
-                'name'    => 'privacy_newsletter',
-                'options' =>
-                    [
-                        '1' => __('Yes', 'rrze-tos'),
-                        '0' => __('No', 'rrze-tos')
-                    ]
-            ]
-        );
-    }
-
-    /**
-     * [addPrivacyExtraSection description]
-     */
-    protected function addPrivacyExtraSection()
-    {
-        add_settings_section(
-            'rrze_tos_section_privacy_extra',
-            __('New section', 'rrze-tos'),
-            '__return_false',
-            'rrze_tos_options'
-        );
-
-        add_settings_field(
-            'privacy_section_extra',
-            __('Add a new section?', 'rrze-tos'),
-            [
-                $this,
-                'inputRadioCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_privacy_extra',
-            [
-                'name'    => 'privacy_section_extra',
-                'options' =>
-                    [
-                        '1' => __('Yes', 'rrze-tos'),
-                        '0' => __('No', 'rrze-tos')
-                    ]
-            ]
-        );
-
-        add_settings_field(
-            'privacy_section_extra_text',
-            __('Content of the new section', 'rrze-tos'),
-            [
-                $this,
-                'wpEditor'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_privacy_extra',
-            [
-                'name' => 'privacy_section_extra_text'
-            ]
-        );
-    }
 
     /**
      * [addAccessibilityGeneralSection description]
@@ -926,20 +517,16 @@ class Settings
         _e('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos');
     }
 
-    /**
-     * [inputTextCallback description]
-     * @param  array $args [description]
-     */
-    public function inputTextCallback($args)
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: Generisches Texteingabefeld
+    /*-----------------------------------------------------------------------------------*/
+    public function inputTextCallback($args) {
         if (! array_key_exists('name', $args)) {
             return;
         }
         $name = esc_attr($args['name']);
 
-        if (array_key_exists($name, $this->options)) {
-            $value = esc_attr($this->options->$name);
-        }
+       
         if (array_key_exists('type', $args)) {
             $type = esc_attr($args['type']);
         }
@@ -948,7 +535,10 @@ class Settings
         }
         if (array_key_exists('description', $args)) {
             $description = $args['description'];
-        }
+        } elseif (array_key_exists('desc', $args)) {
+	    $description = $args['desc'];
+	}
+	
         if (array_key_exists('autocomplete', $args)) {
             $autocomplete = esc_attr($args['autocomplete']);
         }
@@ -957,12 +547,29 @@ class Settings
         }
         if (array_key_exists('button', $args)) {
             $button = $args['button'];
-        } ?>
+        } 
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	if (array_key_exists('default', $args)) {
+            $default = esc_attr($args['default']);
+        }
+	if (isset($fieldset)) {
+	    $oldval = $this->options->$name;
+	    if ( (  !isset($oldval) || empty($oldval)    ) && (isset($default))) {
+		$oldval = $default;
+	    }
+	    $postname = $fieldset."-".$name;
+	} else {
+	    $oldval = $this->options->$name;
+	    $postname = $name;
+	}
+	?>
         <input
-            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
+            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
             type="<?php echo isset($type) ? $type : 'text'; ?>"
             class="<?php echo isset($class) ? esc_attr($class) : 'regular-text'; ?>"
-            value="<?php echo isset($value) ? $value : ''; ?>"
+            value="<?php echo isset($oldval) ? $oldval : ''; ?>"
             <?php echo isset($required) ? $required : ''; ?>
             <?php if (isset($autocomplete)) : ?>
                 autocomplete="<?php echo esc_attr($autocomplete); ?>"
@@ -978,42 +585,53 @@ class Settings
         <?php endif;
     }
 
-    /**
-     * [textareaCallback description]
-     * @param array $args [description]
-     */
-    public function textareaCallback($args)
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: Generisches Textarea-Eingabefeld
+    /*-----------------------------------------------------------------------------------*/
+    public function inputTextareaCallback($args) {
         if (! array_key_exists('name', $args)) {
             return;
         }
         $name = esc_attr($args['name']);
 
-        if (array_key_exists($name, $this->options)) {
-            $value = sanitize_textarea_field($this->options->$name);
-        }
+  
         if (array_key_exists('rows', $args)) {
             $rows = absint($args['rows']);
         }
         if (array_key_exists('description', $args)) {
             $description = esc_attr($args['description']);
-        } ?>
+        } 
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	if (isset($fieldset)) {
+	    $oldval = sanitize_textarea_field($this->options->$name);
+	    if ((!isset($oldval)) && (isset($default))) {
+		$oldval = $default;
+	    }
+	    $postname = $fieldset."-".$name;
+	} else {
+	    $oldval = sanitize_textarea_field($this->options->$name);
+	    $postname = $name;
+	}
+	
+	
+	?>
         <textarea
             name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
             cols="50"
             rows="<?php echo isset($rows) && $rows > 0 ? $rows : 8; ?>"
-        ><?php echo isset($value) ? $value : ''; ?></textarea>
+        ><?php echo isset($oldval) ? $oldval : ''; ?></textarea>
         <br>
         <?php if (isset($description)) : ?>
             <p class="description"><?php echo esc_attr($description); ?></p>
         <?php endif;
     }
 
-    /**
-     * Radio Eingabe Felder
-     */
-    public function inputRadioCallback($args)
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: Radio-Inputfelder
+    /*-----------------------------------------------------------------------------------*/
+    public function inputRadioCallback($args) {
         if (! array_key_exists('name', $args)) {
             return;
         }
@@ -1032,12 +650,14 @@ class Settings
             $fieldset = esc_attr($args['fieldset']);
         }
 	if (isset($fieldset)) {
-	    $oldval = $this->options->$fieldset->$name;
+	    $oldval = $this->options->$name;
 	    if ((!isset($oldval)) && (isset($default))) {
 		$oldval = $default;
 	    }
+	     $postname = $fieldset."-".$name;
 	} else {
 	    $oldval = $this->options->$name;
+	     $postname = $name;
 	}
         $radios = [];
         if (array_key_exists('options', $args)) {
@@ -1045,11 +665,7 @@ class Settings
         }
 	
 	
-	if (isset($fieldset)) {
-	    $postname = $fieldset."-".$name;
-	} else {
-	    $postname = $name;
-	}
+
 	
         foreach ($radios as $_k => $_v) : ?>
             <label>
@@ -1061,7 +677,7 @@ class Settings
                 >
                 <?php echo esc_attr($_v); ?>
             </label>
-            <br>
+           
         <?php endforeach;
         if (isset($description)) : ?>
             <p class="description"><?php echo esc_attr($description); ?></p>
@@ -1073,8 +689,7 @@ class Settings
      * @param  array $args [description]
      * @return void
      */
-    public function selectCallback($args)
-    {
+    public function selectCallback($args) {
         $limit = [];
         if (array_key_exists('name', $args)) {
             $name = esc_attr($args['name']);
@@ -1106,12 +721,10 @@ class Settings
         <?php endif;
     }
 
-    /**
-     * [wpEditor description]
-     * @param  array $args [description]
-     */
-    public function wpEditor($args)
-    {
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: WPEditor
+    /*-----------------------------------------------------------------------------------*/
+    public function inputWPEditor($args) {
         if (! array_key_exists('name', $args)) {
             return;
         }
@@ -1130,13 +743,24 @@ class Settings
         if (array_key_exists('description', $args)) {
             $description = esc_attr($args['description']);
         }
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	if (isset($fieldset)) {
+	    if ((!isset($content)) && (isset($default))) {
+		 $content = wp_unslash($default);
+	    }
+	     $postname = $fieldset."-".$name;
+	} else {
+	     $postname = $name;
+	}
 
         $settings = [
             'teeny'         => true,
             'wpautop'       => false,
             'editor_height' => isset($height) && $height > 150 ? $height : 250,
             'media_buttons' => false,
-            'textarea_name' => sprintf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name))
+            'textarea_name' => sprintf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname))
         ];
 
         wp_editor($content, $name, $settings);
@@ -1144,14 +768,11 @@ class Settings
             <p class="description"><?php echo esc_attr($description); ?></p>
         <?php endif;
     }
-
-    /**
-     * [submitButton description]
-     * @param  array $args [description]
-     * @return void
-     */
-    protected function submitButton($args)
-    {
+    
+    /*-----------------------------------------------------------------------------------*/
+    /* Submit button
+    /*-----------------------------------------------------------------------------------*/
+    protected function submitButton($args) {
         $text = array_key_exists('text', $args) ? esc_html($args['text']) : '';
         $type = array_key_exists('type', $args) ? esc_attr($args['type']) : 'secondary';
         $name = array_key_exists('name', $args) ? esc_attr($args['name']) : '';
@@ -1159,62 +780,5 @@ class Settings
         submit_button($text, $type, $name, false);
     }
 
-    /**
-     * [getResponsibleWmpData description]
-     * @return boolean|object [description]
-     */
-    protected function getResponsibleWmpData()
-    {
-        $this->updateFromWmpData(
-            [
-                'search' => $this->options->imprint_wmp_search_responsible,
-                'key' => 'verantwortlich',
-                'prefix' => 'imprint_responsible_'
-            ]
-        );
-    }
-
-    /**
-     * [getWebmasterWmpData description]
-     * @return boolean|object [description]
-     */
-    protected function getWebmasterWmpData()
-    {
-        $this->updateFromWmpData(
-            [
-                'search' => $this->options->imprint_wmp_search_webmaster,
-                'key' => 'webmaster',
-                'prefix' => 'imprint_webmaster_'
-            ]
-        );
-    }
-
-    /**
-     * [updateFromWmpData description]
-     * @param  array $args [description]
-     * @return boolean|object [description]
-     */
-    protected function updateFromWmpData($args)
-    {
-        $search = array_key_exists('search', $args) ? esc_attr($args['search']) : '';
-        $key = array_key_exists('key', $args) ? esc_attr($args['key']) : '';
-        $prefix = array_key_exists('prefix', $args) ? esc_attr($args['prefix']) : '';
-
-        $data = WMP::getJsonData($search);
-        if (is_wp_error($data)) {
-            return $data;
-        }
-
-        if (! array_key_exists($key, $data)) {
-            return new WP_Error('wmp-key-is-not-available', __('WMP key is not available.', 'rrze-tos'));
-        }
-
-        foreach ($data[$key] as $_k => $_v) {
-            if (! is_null($_v)) {
-                $optionKey = sprintf('%1$s%2$s', $prefix, $_k);
-                $this->options->$optionKey = $_v;
-            }
-        }
-        return update_option($this->optionName, $this->options, true);
-    }
+ 
 }
