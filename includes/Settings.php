@@ -362,30 +362,7 @@ class Settings {
      */
     protected function addAccessibilityGeneralSection()
     {
-        add_settings_section(
-            'rrze_tos_section_accessibility_general',
-            __('General', 'rrze-tos'),
-            [
-                $this,
-                'accessibilityGeneralSectionContent'
-            ],
-            'rrze_tos_options'
-        );
 
-        add_settings_field(
-            'accessibility_conformity',
-            __('This website', 'rrze-tos'),
-            [
-                $this,
-                'inputRadioCallback',
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_accessibility_general',
-            [
-                'name'    => 'accessibility_conformity',
-                'options' => Options::getAccessibilityConformity()
-            ]
-        );
 
         add_settings_field(
             'accessibility_non_accessible_content',
@@ -508,15 +485,7 @@ class Settings {
         );
     }
 
-    /**
-     * [accessibilityGeneralSectionContent description]
-     * @return void
-     */
-    public function accessibilityGeneralSectionContent()
-    {
-        _e('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos');
-    }
-
+    
     /*-----------------------------------------------------------------------------------*/
     /* Callback: Generisches Texteingabefeld
     /*-----------------------------------------------------------------------------------*/

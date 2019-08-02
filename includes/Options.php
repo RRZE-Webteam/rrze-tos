@@ -354,7 +354,37 @@ class Options {
 
 	    ),
 	    'accessibility' => array(
-		'tabtitle'	 => __('Accessibility', 'rrze-tos')    
+		'tabtitle'	 => __('Accessibility', 'rrze-tos'),
+		'settings'  => array(
+		    'sections'	=> array(
+			'rrze_tos_section_accessibility_general'  => array(
+			    'title' => __('General', 'rrze-tos'),
+			    'desc' => __('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			),
+			'rrze_tos_section_feedback'  => array(
+			    'title' => __('Feedback from', 'rrze-tos'),
+			    'desc'	=> __('You have to provide a form to allow people contact you in case there are accessibility problems. Due to laws (Art. 13 BayBGG) you have to answer and help within 6 weeks.', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			),
+			
+
+		    ),
+		    'fields' => array(
+			'accessibility_conformity'   => array(
+			    'title'	=>  __('Declaration of Conformity', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_general',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Please chose the level of conformity to §1 BayBITV. To fully comply, the website has to follow WCAG 2.1 level AA for all webpages, content and media files.', 'rrze-tos'),
+			     'default'	=> 1,
+			    'options' => [
+				    '10'    => __('Website fully complies with § 1 BayBITV', 'rrze-tos'),
+				    '1'	   => __('Website is partly in accordance with § 1 BayBITV', 'rrze-tos'),
+				    '0'	   => __('Website does not comply with § 1 BayBITV', 'rrze-tos')
+				]
+			),
+		    )
+		)
 	    )
 	];
 	
@@ -390,13 +420,6 @@ class Options {
         return self::$optionName;
     }
 
-    public static function getAccessibilityConformity()     {
-        return [
-            '1' => __('fully complies with § 1 BayBITV', 'rrze-tos'),
-            '2' => __('is partly in accordance with § 1 BayBITV', 'rrze-tos'),
-            '0' => __('does not comply with § 1 BayBITV', 'rrze-tos')
-        ];
-    }
 
     public static function getAccessibilityMethodology()
     {
