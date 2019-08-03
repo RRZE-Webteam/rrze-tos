@@ -16,13 +16,11 @@ class Options {
         $siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 
         $options = [
-	    'version'				=> 3,
+	    'version'				=> 4,
 		// Optiontable version
             
             'imprint_websites'                     => $siteUrl,
-            'imprint_wmp_search_responsible'       => $siteUrl,
             'imprint_webmaster_email'              => $adminMail,
-            'imprint_wmp_search_webmaster'         => $siteUrl,
             'feedback_receiver_email'              => $adminMail,
             'feedback_subject'                     => __('Barrierefreiheit Feedback-Formular', 'rrze-tos'),
             'feedback_cc_email'                    => '',
@@ -362,27 +360,163 @@ class Options {
 			    'desc' => __('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos'),
 			    'page'  => 'rrze_tos_options',
 			),
+			'rrze_tos_section_accessibility_status'  => array(
+			    'title' => __('Konformitätsstatus', 'rrze-tos'),
+			    'desc'  => __('Offiziell anzugebender Status des Webauftritts, sowie dessen Inhalten hinsichtlich der Erfüllung der gesetzlichen Anforderungen.', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			),
+			'rrze_tos_section_accessibility_reasonfield'  => array(
+			    'title' => __('Erklärung', 'rrze-tos'),
+			    'desc'  => __('Auflistung und Erläuterung der Probleme bei der Umsetzung der Barrierefreiheit.', 'rrze-tos'),
+			    'page'  => 'rrze_tos_options',
+			),
 			'rrze_tos_section_feedback'  => array(
-			    'title' => __('Feedback from', 'rrze-tos'),
-			    'desc'	=> __('You have to provide a form to allow people contact you in case there are accessibility problems. Due to laws (Art. 13 BayBGG) you have to answer and help within 6 weeks.', 'rrze-tos'),
+			    'title' => __(' Feedback-Mechanismus', 'rrze-tos'),
+			    'desc'  => __('Möglichkeiten zur Kontaktaufnahme bei Probleen und Fehlern zur Barrierefreiheit.', 'rrze-tos'),
 			    'page'  => 'rrze_tos_options',
 			),
 			
 
 		    ),
 		    'fields' => array(
-			'accessibility_conformity'   => array(
-			    'title'	=>  __('Declaration of Conformity', 'rrze-tos'),
-			    'section'	=> 'rrze_tos_section_accessibility_general',
-			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Please chose the level of conformity to §1 BayBITV. To fully comply, the website has to follow WCAG 2.1 level AA for all webpages, content and media files.', 'rrze-tos'),
-			     'default'	=> 1,
+			'accessibility_conformity_val'   => array(
+			    'title'	=>  __('Konformitätserklärung', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_status',
+			    'type'	=> 'inputSelectCallback',
+			    'desc'	=> __('Stand der Konformität gemäß der EU-Richtlinie 2102 und der lokalen Gesetzgebung.', 'rrze-tos'),
+			    'default'	=> 1,
+			    'addbreak'	=> true,
 			    'options' => [
-				    '10'    => __('Website fully complies with § 1 BayBITV', 'rrze-tos'),
-				    '1'	   => __('Website is partly in accordance with § 1 BayBITV', 'rrze-tos'),
-				    '0'	   => __('Website does not comply with § 1 BayBITV', 'rrze-tos')
+				    '2'    => __('Vollständig konform: Der Inhalt entspricht ohne Ausnahmen vollständig dem Standard für Barrierefreiheit.', 'rrze-tos'),
+				    '1'	   => __('Teilweise konform: Einige Teile des Inhalts entsprechen nicht vollständig dem Standard für Barrierefreiheit.', 'rrze-tos'),
+				    '0'	   => __('Nicht konform: Der Inhalt entspricht nicht dem Standard für Barrierefreiheit.', 'rrze-tos'),
+				    '-1'	   => __('Unbekannt: Der Inhalt wurde nicht bewertet oder die Bewertungsergebnisse sind nicht verfügbar.', 'rrze-tos')
 				]
 			),
+			'accessibility_methodology'   => array(
+			    'title'	=>  __('Methodology', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_status',
+			    'type'	=> 'inputRadioCallback',
+			    'default'	=> 1,
+			    'options' => [
+				 '1' => __('Self-evaluation', 'rrze-tos'),
+				 '2' => __('Third party evaluation', 'rrze-tos')
+			    ]
+			),
+			'accessibility_creation_date'   => array(
+			    'title'	=>  __('Creation date', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_status',
+			    'type'	=> 'inputDateCallback',
+			    'min'	=> '2019-08-01',
+			),
+			'accessibility_last_review_date'   => array(
+			    'title'	=>  __('Last review date', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_status',
+			    'type'	=> 'inputDateCallback',
+			    'min'	=> '2019-08-01',
+			),
+			
+			
+			'accessibility_non_accessible_content_helper'   => array(
+			    'title'	=>  __('Eingabehilfe zu nicht barrierefreie Inhalte', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
+			    'type'	=> 'inputRadioCallback',
+			    'default'	=> 0,
+			     'addbreak'	=> true,
+			    'options' => [
+				    '1' => __('Erklärungen manuell ausfüllen', 'rrze-tos'),
+				    '0' => __('Eingabehilfe nutzen und durch manuelle Eingaben ergänzen', 'rrze-tos')
+				]
+			),
+			
+			
+			'accessibility_non_accessible_content_faillist'   => array(
+			    'title'	=>  __('Nicht barrierefrei zugängliche Inhalte (Auswahl)', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
+			    'type'	=> 'inputCheckboxListCallback',
+			       'addbreak'	=> true,
+			    'options' => [
+				    1	=>  __('PDF-Dokumente, die vor dem 23.09.2018 erstellt wurden, konnten noch nicht auf ein barrierefreies Format umgestellt werden.', 'rrze-tos'),
+				2	=>  __('PDF-Dokumente, die ab dem 23.09.2018 erstellt wurden, sind noch nicht barrierefrei zugänglich.', 'rrze-tos'),
+				3	=>  __('Einige Dokumente wurden von Dritten (z.B. Prüfungsamt, andere Einrichtungen der FAU, Ministerien, u.a.) bereitgestellt. Diese Dokumente liegen nicht in einer barrierefreien Fassung vor.', 'rrze-tos'),
+				4	=>  __('Zu eingebundenen Videos stehen derzeit keine Untertitel oder Transkription zur Verfügung.', 'rrze-tos'),
+				5	=>  __('Zu mittels Karten oder Kartenbildern eingebundenen Anfahrtsbeschreibungen fehlt derzeit die textuelle Beschreibung.', 'rrze-tos'),
+				6	=>  __('In den Seiten enthaltene Grafiken oder Bilder sind derzeit nicht vollständig durch Textbeschreibungen ergänzt worden.', 'rrze-tos'),
+				7	=>  __('Es werden Tabellen zum Zwecke der optischen Gestaltung verwendet.', 'rrze-tos'),
+				8	=>  __('Bei der Verwendung von mehrsprachigen Inhalten auf einer Seite, werden die Sprachen teilweise nicht korrekt in HTML gekennzeichnet.', 'rrze-tos'),
+
+
+				]
+			),
+			
+			
+			'accessibility_non_accessible_content'   => array(
+			    'title'	=>  __('Nicht barrierefrei zugängliche Inhalte', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
+			    'type'	=> 'inputWPEditor',
+			    'desc'	=>  __('Der Gesetzgeber verpflichtet dazu, alle nicht barrierefreien Bestandteile des Webauftritts und der Inhalte öffentlich aufzulisten. Diese müssen hier angegeben werden.', 'rrze-tos'),
+			    'default'	=> '',
+			    'height' => 100,
+			),
+			'accessibility_non_accessible_content_reasons'   => array(
+			    'title'	=>  __('Begründung', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
+			    'type'	=> 'inputWPEditor',
+			    'desc'	=>  __('Neben der reinen Auflistung der nicht barrierefreien Inhalte ist zusätzlich für jeden genannten Punkt eine Begründung anzugeben, warum die Barrierefreiheit nicht geleistet werden konnte. Bitte beachten Sie, daß der Gesetzgeber folgende Begründungen als unberechtigt auflistet: "Mangelnde Prioritäten, Zeit oder Unkenntnis". Diese Punkte dürfen daher nicht als Begründung verwendet werden. ', 'rrze-tos'),
+			    'default'	=> '',
+			    'height' => 100,
+			),
+			'accessibility_non_accessible_content_alternatives'   => array(
+			    'title'	=>  __('Alternative Zugangswege', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
+			    'type'	=> 'inputWPEditor',
+			    'desc'	=>  __('Geben Sie hier an, ob und welche Alternativen zur Verfügung stehen, die oben genannten nicht zugänglichen Inhalte zu erlangen. Dies kann beispielsweise die Kontaktaufnahme über das Feedback-Formular sein oder die Angabe einer Stelle, die Hilfe leistet.', 'rrze-tos'),
+			    'default'	=> '',
+			    'height' => 100,
+			),
+			
+			'accessibility_feedback_contactname'=> array(
+			    'title'	=>  __('Ansprechpartner', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_feedback',
+			    'type'	=> 'inputTextCallback',
+			    'desc'	=>  __('Geben Sie hier einen Namen für den zuständigen Ansprechpartner für Beschwerden oder Hilfeanfragen über mangelnde Zugänglichkeit an.', 'rrze-tos'),
+			),
+			'accessibility_feedback_email'=> array(
+			    'title'	=>  __('EMail-Adresse', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_feedback',
+			    'desc'	=> __('Empfänger-Mailadresse zu Beschwerden oder Hilfeanfragen über mangelnde Zugänglichkeit. Bitte beachten Sie: Bleibt eine Anfrage über die Kontaktmöglichkeit innerhalb von sechs Wochen ganz oder teilweise unbeantwortet, prüft die zuständige Aufsichtsbehörde auf Antrag des Nutzers, ob im Rahmen der Überwachung gegenüber dem Verpflichteten Maßnahmen erforderlich sind.', 'rrze-tos'),
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> $adminMail,
+			    'required'     => 'required'
+			),
+			'accessibility_feedback_cc'=> array(
+			    'title'	=>  __('E-Mail CC', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_feedback',
+			    'desc'	=> __('Optionale zusätzliche Mailadresse.', 'rrze-tos'),
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> '',
+			),
+			'accessibility_feedback_subject'=> array(
+			    'title'	=>  __('Subject', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_feedback',
+			    'type'	=> 'inputTextCallback',
+			    'default'	=>  __('Accessibility Formular Request', 'rrze-tos'),
+			    'required'     => 'required'
+			),
+			'accessibility_feedback_phone'=> array(
+			    'title'	=>  __('Phone', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_feedback',
+			    'type'	=> 'inputTextCallback',
+			    'desc'	=>  __('Kontaktnummer für telefonische Hilfestellung.', 'rrze-tos'),
+			),
+			'accessibility_feedback_address'=> array(
+			    'title'	=>  __('Adresse', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_feedback',
+			    'type'	=> 'inputTextareaCallback',
+			    'desc'	=>  __('Postadresse als Alternative zur E-Mail.', 'rrze-tos'),
+			),
+			
+			
 		    )
 		)
 	    )
@@ -390,15 +524,15 @@ class Options {
 	
 	return $settings;
     }
-	
+
     
     /*-----------------------------------------------------------------------------------*/
     /* gets options from get_option() table and merges them with defaults if needed
     /*-----------------------------------------------------------------------------------*/
     public static function getOptions() {
         $defaults = self::defaultOptions();
-    // $options = (array) get_option(self::$optionName);
-	$options = array();
+    $options = (array) get_option(self::$optionName);
+	// $options = array();
 	$options = wp_parse_args($options, $defaults);
 // $options = array_intersect_key($options, $defaults);
         return (object) $options;
@@ -421,11 +555,4 @@ class Options {
     }
 
 
-    public static function getAccessibilityMethodology()
-    {
-        return [
-            '1' => __('Self-evaluation', 'rrze-tos'),
-            '2' => __('Third party evaluation', 'rrze-tos')
-        ];
-    }
 }

@@ -4,7 +4,7 @@
 Plugin Name:     RRZE TOS
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-tos
 Description:     Testing of a website from the FAU network according to the conformity criteria of the TOS.
-Version:         1.7.0
+Version:         1.7.1
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -17,7 +17,7 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-const RRZE_PHP_VERSION = '7.1';
+const RRZE_PHP_VERSION = '7.2';
 const RRZE_WP_VERSION = '5.2';
 
 const RRZE_PLUGIN_FILE = __FILE__;

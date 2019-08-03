@@ -232,8 +232,6 @@ class Settings {
         switch ($this->getQueryVar('current-tab', $default)) {
             case 'accessibility':
 		$this->addConfigSettings('accessibility');
-                $this->addAccessibilityGeneralSection();
-                $this->addFeedbackSection();
                 break;
             case 'privacy':
 	       $this->addConfigSettings('privacy');
@@ -270,7 +268,8 @@ class Settings {
 		foreach ($v as $field => $fielddata) {
 		    $fieldoptions = array();
 		    $required = $rows = $desc = $default = '';
-		    
+		    $min = $max = $step = '';
+		    $addbreak = false;
 		    if (isset($fielddata['id'])) {
 			$id = $fielddata['id'];
 		    } else {
@@ -287,6 +286,18 @@ class Settings {
 		    if (isset($fielddata['required'])) {
 			  $required = $fielddata['required'];
 		    }
+		     if (isset($fielddata['addbreak'])) {
+			  $addbreak = $fielddata['addbreak'];
+		    }
+		     if (isset($fielddata['min'])) {
+			  $min = $fielddata['min'];
+		    }
+		     if (isset($fielddata['max'])) {
+			  $max = $fielddata['max'];
+		    }
+		     if (isset($fielddata['step'])) {
+			  $step = $fielddata['step'];
+		    }
 		    if (isset($fielddata['rows'])) {
 			$rows = $fielddata['rows'];
 		    }
@@ -302,12 +313,10 @@ class Settings {
 			$default = $fielddata['default'];
 		    }
 		    if (isset($fielddata['autocomplete'])) {
-			$default = $fielddata['autocomplete'];
+			$autocomplete = $fielddata['autocomplete'];
 		    }
    		    
-		    if (isset($this->options->$id)) {
-			$default = $this->options->$id;
-		    }
+
 		    if ((isset($title)) && (isset($id))) {
 			   add_settings_field(
 			    $id, 
@@ -323,7 +332,11 @@ class Settings {
 				'description'	=> $desc,
 				'options'	=> $fieldoptions,
 				'default'	=> $default,
-				'autocomplete'    => $autocomplete
+				'autocomplete'    => $autocomplete,
+				'min'		=> $min,
+				'max'		=> $max,
+				'addbreak'	=> $addbreak,
+				'step'		 => $step
 			    ]
 			);
 		    }
@@ -356,134 +369,6 @@ class Settings {
     
 
 
-
-    /**
-     * [addAccessibilityGeneralSection description]
-     */
-    protected function addAccessibilityGeneralSection()
-    {
-
-
-        add_settings_field(
-            'accessibility_non_accessible_content',
-            __('Non-accessible content', 'rrze-tos'),
-            [
-                $this,
-                'wpEditor',
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_accessibility_general',
-            [
-                'name'        => 'accessibility_non_accessible_content',
-                'height'      => 200,
-                'description' => __('Which accessible alternatives are available?', 'rrze-tos'),
-            ]
-        );
-
-        add_settings_field(
-            'accessibility_creation_date',
-            __('Creation date', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_accessibility_general',
-            [
-                'name' => 'accessibility_creation_date',
-                'type' => 'date'
-            ]
-        );
-
-        add_settings_field(
-            'accessibility_methodology',
-            __('Methodology', 'rrze-tos'),
-            [
-                $this,
-                'inputRadioCallback',
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_accessibility_general',
-            [
-                'name'    => 'accessibility_methodology',
-                'options' => Options::getAccessibilityMethodology()
-            ]
-        );
-
-        add_settings_field(
-            'accessibility_last_review_date',
-            __('Last review date', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_accessibility_general',
-            [
-                'name' => 'accessibility_last_review_date',
-                'type' => 'date'
-            ]
-        );
-    }
-
-    /**
-     * [addFeedbackSection description]
-     */
-    protected function addFeedbackSection()
-    {
-        add_settings_section(
-            'rrze_tos_section_feedback',
-            __('Feedback', 'rrze-tos'),
-            '__return_false',
-            'rrze_tos_options'
-        );
-
-        add_settings_field(
-            'feedback_receiver_email',
-            __('Receiver email', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_feedback',
-            [
-                'name'         => 'feedback_receiver_email',
-                'autocomplete' => 'email',
-                'required'     => 'required'
-            ]
-        );
-
-        add_settings_field(
-            'feedback_subject',
-            __('Subject', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_feedback',
-            [
-                'name'     => 'feedback_subject',
-                'required' => 'required'
-            ]
-        );
-
-        add_settings_field(
-            'feedback_cc_email',
-            __('CC', 'rrze-tos'),
-            [
-                $this,
-                'inputTextCallback'
-            ],
-            'rrze_tos_options',
-            'rrze_tos_section_feedback',
-            [
-                'name'         => 'feedback_cc_email',
-                'autocomplete' => 'email'
-            ]
-        );
-    }
 
     
     /*-----------------------------------------------------------------------------------*/
@@ -553,6 +438,71 @@ class Settings {
             <p class="description"><?php echo make_clickable($description); ?></p>
         <?php endif;
     }
+    
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: Generisches Eingabefeld für Datumsangaben
+    /*-----------------------------------------------------------------------------------*/
+    public function inputDateCallback($args) {
+        if (! array_key_exists('name', $args)) {
+            return;
+        }
+        $name = esc_attr($args['name']);
+
+       
+        if (array_key_exists('class', $args)) {
+            $class = esc_attr($args['class']);
+        }
+        if (array_key_exists('description', $args)) {
+            $description = $args['description'];
+        } elseif (array_key_exists('desc', $args)) {
+	    $description = $args['desc'];
+	}
+	
+        if (array_key_exists('required', $args)) {
+            $required = esc_attr($args['required']);
+        }
+	 if (array_key_exists('min', $args)) {
+            $required = esc_attr($args['min']);
+        }
+	 if (array_key_exists('max', $args)) {
+            $required = esc_attr($args['max']);
+        }
+	 if (array_key_exists('step', $args)) {
+            $required = esc_attr($args['step']);
+        }
+        
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	
+	if (isset($fieldset)) {
+	    $oldval = $this->options->$name;
+	    if ( (  !isset($oldval) || empty($oldval)    ) && (isset($default))) {
+		$oldval = $default;
+	    }
+	    $postname = $fieldset."-".$name;
+	} else {
+	    $oldval = $this->options->$name;
+	    $postname = $name;
+	}
+	
+	$args = '';
+	if (isset($min)) { $args .= ' min="'.esc_attr($min).'"'; }
+	if (isset($max)) { $args .= ' max="'.esc_attr($max).'"'; }
+	if (isset($step)) { $args .= ' step="'.esc_attr($step).'"'; }
+	
+	
+	?>
+        <input
+            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
+            type="date" <?php if (isset($args)) { echo $args; } ?> 
+            value="<?php echo isset($oldval) ? $oldval : ''; ?>">
+        <br>
+        <?php if (isset($description)) :
+            $description = is_array($description) ? implode('<br>', array_map('esc_attr', $description)) : esc_attr($description); ?>
+            <p class="description"><?php echo make_clickable($description); ?></p>
+        <?php endif;
+    }
 
     /*-----------------------------------------------------------------------------------*/
     /* Callback: Generisches Textarea-Eingabefeld
@@ -573,21 +523,18 @@ class Settings {
 	if (array_key_exists('fieldset', $args)) {
             $fieldset = esc_attr($args['fieldset']);
         }
+	$oldval = sanitize_textarea_field($this->options->$name);
 	if (isset($fieldset)) {
-	    $oldval = sanitize_textarea_field($this->options->$name);
 	    if ((!isset($oldval)) && (isset($default))) {
 		$oldval = $default;
 	    }
 	    $postname = $fieldset."-".$name;
 	} else {
-	    $oldval = sanitize_textarea_field($this->options->$name);
 	    $postname = $name;
 	}
-	
-	
 	?>
         <textarea
-            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
+            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
             cols="50"
             rows="<?php echo isset($rows) && $rows > 0 ? $rows : 8; ?>"
         ><?php echo isset($oldval) ? $oldval : ''; ?></textarea>
@@ -618,47 +565,89 @@ class Settings {
 	if (array_key_exists('fieldset', $args)) {
             $fieldset = esc_attr($args['fieldset']);
         }
+	$addbreak = $args['addbreak'];
+	$oldval = $this->options->$name;
 	if (isset($fieldset)) {
-	    $oldval = $this->options->$name;
 	    if ((!isset($oldval)) && (isset($default))) {
 		$oldval = $default;
 	    }
-	     $postname = $fieldset."-".$name;
+	    $postname = $fieldset."-".$name;
 	} else {
-	    $oldval = $this->options->$name;
-	     $postname = $name;
+	    $postname = $name;
 	}
         $radios = [];
         if (array_key_exists('options', $args)) {
             $radios = $args['options'];
         }
-	
-	
-
-	
         foreach ($radios as $_k => $_v) : ?>
             <label>
-                <input
-                    name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
-                    type="radio"
-                    value="<?php echo esc_attr($_k); ?>"
+                <input name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
+                    type="radio" value="<?php echo esc_attr($_k); ?>" 
                     <?php if (isset($oldval)): checked($oldval, $_k); endif; ?>
                 >
-                <?php echo esc_attr($_v); ?>
+                <?php echo esc_attr($_v); ?>	
             </label>
-           
-        <?php endforeach;
+	   <?php if ($addbreak==true) { echo '<br>'; } 
+        endforeach;
         if (isset($description)) : ?>
             <p class="description"><?php echo esc_attr($description); ?></p>
         <?php endif;
     }
+    
+      /*-----------------------------------------------------------------------------------*/
+    /* Callback: Checkboxlist
+    /*-----------------------------------------------------------------------------------*/  
+     public function inputCheckboxListCallback($args) {
+	  if (! array_key_exists('name', $args)) {
+            return;
+        }
+        $name = esc_attr($args['name']);
 
-    /**
-     * [selectCallback description]
-     * @param  array $args [description]
-     * @return void
-     */
-    public function selectCallback($args) {
+        if (array_key_exists('name', $args)) {
+            $name = esc_attr($args['name']);
+        }
+        if (array_key_exists('description', $args)) {
+            $description = esc_attr($args['description']);
+        }
+	if (array_key_exists('default', $args)) {
+            $default = sanitize_key($args['default']);
+        }
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	$addbreak = $args['addbreak'];
+	$oldval = $this->options->$name;
+	if (isset($fieldset)) {
+	    if ((!isset($oldval)) && (isset($default))) {
+		$oldval = $default;
+	    }
+	    $postname = $fieldset."-".$name;
+	} else {
+	    $postname = $name;
+	}
+        $radios = [];
+        if (array_key_exists('options', $args)) {
+            $radios = $args['options'];
+        }
+        foreach ($radios as $_k => $_v) : ?>
+            <label>
+                <input name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
+		    type="checkbox" value="<?php echo esc_attr($_k); ?>" 
+                    <?php if (isset($oldval)): checked($oldval, $_k); endif; ?>
+                >
+                <?php echo esc_attr($_v); ?>	
+            </label>
+	   <?php if ($addbreak==true) { echo '<br>'; } 
+        endforeach;
+        if (isset($description)) : ?>
+            <p class="description"><?php echo esc_attr($description); ?></p>
+        <?php endif;
+     }
+    
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: SelectListe
+    /*-----------------------------------------------------------------------------------*/
+    public function inputSelectCallback($args) {
         $limit = [];
         if (array_key_exists('name', $args)) {
             $name = esc_attr($args['name']);
@@ -666,21 +655,31 @@ class Settings {
         if (array_key_exists('description', $args)) {
             $description = esc_attr($args['description']);
         }
+	if (array_key_exists('default', $args)) {
+            $default = sanitize_key($args['default']);
+        }
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	$oldval = $this->options->$name;
+	if (isset($fieldset)) {
+	    if ((!isset($oldval)) && (isset($default))) {
+		$oldval = $default;
+	    }
+	     $postname = $fieldset."-".$name;
+	} else {
+	     $postname = $name;
+	}
         if (array_key_exists('options', $args)) {
             $limit = $args['options'];
         } ?>
         <?php if (isset($name)) {
             ?>
             <select
-                name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($name)); ?>"
+                name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
                 title="<?php __('Please select one', 'rrze-tos'); ?>">
                 <?php foreach ($limit as $_k => $_v) : ?>
-                    <option value="<?php echo esc_attr($_k); ?>"
-                        <?php
-                        if (array_key_exists($name, $this->options)) {
-                            selected($this->options->$name, $_k);
-                        } ?>
-                    ><?php echo esc_attr($_v); ?></option>
+                    <option value="<?php echo esc_attr($_k); ?>" <?php selected($oldval, $_k); ?>><?php echo esc_attr($_v); ?></option>
                 <?php endforeach; ?>
             </select>
         <?php
@@ -689,7 +688,6 @@ class Settings {
             <p class="description"><?php echo esc_attr($description); ?></p>
         <?php endif;
     }
-
     /*-----------------------------------------------------------------------------------*/
     /* Callback: WPEditor
     /*-----------------------------------------------------------------------------------*/
