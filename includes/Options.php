@@ -105,13 +105,7 @@ class Options {
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> '',
 			),
-			'imprint_webmaster_fax'=> array(
-			    'title'	=>  __('Fax number', 'rrze-tos'),
-			    'section'	=> 'rrze_tos_section_imprint_webmaster',
-			    'type'	=> 'inputTextCallback',
-			    'default'	=> ''
-			),
-
+			
 			
 			
 			
@@ -135,7 +129,7 @@ class Options {
 			    'title'	=>  __('Street', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputTextCallback',
-			    'default'	=> 'Schlossplatz',
+			    'default'	=> 'Schlossplatz 1',
 			),
 			'imprint_responsible_postalcode'=> array(
 			    'title'	=>  __('Postal code', 'rrze-tos'),
@@ -157,6 +151,13 @@ class Options {
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> '',
 			),
+			'imprint_responsible_fax'=> array(
+			    'title'	=>  __('Fax number', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_responsible',
+			    'type'	=> 'inputTextCallback',
+			    'default'	=> ''
+			),
+
 			'imprint_responsible_org'=> array(
 			    'title'	=>  __('Organisation', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
@@ -357,7 +358,8 @@ class Options {
 		    'sections'	=> array(
 			'rrze_tos_section_accessibility_general'  => array(
 			    'title' => __('General', 'rrze-tos'),
-			    'desc' => __('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos'),
+			    'desc' => __('Alle öffentlichen Stellen sind gemäß der Richtlinie (EU) 2016/2102 des Europäischen Parlaments und des Rates, bzw. der Umsetzung in der jeweiligen Landesgesetzgebung dazu verpflichtet, ihre Webauftritte und/ oder mobilen Anwendungen barrierefrei zugänglich zu machen. HIerzu gehört auch die Bereitstellung einer Konformitätserklärung zur Barrierefreiheit, in der alle Betreiber von Webauftritten und Apps den Status der Webseite öffentlich angeben und erläutern müssen, aus welchen Gründen welche Barrieren vorhanden sind.', 'rrze-tos'),
+			//    'desc' => __('Public institutions are required by Directive (EU) 2016/2102 of the European Parliament and of the Council to make their websites and/or mobile applications accessible. For public authorities, the directive was implemented in Art. 13 BayBGG and BayBITV.', 'rrze-tos'),
 			    'page'  => 'rrze_tos_options',
 			),
 			'rrze_tos_section_accessibility_status'  => array(
@@ -484,7 +486,7 @@ class Options {
 			'accessibility_feedback_email'=> array(
 			    'title'	=>  __('EMail-Adresse', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_feedback',
-			    'desc'	=> __('Empfänger-Mailadresse zu Beschwerden oder Hilfeanfragen über mangelnde Zugänglichkeit. Bitte beachten Sie: Bleibt eine Anfrage über die Kontaktmöglichkeit innerhalb von sechs Wochen ganz oder teilweise unbeantwortet, prüft die zuständige Aufsichtsbehörde auf Antrag des Nutzers, ob im Rahmen der Überwachung gegenüber dem Verpflichteten Maßnahmen erforderlich sind.', 'rrze-tos'),
+			    'desc'	=> __('Empfänger-Mailadresse zu Beschwerden oder Hilfeanfragen über mangelnde Zugänglichkeit. Bitte beachten Sie: Bleibt eine Anfrage über die Kontaktmöglichkeit innerhalb von sechs Wochen ganz oder teilweise unbeantwortet, prüft die zuständige Aufsichtsbehörde auf Antrag des Nutzers, ob im Rahmen der Überwachung gegenüber dem Betreiber des Webauftritts (also Ihnen) Maßnahmen erforderlich sind.', 'rrze-tos'),
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> $adminMail,
 			    'required'     => 'required'
@@ -532,9 +534,8 @@ class Options {
     public static function getOptions() {
         $defaults = self::defaultOptions();
     $options = (array) get_option(self::$optionName);
-	// $options = array();
 	$options = wp_parse_args($options, $defaults);
-// $options = array_intersect_key($options, $defaults);
+//     $options = array_intersect_key($options, $defaults);
         return (object) $options;
     }
 

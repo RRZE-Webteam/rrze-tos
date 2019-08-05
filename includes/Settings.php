@@ -78,8 +78,8 @@ class Settings {
     /*-----------------------------------------------------------------------------------*/
     public function adminSettingsPage() {
         $this->settingsScreenId = add_options_page(
-            __('ToS', 'rrze-tos'),
-            __('ToS', 'rrze-tos'),
+            __('Rechtliche Pflichtangaben', 'rrze-tos'),
+            __('Rechtliche Pflichtangaben', 'rrze-tos'),
             'manage_options',
             'rrze-tos',
             [
@@ -115,8 +115,6 @@ class Settings {
 	   $message = '';
 	
             foreach ($input as $_k => $_v) {
-	//	$message .= "checking  $_k => $_v<br>";
-
 		if (preg_match('/^([a-z0-9]+)\-([_a-z0-9]+)/i',$_k, $key)) {	
 		    $name	= $key[2];
 		    $fieldset	= $key[1];
@@ -125,37 +123,67 @@ class Settings {
 		    
 		    $type	= $fieldset_opt['settings']['fields'][$name]['type'];
 		    $title	= $fieldset_opt['settings']['fields'][$name]['title'];
-	    // $message .= "name: $name, fieldset: $fieldset<br>";
-	    // $message .= " &nbsp; old: $oldval newval: $_v<br>";
-		    switch($type) {
-			case 'inputRadioCallback':
-			    $val = intval($_v);
-			    if ($oldval !== $val) {
-				$this->options->$name = $val;
-				$message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
-			    }
-			    break;
-			case 'inputTextCallback':
-			    $val = sanitize_text_field(wp_unslash($_v));
-			    if ($oldval !== $val) {
-				$this->options->$name = $val;
-				$message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
-			    }
-			    break;    
+
+		    if ($name == 'imprint_websites') {
+			$val = implode(PHP_EOL, array_map('sanitize_text_field', explode(PHP_EOL, wp_unslash($_v))));
+			if ($oldval !== $val) {
+			    $this->options->$name = $val;
+			    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+			}
+			 
+		    } else {
+			switch($type) {
+			    case 'inputRadioCallback':
+				$val = intval($_v);
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;
+			    case 'inputSelectCallback':
+				$val = wp_kses_post(wp_unslash($_v));
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;    
+			    case 'inputTextCallback':
+				$val = sanitize_text_field(wp_unslash($_v));
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;    
+			    case 'inputDateCallback':
+				$val =  date('Y-m-d', strtotime($_v));
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;        
+			    case 'inputTextareaCallback':
+			    case 'inputWPEditor':
+				$val =  wp_kses_post(wp_unslash($_v));
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;    
+			    case 'inputCheckboxListCallback':
+				$val =  (array) $_v;
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;        	
+			    default:
+				 $val =  sanitize_text_field(wp_unslash($_v));
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+			}
 		    }
-		    
-		} elseif (preg_match('/email/i', $_k)) {
-                    $this->options->$_k = sanitize_email(wp_unslash($_v));
-                } elseif ('imprint_section_extra_text' == $_k) {
-                    $this->options->$_k = wp_kses_post(wp_unslash($_v));
-                } elseif ('privacy_section_extra_text' == $_k) {
-                    $this->options->$_k = wp_kses_post(wp_unslash($_v));
-                } elseif ('accessibility_non_accessible_content' == $_k) {
-                    $this->options->$_k = wp_kses_post(wp_unslash($_v));
-                } elseif ('imprint_websites' == $_k) {
-                    $this->options->$_k = implode(PHP_EOL, array_map('sanitize_text_field', explode(PHP_EOL, wp_unslash($_v))));
-                } elseif (in_array($_k, ['accessibility_creation_date', 'accessibility_last_review_date'])) {
-                    $this->options->$_k = date('Y-m-d', strtotime($_v));
                 } else {
                     $this->options->$_k = sanitize_text_field(wp_unslash($_v));
                 }
@@ -169,13 +197,7 @@ class Settings {
 		       'updated'
 		   );
 	    }
- 
- 
-            if (isset($_POST['rrze-tos-wmp-search-responsible'])) {
-                $this->getResponsibleWmpData();
-            } elseif (isset($_POST['rrze-tos-wmp-search-webmaster'])) {
-                $this->getWebmasterWmpData();
-            }
+
         }
         return $this->options;
     }
@@ -188,7 +210,7 @@ class Settings {
         $default = array_keys($slugs)[0];
         $currentTab = $this->getQueryVar('current-tab', $default); ?>
         <div class="wrap">
-            <h1><?php echo __('Settings &rsaquo; ToS', 'rrze-tos'); ?></h1>
+            <h1><?php echo __('Rechtliche Pflichtangaben bearbeiten', 'rrze-tos'); ?></h1>
             <h2 class="nav-tab-wrapper wp-clearfix">
             <?php foreach ($slugs as $tab => $name) :
                 $class = $tab == $currentTab ? 'nav-tab-active' : '';
@@ -365,12 +387,7 @@ class Settings {
 	       }
 	   }
        }	
-    }
-    
-
-
-
-    
+    }   
     /*-----------------------------------------------------------------------------------*/
     /* Callback: Generisches Texteingabefeld
     /*-----------------------------------------------------------------------------------*/
@@ -513,7 +530,6 @@ class Settings {
         }
         $name = esc_attr($args['name']);
 
-  
         if (array_key_exists('rows', $args)) {
             $rows = absint($args['rows']);
         }
@@ -609,9 +625,10 @@ class Settings {
         if (array_key_exists('description', $args)) {
             $description = esc_attr($args['description']);
         }
-	if (array_key_exists('default', $args)) {
-            $default = sanitize_key($args['default']);
-        }
+	
+	
+         $default = $args['default'];
+
 	if (array_key_exists('fieldset', $args)) {
             $fieldset = esc_attr($args['fieldset']);
         }
@@ -629,11 +646,12 @@ class Settings {
         if (array_key_exists('options', $args)) {
             $radios = $args['options'];
         }
+
         foreach ($radios as $_k => $_v) : ?>
             <label>
-                <input name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
+                <input name="<?php printf('%1$s[%2$s][]', esc_attr($this->optionName), esc_attr($postname)); ?>"
 		    type="checkbox" value="<?php echo esc_attr($_k); ?>" 
-                    <?php if (isset($oldval)): checked($oldval, $_k); endif; ?>
+                    <?php if (isset($oldval)): checked( in_array( $_k, $oldval ), 1); endif; ?>
                 >
                 <?php echo esc_attr($_v); ?>	
             </label>
