@@ -1,31 +1,42 @@
 
 
-<h2>Publisher</h2>
-<p>
-    {{=imprint_responsible_name}}<br>
+<h2>Website owner</h2>
+{{=imprint_responsible_name}}<br>
+<address>
     {{=imprint_responsible_street}}<br>
     {{=imprint_responsible_postalcode}}
     {{=imprint_responsible_city}}
-</p>
+</address>
+<ul class="person-info">
+    {{imprint_responsible_phone}}
+    <li class="person-info-phone"><span class="screen-reader-text">Phone:</span> {{=imprint_responsible_phone}}</li>
+    {{/imprint_responsible_phone}}
+    {{imprint_responsible_fax}}
+    <li class="person-info-fax"><span class="screen-reader-text">Fax:</span> {{=imprint_responsible_fax}}</li>
+    {{/imprint_responsible_fax}}
+    {{imprint_responsible_email}}
+    <li class="person-info-email"><span class="screen-reader-text">E-Mail:</span> <a href="mailto:{{=imprint_responsible_email}}">{{=imprint_responsible_email}}</a></li>
+    {{/imprint_responsible_email}}
+</ul>
+
 
 {{=imprint_template_vertretung}}
 
-<h3>Webmaster contact</h3>
+<h3>Website Contact (Webmaster)</h3>
 <p>
-    {{=imprint_webmaster_name}}<br>
-    {{=imprint_webmaster_street}}<br>
-    {{=imprint_webmaster_postalcode}}
-    {{=imprint_webmaster_city}}
+    {{=imprint_webmaster_name}}
 </p>
-<p>
-    {{phone}}
-    Telefon: {{=phone}}<br>
-    {{/phone}}
-    {{fax}}
-    Fax: {{=fax}}<br>
-    {{/fax}}
-    E-Mail: {{=imprint_webmaster_email}}
-</p>
+<ul class="person-info">
+    {{imprint_webmaster_phone}}
+    <li class="person-info-phone"><span class="screen-reader-text">Phone:</span> {{=imprint_webmaster_phone}}</li>
+    {{/imprint_webmaster_phone}}
+    {{imprint_webmaster_fax}}
+    <li class="person-info-fax"><span class="screen-reader-text">Fax:</span> {{=imprint_webmaster_fax}}</li>
+    {{/imprint_webmaster_fax}}
+    {{imprint_webmaster_email}}
+    <li class="person-info-email"><span class="screen-reader-text">E-Mail:</span> <a href="mailto:{{=imprint_webmaster_email}}">{{=imprint_webmaster_email}}</a></li>
+    {{/imprint_webmaster_email}}
+</ul>
 {{=webmaster_more}}
 
 
@@ -69,11 +80,8 @@ on this website does not indicate that they are not protected by third party rig
     {{:imprint_websites_extra}}
     This imprint only belongs to the following website:<br>
     {{/imprint_websites_extra}}
-</p>
-<pre>
-{{=websites}}
-</pre>
-<p>
+    <strong><em>{{=websites}}</em></strong>
+    <br>
     The website owner is not responsible for other websites, that are not listet above.
 </p>
 <p>

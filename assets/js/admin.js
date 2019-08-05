@@ -1,19 +1,12 @@
 jQuery(document).ready(function($) {
-    function checkConformity() {
-        var rrzeTosConformity = $("input[name='rrze_tos[accessibility_conformity]']:checked", "#tos-admin-form").val();
-        if ('1' === rrzeTosConformity) {
-            $("textarea[name='rrze_tos[accessibility_non_accessible_content]']").parents('tr').hide();
-        } else {
-            $("textarea[name='rrze_tos[accessibility_non_accessible_content]']").parents('tr').show();
-        }
-    }
+
 
     function checkAccessibilityHelperSection() {
         var rrzeTosAccessibilityHelper = $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_helper]']:checked", "#tos-admin-form").val();
         if ('1' === rrzeTosAccessibilityHelper) {
-            $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_faillist]']").parents('tr').hide();
+            $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_faillist][]']").parents('tr').hide();
         } else {
-            $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_faillist]']").parents('tr').show();
+            $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_faillist][]']").parents('tr').show();
         }
     }  
     
@@ -37,10 +30,6 @@ jQuery(document).ready(function($) {
         }
     }
 
-    checkConformity();
-    $("#tos-admin-form input").on('change', function() {
-        checkConformity();
-    });
 
     checkNewPrivacySection();
     checkNewImprintSection();

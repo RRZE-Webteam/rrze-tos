@@ -154,6 +154,20 @@ class Settings {
 				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
 				}
 				break;    
+			    case 'inputURLCallback':
+				$val = esc_url(wp_unslash($_v));
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;    	
+			    case 'inputEMailCallback':
+				$val = sanitize_email(wp_unslash($_v));
+				if ($oldval !== $val) {
+				    $this->options->$name = $val;
+				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				}
+				break;    		
 			    case 'inputDateCallback':
 				$val =  date('Y-m-d', strtotime($_v));
 				if ($oldval !== $val) {
@@ -221,22 +235,20 @@ class Settings {
                 );
 	     endforeach; ?>
             </h2>
+	   <?php $this->addEndpointInfo($currentTab); ?>
             <form method="post" action="options.php" id="tos-admin-form">
                 <?php settings_fields('rrze_tos_options'); ?>
                 <?php do_settings_sections('rrze_tos_options'); ?>
                 <p class="submit">
                     <?php submit_button(esc_html__('Save Changes', 'rrze-tos'), 'primary', 'rrze-tos-submit', false); ?>
                 </p>
-            </form>
-	    <pre>
-	    <?php 
-	    
-	    var_dump($this->options);
-	    ?>
-	    </pre>
-	    
+            </form>    
         </div>
         <?php
+	
+	echo "<pre>";
+	var_dump($this->options); 
+	echo "</pre>";
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -264,7 +276,19 @@ class Settings {
         }
     }
 
-    
+        
+    /*-----------------------------------------------------------------------------------*/
+    /* Erstelle Settings und EIngabefelder der jeewiligen Tab
+    /*-----------------------------------------------------------------------------------*/
+    public function addEndpointInfo($fieldset = 'imprint') {
+	$endpoints = Options::getEndPoints();
+	$url = home_url($endpoints[$fieldset]);
+
+	echo "<p><em>";
+	echo __('Die Informationen dieser Seite werden unter folgender Adresse abrufbar:','rrze-tos');
+	echo ' <a href="'.$url.'">'.$url.'</a></em></p>';
+	
+    }
     /*-----------------------------------------------------------------------------------*/
     /* Erstelle Settings und EIngabefelder der jeewiligen Tab
     /*-----------------------------------------------------------------------------------*/
@@ -334,9 +358,7 @@ class Settings {
 		     if (isset($fielddata['default'])) {
 			$default = $fielddata['default'];
 		    }
-		    if (isset($fielddata['autocomplete'])) {
-			$autocomplete = $fielddata['autocomplete'];
-		    }
+
    		    
 
 		    if ((isset($title)) && (isset($id))) {
@@ -354,7 +376,6 @@ class Settings {
 				'description'	=> $desc,
 				'options'	=> $fieldoptions,
 				'default'	=> $default,
-				'autocomplete'    => $autocomplete,
 				'min'		=> $min,
 				'max'		=> $max,
 				'addbreak'	=> $addbreak,
@@ -410,9 +431,7 @@ class Settings {
 	    $description = $args['desc'];
 	}
 	
-        if (array_key_exists('autocomplete', $args)) {
-            $autocomplete = esc_attr($args['autocomplete']);
-        }
+
         if (array_key_exists('required', $args)) {
             $required = esc_attr($args['required']);
         }
@@ -442,9 +461,6 @@ class Settings {
             class="<?php echo isset($class) ? esc_attr($class) : 'regular-text'; ?>"
             value="<?php echo isset($oldval) ? $oldval : ''; ?>"
             <?php echo isset($required) ? $required : ''; ?>
-            <?php if (isset($autocomplete)) : ?>
-                autocomplete="<?php echo esc_attr($autocomplete); ?>"
-            <?php endif; ?>
         >
         <?php if (isset($button) && is_array($button)) :
             $this->submitButton($button);
@@ -455,7 +471,99 @@ class Settings {
             <p class="description"><?php echo make_clickable($description); ?></p>
         <?php endif;
     }
-    
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: Generisches Texteingabefeld
+    /*-----------------------------------------------------------------------------------*/
+    public function inputURLCallback($args) {
+        if (! array_key_exists('name', $args)) {
+            return;
+        }
+        $name = esc_attr($args['name']);
+
+       
+        if (array_key_exists('class', $args)) {
+            $class = esc_attr($args['class']);
+        }
+        if (array_key_exists('description', $args)) {
+            $description = $args['description'];
+        } elseif (array_key_exists('desc', $args)) {
+	    $description = $args['desc'];
+	}
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	if (array_key_exists('default', $args)) {
+            $default = esc_attr($args['default']);
+        }
+	if (isset($fieldset)) {
+	    $oldval = $this->options->$name;
+	    if ( (  !isset($oldval) || empty($oldval)    ) && (isset($default))) {
+		$oldval = $default;
+	    }
+	    $postname = $fieldset."-".$name;
+	} else {
+	    $oldval = $this->options->$name;
+	    $postname = $name;
+	}
+	?>
+        <input
+            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
+            type="url" placeholder="https://" class="<?php echo isset($class) ? esc_attr($class) : 'regular-text'; ?>"
+            value="<?php echo isset($oldval) ? $oldval : ''; ?>">
+
+        <br>
+        <?php if (isset($description)) :
+            $description = is_array($description) ? implode('<br>', array_map('esc_attr', $description)) : esc_attr($description); ?>
+            <p class="description"><?php echo make_clickable($description); ?></p>
+        <?php endif;
+    }
+    /*-----------------------------------------------------------------------------------*/
+    /* Callback: EMail
+    /*-----------------------------------------------------------------------------------*/
+    public function inputEMailCallback($args) {
+        if (! array_key_exists('name', $args)) {
+            return;
+        }
+        $name = esc_attr($args['name']);
+
+       
+        if (array_key_exists('class', $args)) {
+            $class = esc_attr($args['class']);
+        }
+        if (array_key_exists('description', $args)) {
+            $description = $args['description'];
+        } elseif (array_key_exists('desc', $args)) {
+	    $description = $args['desc'];
+	}
+	if (array_key_exists('fieldset', $args)) {
+            $fieldset = esc_attr($args['fieldset']);
+        }
+	if (array_key_exists('default', $args)) {
+            $default = esc_attr($args['default']);
+        }
+	if (isset($fieldset)) {
+	    $oldval = $this->options->$name;
+	    if ( (  !isset($oldval) || empty($oldval)    ) && (isset($default))) {
+		$oldval = $default;
+	    }
+	    $postname = $fieldset."-".$name;
+	} else {
+	    $oldval = $this->options->$name;
+	    $postname = $name;
+	}
+	?>
+        <input
+            name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
+            type="email"  class="<?php echo isset($class) ? esc_attr($class) : 'regular-text'; ?>"
+            value="<?php echo isset($oldval) ? $oldval : ''; ?>">
+
+        <br>
+        <?php if (isset($description)) :
+            $description = is_array($description) ? implode('<br>', array_map('esc_attr', $description)) : esc_attr($description); ?>
+            <p class="description"><?php echo make_clickable($description); ?></p>
+        <?php endif;
+    }
+        
     /*-----------------------------------------------------------------------------------*/
     /* Callback: Generisches Eingabefeld für Datumsangaben
     /*-----------------------------------------------------------------------------------*/

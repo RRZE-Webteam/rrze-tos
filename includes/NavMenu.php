@@ -49,7 +49,7 @@ defined('ABSPATH') || exit;
          $menuLocations = self::menuLocations();
          $stylesheetGroup = Theme::getCurrentStylesheetGroup();
 
-         $menuItems = Endpoint::getEndPoints();
+         $menuItems = Options::getEndPoints();
          $menuName  = self::$tosMenuName;
          $menuLocation = isset($menuLocations[$stylesheetGroup]) ? $menuLocations[$stylesheetGroup] : '';
 
