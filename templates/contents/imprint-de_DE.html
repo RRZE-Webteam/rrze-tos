@@ -3,11 +3,16 @@
 
 <h2>Herausgeber</h2>
 
-{{=imprint_responsible_name}}<br>
+<p>{{=imprint_responsible_name}}</p>
+
 <address>
+    {{imprint_responsible_street}}
     {{=imprint_responsible_street}}<br>
+    {{/imprint_responsible_street}}
+    {{imprint_responsible_city}}
     {{=imprint_responsible_postalcode}}
     {{=imprint_responsible_city}}
+    {{/imprint_responsible_city}}
 </address>
 <ul class="person-info">
     {{imprint_responsible_phone}}
@@ -42,15 +47,13 @@
 {{=webmaster_more}}
 
 
-
 {{=imprint_template_supervisory}}
-
-
 {{=imprint_template_idnumbers}}
-
-
 {{=imprint_template_itsec}}
 
+<br>
+[collapsibles]
+[collapse title="Nutzungsbedingungen"]
 <h2>Nutzungsbedingungen</h2>
 <p>
     Texte, Bilder, Grafiken sowie die Gestaltung dieser Internetseiten
@@ -91,7 +94,8 @@
     nähere Auskünfte, sofern diese Rechte nicht bereits durch entsprechende
     Hinweise im Webangebot kenntlich gemacht sind.
 </p>
-
+[/collapse]
+[collapse title="Haftungsausschluss"]
 <h2>Haftungsausschluss</h2>
 
 <p>
@@ -137,7 +141,8 @@
     verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder
     endgültig einzustellen.
 </p>
-
+[/collapse]
+[collapse title="Haftung für Links"]
 <h2>Haftung für Links</h2>
 <p>
     Unser Angebot enthält Links zu externen Webauftritte Dritter, auf deren Inhalte
@@ -152,3 +157,5 @@
     Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend
     entfernen.
 </p>
+[/collapse]
+[/collapsibles]

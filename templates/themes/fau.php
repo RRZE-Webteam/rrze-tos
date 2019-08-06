@@ -34,7 +34,13 @@ if (isset($options['breadcrumb_root'])) {
     $breadcrumb .= $showcurrent ? $before . $title . $after : '';
     $breadcrumb .= '</nav>';
 }
-get_header(); ?>
+get_header(); 
+if ( is_plugin_active( 'rrze-elements/rrze-elements.php' ) ) {
+	    wp_enqueue_style('rrze-elements');
+	    wp_enqueue_script('rrze-accordions');
+	   
+	}
+?>
 
 
 

@@ -263,10 +263,10 @@ class Options {
 		    ),
 		    'fields' => array(
 			'display_template_newsletter'   => array(
-			    'title'	=>  __('Do you provide a newsletter?', 'rrze-tos'),
+			    'title'	=>  __('Newsletter oder Mailverteiler', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_fauservices',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Are you providing a newsletter by using IdM or RRZE mail services?', 'rrze-tos'),
+			    'desc'	=> __('Bieten Sie einen Newsletter oder Mailverteiler an?', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
@@ -274,21 +274,21 @@ class Options {
 				]
 			),
 			'display_template_contactform'   => array(
-			    'title'	=>  __('Contact Form', 'rrze-tos'),
+			    'title'	=>  __('Kontaktformular', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_fauservices',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Do you use a contact form on this website?', 'rrze-tos'),
+			    'desc'	=> __('Verwenden Sie ein Kontaktformular auf dieser Webseite? (Die Barrierefreiheitserklärung bietet ein solches an. Daher ist die Antwort in der Regel "ja").', 'rrze-tos'),
 			     'default'	=> 1,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
 				    '0' => __('No', 'rrze-tos')
 				]
 			),
-			'display_template_register_event'   => array(
-			    'title'	=>  __('Register form', 'rrze-tos'),
+			'display_template_registrationform'   => array(
+			    'title'	=>  __('Registrierungs- und Anmeldeformulare', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_fauservices',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Do you provide a contact form to register for an event?', 'rrze-tos'),
+			    'desc'	=> __('Verwenden Sie Formulare für die Anmeldung zu Veranstaltungen oder anderen Funktionen, bei denen man sich Registrieren muss?', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
@@ -300,7 +300,7 @@ class Options {
 			    'title'	=>  __('YouTube Embeds', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_externalservices',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Do you embed videos from Youtube?', 'rrze-tos'),
+			    'desc'	=> __('Wenn Sie YouTube Videos in der Webseite einbinden, aktivieren Sie diese Option.', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
@@ -311,7 +311,7 @@ class Options {
 			    'title'	=>  __('Slideshare Embeds', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_externalservices',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Do you embed slides from Slideshare?', 'rrze-tos'),
+			    'desc'	=> __('Wenn Sie Vortragsfolien auf Slideshare anbieten und in der Webseite embedden, aktivieren Sie diese Option.', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
@@ -322,7 +322,7 @@ class Options {
 			    'title'	=>  __('Vimeo Embeds', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_externalservices',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Do you embed videos from Vimeo?', 'rrze-tos'),
+			    'desc'	=> __('Wenn Sie Videos vom Onlinedienst Vimeo in der Webseite einbinden, aktivieren Sie diese Option.', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),
@@ -377,7 +377,7 @@ class Options {
 			),
 			'rrze_tos_section_feedback'  => array(
 			    'title' => __(' Feedback-Mechanismus', 'rrze-tos'),
-			    'desc'  => __('Möglichkeiten zur Kontaktaufnahme bei Probleen und Fehlern zur Barrierefreiheit.', 'rrze-tos'),
+			    'desc'  => __('Möglichkeiten zur Kontaktaufnahme bei Problemen und Fehlern zur Barrierefreiheit.', 'rrze-tos'),
 			    'page'  => 'rrze_tos_options',
 			),
 			
@@ -571,12 +571,12 @@ class Options {
 	    'controlling'   => 'Landesamt für Digitalisierung, Breitband und Vermessung',
 	    'controlling_email'   => 'service@geodaten.bayern.de',
 	    'controlling_url'   => 'https://www.ldbv.bayern.de/',
-	    'controlling_address'	=> 
-		'Alexandrastraße 4
-		80538 München
-		Telefon: +49 89 2129-1111
-		Telefax: +49 89 2129-1113
-		',
+	    'controlling_fax'   => ' +49 89 2129-1113',
+	    'controlling_phone'   => '+49 89 2129-1111',
+	    'controlling_plz'   => '80538',
+	    'controlling_city'   => 'München',
+	    'controlling_street'   => 'Alexandrastraße 4',
+
 	),
 	3 =>  array(
 	    'region' => __('Berlin','rrze-tos'),
@@ -585,9 +585,9 @@ class Options {
 	    'controlling'   => 'Senatsverwaltung für Inneres und Sport, IKT-Steuerung, Kompetenzstelle für digitale Barrierefreiheit und Usability',
 	    'controlling_email'   => 'Digitale-Barrierefreiheit@senInnDS.berlin.de',
 	    'controlling_url'   => 'https://www.berlin.de/sen/inneres/moderne-verwaltung/digitale-barrierefreiheit/berliner-standards/artikel.803649.php',
-	    'controlling_address'	=> 
-		'Klosterstraße 47
-		10179 Berlin',
+    	    'controlling_plz'   => '10179',
+	    'controlling_city'   => 'Berlin',
+	    'controlling_street'   => 'Klosterstraße 47',
 	),
 	4 =>  array(
 	    'region' => __('Brandenburg','rrze-tos'),

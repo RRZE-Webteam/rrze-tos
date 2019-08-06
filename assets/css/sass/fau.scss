@@ -13,31 +13,7 @@
 	margin-bottom: 30px;
     }
 
-    .wcag-pass {
-	&:before {
-	    font-family: FontAwesome;
-	    font-size: 2em;
-	    content: "\f00c";
-	    color: green;
-	    padding-right: 13px;
-	    vertical-align: -20%;
-	}
-	font-size: 1em;
-	color: green;
-    }
-
-    .wcag-fail {
-	&:before {
-	    font-family: FontAwesome;
-	    font-size: 2em;
-	    content: "\f00d";
-	    color: red;
-	    padding-right: 13px;
-	    vertical-align: -20%;
-	}
-	font-size: 1em;
-	color: red;
-    }
+   
 
     .complaint {
 	padding-top: 20px;
@@ -47,13 +23,7 @@
     @media (min-width: 768px) {
 
 
-	.wcag-pass:before {
-	    vertical-align: -40%;
-	}
-
-	.wcag-fail:before {
-	    vertical-align: -35%;
-	}
+	
 
 	textarea {
 	    width: 750px !important;

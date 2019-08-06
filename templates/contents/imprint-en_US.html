@@ -1,11 +1,16 @@
 
 
 <h2>Website owner</h2>
-{{=imprint_responsible_name}}<br>
+<p>{{=imprint_responsible_name}}</p>
+
 <address>
+    {{imprint_responsible_street}}
     {{=imprint_responsible_street}}<br>
+    {{/imprint_responsible_street}}
+    {{imprint_responsible_city}}
     {{=imprint_responsible_postalcode}}
     {{=imprint_responsible_city}}
+    {{/imprint_responsible_city}}
 </address>
 <ul class="person-info">
     {{imprint_responsible_phone}}
@@ -47,8 +52,8 @@
 
 
 {{=imprint_template_itsec}}
-
-
+[collapsibles]
+[collapse title="Copyright"]
 <h2>Copyright</h2>
 <p>
     Unless specified otherwise, all pages of the FAU website are protected by copyright. 
@@ -71,7 +76,7 @@ by third parties are subject without restriction to the respective applicable tr
 law and the property rights of their respective owners. The mere mention of trademarks 
 on this website does not indicate that they are not protected by third party rights.
 </p>
-
+[/collapse][collapse title="Exclusions"]
 <h2>Exclusion of liability</h2>
 
 <p>
@@ -98,7 +103,7 @@ Websites credited to an author reflect the opinions and insights of that author.
 The operator expressly reserves the right to change, amend or delete individual web 
 pages, services or the entire website without prior notice or to interrupt or terminate the publication.
 </p>
-
+[/collapse][collapse title="Disclaimer"]
 <h2>Links and references (disclaimer)</h2>
 <p>
     The operator is only responsible for the original content provided in accordance with 
@@ -124,3 +129,5 @@ Liability for illegal, inaccurate or incomplete content and for damages resultin
 the use or non-use of information provided by third parties shall lie exclusively with 
 the respective operators of the linked sites.
 </p>
+[/collapse]
+[/collapsibles]

@@ -1,105 +1,127 @@
 <p>
     Die öffentlichen Stellen sind gemäß der Richtlinie (EU) 2016/2102 des
-    Europäischen Parlaments und des Rates dazu verpflichtet, ihre Webauftritte
-    und/ oder mobilen Anwendungen barrierefrei zugänglich zu machen. Für Träger
-    öffentlicher Gewalt wurde die Richtlinie in Art. 13 BayBGG und der BayBITV
-    umgesetzt. Dieser Webauftritt wurde gemäß der obigen Richtlinie geprüft.
+    Europäischen Parlaments und des Rates dazu verpflichtet, Webauftritte
+    und mobile Anwendungen barrierefrei zugänglich zu machen.
+    Die folgende Erklärung zur Barrierefreiheit dokumentiert den Umsetzungsstand 
+    dieses Webauftritts gemäß der {{accessibility_url_law}}<a href="{{=accessibility_url_law}}">{{/accessibility_url_law}}gültigen Gesetzgebung{{accessibility_url_law}}</a>{{/accessibility_url_law}}.
 </p>
 
-{{accessibility_conformity}}
-<div class="alert alert-success" role="alert">
-    <span class="wcag-pass"></span>Dieser Webauftritt {{=accessibility_conformity_val}}.
-</div>
-{{:accessibility_conformity}}
-<div class="alert alert-info" role="alert">
-    <span class="wcag-fail"></span>Dieser Webauftritt {{=accessibility_conformity_val}}.
-    {{accessibility_non_accessible_content}}
-    <h4>Nicht barrierefrei zugängliche Inhalte</h4>
-    {{=accessibility_non_accessible_content}}
-    {{/accessibility_non_accessible_content}}
-</div>
-{{/accessibility_conformity}}
+<h2>Konformitätsstatus</h2>
 
+[alert style="{{=accessibility_conformity_alertshortcodestyle}}"]
+<strong>{{=accessibility_conformity_text}}</strong>
+[/alert]
+<table class="nobackground" style="width: auto;">
+    {{accessibility_methodik_text}}
+    <tr>
+	<th>Methodik der Prüfung:</th><td>{{=accessibility_methodik_text}}</td>
+    </tr>
+    {{/accessibility_methodik_text}}
+    {{accessibility_creation_date_val}}
+     <tr>
+	<th>Erstellungsdatum:</th><td>{{=accessibility_creation_date_val}}</td>
+    </tr>
+    {{/accessibility_creation_date_val}}
+    {{accessibility_last_review_date_val}}
+     <tr>
+	<th>Letzte Überprüfung:</th><td>{{=accessibility_last_review_date_val}}</td>
+    </tr>
+    {{/accessibility_last_review_date_val}}
+    {{accessibility_testurl}}
+     <tr>
+	 <th>Bericht:</th><td><a href="{{=accessibility_testurl}}">{{=accessibility_testurl}}</a></td>
+    </tr>
+     {{/accessibility_testurl}}
+</table>
+
+
+<h2>Bekannte Probleme bei der Barrierefreiheit</h2>
 <p>
-    Erstellungsdatum: {{=accessibility_creation_date_val}}<br>
-    Methodik: {{=accessibility_methodology_val}}<br>
-    Letzte Überprüfung: {{=accessibility_last_review_date_val}}
+    Auflistung und Erläuterung der Probleme bei der Umsetzung der Barrierefreiheit dieses Webauftritts.
 </p>
 
-<h3>Feedback</h3>
+{{accessibility_non_accessible_info}}
+<h3>Nicht barrierefrei zugängliche Inhalte</h3>
+{{=accessibility_non_accessible_content_list}}
+{{=accessibility_non_accessible_content}}
+{{/accessibility_non_accessible_info}}
+
+{{accessibility_non_accessible_content_reasons}}
+<h3>Begründung</h3>
+{{=accessibility_non_accessible_content_reasons}}
+{{/accessibility_non_accessible_content_reasons}}
+
+{{accessibility_non_accessible_content_alternatives}}
+<h3>Alternative Zugangswege</h3>
+{{=accessibility_non_accessible_content_alternatives}}
+
+{{/accessibility_non_accessible_content_alternatives}}
+  
+
+<h2>Hilfe und Kontaktaufnahme bei Problemen</h2>
 <p>
-    Sie können uns als Nutzer Mängel bei der Einhaltung der Anforderungen an
+    Sie können Mängel bei der Einhaltung der Anforderungen an
     die Barrierefreiheit mitteilen oder Informationen, die nicht barrierefrei
     dargestellt werden müssen, barrierefrei anfordern.
 </p>
 
-<h4>Kontaktinformationen</h4>
+<h3>Ansprechpartner</h3>
+{{accessibility_feedback_contactname}}
+<p>{{=accessibility_feedback_contactname}}</p>
+{{/accessibility_feedback_contactname}}
 
-<p>
-    Für diesen Webauftritt sind folgende Personen verantwortlich:
-</p>
+{{accessibility_feedback_address}}
+<address>
+    {{=accessibility_feedback_address}}
+</address>
+{{/accessibility_feedback_address}}
 
-<div class="table-wrapper">
-    <div class="scrollable">
-        <table width="" border="1">
-            <tbody>
-                <tr>
-					<td>
-                        {{imprint_responsible_name}}
-                        {{=imprint_responsible_name}}<br>
-                        {{=imprint_responsible_street}}<br>
-                        {{=imprint_responsible_city}}<br>
-                        {{imprint_responsible_phone}}
-                        <strong>Telefon:</strong> {{=imprint_responsible_phone}}<br>
-                        {{/imprint_responsible_phone}}
-                        {{imprint_responsible_email}}
-                        <strong>E-Mail:</strong> {{=imprint_responsible_email}}<br>
-                        {{/imprint_responsible_email}}
-                        {{/imprint_responsible_name}}
-                    </td>
-                    <td>
-						{{imprint_webmaster_name}}
-                        {{=imprint_webmaster_name}}<br>
-                        {{=imprint_webmaster_street}}<br>
-                        {{=imprint_webmaster_city}}<br>
-						{{imprint_webmaster_phone}}
-                        <strong>Telefon:</strong> {{=imprint_webmaster_phone}}<br>
-						{{/imprint_webmaster_phone}}
-						{{imprint_webmaster_email}}
-                        <strong>E-Mail:</strong> {{=imprint_webmaster_email}}<br>
-						{{/imprint_webmaster_email}}
-						{{/imprint_webmaster_name}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<ul class="person-info">
+    {{accessibility_feedback_phone}}
+    <li class="person-info-phone"><span class="screen-reader-text">Telefon: </span> {{=accessibility_feedback_phone}}</li>
+    {{/accessibility_feedback_phone}}
+    {{accessibility_feedback_email}}
+    <li class="person-info-email"><span class="screen-reader-text">E-Mail:</span> <a href="mailto:{{=accessibility_feedback_email}}">{{=accessibility_feedback_email}}</a></li>
+    {{/accessibility_feedback_email}}
+</ul>
+
 
 {{contact_form}}
-<p>
-    Wenn Sie Probleme bei der Benutzung dieses Webauftrittes haben, schreiben Sie eine E-Mail an
-    <a href="mailto:{{=feedback_receiver_email}}?subject={{=feedback_subject}}">{{=feedback_receiver_email}}</a>
-    oder füllen Sie das folgende Formular aus.
-</p>
+<h3>Kontaktformular</h3>
 {{=contact_form}}
 {{/contact_form}}
 
-<h4>Durchsetzungsverfahren</h4>
+<h2>Durchsetzungsverfahren</h2>
 <p>
     Bleibt eine Anfrage über die Kontaktmöglichkeit innerhalb von sechs Wochen
-    ganz oder teilweise unbeantwortet, prüft das Landesamt für Digitalisierung,
-    Breitband und Vermessung auf Antrag des Nutzers, ob im Rahmen der
-    Überwachung gegenüber dem Verpflichteten Maßnahmen erforderlich sind.
+    ganz oder teilweise unbeantwortet, prüft die zuständige Aufsichtsbehörde auf Antrag des Nutzers, ob im Rahmen der
+    Überwachung gegenüber den Betreibern des Webangebots Maßnahmen erforderlich sind.
 </p>
+<p>Kontaktinformation der für das Durchsetzungsverfahren zuständigen Aufsicht:</p>
 
-<h4>Kontaktinformation der für das Durchsetzungsverfahen zuständigen Einrichtung</h4>
-<p>
-    Landesamt für Digitalisierung, Breitband und Vermessung
-    Alexandrastraße 4<br>
-    80538 München<br>
-    Telefon: +49 89 2129-1111<br>
-    Telefax: +49 89 2129-1113<br>
-    E-Mail: service@geodaten.bayern.de<br>
-    https://www.ldbv.bayern.de/service/kontakt.html<br>
-</p>
+<p><strong>{{=accessibility_controlling_name}}</strong></p>        
+<address>
+    {{accessibility_controlling_street}}
+    {{=accessibility_controlling_street}}<br>
+    {{/accessibility_controlling_street}}
+    {{accessibility_controlling_city}}
+    {{=accessibility_controlling_postalcode}}
+    {{=accessibility_controlling_city}}
+    {{/accessibility_controlling_city}}
+</address>
+<ul class="person-info">
+    {{accessibility_controlling_phone}}
+    <li class="person-info-phone"><span class="screen-reader-text">Telefon: </span> {{=accessibility_controlling_phone}}</li>
+    {{/accessibility_controlling_phone}}
+    {{accessibility_controlling_fax}}
+    <li class="person-info-fax"><span class="screen-reader-text">Fax:</span> {{=accessibility_controlling_fax}}</li>
+    {{/accessibility_controlling_fax}}
+    {{accessibility_controlling_email}}
+    <li class="person-info-email"><span class="screen-reader-text">E-Mail:</span> <a href="mailto:{{=accessibility_controlling_email}}">{{=accessibility_controlling_email}}</a></li>
+    {{/accessibility_controlling_email}}
+    {{accessibility_controlling_url}}
+    <li class="person-info-www"><span class="screen-reader-text">Web:</span> <a href="mailto:{{=accessibility_controlling_url}}">{{=accessibility_controlling_url}}</a></li>
+    {{/accessibility_controlling_url}}
+</ul>
+
+
