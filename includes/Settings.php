@@ -54,17 +54,6 @@ class Settings {
         );
     }
 
-    /*-----------------------------------------------------------------------------------*/
-    /* Get Tab Slugs
-    /*-----------------------------------------------------------------------------------*/
-    public function getSettingsPageSlug() {
-	$tablist = array();
-	
-	foreach ($this->settings as $tab => $data) {
-	    $tablist[$tab] = $data['tabtitle'];
-	 }
-	return $tablist;
-    }
 
     /*-----------------------------------------------------------------------------------*/
     /* Parse Query
@@ -220,7 +209,7 @@ class Settings {
     /* Create settings page
     /*-----------------------------------------------------------------------------------*/
     public function settingsPage() {
-        $slugs = self::getSettingsPageSlug();
+        $slugs = Options::getSettingsPageSlug();
         $default = array_keys($slugs)[0];
         $currentTab = $this->getQueryVar('current-tab', $default); ?>
         <div class="wrap">
@@ -257,7 +246,7 @@ class Settings {
             [$this, 'optionsValidate']
         );
 
-        $slugs = self::getSettingsPageSlug();
+        $slugs = Options::getSettingsPageSlug();
         $default = array_keys($slugs)[0];
         switch ($this->getQueryVar('current-tab', $default)) {
             case 'accessibility':

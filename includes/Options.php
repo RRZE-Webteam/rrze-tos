@@ -16,16 +16,20 @@ class Options {
         $siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 
         $options = [
-	    'version'			    => 6,
-		// Optiontable version
-            'imprint_websites'                  => $siteUrl,
-            'imprint_webmaster_email'           => $adminMail,
-            'accessibility_feedback_email'	    => $adminMail,
+
+	    'imprint_websites'                  => $siteUrl,
+	    'imprint_webmaster_email'           => $adminMail,
+	    'accessibility_feedback_email'	    => $adminMail,
 	    'display_template_contactinfos'	    => 1,
-		// fix value, not editale with settings
-		// TODO: Make it chanceable to enter a text for someone else
 	    'accessibility_feedback_mailposttext'   => "\n\n-- \nHinweis: Diese E-Mail wurde aus dem Feedback-Formular zur Barrierefreiheit der Website ".$siteUrl." gesendet.\n\n" ,
 	    'accessibility_feedback_mailpretext'   => "",
+	    'accessibility_region'		    => 2,
+	    'accessibility_conformity_val'	    => -1,
+	    'accessibility_feedback_subject'	=> __('Accessibility Formular Request', 'rrze-tos'),
+	    'display_template_supervisory'  => 1,
+	    'display_template_idnumbers'  => 1,
+	    'display_template_itsec'  => 1,
+
 	    
         ];
 	   
@@ -47,7 +51,11 @@ class Options {
 	
 	$settings = [  
 	    'imprint'	=> array(
-		'tabtitle' =>	 __('Imprint', 'rrze-tos'),
+		'endpoint'  => array(
+		    'de'    => 'impressum',
+		    'en'    => 'imprint'
+		),
+		'tabtitle' => __('Impressum', 'rrze-tos'),
 		'settings'  => array(
 		    'sections'	=> array(
 			
@@ -77,10 +85,10 @@ class Options {
 		    ),
 		    'fields' => array(
 			'imprint_websites' => array(
-			    'title'	=>  __('Websites', 'rrze-tos'),
+			    'title'	=>  __('Webauftritte', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_websites',
 			    'type'	=> 'inputTextareaCallback',
-			    'desc'	=> __('Add one or more websites referred to in the imprint.','rrze-tos'),
+			    'desc'	=> __('Wenn dieses Impressum für mehr als einen Webauftritt gilt, fügen Sie hier die Adressen der weiteren Webauftritte ein. Bitte jeweils pro Zeile eine Adresse eingeben.','rrze-tos'),
 			    'default'	=> $siteUrl,
 			    'required'	=> 'required',
 			    'rows'        => 4,
@@ -92,21 +100,20 @@ class Options {
 			    'title'	=>  __('Name', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_webmaster',
 			    'type'	=> 'inputTextCallback',
-			    'desc'	=> __('Name of webmaster or webteam', 'rrze-tos'),
+			    'desc'	=> __('Name des Webmasters oder der zuständigen Webredaktion.', 'rrze-tos'),
 			    'default'	=> '',
 			    'required'	=> 1,
 			),
 			'imprint_webmaster_email'=> array(
-			    'title'	=>  __('EMail', 'rrze-tos'),
+			    'title'	=>  __('E-Mail', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_webmaster',
 			    'type'	=> 'inputEMailCallback',
-			    'desc'	=> __('Contact email', 'rrze-tos'),
 			    'default'	=> '',
 			    'required'	=> 1,
 			),
 			
 			'imprint_webmaster_phone'=> array(
-			    'title'	=>  __('Phone', 'rrze-tos'),
+			    'title'	=>  __('Telefon', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_webmaster',
 			    'desc'	=> __('Contact phone number', 'rrze-tos'),
 			    'type'	=> 'inputTextCallback',
@@ -120,41 +127,39 @@ class Options {
 			    'title'	=>  __('Name', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputTextCallback',
-			    'desc'	=> __('Responsible person for the website.', 'rrze-tos'),
+			    'desc'	=> __('Rechtlich verantwortliche Person für den Webauftritt. (In der Regel ist dies der Lehrstuhlinhaber oder Einrichtungsleiter)', 'rrze-tos'),
 			    'default'	=> '',
 			    'required'	=> 1,
 			),
 			'imprint_responsible_email'=> array(
-			    'title'	=>  __('EMail', 'rrze-tos'),
+			    'title'	=>  __('E-Mail', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputEMailCallback',
-			    'desc'	=> __('Contact email for responsible person', 'rrze-tos'),
 			    'default'	=> '',
 			    'required'	=> 1,
 			),
 			'imprint_responsible_street'=> array(
-			    'title'	=>  __('Street', 'rrze-tos'),
+			    'title'	=>  __('Straße und Hausnummer', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> 'Schlossplatz 1',
 			),
 			'imprint_responsible_postalcode'=> array(
-			    'title'	=>  __('Postal code', 'rrze-tos'),
+			    'title'	=>  __('Postleitzahl', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> '91052',
 			),
 			'imprint_responsible_city'=> array(
-			    'title'	=>  __('City', 'rrze-tos'),
+			    'title'	=>  __('Stadt', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> 'Erlangen',
 			    
 			),
 			'imprint_responsible_phone'=> array(
-			    'title'	=>  __('Phone', 'rrze-tos'),
+			    'title'	=>  __('Telefon', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
-			    'desc'	=> __('Contact phone number for responsible person', 'rrze-tos'),
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> '',
 			),
@@ -178,11 +183,11 @@ class Options {
 			    'title'	=>  __('Verweis auf die Universitätsleitung', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Offizieller Vertreter der Universität und ihrer EInrichtungen nach Außen ist der Präsident. Dazu wird hiermit ein entsprechenden Absatz angezeigt.', 'rrze-tos'),
+			    'desc'	=> __('Offizieller Vertreter der Universität und ihrer Einrichtungen nach Außen ist der Präsident. Dazu wird hiermit ein entsprechenden Absatz angezeigt.', 'rrze-tos'),
 			    'default'	=> 1,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_supervisory'   => array(
@@ -192,8 +197,8 @@ class Options {
 			    'desc'	=> __('Zeigt die Aufsichtsbehörde der FAU an.', 'rrze-tos'),
 			     'default'	=> 1,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_idnumbers'   => array(
@@ -203,8 +208,8 @@ class Options {
 			    'desc'	=> __('Anzeige der öffentlichen und offiziellen Identifikationsnummern der Universität', 'rrze-tos'),
 			     'default'	=> 1,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_itsec'   => array(
@@ -214,25 +219,25 @@ class Options {
 			    'desc'	=> __('Hinweis und Kontaktangaben zur Meldung von Vorfällen zur IT Sicherheit.', 'rrze-tos'),
 			     'default'	=> 1,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'imprint_section_extra'   => array(
-			    'title'	=>  __('Add a new section?', 'rrze-tos'),
+			    'title'	=>  __('Neuen Abschnitt hinzufügen?', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputRadioCallback',
 			    'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'imprint_section_extra_text'   => array(
-			    'title'	=>  __('Content', 'rrze-tos'),
+			    'title'	=>  __('Inhalt', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputWPEditor',
-			    'desc'	=>  __('Content of the new section', 'rrze-tos'),
+			    'desc'	=>  __('Inhalt des neuen, zusätzlichen Abschnitts.', 'rrze-tos'),
 			    'default'	=> '',
 			     'height' => 200,
 			)
@@ -244,7 +249,11 @@ class Options {
 	    ),
 
 	    'privacy'	=> array(
-		'tabtitle'	 => __('Privacy', 'rrze-tos'),
+		'endpoint'  => array(
+		    'de'    => 'datenschutz',
+		    'en'    => 'privacy'
+		),
+		'tabtitle'	 => __('Datenschutzerklärung', 'rrze-tos'),
 		'settings'  => array(
 		    'sections'	=> array(
 			'rrze_tos_section_privacy_fauservices'  => array(
@@ -272,8 +281,8 @@ class Options {
 			    'desc'	=> __('Bieten Sie einen Newsletter oder Mailverteiler an?', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_contactform'   => array(
@@ -283,8 +292,8 @@ class Options {
 			    'desc'	=> __('Verwenden Sie ein Kontaktformular auf dieser Webseite? (Die Barrierefreiheitserklärung bietet ein solches an. Daher ist die Antwort in der Regel "ja").', 'rrze-tos'),
 			     'default'	=> 1,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_registrationform'   => array(
@@ -294,8 +303,8 @@ class Options {
 			    'desc'	=> __('Verwenden Sie Formulare für die Anmeldung zu Veranstaltungen oder anderen Funktionen, bei denen man sich Registrieren muss?', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			
@@ -306,8 +315,8 @@ class Options {
 			    'desc'	=> __('Wenn Sie YouTube Videos in der Webseite einbinden, aktivieren Sie diese Option.', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_slideshare'   => array(
@@ -317,8 +326,8 @@ class Options {
 			    'desc'	=> __('Wenn Sie Vortragsfolien auf Slideshare anbieten und in der Webseite embedden, aktivieren Sie diese Option.', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_vimeo'   => array(
@@ -328,8 +337,8 @@ class Options {
 			    'desc'	=> __('Wenn Sie Videos vom Onlinedienst Vimeo in der Webseite einbinden, aktivieren Sie diese Option.', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'display_template_vgwort'   => array(
@@ -339,8 +348,8 @@ class Options {
 			    'desc'	=> __('Für den Fall, dass auf der Webseite das Messverfahren der VG Wort eingesetzt wird, sollte diese Option aktiviert werden', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			
@@ -348,34 +357,59 @@ class Options {
 			
 			
 			'privacy_section_extra'   => array(
-			    'title'	=>  __('Add a new section?', 'rrze-tos'),
+			    'title'	=>  __('Neuen Abschnitt hinzufügen?', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_optional',
 			    'type'	=> 'inputRadioCallback',
 			    'default'	=> 0,
 			    'options' => [
-				    '1' => __('Yes', 'rrze-tos'),
-				    '0' => __('No', 'rrze-tos')
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
 			'privacy_section_extra_text'   => array(
-			    'title'	=>  __('Content', 'rrze-tos'),
+			    'title'	=>  __('Inhalt', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_optional',
 			    'type'	=> 'inputWPEditor',
-			    'desc'	=>  __('Content of the new section', 'rrze-tos'),
+			    'desc'	=>  __('Inhalt des neuen, zusätzlichen Abschnitts.', 'rrze-tos'),
+			    'default'	=> '',
+			     'height' => 200,
+			),
+			'privacy_section_owndsb'   => array(
+			    'title'	=>  __('Text Datenschutzbeauftragter', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'default'	=> 0,
+			    'desc'	=>  __('Ersetze den Standardext mit der Einleitung und den Kontaktdaten zum Datenschutzbeauftragten durch einen eigenen Text.', 'rrze-tos'),
+			    'options' => [
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
+				]
+			),
+			'privacy_section_owndsb_text'   => array(
+			    'title'	=>  __('Inhalt', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_optional',
+			    'type'	=> 'inputWPEditor',
+			    'desc'	=>  __('Eigener Text für Einleitung und Angabe eines Datenschutzbeauftragten', 'rrze-tos'),
 			    'default'	=> '',
 			     'height' => 200,
 			)
+			
+			
 		    ),
 
 		)
 
 	    ),
 	    'accessibility' => array(
-		'tabtitle'	 => __('Accessibility', 'rrze-tos'),
+		'endpoint'  => array(
+		    'de'    => 'barrierefreiheit',
+		    'en'    => 'accessibility'
+		),
+		'tabtitle'	 => __('Barrierefreiheit', 'rrze-tos'),
 		'settings'  => array(
 		    'sections'	=> array(
 			'rrze_tos_section_accessibility_general'  => array(
-			    'title' => __('General', 'rrze-tos'),
+			    'title' => __('Allgemeine Hinweise', 'rrze-tos'),
 			    'desc' => __('Alle öffentlichen Stellen sind gemäß der Richtlinie (EU) 2016/2102 des Europäischen Parlaments und des Rates, bzw. der Umsetzung in der jeweiligen Landesgesetzgebung dazu verpflichtet, ihre Webauftritte und/ oder mobilen Anwendungen barrierefrei zugänglich zu machen. HIerzu gehört auch die Bereitstellung einer Konformitätserklärung zur Barrierefreiheit, in der alle Betreiber von Webauftritten und Apps den Status der Webseite öffentlich angeben und erläutern müssen, aus welchen Gründen welche Barrieren vorhanden sind.', 'rrze-tos'),
 			    'page'  => 'rrze_tos_options',
 			),
@@ -421,7 +455,7 @@ class Options {
 				]
 			),
 			'accessibility_methodology'   => array(
-			    'title'	=>  __('Methodology', 'rrze-tos'),
+			    'title'	=>  __('Methode', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_status',
 			    'type'	=> 'inputRadioCallback',
 			    'default'	=> 1,
@@ -431,13 +465,13 @@ class Options {
 			    ]
 			),
 			'accessibility_creation_date'   => array(
-			    'title'	=>  __('Creation date', 'rrze-tos'),
+			    'title'	=>  __('Erstellungsdatum', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_status',
 			    'type'	=> 'inputDateCallback',
 			    'min'	=> '2019-08-01',
 			),
 			'accessibility_last_review_date'   => array(
-			    'title'	=>  __('Last review date', 'rrze-tos'),
+			    'title'	=>  __('Letzte Überprüfung', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_status',
 			    'type'	=> 'inputDateCallback',
 			    'min'	=> '2019-08-01',
@@ -730,11 +764,17 @@ class Options {
     /* Endpoints for generated pages
     /*-----------------------------------------------------------------------------------*/
     public static function getEndPoints() {
-        return [
-            'imprint'       => __('imprint', 'rrze-tos'),
-            'privacy'       => __('privacy', 'rrze-tos'),
-            'accessibility' => __('accessibility', 'rrze-tos'),
-        ];
+	$settings = self::defaultAdminSettings();
+	$endpoint = array();
+	$langCode = Locale::getLangCode();
+	foreach ($settings as $field => $data) {
+	    if (isset($data['endpoint'][$langCode])) {
+		$endpoint[$field] = $data['endpoint'][$langCode];
+	    } else {
+		$endpoint[$field] = $data['endpoint']['de'];
+	    }
+	}
+	return $endpoint;
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -769,6 +809,17 @@ class Options {
     /*-----------------------------------------------------------------------------------*/
     public static function getOptionName() {
         return self::$optionName;
+    }
+    /*-----------------------------------------------------------------------------------*/
+    /* Get Tab Slugs
+    /*-----------------------------------------------------------------------------------*/
+    public function getSettingsPageSlug() {
+	$tablist = array();
+	$defaults = self::defaultAdminSettings();
+	foreach ($defaults as $tab => $data) {
+	    $tablist[$tab] = $data['tabtitle'];
+	 }
+	return $tablist;
     }
 
 

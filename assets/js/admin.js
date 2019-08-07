@@ -13,16 +13,22 @@ jQuery(document).ready(function($) {
 
     function checkNewPrivacySection() {
         var rrzeTosNewSection = $("input[name='rrze_tos[privacy-privacy_section_extra]']:checked", "#tos-admin-form").val();
-   //     console.log(rrzeTosNewSection);
         if ('1' === rrzeTosNewSection) {
             $("#wp-privacy_section_extra_text-wrap").parents('tr').show();
         } else {
             $("#wp-privacy_section_extra_text-wrap").parents('tr').hide();
         }
     }
+    function checkPrivacyOwnDSBSection() {
+        var rrzeDSBSection = $("input[name='rrze_tos[privacy-privacy_section_owndsb]']:checked", "#tos-admin-form").val();
+        if ('1' === rrzeDSBSection) {
+            $("#wp-privacy_section_owndsb_text-wrap").parents('tr').show();
+        } else {
+            $("#wp-privacy_section_owndsb_text-wrap").parents('tr').hide();
+        }
+    }
     function checkNewImprintSection() {
         var rrzeTosImprintNewSection = $("input[name='rrze_tos[imprint-imprint_section_extra]']:checked", "#tos-admin-form").val();
-     //   console.log(rrzeTosNewSection);
         if ('1' === rrzeTosImprintNewSection) {
             $("#wp-imprint_section_extra_text-wrap").parents('tr').show();
         } else {
@@ -34,10 +40,12 @@ jQuery(document).ready(function($) {
     checkNewPrivacySection();
     checkNewImprintSection();
     checkAccessibilityHelperSection();
+    checkPrivacyOwnDSBSection();
     $("#tos-admin-form input").on('change', function() {
         checkNewPrivacySection();
 	checkNewImprintSection();
 	 checkAccessibilityHelperSection();
+	  checkPrivacyOwnDSBSection();
     });
 
     if ($('[type="date"]').prop('type') != 'date') {

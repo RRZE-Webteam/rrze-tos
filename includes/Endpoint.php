@@ -18,8 +18,8 @@ class Endpoint {
      * Define Endpoints
      */
     public static function addRewrite() {
-        foreach (Options::getEndPoints() as $name) {
-            add_rewrite_endpoint(sanitize_title($name), EP_ROOT);
+        foreach (Options::getEndPoints() as $key => $name) {
+            add_rewrite_endpoint($name, EP_ROOT);
         }
     }
 
@@ -35,9 +35,10 @@ class Endpoint {
         $template = '';
         $endpointName = '';
         $endPoints = Options::getEndPoints();
-
+	
         foreach ($endPoints as $k => $name) {
-            if (isset($wp_query->query_vars[$name])) {
+	   $name = sanitize_title($name);
+            if ((isset($wp_query->query_vars[$name])) || ($wp_query->query_vars['pagename'] == $name)) {
                 $template = $k;
                 $endpointName = $name;
                 break;
@@ -62,20 +63,33 @@ class Endpoint {
 	/* 
 	 * Dynamic variables for all endpoints
 	 */
-        $title = mb_convert_case($endpointName, MB_CASE_TITLE, 'UTF-8');
-        $imprintWebsites = explode(PHP_EOL, $this->options->imprint_websites);
-        $this->options->imprint_websites_extra = count($imprintWebsites) > 1 ? 1 : 0;
-        $this->options->websites = implode(', ', $imprintWebsites);
-        $this->options->webmaster_more = do_shortcode($this->options->imprint_section_extra_text);
-        $this->options->privacy_new_section_text = do_shortcode($this->options->privacy_section_extra_text);
+	
+	
+	$slugs = Options::getSettingsPageSlug();
+	$title = mb_convert_case($slugs[$template], MB_CASE_TITLE, 'UTF-8');
+
+
+
 
         $this->options->imprint_url = home_url($endPoints['imprint']);
         $this->options->privacy_url = home_url($endPoints['privacy']);
         $this->options->accessibility_url = home_url($endPoints['accessibility']);
 
 	/* 
+	 * Dynamic variables for endpoint: Imprint
+	 */
+	if (empty($this->options->imprint_responsible_name)) {
+	   $this->options->display_template_noresponsible = 1;
+	}
+        $imprintWebsites = explode(PHP_EOL, $this->options->imprint_websites);
+        $this->options->imprint_websites_extra = count($imprintWebsites) > 1 ? 1 : 0;
+        $this->options->websites = implode(', ', $imprintWebsites);
+        $this->options->webmaster_more = do_shortcode($this->options->imprint_section_extra_text);	
+	
+	/* 
 	 * Dynamic variables for endpoint: Privacy
 	 */
+	$this->options->privacy_new_section_text = do_shortcode($this->options->privacy_section_extra_text);
 	if ($this->options->display_template_youtube ||
 	    $this->options->display_template_slideshare ||
 	    $this->options->display_template_vgwort ||
@@ -83,6 +97,10 @@ class Endpoint {
 	 $this->options->privacy_section_external = 1;
 	}
 	
+	$this->options->privacy_defaultteasertext = 1;
+	if (($this->options->privacy_section_owndsb) && (!empty($this->options->privacy_section_owndsb_text))) {
+	    $this->options->privacy_defaultteasertext = 0;
+	} 
 	
 	/* 
 	 * Dynamic variables for endpoint: Accessibility
@@ -119,25 +137,30 @@ class Endpoint {
 	   $this->options->accessibility_controlling_postalcode = $lawdata->$index['controlling_plz']; 
 	}
 	
-	
-	
-	$settings = Options::getAdminsettings();
-	
+
+	$settings = Options::getAdminsettings();	
 	$style = 'warning';
+	
 	switch ($this->options->accessibility_conformity_val) {
 	    case '-1':
 		$style = 'alert';
 		break;
 	    case '0':	 
 		$style = 'alert';
+		$this->options->accessibility_conformity_filled = 1;
 		break;
 	    case '1':
 		$style = 'info';
+		$this->options->accessibility_conformity_filled = 1;
 		break;
 	    case '2':
 		$style = 'success';
+		$this->options->accessibility_conformity_filled = 1;
 		break;   		 
 	} 
+	
+
+	
 	$this->options->accessibility_conformity_alertshortcodestyle = $style;
 	$this->options->accessibility_conformity_text = $settings->accessibility['settings']['fields']['accessibility_conformity_val']['options'][$this->options->accessibility_conformity_val];
 	$this->options->accessibility_methodik_text = $settings->accessibility['settings']['fields']['accessibility_methodology']['options'][$this->options->accessibility_methodology];
