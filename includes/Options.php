@@ -16,14 +16,17 @@ class Options {
         $siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 
         $options = [
-	    'version'				=> 5,
+	    'version'			    => 6,
 		// Optiontable version
-            'imprint_websites'                     => $siteUrl,
-            'imprint_webmaster_email'              => $adminMail,
-            'feedback_receiver_email'              => $adminMail,
+            'imprint_websites'                  => $siteUrl,
+            'imprint_webmaster_email'           => $adminMail,
+            'accessibility_feedback_email'	    => $adminMail,
 	    'display_template_contactinfos'	    => 1,
 		// fix value, not editale with settings
 		// TODO: Make it chanceable to enter a text for someone else
+	    'accessibility_feedback_mailposttext'   => "\n\n-- \nHinweis: Diese E-Mail wurde aus dem Feedback-Formular zur Barrierefreiheit der Website ".$siteUrl." gesendet.\n\n" ,
+	    'accessibility_feedback_mailpretext'   => "",
+	    
         ];
 	   
         return $options;
@@ -323,6 +326,17 @@ class Options {
 			    'section'	=> 'rrze_tos_section_privacy_externalservices',
 			    'type'	=> 'inputRadioCallback',
 			    'desc'	=> __('Wenn Sie Videos vom Onlinedienst Vimeo in der Webseite einbinden, aktivieren Sie diese Option.', 'rrze-tos'),
+			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Yes', 'rrze-tos'),
+				    '0' => __('No', 'rrze-tos')
+				]
+			),
+			'display_template_vgwort'   => array(
+			    'title'	=>  __('VG Wort Zählpixel', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_externalservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Für den Fall, dass auf der Webseite das Messverfahren der VG Wort eingesetzt wird, sollte diese Option aktiviert werden', 'rrze-tos'),
 			     'default'	=> 0,
 			    'options' => [
 				    '1' => __('Yes', 'rrze-tos'),

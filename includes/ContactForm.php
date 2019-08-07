@@ -121,18 +121,22 @@ class ContactForm
         return Template::getContent('contact-form', $data);
     }
 
-    protected function sendMail($name, $from, $message)
-    {
-        $to = sanitize_email($this->options->feedback_receiver_email);
-        $subject = sanitize_text_field($this->options->feedback_subject);
+    protected function sendMail($name, $from, $message)  {
+	$to = sanitize_email($this->options->accessibility_feedback_email);
+        $subject = sanitize_text_field($this->options->accessibility_feedback_subject);
         $headers = [
-            'Content-Type: text/html; charset=UTF-8',
+            'Content-Type: text/plain; charset=UTF-8',
             sprintf('From: %1$s <%2$s>', sanitize_text_field($name), sanitize_text_field($from))
         ];
-        if ($this->options->rrze_tos_cc) {
-            $headers[] = sprintf('CC: <%s>', sanitize_email($this->options->rrze_tos_cc));
+        if ($this->options->accessibility_feedback_cc) {
+            $headers[] = sprintf('CC: <%s>', sanitize_email($this->options->accessibility_feedback_cc));
         }
-
+	if (isset($this->options->accessibility_feedback_mailpretext)) {
+	    $message = $this->options->accessibility_feedback_mailpretext . $message;
+	}
+	if (isset($this->options->accessibility_feedback_mailposttext)) {
+	    $message = $message . $this->options->accessibility_feedback_mailposttext;
+	}
         return wp_mail($to, $subject, $message, $headers);
     }
 
@@ -166,8 +170,7 @@ class ContactForm
         return $this->error;
     }
 
-    protected function messageResponse($type, $message)
-    {
+    protected function messageResponse($type, $message) {
         global $form_error;
         if ('success' === $type) {
             echo '<div class="alert alert-success">' . esc_html($message) . '</div>';
@@ -175,7 +178,7 @@ class ContactForm
             if ($_POST && $form_error instanceof \WP_Error && is_wp_error($message)) {
                 foreach ($form_error->get_error_messages() as $error) {
                     echo '<div class="alert alert-warning" role="alert">';
-                    echo '<strong>ERROR</strong>:';
+                    echo '<strong>'.__('Error','rrze-tos').'</strong>:';
                     echo esc_html($error) . '<br/>';
                     echo '</div>';
                 }

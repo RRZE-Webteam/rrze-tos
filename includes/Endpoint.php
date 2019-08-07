@@ -78,6 +78,7 @@ class Endpoint {
 	 */
 	if ($this->options->display_template_youtube ||
 	    $this->options->display_template_slideshare ||
+	    $this->options->display_template_vgwort ||
 	    $this->options->display_template_vimeo) {
 	 $this->options->privacy_section_external = 1;
 	}
