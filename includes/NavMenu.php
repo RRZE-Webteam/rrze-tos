@@ -40,16 +40,28 @@ defined('ABSPATH') || exit;
              self::createTosMenu();
          }
      }
-
+     
      /**
-      * [createTosMenu description]
+      * Generates Menu-Items by Options
+      */
+     public static function createMenuList() {
+	$endpoints = Options::getEndPoints();
+	$titleslugs = Options::getSettingsPageSlug();
+	$menulist = array();
+	foreach ($endpoints as $key => $endpoint) {
+	    $menulist[$endpoint] = $titleslugs[$key];
+	}
+	return $menulist;
+     }
+     /**
+      * Create Nav Menu
       */
      protected static function createTosMenu()
      {
          $menuLocations = self::menuLocations();
          $stylesheetGroup = Theme::getCurrentStylesheetGroup();
 
-         $menuItems = Options::getEndPoints();
+         $menuItems = self::createMenuList();
          $menuName  = self::$tosMenuName;
          $menuLocation = isset($menuLocations[$stylesheetGroup]) ? $menuLocations[$stylesheetGroup] : '';
 
@@ -76,14 +88,14 @@ defined('ABSPATH') || exit;
 
          $menu = get_term_by('name', $menuName, 'nav_menu');
 
-         foreach ($menuItems as $value) {
+         foreach ($menuItems as $slug => $value) {
              wp_update_nav_menu_item(
                  $menu->term_id,
                  0,
                  [
                     'menu-item-title'   => mb_convert_case($value, MB_CASE_TITLE, 'UTF-8'),
                     'menu-item-classes' => 'tos',
-                    'menu-item-url'     => home_url('/' . sanitize_title($value)),
+                    'menu-item-url'     => home_url('/' . sanitize_title($slug)),
                     'menu-item-status'  => 'publish',
                 ]
             );

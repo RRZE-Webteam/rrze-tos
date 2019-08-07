@@ -54,7 +54,9 @@ class Template
         $localeFallback = Locale::getLocaleFallback();
         if (isset($localeFallback[$langCode])) {
             $templateFile = sprintf($format, $pluginDirPath, $template, $localeFallback[$langCode]);
-        }
+        } else {
+	    $templateFile = sprintf($format, $pluginDirPath, $template, 'de_DE');
+	}
         return is_readable($templateFile) ? $templateFile : '';
     }
 }

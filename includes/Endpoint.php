@@ -139,22 +139,22 @@ class Endpoint {
 	
 
 	$settings = Options::getAdminsettings();	
-	$style = 'warning';
+	$style ='alert-warning';
 	
 	switch ($this->options->accessibility_conformity_val) {
 	    case '-1':
-		$style = 'alert';
+		$style = 'alert-danger';
 		break;
 	    case '0':	 
-		$style = 'alert';
+		$style = 'alert-danger';
 		$this->options->accessibility_conformity_filled = 1;
 		break;
 	    case '1':
-		$style = 'info';
+		$style = 'alert-warning';
 		$this->options->accessibility_conformity_filled = 1;
 		break;
 	    case '2':
-		$style = 'success';
+		$style = 'alert-success';
 		$this->options->accessibility_conformity_filled = 1;
 		break;   		 
 	} 

@@ -253,7 +253,7 @@ class Options {
 		    'de'    => 'datenschutz',
 		    'en'    => 'privacy'
 		),
-		'tabtitle'	 => __('Datenschutzerklärung', 'rrze-tos'),
+		'tabtitle'	 => __('Datenschutz', 'rrze-tos'),
 		'settings'  => array(
 		    'sections'	=> array(
 			'rrze_tos_section_privacy_fauservices'  => array(

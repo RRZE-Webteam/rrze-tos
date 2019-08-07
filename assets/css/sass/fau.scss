@@ -18,7 +18,10 @@
     .complaint {
 	padding-top: 20px;
     }
-    
+    .alert p {
+	font-size: 1.1rem;
+	padding: 5px 0;  
+    }
 
     @media (min-width: 768px) {
 
