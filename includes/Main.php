@@ -4,13 +4,8 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-class Main
-{
-    /**
-     * [__construct description]
-     */
-    public function __construct()
-    {
+class Main {
+    public function __construct()  {
         add_action('init', [$this, 'registerScripts']);
         add_action('admin_enqueue_scripts', [$this, 'adminEnqueueScripts']);
 
@@ -24,23 +19,22 @@ class Main
     /**
     * register avaible scripts and css
     */
-    public function registerScripts()
-    {
+    public function registerScripts()     {
         wp_register_style(
             'rrze-tos-default',
-            plugins_url('assets/css/default.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/default.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
         wp_register_style(
             'rrze-tos-fau',
-            plugins_url('assets/css/fau.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/fau.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
         wp_register_style(
             'rrze-tos-rrze',
-            plugins_url('assets/css/rrze.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/rrze.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
         wp_register_style(
             'rrze-tos-events',
-            plugins_url('assets/css/events.min.css', plugin_basename(RRZE_PLUGIN_FILE))
+            plugins_url('assets/css/events.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
     }
 
@@ -49,8 +43,7 @@ class Main
      * @param  string $hook
      * @return void
      */
-    public function adminEnqueueScripts($hook)
-    {
+    public function adminEnqueueScripts($hook)  {
         if ('settings_page_rrze-tos' !== $hook) {
             return;
         }
@@ -67,5 +60,6 @@ class Main
             false,
             true
         );
+
     }
 }

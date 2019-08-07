@@ -13,7 +13,6 @@ class Locale
     protected static $localeFallback = [
         'de' => 'de_DE',
         'en' => 'en_US',
-        'es' => 'es_ES'
     ];
 
     /**

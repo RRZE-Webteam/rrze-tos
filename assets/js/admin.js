@@ -1,31 +1,51 @@
 jQuery(document).ready(function($) {
-    function checkConformity() {
-        var rrzeTosConformity = $("input[name='rrze_tos[accessibility_conformity]']:checked", "#tos-admin-form").val();
-        if ('1' === rrzeTosConformity) {
-            $("textarea[name='rrze_tos[accessibility_non_accessible_content]']").parents('tr').hide();
-        } else {
-            $("textarea[name='rrze_tos[accessibility_non_accessible_content]']").parents('tr').show();
-        }
-    }
 
-    function checkNewSection() {
-        var rrzeTosNewSection = $("input[name='rrze_tos[privacy_section_extra]']:checked", "#tos-admin-form").val();
-        console.log(rrzeTosNewSection);
+
+    function checkAccessibilityHelperSection() {
+        var rrzeTosAccessibilityHelper = $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_helper]']:checked", "#tos-admin-form").val();
+        if ('1' === rrzeTosAccessibilityHelper) {
+            $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_faillist][]']").parents('tr').hide();
+        } else {
+            $("input[name='rrze_tos[accessibility-accessibility_non_accessible_content_faillist][]']").parents('tr').show();
+        }
+    }  
+    
+
+    function checkNewPrivacySection() {
+        var rrzeTosNewSection = $("input[name='rrze_tos[privacy-privacy_section_extra]']:checked", "#tos-admin-form").val();
         if ('1' === rrzeTosNewSection) {
             $("#wp-privacy_section_extra_text-wrap").parents('tr').show();
         } else {
             $("#wp-privacy_section_extra_text-wrap").parents('tr').hide();
         }
     }
+    function checkPrivacyOwnDSBSection() {
+        var rrzeDSBSection = $("input[name='rrze_tos[privacy-privacy_section_owndsb]']:checked", "#tos-admin-form").val();
+        if ('1' === rrzeDSBSection) {
+            $("#wp-privacy_section_owndsb_text-wrap").parents('tr').show();
+        } else {
+            $("#wp-privacy_section_owndsb_text-wrap").parents('tr').hide();
+        }
+    }
+    function checkNewImprintSection() {
+        var rrzeTosImprintNewSection = $("input[name='rrze_tos[imprint-imprint_section_extra]']:checked", "#tos-admin-form").val();
+        if ('1' === rrzeTosImprintNewSection) {
+            $("#wp-imprint_section_extra_text-wrap").parents('tr').show();
+        } else {
+            $("#wp-imprint_section_extra_text-wrap").parents('tr').hide();
+        }
+    }
 
-    checkConformity();
-    $("#tos-admin-form input").on('change', function() {
-        checkConformity();
-    });
 
-    checkNewSection();
+    checkNewPrivacySection();
+    checkNewImprintSection();
+    checkAccessibilityHelperSection();
+    checkPrivacyOwnDSBSection();
     $("#tos-admin-form input").on('change', function() {
-        checkNewSection();
+        checkNewPrivacySection();
+	checkNewImprintSection();
+	 checkAccessibilityHelperSection();
+	  checkPrivacyOwnDSBSection();
     });
 
     if ($('[type="date"]').prop('type') != 'date') {

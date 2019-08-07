@@ -3,8 +3,8 @@
 /*
 Plugin Name:     RRZE TOS
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-tos
-Description:     Testing of a website from the FAU network according to the conformity criteria of the TOS.
-Version:         1.6.7
+Description:     Generator für die Erstellung der rechtlichen Pflichtangaben des Webauftritts
+Version:         1.7.7
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -17,7 +17,7 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-const RRZE_PHP_VERSION = '7.1';
+const RRZE_PHP_VERSION = '7.2';
 const RRZE_WP_VERSION = '5.2';
 
 const RRZE_PLUGIN_FILE = __FILE__;
@@ -45,20 +45,18 @@ register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
 /**
- * [loadTextdomain description]
+ * Load Text Domain for Translations
  * @return void
  */
-function loadTextdomain()
-{
+function loadTextdomain() {
     load_plugin_textdomain('rrze-tos', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 
 /**
- * [systemRequirements description]
+ * Check for System requirements
  * @return string error message
  */
-function systemRequirements()
-{
+function systemRequirements() {
     $error = '';
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
             $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-tos'), PHP_VERSION, RRZE_PHP_VERSION);
@@ -69,11 +67,10 @@ function systemRequirements()
 }
 
 /**
- * [activation description]
+ * Handler for Activation
  * @return void
  */
-function activation()
-{
+function activation() {
     loadTextdomain();
 
     if ($error = systemRequirements()) {
@@ -86,20 +83,17 @@ function activation()
 }
 
 /**
- * [deactivation description]
+ * Handler for Deactivation
  * @return void
  */
-function deactivation()
-{
+function deactivation() {
     flush_rewrite_rules();
 }
 
 /**
- * [loaded description]
- * @return mixed
+ * Once loaded, run
  */
-function loaded()
-{
+function loaded() {
     loadTextdomain();
 
     if ($error = systemRequirements()) {

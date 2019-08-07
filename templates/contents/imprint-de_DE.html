@@ -1,109 +1,61 @@
 
 
-<p>
-    {{imprint_websites_extra}}
-    Dieses Impressum gilt für die Webauftritte unter den Adressen:<br>
-    {{:imprint_websites_extra}}
-    Dieses Impressum gilt für den Webauftritt unter der Adresse:<br>
-    {{/imprint_websites_extra}}
-    {{=websites}}
-</p>
 
 <h2>Herausgeber</h2>
-<p>
-    {{=imprint_responsible_name}}<br>
+
+<p>{{=imprint_responsible_name}}</p>
+{{=imprint_template_noresponsible}}
+
+
+<address>
+    {{imprint_responsible_street}}
     {{=imprint_responsible_street}}<br>
+    {{/imprint_responsible_street}}
+    {{imprint_responsible_city}}
     {{=imprint_responsible_postalcode}}
     {{=imprint_responsible_city}}
-</p>
+    {{/imprint_responsible_city}}
+</address>
+<ul class="person-info">
+    {{imprint_responsible_phone}}
+    <li class="person-info-phone"><span class="screen-reader-text">Telefon: </span> {{=imprint_responsible_phone}}</li>
+    {{/imprint_responsible_phone}}
+    {{imprint_responsible_fax}}
+    <li class="person-info-fax"><span class="screen-reader-text">Fax:</span> {{=imprint_responsible_fax}}</li>
+    {{/imprint_responsible_fax}}
+    {{imprint_responsible_email}}
+    <li class="person-info-email"><span class="screen-reader-text">E-Mail:</span> <a href="mailto:{{=imprint_responsible_email}}">{{=imprint_responsible_email}}</a></li>
+    {{/imprint_responsible_email}}
+</ul>
 
-<h3>Vertreten durch</h3>
-<p>
-    {{=imprint_webmaster_org}}
-    ist eine Einrichtung des Öffentlichen Rechts innerhalb der 
-    <a href="https://www.fau.de/">Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)</a>.
-</p>
-<p>
-    Gemäß Art. 20, 21 <abbr title="Bayerisches Hochschulrahmengesetz">BayHSchG</abbr>
-    wird die FAU als staatliche Einrichtung und Selbstverwaltungskörperschaft
-    des öffentlichen Rechts nach außen durch den Präsidenten vertreten.
-</p>
 
-<h3>Verantwortlich für den Inhalt</h3>
+{{=imprint_template_vertretung}}
+
+<h3>Ansprechpartner für den Inhalt</h3>
 <p>
-    {{=imprint_webmaster_name}}<br>
-    {{=imprint_webmaster_street}}<br>
-    {{=imprint_webmaster_postalcode}}
-    {{=imprint_webmaster_city}}
+    {{=imprint_webmaster_name}}
 </p>
-<p>
-    {{phone}}
-    Telefon: {{=phone}}<br>
-    {{/phone}}
-    {{fax}}
-    Fax: {{=fax}}<br>
-    {{/fax}}
-    E-Mail: {{=imprint_webmaster_email}}
-</p>
+<ul class="person-info">
+    {{imprint_webmaster_phone}}
+    <li class="person-info-phone"><span class="screen-reader-text">Telefon: </span> {{=imprint_webmaster_phone}}</li>
+    {{/imprint_webmaster_phone}}
+    {{imprint_webmaster_fax}}
+    <li class="person-info-fax"><span class="screen-reader-text">Fax:</span> {{=imprint_webmaster_fax}}</li>
+    {{/imprint_webmaster_fax}}
+    {{imprint_webmaster_email}}
+    <li class="person-info-email"><span class="screen-reader-text">E-Mail:</span> <a href="mailto:{{=imprint_webmaster_email}}">{{=imprint_webmaster_email}}</a></li>
+    {{/imprint_webmaster_email}}
+</ul>
 {{=webmaster_more}}
 
-<h3>Zuständige Aufsichtsbehörde</h3>
-<p>
-    Bayerisches Staatsministerium für Wissenschaft und Kunst<br>
-    Salvatorstraße 2<br>
-    80327 München
-</p>
-<p>
-    Webseite:
-    <a href="https://www.stmwk.bayern.de/">
-        https://www.stmwk.bayern.de/
-    </a>
-</p>
 
-<h3>Identifikationsnummern</h3>
-<table>
-    <tbody>
-        <tr>
-            <td>Umsatzsteuer-Identifikationsnummer<br>
-                (gemäß § 27a Umsatzsteuergesetz)</td>
-            <td>DE 132507686</td>
-        </tr>
-        <tr>
-            <td>Steuernummer</td>
-            <td>216/114/20045 (Finanzamt Erlangen)</td>
-        </tr>
-        <tr>
-            <td>DUNS-Nummer</td>
-            <td>327958716</td>
-        </tr>
-        <tr>
-            <td>EORI-Nummer</td>
-            <td>DE4204891</td>
-        </tr>
-        <tr>
-            <td>Bankverbindung</td>
-            <td>Bayerische Landesbank München
-                <ul>
-                    <li>SWIFT/BIC-Code: BYLADEMMXXX</li>
-                    <li>IBAN: DE66700500000301279280</li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
-</table>
+{{=imprint_template_supervisory}}
+{{=imprint_template_idnumbers}}
+{{=imprint_template_itsec}}
 
-<h2>Sicherheitsvorfälle</h2>
-<h3>Meldung über Missbrauch von Computer- und Netzwerk-Ressourcen</h3>
-<p>
-    Sollte Ihnen irgendeine Form von Missbrauch der Computer- und
-    Netzwerk-Ressourcen an der Friedrich-Alexander-Universität Erlangen-Nürnberg
-    auffallen,
-    <a href="https://www.rrze.fau.de/infocenter/kontakt-hilfe/sicherheitsvorfaelle/">
-        informieren Sie bitte umgehend die für IT-Sicherheit
-    </a>
-    zuständige Stelle am RRZE.
-</p>
-
+<br>
+[collapsibles]
+[collapse title="Nutzungsbedingungen"]
 <h2>Nutzungsbedingungen</h2>
 <p>
     Texte, Bilder, Grafiken sowie die Gestaltung dieser Internetseiten
@@ -144,11 +96,19 @@
     nähere Auskünfte, sofern diese Rechte nicht bereits durch entsprechende
     Hinweise im Webangebot kenntlich gemacht sind.
 </p>
-
+[/collapse]
+[collapse title="Haftungsausschluss"]
 <h2>Haftungsausschluss</h2>
+
 <p>
-    Für die Inhalte anderer Webangebote der FAU sind die jeweiligen
-    Einrichtungen verantwortlich.
+    {{imprint_websites_extra}}
+    Dieses Impressum gilt nur für die Webauftritte unter den Adressen:<br>
+    {{:imprint_websites_extra}}
+    Dieses Impressum gilt nur für den Webauftritt unter der Adresse:<br>
+    {{/imprint_websites_extra}}
+    <strong><em>{{=websites}}</em></strong>
+    <br>
+    Für die Inhalte anderer Webangebote sind die jeweiligen Einrichtungen verantwortlich.
 </p>
 <p>
     Alle auf dieser Internetseite bereitgestellten Informationen haben wir nach
@@ -170,7 +130,7 @@
     wird nicht gehaftet.<br>
     Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf
     diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
-    Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+    Nach § 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
     übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach
     Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.<br>
     Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
@@ -183,7 +143,8 @@
     verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder
     endgültig einzustellen.
 </p>
-
+[/collapse]
+[collapse title="Haftung für Links"]
 <h2>Haftung für Links</h2>
 <p>
     Unser Angebot enthält Links zu externen Webauftritte Dritter, auf deren Inhalte
@@ -198,3 +159,5 @@
     Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend
     entfernen.
 </p>
+[/collapse]
+[/collapsibles]

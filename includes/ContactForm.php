@@ -69,14 +69,14 @@ class ContactForm
                         $data,
                         $defaultData,
                         [
-                            'error_message_could_not_be_sent' => __('The message could not be sent.', 'rrze-tos')
+                            'error_message_could_not_be_sent' => __('Die Nachricht konnte nicht gesendet werden.', 'rrze-tos')
                         ]
                     );
                 } else {
                     $data = array_merge(
                         $defaultData,
                         [
-                            'message_has_been_sent_successfully' => __('Thank you for contacting us.', 'rrze-tos')
+                            'message_has_been_sent_successfully' => __('Danke für Ihre Nachricht. SIe wurde erfolgreich gesendet.', 'rrze-tos')
                         ]
                     );
                 }
@@ -121,38 +121,42 @@ class ContactForm
         return Template::getContent('contact-form', $data);
     }
 
-    protected function sendMail($name, $from, $message)
-    {
-        $to = sanitize_email($this->options->feedback_receiver_email);
-        $subject = sanitize_text_field($this->options->feedback_subject);
+    protected function sendMail($name, $from, $message)  {
+	$to = sanitize_email($this->options->accessibility_feedback_email);
+        $subject = sanitize_text_field($this->options->accessibility_feedback_subject);
         $headers = [
-            'Content-Type: text/html; charset=UTF-8',
+            'Content-Type: text/plain; charset=UTF-8',
             sprintf('From: %1$s <%2$s>', sanitize_text_field($name), sanitize_text_field($from))
         ];
-        if ($this->options->rrze_tos_cc) {
-            $headers[] = sprintf('CC: <%s>', sanitize_email($this->options->rrze_tos_cc));
+        if ($this->options->accessibility_feedback_cc) {
+            $headers[] = sprintf('CC: <%s>', sanitize_email($this->options->accessibility_feedback_cc));
         }
-
+	if (isset($this->options->accessibility_feedback_mailpretext)) {
+	    $message = $this->options->accessibility_feedback_mailpretext . $message;
+	}
+	if (isset($this->options->accessibility_feedback_mailposttext)) {
+	    $message = $message . $this->options->accessibility_feedback_mailposttext;
+	}
         return wp_mail($to, $subject, $message, $headers);
     }
 
     protected function validateForm($name, $email, $message, $result, $solution)
     {
         if (empty($name)) {
-            $this->error['error_name'] = __('Name field should not be empty.', 'rrze-tos');
+            $this->error['error_name'] = __('Bitte geben Sie einen Namen an', 'rrze-tos');
         }
         if (empty($email)) {
-            $this->error['error_email'] = __('Email field should not be empty.', 'rrze-tos');
+            $this->error['error_email'] = __('Die Feld der E-Mail-Adresse muss ausgefüllt sein und eine korrekt geschriebene E-Mailadresse enthalten.', 'rrze-tos');
         } elseif (! is_email($email)) {
-            $this->error['error_email'] = __('Email Address Invalid.', 'rrze-tos');
+            $this->error['error_email'] = __('Die angegebene E-Mailadresse ist nicht korrekt.', 'rrze-tos');
         }
         if (empty($message)) {
-            $this->error['error_message'] = __('Message field should not be empty.', 'rrze-tos');
+            $this->error['error_message'] = __('Bitte geben Sie einen Text an.', 'rrze-tos');
         }
         if (empty($result)) {
-            $this->error['error_captcha'] = __('Result field should not be empty.', 'rrze-tos');
+            $this->error['error_captcha'] = __('Bitte geben Sie eine Zahl als Lösung ein.', 'rrze-tos');
         } elseif ($result !== $solution) {
-            $this->error['error_captcha'] = __('Human verification incorrect.', 'rrze-tos');
+            $this->error['error_captcha'] = __('Die eingegebene Zahl ist falsch.', 'rrze-tos');
         }
     }
 
@@ -166,8 +170,7 @@ class ContactForm
         return $this->error;
     }
 
-    protected function messageResponse($type, $message)
-    {
+    protected function messageResponse($type, $message) {
         global $form_error;
         if ('success' === $type) {
             echo '<div class="alert alert-success">' . esc_html($message) . '</div>';
@@ -175,7 +178,7 @@ class ContactForm
             if ($_POST && $form_error instanceof \WP_Error && is_wp_error($message)) {
                 foreach ($form_error->get_error_messages() as $error) {
                     echo '<div class="alert alert-warning" role="alert">';
-                    echo '<strong>ERROR</strong>:';
+                    echo '<strong>'.__('Fehler','rrze-tos').'</strong>:';
                     echo esc_html($error) . '<br/>';
                     echo '</div>';
                 }
@@ -196,16 +199,16 @@ class ContactForm
     protected function generateCaptcha()
     {
         $numbers = [
-            __('zero', 'rrze-tos'),
-            __('one', 'rrze-tos'),
-            __('two', 'rrze-tos'),
-            __('three', 'rrze-tos'),
-            __('four', 'rrze-tos'),
-            __('five', 'rrze-tos'),
-            __('six', 'rrze-tos'),
-            __('seven', 'rrze-tos'),
-            __('eight', 'rrze-tos'),
-            __('nine', 'rrze-tos')
+            __('Null', 'rrze-tos'),
+            __('Eins', 'rrze-tos'),
+            __('Zwei', 'rrze-tos'),
+            __('Drei', 'rrze-tos'),
+            __('Vier', 'rrze-tos'),
+            __('Fünf', 'rrze-tos'),
+            __('Sechs', 'rrze-tos'),
+            __('Sieben', 'rrze-tos'),
+            __('Acht', 'rrze-tos'),
+            __('Neun', 'rrze-tos')
         ];
 
         $num_1 = wp_rand(2, 6);
