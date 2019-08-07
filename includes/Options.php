@@ -25,7 +25,7 @@ class Options {
 	    'accessibility_feedback_mailpretext'   => "",
 	    'accessibility_region'		    => 2,
 	    'accessibility_conformity_val'	    => -1,
-	    'accessibility_feedback_subject'	=> __('Accessibility Formular Request', 'rrze-tos'),
+	    'accessibility_feedback_subject'	=> __('Feedback-Formular Barrierefreiheit', 'rrze-tos'),
 	    'display_template_supervisory'  => 1,
 	    'display_template_idnumbers'  => 1,
 	    'display_template_itsec'  => 1,
@@ -77,7 +77,7 @@ class Options {
 			    'title'	=> __('Optionale Angaben', 'rrze-tos'),
 			    'page'	=> 'rrze_tos_options',
 			    'desc'	=> __('Diese Option erlaubt das Ändern von vorgegebenen Absätzen, sowie das Hinzufügen eines weiteren selbst formulierten Absatzes.','rrze-tos'),
-			    'notice'	=> __('Hinweis: Offizielle Einrichtungen der FAU sollten alle folgenden OPtionen aktiviert haben.','rrze-tos'),
+			    'notice'	=> __('Hinweis: Offizielle Einrichtungen der FAU sollten alle folgenden Optionen aktiviert haben.','rrze-tos'),
 			),
 		
 			
@@ -115,7 +115,6 @@ class Options {
 			'imprint_webmaster_phone'=> array(
 			    'title'	=>  __('Telefon', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_webmaster',
-			    'desc'	=> __('Contact phone number', 'rrze-tos'),
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> '',
 			),
@@ -173,7 +172,6 @@ class Options {
 			'imprint_responsible_org'=> array(
 			    'title'	=>  __('Organisation', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
-			    'desc'	=> __('Department name', 'rrze-tos'),
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> 'Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)'
 			),
@@ -460,8 +458,8 @@ class Options {
 			    'type'	=> 'inputRadioCallback',
 			    'default'	=> 1,
 			    'options' => [
-				 '1' => __('Self-evaluation', 'rrze-tos'),
-				 '2' => __('Third party evaluation', 'rrze-tos')
+				 '1' => __('Selbstbewertung', 'rrze-tos'),
+				 '2' => __('Bewertung durch Dritte', 'rrze-tos')
 			    ]
 			),
 			'accessibility_creation_date'   => array(
@@ -567,11 +565,11 @@ class Options {
 			    'title'	=>  __('Subject', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_feedback',
 			    'type'	=> 'inputTextCallback',
-			    'default'	=>  __('Accessibility Formular Request', 'rrze-tos'),
+			    'default'	=>  __('Feedback-Formular Barrierefreiheit', 'rrze-tos'),
 			    'required'     => 'required'
 			),
 			'accessibility_feedback_phone'=> array(
-			    'title'	=>  __('Phone', 'rrze-tos'),
+			    'title'	=>  __('Telefon', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_feedback',
 			    'type'	=> 'inputTextCallback',
 			    'desc'	=>  __('Kontaktnummer für telefonische Hilfestellung.', 'rrze-tos'),

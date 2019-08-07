@@ -1,19 +1,18 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: RRZE TOS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-07 14:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"PO-Revision-Date: 2019-08-07 15:04+0000\n"
+"Last-Translator: Wolfgang Wiese <wolfgang.wiese@fau.de>\n"
+"Language-Team: English (United States)\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.1; wp-5.1.1"
+"X-Loco-Version: 2.3.0; wp-5.2.2"
 
 #: rrze-tos.php:62
 #, php-format
@@ -21,6 +20,8 @@ msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
 "version %2$s."
 msgstr ""
+"The server is running PHP version %1$s. The Plugin requires at least PHP "
+"version %2$s."
 
 #: rrze-tos.php:64
 #, php-format
@@ -28,54 +29,60 @@ msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
 "WordPress version %2$s."
 msgstr ""
+"The server is running WordPress version %1$s. The Plugin requires at least "
+"WordPress version %2$s."
 
 #: includes/Options.php:28 includes/Options.php:568
 msgid "Feedback-Formular Barrierefreiheit"
-msgstr ""
+msgstr "Feedback form Accessibility"
 
 #: includes/Options.php:58
 msgid "Impressum"
-msgstr ""
+msgstr "Imprint"
 
 #: includes/Options.php:63
 msgid "Umfang"
-msgstr ""
+msgstr "Scope"
 
 #: includes/Options.php:67
 msgid "Verantwortliche Person"
-msgstr ""
+msgstr "Responsible person"
 
 #: includes/Options.php:69
 msgid "Daten für die Kontaktaufnahme in rechtlicher Hinsicht."
-msgstr ""
+msgstr "Data for contacting in legal terms."
 
 #: includes/Options.php:72
 msgid "Webmaster"
-msgstr ""
+msgstr "Webmaster"
 
 #: includes/Options.php:74
 msgid "Daten zur Kontaktaufnahme hinsichtlich der Inhalte des Webauftritts."
-msgstr ""
+msgstr "Data for contacting the content of the website."
 
 #: includes/Options.php:77 includes/Options.php:268
 msgid "Optionale Angaben"
-msgstr ""
+msgstr "Optional information"
 
 #: includes/Options.php:79
 msgid ""
 "Diese Option erlaubt das Ändern von vorgegebenen Absätzen, sowie das "
 "Hinzufügen eines weiteren selbst formulierten Absatzes."
 msgstr ""
+"This option allows you to change predefined paragraphs, as well as to add "
+"another self-phrased paragraph."
 
 #: includes/Options.php:80
 msgid ""
 "Hinweis: Offizielle Einrichtungen der FAU sollten alle folgenden Optionen "
 "aktiviert haben."
 msgstr ""
+"Note: Official FAU facilities should have all of the following options "
+"enabled."
 
 #: includes/Options.php:88
 msgid "Webauftritte"
-msgstr ""
+msgstr "Websites"
 
 #: includes/Options.php:91
 msgid ""
@@ -83,58 +90,64 @@ msgid ""
 "die Adressen der weiteren Webauftritte ein. Bitte jeweils pro Zeile eine "
 "Adresse eingeben."
 msgstr ""
+"If this imprint applies to more than one website, add here the domain namens "
+"of the other websites. Please enter one domain name per line."
 
 #: includes/Options.php:100 includes/Options.php:126
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: includes/Options.php:103
 msgid "Name des Webmasters oder der zuständigen Webredaktion."
-msgstr ""
+msgstr "Name of the webmaster or the responsible web editor."
 
 #: includes/Options.php:108 includes/Options.php:134
 msgid "E-Mail"
-msgstr ""
+msgstr "EMail"
 
 #: includes/Options.php:116 includes/Options.php:160 includes/Options.php:572
 msgid "Telefon"
-msgstr ""
+msgstr "Phone"
 
 #: includes/Options.php:129
 msgid ""
 "Rechtlich verantwortliche Person für den Webauftritt. (In der Regel ist dies "
 "der Lehrstuhlinhaber oder Einrichtungsleiter)"
 msgstr ""
+"Legally responsible person for the website. (This is usually the chair owner "
+"or facility manager)"
 
 #: includes/Options.php:141
 msgid "Straße und Hausnummer"
-msgstr ""
+msgstr "Street and house number"
 
 #: includes/Options.php:147
 msgid "Postleitzahl"
-msgstr ""
+msgstr "Postal number"
 
 #: includes/Options.php:153
 msgid "Stadt"
-msgstr ""
+msgstr "City"
 
 #: includes/Options.php:166
 msgid "Fax number"
-msgstr ""
+msgstr "Fax number"
 
 #: includes/Options.php:173
 msgid "Organisation"
-msgstr ""
+msgstr "Organization"
 
 #: includes/Options.php:181
 msgid "Verweis auf die Universitätsleitung"
-msgstr ""
+msgstr "Reference to the university management"
 
 #: includes/Options.php:184
 msgid ""
 "Offizieller Vertreter der Universität und ihrer Einrichtungen nach Außen ist "
 "der Präsident. Dazu wird hiermit ein entsprechenden Absatz angezeigt."
 msgstr ""
+"Official representative of the university and its outward institutions is "
+"the president. For this purpose, a corresponding paragraph is displayed."
 
 #: includes/Options.php:187 includes/Options.php:198 includes/Options.php:209
 #: includes/Options.php:220 includes/Options.php:230 includes/Options.php:282
@@ -142,7 +155,7 @@ msgstr ""
 #: includes/Options.php:327 includes/Options.php:338 includes/Options.php:349
 #: includes/Options.php:363 includes/Options.php:382
 msgid "Ja"
-msgstr ""
+msgstr "Yes"
 
 #: includes/Options.php:188 includes/Options.php:199 includes/Options.php:210
 #: includes/Options.php:221 includes/Options.php:231 includes/Options.php:283
@@ -150,63 +163,66 @@ msgstr ""
 #: includes/Options.php:328 includes/Options.php:339 includes/Options.php:350
 #: includes/Options.php:364 includes/Options.php:383
 msgid "Nein"
-msgstr ""
+msgstr "No"
 
 #: includes/Options.php:192
 msgid "Aufsichtsbehörde"
-msgstr ""
+msgstr "Supervisory authority"
 
 #: includes/Options.php:195
 msgid "Zeigt die Aufsichtsbehörde der FAU an."
-msgstr ""
+msgstr "Indicates the supervisory authority of the FAU."
 
 #: includes/Options.php:203
 msgid "Identifikationsnummern"
-msgstr ""
+msgstr "Identification numbers"
 
 #: includes/Options.php:206
 msgid ""
 "Anzeige der öffentlichen und offiziellen Identifikationsnummern der "
 "Universität"
 msgstr ""
+"Display of public and official identification numbers of the university"
 
 #: includes/Options.php:214
 msgid "IT Sicherheit"
-msgstr ""
+msgstr "IT security"
 
 #: includes/Options.php:217
 msgid "Hinweis und Kontaktangaben zur Meldung von Vorfällen zur IT Sicherheit."
-msgstr ""
+msgstr "Note and contact details for reporting IT security incidents."
 
 #: includes/Options.php:225 includes/Options.php:358
 msgid "Neuen Abschnitt hinzufügen?"
-msgstr ""
+msgstr "Add a new section?"
 
 #: includes/Options.php:235 includes/Options.php:368 includes/Options.php:387
 msgid "Inhalt"
-msgstr ""
+msgstr "Content"
 
 #: includes/Options.php:238 includes/Options.php:371
 msgid "Inhalt des neuen, zusätzlichen Abschnitts."
-msgstr ""
+msgstr "Content of the new, additional section."
 
 #: includes/Options.php:254
 msgid "Datenschutz"
-msgstr ""
+msgstr "Privacy"
 
 #: includes/Options.php:258
 msgid "FAU Dienste"
-msgstr ""
+msgstr "FAU services"
 
 #: includes/Options.php:259
 msgid ""
 "Falls einer der folgenden FAU-Dienste verwendet wird, aktivieren Sie diesen "
 "um einen entsprechenden Hinweis in der Datenschutzerklärung zu erzeugen."
 msgstr ""
+"If one of the following FAU services is used, activate it to generate a note "
+"in the privacy policy."
 
 #: includes/Options.php:263
 msgid "Externe Dienstleister"
-msgstr ""
+msgstr "External serviceprovider"
 
 #: includes/Options.php:264
 msgid ""
@@ -214,22 +230,24 @@ msgid ""
 "einzubinden, müssen diese ebenfalls in der Datenschutzerklärung aufgenommen "
 "werden."
 msgstr ""
+"If external service providers are used to include content on the website, "
+"they must also be included in the privacy policy."
 
 #: includes/Options.php:270
 msgid "Zusätzliche Angaben zur Datenschutzerklärung."
-msgstr ""
+msgstr "Additional information about the privacy policy."
 
 #: includes/Options.php:276
 msgid "Newsletter oder Mailverteiler"
-msgstr ""
+msgstr "Newsletter or mailing list"
 
 #: includes/Options.php:279
 msgid "Bieten Sie einen Newsletter oder Mailverteiler an?"
-msgstr ""
+msgstr "Do you offer a newsletter or mailing list?"
 
 #: includes/Options.php:287
 msgid "Kontaktformular"
-msgstr ""
+msgstr "Contact form"
 
 #: includes/Options.php:290
 msgid ""
@@ -237,78 +255,90 @@ msgid ""
 "Barrierefreiheitserklärung bietet ein solches an. Daher ist die Antwort in "
 "der Regel \"ja\")."
 msgstr ""
+"Do you use a contact form on this website? (The accessibility declaration "
+"offers one, so the answer is usually \"yes\")."
 
 #: includes/Options.php:298
 msgid "Registrierungs- und Anmeldeformulare"
-msgstr ""
+msgstr "Registration and Registration Forms"
 
 #: includes/Options.php:301
 msgid ""
 "Verwenden Sie Formulare für die Anmeldung zu Veranstaltungen oder anderen "
 "Funktionen, bei denen man sich Registrieren muss?"
 msgstr ""
+"Do you use forms to sign up for events or other functions that require "
+"registration?"
 
 #: includes/Options.php:310
 msgid "YouTube Embeds"
-msgstr ""
+msgstr "YouTube Embeds"
 
 #: includes/Options.php:313
 msgid ""
 "Wenn Sie YouTube Videos in der Webseite einbinden, aktivieren Sie diese "
 "Option."
-msgstr ""
+msgstr "If you include YouTube videos in the website, enable this option."
 
 #: includes/Options.php:321
 msgid "Slideshare Embeds"
-msgstr ""
+msgstr "Slideshare Embeds"
 
 #: includes/Options.php:324
 msgid ""
 "Wenn Sie Vortragsfolien auf Slideshare anbieten und in der Webseite embedden,"
 " aktivieren Sie diese Option."
 msgstr ""
+"If you offer slide slides on Slideshare and embed them in the website, "
+"enable this option."
 
 #: includes/Options.php:332
 msgid "Vimeo Embeds"
-msgstr ""
+msgstr "Vimeo Embeds"
 
 #: includes/Options.php:335
 msgid ""
 "Wenn Sie Videos vom Onlinedienst Vimeo in der Webseite einbinden, aktivieren "
 "Sie diese Option."
 msgstr ""
+"If you include videos from the online service Vimeo in the website, enable "
+"this option."
 
 #: includes/Options.php:343
 msgid "VG Wort Zählpixel"
-msgstr ""
+msgstr "VG Word counting pixels"
 
 #: includes/Options.php:346
 msgid ""
 "Für den Fall, dass auf der Webseite das Messverfahren der VG Wort eingesetzt "
 "wird, sollte diese Option aktiviert werden"
 msgstr ""
+"If the VG Wort measurement method is used on the website, this option should "
+"be activated"
 
 #: includes/Options.php:376
 msgid "Text Datenschutzbeauftragter"
-msgstr ""
+msgstr "Text Data Protection Officer"
 
 #: includes/Options.php:380
 msgid ""
 "Ersetze den Standardext mit der Einleitung und den Kontaktdaten zum "
 "Datenschutzbeauftragten durch einen eigenen Text."
 msgstr ""
+"Replace the standard text with the introduction and the contact details for "
+"the data protection officer with your own text."
 
 #: includes/Options.php:390
 msgid "Eigener Text für Einleitung und Angabe eines Datenschutzbeauftragten"
-msgstr ""
+msgstr "Own text for introduction and indication of a data protection officer"
 
 #: includes/Options.php:406
 msgid "Barrierefreiheit"
-msgstr ""
+msgstr "Accessibility"
 
 #: includes/Options.php:410
 msgid "Allgemeine Hinweise"
-msgstr ""
+msgstr "General information"
 
 #: includes/Options.php:411
 msgid ""
@@ -321,136 +351,156 @@ msgid ""
 "angeben und erläutern müssen, aus welchen Gründen welche Barrieren vorhanden "
 "sind."
 msgstr ""
+"All public sector bodies are obliged to make their websites and / or mobile "
+"applications accessible in accordance with Directive (EU) 2016/2102 of the "
+"European Parliament and of the Council, or implementation in their "
+"respective national legislation. It also includes the provision of an "
+"Accessibility Declaration of Conformity, in which all web site and app "
+"operators must publicly state the status of the website and explain the "
+"reasons for which barriers exist."
 
 #: includes/Options.php:415
 msgid "Konformitätsstatus"
-msgstr ""
+msgstr "Compliance status"
 
 #: includes/Options.php:416
 msgid ""
 "Offiziell anzugebender Status des Webauftritts, sowie dessen Inhalten "
 "hinsichtlich der Erfüllung der gesetzlichen Anforderungen."
 msgstr ""
+"Officially stated status of the website, as well as its contents regarding "
+"the fulfillment of the legal requirements."
 
 #: includes/Options.php:420
 msgid "Erklärung"
-msgstr ""
+msgstr "Statement"
 
 #: includes/Options.php:421
 msgid ""
 "Auflistung und Erläuterung der Probleme bei der Umsetzung der "
 "Barrierefreiheit."
 msgstr ""
+"List and explain the problems with the implementation of accessibility."
 
 #: includes/Options.php:425
 msgid " Feedback-Mechanismus"
-msgstr ""
+msgstr "Feedback Mechanism"
 
 #: includes/Options.php:426
 msgid ""
 "Möglichkeiten zur Kontaktaufnahme bei Problemen und Fehlern zur "
 "Barrierefreiheit."
-msgstr ""
+msgstr "Opportunities to contact for accessibility issues and errors."
 
 #: includes/Options.php:434
 msgid "Rechtsraum"
-msgstr ""
+msgstr "Legal area"
 
 #: includes/Options.php:437
 msgid ""
 "Auswahl des Rechtsraumes, zu welcher der Betreiber des Webangebots gehört."
 msgstr ""
+"Selection of the legal area to which the operator of the website belongs."
 
 #: includes/Options.php:442
 msgid "Konformitätserklärung"
-msgstr ""
+msgstr "Declaration of conformity"
 
 #: includes/Options.php:445
 msgid ""
 "Stand der Konformität gemäß der EU-Richtlinie 2102 und der lokalen "
 "Gesetzgebung."
 msgstr ""
+"State of conformity in accordance with EU Directive 2102 and local "
+"legislation."
 
 #: includes/Options.php:449
 msgid ""
 "Vollständig konform: Der Inhalt entspricht ohne Ausnahmen vollständig dem "
 "Standard für Barrierefreiheit."
 msgstr ""
+"Completely compliant: the content is fully compliant with the accessibility "
+"standard without exceptions."
 
 #: includes/Options.php:450
 msgid ""
 "Teilweise konform: Einige Teile des Inhalts entsprechen nicht vollständig "
 "dem Standard für Barrierefreiheit."
 msgstr ""
+"Partially Compliant: Some parts of the content are not fully compliant with "
+"the accessibility standard."
 
 #: includes/Options.php:451
 msgid ""
 "Nicht konform: Der Inhalt entspricht nicht dem Standard für Barrierefreiheit."
 msgstr ""
+"Non-compliant: The content does not comply with the accessibility standard."
 
 #: includes/Options.php:452
 msgid ""
 "Unbekannt: Der Inhalt wurde nicht bewertet oder die Bewertungsergebnisse "
 "sind nicht verfügbar."
-msgstr ""
+msgstr "Unknown: Content was not rated or rating results are not available."
 
 #: includes/Options.php:456
 msgid "Methode"
-msgstr ""
+msgstr "Method"
 
 #: includes/Options.php:461
 msgid "Selbstbewertung"
-msgstr ""
+msgstr "Self-Evaluation"
 
 #: includes/Options.php:462
 msgid "Bewertung durch Dritte"
-msgstr ""
+msgstr "Third party rating"
 
 #: includes/Options.php:466
 msgid "Erstellungsdatum"
-msgstr ""
+msgstr "Creation Date"
 
 #: includes/Options.php:472
 msgid "Letzte Überprüfung"
-msgstr ""
+msgstr "Last check"
 
 #: includes/Options.php:478
 msgid "Bericht"
-msgstr ""
+msgstr "Report"
 
 #: includes/Options.php:481
 msgid ""
 "Falls es einen ausführlichen Testbericht gibt, kann dieser hier verlinkt "
 "werden."
-msgstr ""
+msgstr "If there is a detailed review, this can be linked here."
 
 #: includes/Options.php:485
 msgid "Eingabehilfe zu nicht barrierefreie Inhalte"
-msgstr ""
+msgstr "Accessibility to non-accessible content"
 
 #: includes/Options.php:491
 msgid "Erklärungen manuell ausfüllen"
-msgstr ""
+msgstr "Fill out explanations manually"
 
 #: includes/Options.php:492
 msgid "Eingabehilfe nutzen und durch manuelle Eingaben ergänzen"
-msgstr ""
+msgstr "Use input help and supplement it with manual entries"
 
 #: includes/Options.php:498
 msgid "Nicht barrierefrei zugängliche Inhalte (Auswahl)"
-msgstr ""
+msgstr "Non-accessible content (selection)"
 
 #: includes/Options.php:503
 msgid ""
 "PDF-Dokumente, die vor dem 23.09.2018 erstellt wurden, konnten noch nicht "
 "auf ein barrierefreies Format umgestellt werden."
 msgstr ""
+"PDF documents created before 23.09.2018 could not yet be converted to a "
+"barrier-free format."
 
 #: includes/Options.php:504
 msgid ""
 "PDF-Dokumente, die ab dem 23.09.2018 erstellt wurden, sind noch nicht "
 "barrierefrei zugänglich."
-msgstr ""
+msgstr "PDF documents created from 23.09.2018 are not accessible yet."
 
 #: includes/Options.php:505
 msgid ""
@@ -458,34 +508,44 @@ msgid ""
 "der FAU, Ministerien, u.a.) bereitgestellt. Diese Dokumente liegen nicht in "
 "einer barrierefreien Fassung vor."
 msgstr ""
+"Some documents have been provided by third parties (for example, the "
+"Examination Office, other FAU bodies, ministries, etc.). These documents are "
+"not available in an accessible version."
 
 #: includes/Options.php:506
 msgid ""
 "Zu eingebundenen Videos stehen derzeit keine Untertitel oder Transkription "
 "zur Verfügung."
 msgstr ""
+"Embedded videos currently have no subtitles or transcription available."
 
 #: includes/Options.php:507
 msgid ""
 "Zu mittels Karten oder Kartenbildern eingebundenen Anfahrtsbeschreibungen "
 "fehlt derzeit die textuelle Beschreibung."
 msgstr ""
+"Currently there is no textual description for directions describing maps or "
+"maps."
 
 #: includes/Options.php:508
 msgid ""
 "In den Seiten enthaltene Grafiken oder Bilder sind derzeit nicht vollständig "
 "durch Textbeschreibungen ergänzt worden."
 msgstr ""
+"Graphics or images contained in the pages are currently not completely "
+"supplemented by text descriptions."
 
 #: includes/Options.php:509
 msgid "Es werden Tabellen zum Zwecke der optischen Gestaltung verwendet."
-msgstr ""
+msgstr "Tables are used for the purpose of optical design."
 
 #: includes/Options.php:510
 msgid ""
 "Bei der Verwendung von mehrsprachigen Inhalten auf einer Seite, werden die "
 "Sprachen teilweise nicht korrekt in HTML gekennzeichnet."
 msgstr ""
+"When using multilingual content on a page, sometimes the languages ​​are not "
+"correctly marked in HTML."
 
 #: includes/Options.php:514
 msgid ""
@@ -494,10 +554,14 @@ msgid ""
 "jeweils plausible Begründung ein, warum dieser Mangel vorhanden ist und "
 "welche Alternativen vorhanden sind, um dennoch an die Inhalte zu gelangen."
 msgstr ""
+"Selection of the most common deficiencies that a website can have. However, "
+"when choosing one or more of the above-mentioned deficiencies, please "
+"provide below a plausible justification why this deficiency exists and which "
+"alternatives are available in order to access the content nevertheless."
 
 #: includes/Options.php:519
 msgid "Nicht barrierefrei zugängliche Inhalte"
-msgstr ""
+msgstr "Non-accessible content"
 
 #: includes/Options.php:522
 msgid ""
@@ -505,10 +569,12 @@ msgid ""
 "des Webauftritts und der Inhalte öffentlich aufzulisten. Diese müssen hier "
 "angegeben werden."
 msgstr ""
+"The website owner is obliged to publicly list all non-accessible components "
+"of the website and its contents. These must be specified here."
 
 #: includes/Options.php:527
 msgid "Begründung"
-msgstr ""
+msgstr "Reason"
 
 #: includes/Options.php:530
 msgid ""
@@ -519,10 +585,15 @@ msgid ""
 "Prioritäten, Zeit oder Unkenntnis\". Diese Punkte dürfen daher nicht als "
 "Begründung verwendet werden. "
 msgstr ""
+"In addition to the pure list of non-accessible contents, a justification for "
+"each of the above points should also be provided as to why barrier-free "
+"accessibility could not be achieved. Please note that the legislator lists "
+"the following reasons as unjustified: \"Lack of priorities, time or "
+"ignorance\". These items should not be used as justification."
 
 #: includes/Options.php:535
 msgid "Alternative Zugangswege"
-msgstr ""
+msgstr "Alternative access"
 
 #: includes/Options.php:538
 msgid ""
@@ -531,20 +602,25 @@ msgid ""
 "die Kontaktaufnahme über das Feedback-Formular sein oder die Angabe einer "
 "Stelle, die Hilfe leistet."
 msgstr ""
+"Indicate here whether and which alternatives are available to obtain the "
+"above inaccessible content. This can be, for example, the contact via the "
+"feedback form or the indication of a body that provides help."
 
 #: includes/Options.php:544
 msgid "Ansprechpartner"
-msgstr ""
+msgstr "Contact Person"
 
 #: includes/Options.php:547
 msgid ""
 "Geben Sie hier einen Namen für den zuständigen Ansprechpartner für "
 "Beschwerden oder Hilfeanfragen über mangelnde Zugänglichkeit an."
 msgstr ""
+"Enter a name for the responsible contact person for complaints or requests "
+"for help about lack of accessibility."
 
 #: includes/Options.php:550
 msgid "EMail-Adresse"
-msgstr ""
+msgstr "EMail"
 
 #: includes/Options.php:552
 msgid ""
@@ -555,106 +631,112 @@ msgid ""
 "ob im Rahmen der Überwachung gegenüber dem Betreiber des Webauftritts (also "
 "Ihnen) Maßnahmen erforderlich sind."
 msgstr ""
+"Recipient email address for complaints or requests for help about lack of "
+"accessibility. Please note: If a request about the possibility of contact "
+"remains completely or partially unanswered within six weeks, the supervisory "
+"authority will check at the request of the user whether measures are "
+"required in the context of the monitoring of the operator of the website (ie "
+"you)."
 
 #: includes/Options.php:558
 msgid "E-Mail CC"
-msgstr ""
+msgstr "EMail CC"
 
 #: includes/Options.php:560
 msgid "Optionale zusätzliche Mailadresse."
-msgstr ""
+msgstr "Optional additional email address."
 
 #: includes/Options.php:565
 msgid "Subject"
-msgstr ""
+msgstr "Subject"
 
 #: includes/Options.php:575
 msgid "Kontaktnummer für telefonische Hilfestellung."
-msgstr ""
+msgstr "Contact number for telephone assistance."
 
 #: includes/Options.php:578
 msgid "Adresse"
-msgstr ""
+msgstr "Address"
 
 #: includes/Options.php:581
 msgid "Postadresse als Alternative zur E-Mail."
-msgstr ""
+msgstr "Postal address as an alternative to e-mail."
 
 #: includes/Options.php:596
 msgid "Bundesebene Deutschland (Öffentlicher Dienst)"
-msgstr ""
+msgstr "Federal level Germany (Civil Service)"
 
 #: includes/Options.php:605
 msgid "Baden-Württemberg"
-msgstr ""
+msgstr "Baden-Württemberg"
 
 #: includes/Options.php:614
 msgid "Bayern"
-msgstr ""
+msgstr "Bayern"
 
 #: includes/Options.php:628
 msgid "Berlin"
-msgstr ""
+msgstr "Berlin"
 
 #: includes/Options.php:639
 msgid "Brandenburg"
-msgstr ""
+msgstr "Brandenburg"
 
 #: includes/Options.php:648
 msgid "Bremen"
-msgstr ""
+msgstr "Bremen"
 
 #: includes/Options.php:657
 msgid "Hamburg"
-msgstr ""
+msgstr "Hamburg"
 
 #: includes/Options.php:666
 msgid "Hessen"
-msgstr ""
+msgstr "Hessen"
 
 #: includes/Options.php:675
 msgid "Mecklenburg-Vorpommern"
-msgstr ""
+msgstr "Mecklenburg-Vorpommern"
 
 #: includes/Options.php:684
 msgid "Niedersachsen"
-msgstr ""
+msgstr "Niedersachsen"
 
 #: includes/Options.php:693
 msgid "Nordrhein-Westfalen"
-msgstr ""
+msgstr "Nordrhein-Westfalen"
 
 #: includes/Options.php:702
 msgid "Rheinland-Pfalz"
-msgstr ""
+msgstr "Rheinland-Pfalz"
 
 #: includes/Options.php:711
 msgid "Saarland"
-msgstr ""
+msgstr "Saarland"
 
 #: includes/Options.php:720
 msgid "Sachsen"
-msgstr ""
+msgstr "Sachsen"
 
 #: includes/Options.php:729
 msgid "Sachsen-Anhalt"
-msgstr ""
+msgstr "Sachsen-Anhalt"
 
 #: includes/Options.php:738
 msgid "Schleswig-Holstein"
-msgstr ""
+msgstr "Schleswig-Holstein"
 
 #: includes/Options.php:747
 msgid "Thüringen"
-msgstr ""
+msgstr "Thüringen"
 
 #: includes/Settings.php:51
 msgid "Einstellungen"
-msgstr ""
+msgstr "Settings"
 
 #: includes/Settings.php:70 includes/Settings.php:71
 msgid "Rechtliche Pflichtangaben"
-msgstr ""
+msgstr "Legal mandatory information"
 
 #: includes/Settings.php:108 includes/Settings.php:117
 #: includes/Settings.php:124 includes/Settings.php:131
@@ -662,97 +744,99 @@ msgstr ""
 #: includes/Settings.php:152 includes/Settings.php:160
 #: includes/Settings.php:167 includes/Settings.php:174
 msgid "wurde aktualisiert"
-msgstr ""
+msgstr "was updated"
 
 #: includes/Settings.php:204
 msgid "Rechtliche Pflichtangaben bearbeiten"
-msgstr ""
+msgstr "Edit legal required information"
 
 #: includes/Settings.php:220
 msgid "Speichern"
-msgstr ""
+msgstr "Save changes"
 
 #: includes/Settings.php:261
 msgid "Die Informationen dieser Seite werden unter folgender Adresse abrufbar:"
-msgstr ""
+msgstr "The information on this page is available at the following address:"
 
 #: includes/ContactForm.php:72
 msgid "Die Nachricht konnte nicht gesendet werden."
-msgstr ""
+msgstr "The message could not be sent."
 
 #: includes/ContactForm.php:79
 msgid "Danke für Ihre Nachricht. SIe wurde erfolgreich gesendet."
-msgstr ""
+msgstr "Thank you for your message. It was sent successfully."
 
 #: includes/ContactForm.php:146
 msgid "Bitte geben Sie einen Namen an"
-msgstr ""
+msgstr "Please enter a name"
 
 #: includes/ContactForm.php:149
 msgid ""
 "Die Feld der E-Mail-Adresse muss ausgefüllt sein und eine korrekt "
 "geschriebene E-Mailadresse enthalten."
 msgstr ""
+"The field of the e-mail address must be filled in and contain a correctly "
+"written e-mail address."
 
 #: includes/ContactForm.php:151
 msgid "Die angegebene E-Mailadresse ist nicht korrekt."
-msgstr ""
+msgstr "The specified e-mail address is incorrect."
 
 #: includes/ContactForm.php:154
 msgid "Bitte geben Sie einen Text an."
-msgstr ""
+msgstr "Please enter a text."
 
 #: includes/ContactForm.php:157
 msgid "Bitte geben Sie eine Zahl als Lösung ein."
-msgstr ""
+msgstr "Please enter a number as a solution."
 
 #: includes/ContactForm.php:159
 msgid "Die eingegebene Zahl ist falsch."
-msgstr ""
+msgstr "The entered number is wrong."
 
 #: includes/ContactForm.php:181
 msgid "Fehler"
-msgstr ""
+msgstr "Error"
 
 #: includes/ContactForm.php:202
 msgid "Null"
-msgstr ""
+msgstr "zero"
 
 #: includes/ContactForm.php:203
 msgid "Eins"
-msgstr ""
+msgstr "one"
 
 #: includes/ContactForm.php:204
 msgid "Zwei"
-msgstr ""
+msgstr "two"
 
 #: includes/ContactForm.php:205
 msgid "Drei"
-msgstr ""
+msgstr "three"
 
 #: includes/ContactForm.php:206
 msgid "Vier"
-msgstr ""
+msgstr "four"
 
 #: includes/ContactForm.php:207
 msgid "Fünf"
-msgstr ""
+msgstr "five"
 
 #: includes/ContactForm.php:208
 msgid "Sechs"
-msgstr ""
+msgstr "six"
 
 #: includes/ContactForm.php:209
 msgid "Sieben"
-msgstr ""
+msgstr "seven"
 
 #: includes/ContactForm.php:210
 msgid "Acht"
-msgstr ""
+msgstr "eight"
 
 #: includes/ContactForm.php:211
 msgid "Neun"
-msgstr ""
+msgstr "nine"
 
 #. Name of the plugin
 msgid "RRZE TOS"
@@ -762,10 +846,11 @@ msgstr ""
 msgid ""
 "Generator für die Erstellung der rechtlichen Pflichtangaben des Webauftritts"
 msgstr ""
+"Generator for the creation of legal mandatory information of the website"
 
 #. URI of the plugin
 msgid "https://github.com/RRZE-Webteam/rrze-tos"
-msgstr ""
+msgstr "https://github.com/RRZE-Webteam/rrze-tos"
 
 #. Author of the plugin
 msgid "RRZE Webteam"
@@ -773,4 +858,4 @@ msgstr ""
 
 #. Author URI of the plugin
 msgid "https://blogs.fau.de/webworking/"
-msgstr ""
+msgstr "https://blogs.fau.de/webworking/"

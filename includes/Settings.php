@@ -48,7 +48,7 @@ class Settings {
                 sprintf(
                     '<a href="%1$s">%2$s</a>',
                     admin_url('options-general.php?page=rrze-tos'),
-                    __('Settings', 'rrze-tos')
+                    __('Einstellungen', 'rrze-tos')
                 )
             ]
         );
@@ -77,21 +77,9 @@ class Settings {
             ]
         );
 
-     //   add_action(
-     //       'load-' . $this->settingsScreenId,
-     //       [
-     //           $this,
-     //           'adminHelpMenu'
-    //       ]
-    //    );
+
     }
 
-    /*-----------------------------------------------------------------------------------*/
-    /* Define Help Tab for settings page
-    /*-----------------------------------------------------------------------------------*/
-    public function adminHelpMenu() {
-        new HelpMenu($this->settingsScreenId);
-    }
     /*-----------------------------------------------------------------------------------*/
     /* Prüfung der Eingabewerte
     /*-----------------------------------------------------------------------------------*/
@@ -117,7 +105,7 @@ class Settings {
 			$val = implode(PHP_EOL, array_map('sanitize_text_field', explode(PHP_EOL, wp_unslash($_v))));
 			if ($oldval !== $val) {
 			    $this->options->$name = $val;
-			    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+			    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 			}
 			 
 		    } else {
@@ -126,42 +114,42 @@ class Settings {
 				$val = intval($_v);
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;
 			    case 'inputSelectCallback':
 				$val = wp_kses_post(wp_unslash($_v));
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;    
 			    case 'inputTextCallback':
 				$val = sanitize_text_field(wp_unslash($_v));
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;    
 			    case 'inputURLCallback':
 				$val = esc_url(wp_unslash($_v));
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;    	
 			    case 'inputEMailCallback':
 				$val = sanitize_email(wp_unslash($_v));
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;    		
 			    case 'inputDateCallback':
 				$val =  date('Y-m-d', strtotime($_v));
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;        
 			    case 'inputTextareaCallback':
@@ -169,21 +157,21 @@ class Settings {
 				$val =  wp_kses_post(wp_unslash($_v));
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;    
 			    case 'inputCheckboxListCallback':
 				$val =  (array) $_v;
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 				break;        	
 			    default:
 				 $val =  sanitize_text_field(wp_unslash($_v));
 				if ($oldval !== $val) {
 				    $this->options->$name = $val;
-				    $message .= "<li>\"".$title."\" ".__("was updated", "rrze-tos")."</li>";
+				    $message .= "<li>\"".$title."\" ".__("wurde aktualisiert", "rrze-tos")."</li>";
 				}
 			}
 		    }
@@ -229,7 +217,7 @@ class Settings {
                 <?php settings_fields('rrze_tos_options'); ?>
                 <?php do_settings_sections('rrze_tos_options'); ?>
                 <p class="submit">
-                    <?php submit_button(esc_html__('Save Changes', 'rrze-tos'), 'primary', 'rrze-tos-submit', false); ?>
+                    <?php submit_button(esc_html__('Speichern', 'rrze-tos'), 'primary', 'rrze-tos-submit', false); ?>
                 </p>
             </form>    
         </div>
@@ -787,8 +775,7 @@ class Settings {
         <?php if (isset($name)) {
             ?>
             <select
-                name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>"
-                title="<?php __('Please select one', 'rrze-tos'); ?>">
+                name="<?php printf('%1$s[%2$s]', esc_attr($this->optionName), esc_attr($postname)); ?>">
                 <?php foreach ($limit as $_k => $_v) : ?>
                     <option value="<?php echo esc_attr($_k); ?>" <?php selected($oldval, $_k); ?>><?php echo esc_attr($_v); ?></option>
                 <?php endforeach; ?>

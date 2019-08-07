@@ -1,13 +1,13 @@
 {{message_has_been_sent_successfully}}
-<div class="alert alert-success" role="alert">
+<div class="alert alert-success">
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     {{=message_has_been_sent_successfully}}
 </div>
 {{/message_has_been_sent_successfully}}
 {{error_message_could_not_be_sent}}
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-danger" >
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <span class="sr-only">Fehler:</span>
+    <span class="sr-only">Error:</span>
     {{=error_message_could_not_be_sent}}
 </div>
 {{/error_message_could_not_be_sent}}
@@ -49,7 +49,7 @@
     </div>
     <div class="form-group">
         <label for="message_human" style="display: inherit;">{{=captcha_num_1}} times {{=captcha_num_2}} equals:</label>
-        <input type="text" class="form-control form-control-success" name="message_human" value="" id="message_human" placeholder="Enter the result">
+        <input type="text" class="form-control form-control-success" name="message_human" value="" id="message_human" placeholder="Enter the result as number">
         {{error_captcha}}
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -59,6 +59,6 @@
         {{/error_captcha}}
     </div>
     <div class=wcag-submit>
-        <input type="submit" class="btn">
+        <input type="submit" value="Send EMail">
     </div>
 </form>
