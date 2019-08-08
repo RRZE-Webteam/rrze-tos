@@ -51,8 +51,10 @@ class Endpoint {
 
         $wp_query->is_home = false;
         $stylesheetGroup = Theme::getCurrentStylesheetGroup();
-
-        wp_enqueue_style('rrze-tos-' . $stylesheetGroup);
+	if ($stylesheetGroup !== 'fau') {
+		// No CSS for FAU Themes, only template
+		wp_enqueue_style('rrze-tos-' . $stylesheetGroup);
+	}
 
         $styleFile = sprintf(
             '%1$stemplates/themes/%2$s.php',
@@ -84,7 +86,6 @@ class Endpoint {
         $imprintWebsites = explode(PHP_EOL, $this->options->imprint_websites);
         $this->options->imprint_websites_extra = count($imprintWebsites) > 1 ? 1 : 0;
         $this->options->websites = implode(', ', $imprintWebsites);
-        $this->options->webmaster_more = do_shortcode($this->options->imprint_section_extra_text);	
 	
 	/* 
 	 * Dynamic variables for endpoint: Privacy

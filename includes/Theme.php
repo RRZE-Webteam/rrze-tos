@@ -4,16 +4,12 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-class Theme
-{
+class Theme {
     /**
-     * [allowedStylesheets description]
-     * @return array [description]
+     * List of known Themes
      */
-    protected static function allowedStylesheets()
-    {
+    protected static function allowedStylesheets() {
         return [
-
             'fau' => [
                 'FAU-Einrichtungen',
                 'FAU-Einrichtungen-BETA',

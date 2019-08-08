@@ -27,7 +27,7 @@
     </div>
     <div class="form-group">
         <label class="form-control-label" style="display: inherit;" for="message_email">E-Mail</label>
-        <input type="text" class="form-control" name="message_email" value="{{=email}}" placeholder="Geben Sie eine E-Mail-Adresse ein">
+        <input type="email" class="form-control" name="message_email" value="{{=email}}" placeholder="Geben Sie eine E-Mail-Adresse ein">
         {{error_email}}
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -48,8 +48,9 @@
         {{/error_message}}
     </div>
     <div class="form-group">
-        <label for="message_human" style="display: inherit;">{{=captcha_num_1}} mal {{=captcha_num_2}} ist gleich:</label>
-        <input type="text" class="form-control form-control-success" name="message_human" value="" id="message_human" placeholder="Geben Sie das Ergebnis in Zahlenform ein">
+        <label for="message_human" style="display: inherit;">{{=captcha_num_1}} mal {{=captcha_num_2}} ist gleich? (<em>Geben Sie das Ergebnis als Zahl ein</em>)</label>
+        <input type="number" class="form-control form-control-success" name="message_human" value="" id="message_human">
+	
         {{error_captcha}}
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
