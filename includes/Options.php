@@ -811,7 +811,7 @@ class Options {
     /*-----------------------------------------------------------------------------------*/
     /* Get Tab Slugs
     /*-----------------------------------------------------------------------------------*/
-    public function getSettingsPageSlug() {
+    public static function getSettingsPageSlug() {
 	$tablist = array();
 	$defaults = self::defaultAdminSettings();
 	foreach ($defaults as $tab => $data) {

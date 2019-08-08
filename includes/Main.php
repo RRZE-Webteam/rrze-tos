@@ -20,14 +20,15 @@ class Main {
     * register avaible scripts and css
     */
     public function registerScripts()     {
+	/*
+	 * Not needed anymore
         wp_register_style(
             'rrze-tos-default',
             plugins_url('assets/css/default.css', plugin_basename(RRZE_PLUGIN_FILE))
         );
-        wp_register_style(
-            'rrze-tos-fau',
-            plugins_url('assets/css/fau.css', plugin_basename(RRZE_PLUGIN_FILE))
-        );
+	*/
+	
+	
         wp_register_style(
             'rrze-tos-rrze',
             plugins_url('assets/css/rrze.css', plugin_basename(RRZE_PLUGIN_FILE))

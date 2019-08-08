@@ -560,13 +560,13 @@ class Settings {
             $required = esc_attr($args['required']);
         }
 	 if (array_key_exists('min', $args)) {
-            $required = esc_attr($args['min']);
+            $min = esc_attr($args['min']);
         }
 	 if (array_key_exists('max', $args)) {
-            $required = esc_attr($args['max']);
+            $max = esc_attr($args['max']);
         }
 	 if (array_key_exists('step', $args)) {
-            $required = esc_attr($args['step']);
+            $step = esc_attr($args['step']);
         }
         
 	if (array_key_exists('fieldset', $args)) {
