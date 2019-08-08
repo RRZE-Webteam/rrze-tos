@@ -14,32 +14,6 @@
   width: 400px;
 }
 
-.wcag-pass {
-  &:before {
-    font-family: FontAwesome;
-    font-size: 1em;
-    content: "\f00c";
-    color: green;
-    padding-right: 13px;
-  }
-  font-size: 1em;
-  color: green;
-  padding: 10px;
-}
-
-.wcag-fail {
-  &:before {
-    font-family: FontAwesome;
-    font-size: 1em;
-    content: "\f00d";
-    color: red;
-    padding-right: 13px;
-  }
-  font-size: 1em;
-  color: red;
-  padding: 10px;
-}
-
 .wcag-submit {
     padding: 13px 0;
 }

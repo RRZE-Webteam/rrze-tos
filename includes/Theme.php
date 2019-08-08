@@ -21,6 +21,7 @@ class Theme {
             ],
             'rrze' => [
                 'rrze-2015',
+                'rrze-2019',
             ],
             'events' => [
                 'FAU-Events',
