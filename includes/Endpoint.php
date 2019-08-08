@@ -90,16 +90,18 @@ class Endpoint {
 	/* 
 	 * Dynamic variables for endpoint: Privacy
 	 */
-	$this->options->privacy_new_section_text = do_shortcode($this->options->privacy_section_extra_text);
-	if ($this->options->display_template_youtube ||
-	    $this->options->display_template_slideshare ||
-	    $this->options->display_template_vgwort ||
-	    $this->options->display_template_vimeo) {
+	if (isset($this->options->privacy_section_extra_text)) {
+	    $this->options->privacy_new_section_text = do_shortcode($this->options->privacy_section_extra_text);
+	}
+	if ((isset($this->options->display_template_youtube) && $this->options->display_template_youtube==1) ||
+	    (isset($this->options->display_template_slideshare) && $this->options->display_template_slideshare==1) ||
+	    (isset($this->options->display_template_vgwort) && $this->options->display_template_vgwort==1) ||
+	    (isset($this->options->display_template_vimeo) && $this->options->display_template_vimeo==1)) {
 	 $this->options->privacy_section_external = 1;
 	}
 	
 	$this->options->privacy_defaultteasertext = 1;
-	if (($this->options->privacy_section_owndsb) && (!empty($this->options->privacy_section_owndsb_text))) {
+	if (isset($this->options->privacy_section_owndsb) && $this->options->privacy_section_owndsb == 1 && (!empty($this->options->privacy_section_owndsb_text))) {
 	    $this->options->privacy_defaultteasertext = 0;
 	} 
 	
@@ -164,19 +166,29 @@ class Endpoint {
 	
 	$this->options->accessibility_conformity_alertshortcodestyle = $style;
 	$this->options->accessibility_conformity_text = $settings->accessibility['settings']['fields']['accessibility_conformity_val']['options'][$this->options->accessibility_conformity_val];
-	$this->options->accessibility_methodik_text = $settings->accessibility['settings']['fields']['accessibility_methodology']['options'][$this->options->accessibility_methodology];
-
-        $this->options->accessibility_creation_date_val = date_i18n(get_option('date_format'), strtotime($this->options->accessibility_creation_date));
-        $this->options->accessibility_last_review_date_val = date_i18n(get_option('date_format'), strtotime($this->options->accessibility_last_review_date));
-
-	if ($this->options->accessibility_non_accessible_content) {
+	if (isset($this->options->accessibility_methodology)) {
+	    $this->options->accessibility_methodik_text = $settings->accessibility['settings']['fields']['accessibility_methodology']['options'][$this->options->accessibility_methodology];
+	}
+	if (isset($this->options->accessibility_creation_date)) {
+	    $this->options->accessibility_creation_date_val = date_i18n(get_option('date_format'), strtotime($this->options->accessibility_creation_date));
+	}
+	if (isset($this->options->accessibility_last_review_date)) {
+	    $this->options->accessibility_last_review_date_val = date_i18n(get_option('date_format'), strtotime($this->options->accessibility_last_review_date));
+	}
+	if (isset($this->options->accessibility_non_accessible_content)) {
 	    $this->options->accessibility_non_accessible_info = 1;
 	}
-	$this->options->accessibility_non_accessible_content_reasons = wpautop($this->options->accessibility_non_accessible_content_reasons);
-	$this->options->accessibility_non_accessible_content_alternatives = wpautop($this->options->accessibility_non_accessible_content_alternatives);
-	$this->options->accessibility_non_accessible_content = wpautop($this->options->accessibility_non_accessible_content);
+	if (isset($this->options->accessibility_non_accessible_content_reasons)) {
+	    $this->options->accessibility_non_accessible_content_reasons = wpautop($this->options->accessibility_non_accessible_content_reasons);
+	}
+	if (isset($this->options->accessibility_non_accessible_content_alternatives)) {
+	    $this->options->accessibility_non_accessible_content_alternatives = wpautop($this->options->accessibility_non_accessible_content_alternatives);
+	}
+	if (isset($this->options->accessibility_non_accessible_content)) {
+	    $this->options->accessibility_non_accessible_content = wpautop($this->options->accessibility_non_accessible_content);
+	}
 	
-	if ($this->options->accessibility_non_accessible_content_helper==0) {
+	if (isset($this->options->accessibility_non_accessible_content_helper) && $this->options->accessibility_non_accessible_content_helper==0) {
 	    $textoptions = $settings->accessibility['settings']['fields']['accessibility_non_accessible_content_faillist']['options'];
 	    $oldval = $this->options->accessibility_non_accessible_content_faillist;
 	    $output = '';
