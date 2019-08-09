@@ -469,13 +469,13 @@ class Options {
 			    'title'	=>  __('Erstellungsdatum', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_status',
 			    'type'	=> 'inputDateCallback',
-			    'min'	=> '2019-08-01',
+			    'min'	=> '2018-01-01',
 			),
 			'accessibility_last_review_date'   => array(
 			    'title'	=>  __('Letzte Überprüfung', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_status',
 			    'type'	=> 'inputDateCallback',
-			    'min'	=> '2019-08-01',
+			    'min'	=> '2018-01-01',
 			),
 			'accessibility_testurl'   => array(
 			    'title'	=>  __('Bericht', 'rrze-tos'),
