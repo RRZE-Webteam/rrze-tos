@@ -29,6 +29,9 @@ class Options {
 	    'display_template_supervisory'  => 1,
 	    'display_template_idnumbers'  => 1,
 	    'display_template_itsec'  => 1,
+	    'display_template_betroffenenrechte'  => 1,
+	    'display_template_vertretung'   => 1,
+	    'imprint_responsible_org'	=> get_bloginfo('name'),
 
 	    
         ];
@@ -173,7 +176,7 @@ class Options {
 			    'title'	=>  __('Organisation', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputTextCallback',
-			    'default'	=> 'Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)'
+			    'default'	=>  get_bloginfo('name'),
 			),
 			
 			
