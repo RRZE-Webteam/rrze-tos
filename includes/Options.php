@@ -33,9 +33,9 @@ class Options {
 	    'display_template_vertretung'   => 1,
 	    'imprint_responsible_org'	=> get_bloginfo('name'),
 
-	    
+
         ];
-	   
+
         return $options;
     }
 
@@ -43,16 +43,16 @@ class Options {
     /* Avaible admin settings that will allow to define and overwrite options
     /*-----------------------------------------------------------------------------------*/
      protected static function defaultAdminSettings() {
-	 
+
          $adminMail = is_multisite() ? get_site_option('admin_email') : get_option('admin_email');
 	$siteUrl = preg_replace('#^http(s)?://#', '', get_option('siteurl'));
 	$rechtsraumliste = self::getRechtsraumData();
 	foreach ($rechtsraumliste as $key => $bereich) {
 	    $rechtsraumindex[$key] = $bereich['region'];
 	}
-	
-	
-	$settings = [  
+
+
+	$settings = [
 	    'imprint'	=> array(
 		'endpoint'  => array(
 		    'de'    => 'impressum',
@@ -61,7 +61,7 @@ class Options {
 		'tabtitle' => __('Impressum', 'rrze-tos'),
 		'settings'  => array(
 		    'sections'	=> array(
-			
+
 			'rrze_tos_section_imprint_websites' => array(
 			    'title'	=> __('Umfang', 'rrze-tos'),
 			    'page'	=> 'rrze_tos_options',
@@ -82,8 +82,8 @@ class Options {
 			    'desc'	=> __('Diese Option erlaubt das Ändern von vorgegebenen Absätzen, sowie das Hinzufügen eines weiteren selbst formulierten Absatzes.','rrze-tos'),
 			    'notice'	=> __('Hinweis: Offizielle Einrichtungen der FAU sollten alle folgenden Optionen aktiviert haben.','rrze-tos'),
 			),
-		
-			
+
+
 
 		    ),
 		    'fields' => array(
@@ -96,9 +96,9 @@ class Options {
 			    'required'	=> 'required',
 			    'rows'        => 4,
 			),
-			
-			
-			
+
+
+
 			'imprint_webmaster_name'=> array(
 			    'title'	=>  __('Name', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_webmaster',
@@ -114,17 +114,17 @@ class Options {
 			    'default'	=> '',
 			    'required'	=> 1,
 			),
-			
+
 			'imprint_webmaster_phone'=> array(
 			    'title'	=>  __('Telefon', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_webmaster',
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> '',
 			),
-			
-			
-			
-			
+
+
+
+
 			'imprint_responsible_name'=> array(
 			    'title'	=>  __('Name', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
@@ -157,7 +157,7 @@ class Options {
 			    'section'	=> 'rrze_tos_section_imprint_responsible',
 			    'type'	=> 'inputTextCallback',
 			    'default'	=> 'Erlangen',
-			    
+
 			),
 			'imprint_responsible_phone'=> array(
 			    'title'	=>  __('Telefon', 'rrze-tos'),
@@ -178,8 +178,8 @@ class Options {
 			    'type'	=> 'inputTextCallback',
 			    'default'	=>  get_bloginfo('name'),
 			),
-			
-			
+
+
 			'display_template_vertretung'   => array(
 			    'title'	=>  __('Verweis auf die Universitätsleitung', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_optional',
@@ -242,8 +242,8 @@ class Options {
 			    'default'	=> '',
 			     'height' => 200,
 			)
-			
-			
+
+
 		    ),
 
 		)
@@ -308,7 +308,7 @@ class Options {
 				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
-			
+
 			'display_template_youtube'   => array(
 			    'title'	=>  __('YouTube Embeds', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_externalservices',
@@ -353,10 +353,10 @@ class Options {
 				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
-			
-			
-			
-			
+
+
+
+
 			'privacy_section_extra'   => array(
 			    'title'	=>  __('Neuen Abschnitt hinzufügen?', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_privacy_optional',
@@ -394,8 +394,8 @@ class Options {
 			    'default'	=> '',
 			     'height' => 200,
 			)
-			
-			
+
+
 		    ),
 
 		)
@@ -429,7 +429,7 @@ class Options {
 			    'desc'  => __('Möglichkeiten zur Kontaktaufnahme bei Problemen und Fehlern zur Barrierefreiheit.', 'rrze-tos'),
 			    'page'  => 'rrze_tos_options',
 			),
-			
+
 
 		    ),
 		    'fields' => array(
@@ -483,7 +483,7 @@ class Options {
 			    'type'	=> 'inputURLCallback',
 			    'desc'	=> __('Falls es einen ausführlichen Testbericht gibt, kann dieser hier verlinkt werden.', 'rrze-tos'),
 			),
-			
+
 			'accessibility_non_accessible_content_helper'   => array(
 			    'title'	=>  __('Eingabehilfe zu nicht barrierefreie Inhalte', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
@@ -495,8 +495,8 @@ class Options {
 				    '0' => __('Eingabehilfe nutzen und durch manuelle Eingaben ergänzen', 'rrze-tos')
 				]
 			),
-			
-			
+
+
 			'accessibility_non_accessible_content_faillist'   => array(
 			    'title'	=>  __('Nicht barrierefrei zugängliche Inhalte (Auswahl)', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
@@ -516,8 +516,8 @@ class Options {
 				],
 			    'desc'  => __('Auswahl der gängsten Mängel, die eine Webseite aufweisen kann. Bitte geben Sie bei AUswahl einer oder mehrerer oben genannter Mängel dennoch unten eine jeweils plausible Begründung ein, warum dieser Mangel vorhanden ist und welche Alternativen vorhanden sind, um dennoch an die Inhalte zu gelangen.', 'rrze-tos'),
 			),
-			
-			
+
+
 			'accessibility_non_accessible_content'   => array(
 			    'title'	=>  __('Nicht barrierefrei zugängliche Inhalte', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_accessibility_reasonfield',
@@ -542,7 +542,7 @@ class Options {
 			    'default'	=> '',
 			    'height' => 100,
 			),
-			
+
 			'accessibility_feedback_contactname'=> array(
 			    'title'	=>  __('Ansprechpartner', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_feedback',
@@ -583,13 +583,13 @@ class Options {
 			    'type'	=> 'inputTextareaCallback',
 			    'desc'	=>  __('Postadresse als Alternative zur E-Mail.', 'rrze-tos'),
 			),
-			
-			
+
+
 		    )
 		)
 	    )
 	];
-	
+
 	return $settings;
     }
 
@@ -756,9 +756,9 @@ class Options {
 	    'controlling_address'	=> '',
 	),
 
-	    
+
         ];
-	   
+
         return $rechtsraum;
     }
     /*-----------------------------------------------------------------------------------*/
@@ -766,16 +766,18 @@ class Options {
     /*-----------------------------------------------------------------------------------*/
     public static function getEndPoints() {
 	$settings = self::defaultAdminSettings();
-	$endpoint = array();
+	$endpoints = array();
+    $endpointsMap = array();
 	$langCode = Locale::getLangCode();
 	foreach ($settings as $field => $data) {
 	    if (isset($data['endpoint'][$langCode])) {
-		$endpoint[$field] = $data['endpoint'][$langCode];
+		$endpoints[$field] = $data['endpoint'][$langCode];
 	    } else {
-		$endpoint[$field] = $data['endpoint']['de'];
+		$endpoints[$field] = $data['endpoint']['de'];
 	    }
+        $endpointsMap[$field] = $data['endpoint'];
 	}
-	return $endpoint;
+	return apply_filters('rrze_tos_endpoints', $endpoints, $endpointsMap);
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -794,7 +796,7 @@ class Options {
     public static function getRechtsraumData() {
         $rechtsraum = self::defaultRechtsraumData();
 	return (object) $rechtsraum;
-	
+
     }
 
     /*-----------------------------------------------------------------------------------*/
@@ -804,7 +806,7 @@ class Options {
       $defaults = self::defaultAdminSettings();
          return (object) $defaults;
     }
-    
+
     /*-----------------------------------------------------------------------------------*/
     /* getOptionName
     /*-----------------------------------------------------------------------------------*/
