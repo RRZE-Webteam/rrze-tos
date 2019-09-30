@@ -1,12 +1,10 @@
 {{message_has_been_sent_successfully}}
 <div class="alert alert-success">
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     {{=message_has_been_sent_successfully}}
 </div>
 {{/message_has_been_sent_successfully}}
 {{error_message_could_not_be_sent}}
 <div class="alert alert-danger" >
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
     <span class="sr-only">Error:</span>
     {{=error_message_could_not_be_sent}}
 </div>
@@ -15,44 +13,40 @@
     {{=wp_nonce}}
     <input type="hidden" value="{{=captcha_result}}" name="message_solution">
     <div class="form-group">
-        <label class="form-control-label" style="display: inherit;" for="message_name">Name</label>
-        <input type="text" class="form-control form-control-success" name="message_name" value="{{=name}}" placeholder="Enter a name">
+        <label class="form-control-label" for="message_name">Name</label>
+        <input type="text" class="form-control form-control-success" id="message_name" name="message_name" value="{{=name}}" placeholder="Enter a name">
         {{error_name}}
         <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
             {{=error_name}}
         </div>
         {{/error_name}}
     </div>
     <div class="form-group">
-        <label class="form-control-label" style="display: inherit;" for="message_email">E-Mail</label>
-        <input type="text" class="form-control" name="message_email" value="{{=email}}" placeholder="Enter an email address">
+        <label class="form-control-label" for="message_email">E-Mail</label>
+        <input type="text" class="form-control" id="message_email" name="message_email" value="{{=email}}" placeholder="Enter an email address">
         {{error_email}}
         <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
             {{=error_email}}
         </div>
         {{/error_email}}
     </div>
     <div class="form-group">
-        <label style="display: inherit;" for="message_name">Message</label>
-        <textarea type="text" class="form-control" name="message_feedback" id="message_feedback" style="margin-bottom: 10px;">{{=message}}</textarea>
+        <label for="message_name">Message</label>
+        <textarea class="form-control" id="message_feedback" name="message_feedback">{{=message}}</textarea>
         {{error_message}}
         <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
             {{=error_message}}
         </div>
         {{/error_message}}
     </div>
     <div class="form-group">
-        <label for="message_human" style="display: inherit;">{{=captcha_num_1}} times {{=captcha_num_2}} equals:</label>
-        <input type="text" class="form-control form-control-success" name="message_human" value="" id="message_human" placeholder="Enter the result as number">
+        <label for="message_human">{{=captcha_num_1}} times {{=captcha_num_2}} equals? (<em>Enter the result as number</em>)</label>
+        <input type="number" class="form-control form-control-success" id="message_human" name="message_human" value="0">
         {{error_captcha}}
         <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
             {{=error_captcha}}
         </div>
