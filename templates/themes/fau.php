@@ -53,7 +53,7 @@ if ( is_plugin_active( 'rrze-elements/rrze-elements.php' ) ) {
 		</div>
 		<div class="row" aria-hidden="true" role="presentation">
 			<div  class="col-xs-12 col-sm-8">
-				<p class="presentationtitle"><?php echo $title; ?></p>
+				<h1 class="presentationtitle"><?php echo $title; ?></h1>
 			</div>
 		</div>
 	</div>
