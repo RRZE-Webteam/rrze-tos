@@ -18,6 +18,7 @@
     <div class="form-group">
         <label class="form-control-label" for="message_name">Name</label>
         <input type="text" class="form-control form-control-success" id="message_name" name="message_name" value="{{=name}}" placeholder="Geben Sie einen Namen ein">
+
         {{error_name}}
         <div class="alert alert-danger" role="alert">
             <span class="sr-only">Fehler:</span>
@@ -28,6 +29,7 @@
     <div class="form-group">
         <label class="form-control-label" for="message_email">E-Mail</label>
         <input type="email" class="form-control" id="message_email" name="message_email" value="{{=email}}" placeholder="Geben Sie eine E-Mail-Adresse ein">
+
         {{error_email}}
         <div class="alert alert-danger" role="alert">
             <span class="sr-only">Fehler:</span>
@@ -38,6 +40,7 @@
     <div class="form-group">
         <label for="message_feedback">Nachricht</label>
         <textarea class="form-control" id="message_feedback" name="message_feedback">{{=message}}</textarea>
+
         {{error_message}}
         <div class="alert alert-danger" role="alert">
            
