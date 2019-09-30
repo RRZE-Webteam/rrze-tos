@@ -193,8 +193,7 @@ class Parser
      * @param  array $data      [description]
      * @return string           [description]
      */
-    public function parse($templateFile, $data)
-    {
+    public function parse($templateFile, $data)  {
         if (! is_readable($templateFile)) {
             return '';
         }

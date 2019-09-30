@@ -63,7 +63,7 @@ if ( is_plugin_active( 'rrze-elements/rrze-elements.php' ) ) {
 	<div class="row">
 	    <div class="col-xs-12">
 	        <main id="droppoint">
-		    <h1 class="screen-reader-text"><?php the_title(); ?></h1>
+		    <h1 class="screen-reader-text"><?php  echo $title; ?></h1>
 		    <div  id="rrze-tos">
 			<?php echo $content; ?>
 

@@ -4,16 +4,14 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-class Template
-{
+class Template {
     /**
      * [getContent description]
      * @param  string $template [description]
      * @param  array  $data     [description]
      * @return string           [description]
      */
-    public static function getContent($template = '', $data = [])
-    {
+    public static function getContent($template = '', $data = []) {
         return self::parseContent($template, $data);
     }
 
@@ -23,8 +21,7 @@ class Template
      * @param  array  $data     [description]
      * @return string           [description]
      */
-    protected static function parseContent($template, $data)
-    {
+    protected static function parseContent($template, $data) {
         $templateFile = self::getTemplateLocale($template);
         if (! $templateFile || empty($data)) {
             return '';
@@ -38,8 +35,7 @@ class Template
      * @param  string $template [description]
      * @return string           [description]
      */
-    protected static function getTemplateLocale($template)
-    {
+    protected static function getTemplateLocale($template) {
         $pluginDirPath = plugin_dir_path(RRZE_PLUGIN_FILE);
         $locale = Locale::getLocale();
         $format = '%1$stemplates/contents/%2$s-%3$s.html';

@@ -4,22 +4,18 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-class ContactForm
-{
+class ContactForm {
     protected $error;
-
     protected $options;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->error = false;
         $this->options = Options::getOptions();
     }
 
-    public function setForm()
-    {
+    public function setForm() {
         $captcha = $this->generateCaptcha();
-        $wp_nonce = wp_nonce_field('tos_contact_form');
+        $wp_nonce = wp_nonce_field('tos_contact_form','_wpnonce',true,false);
 
         $defaultData = [
             'captcha_num_1'  => mb_convert_case($captcha['num_1'], MB_CASE_TITLE, 'UTF-8'),
@@ -76,7 +72,7 @@ class ContactForm
                     $data = array_merge(
                         $defaultData,
                         [
-                            'message_has_been_sent_successfully' => __('Danke für Ihre Nachricht. SIe wurde erfolgreich gesendet.', 'rrze-tos')
+                            'message_has_been_sent_successfully' => __('Danke für Ihre Nachricht. Sie wurde erfolgreich gesendet.', 'rrze-tos')
                         ]
                     );
                 }
@@ -160,13 +156,11 @@ class ContactForm
         }
     }
 
-    protected function hasError()
-    {
+    protected function hasError() {
         return $this->error !== false ? true : false;
     }
 
-    protected function getError()
-    {
+    protected function getError()  {
         return $this->error;
     }
 
@@ -186,8 +180,7 @@ class ContactForm
         }
     }
 
-    protected function generateHash()
-    {
+    protected function generateHash() {
         return sprintf(
             '%04x%04x%04x',
             mt_rand(0, 0xffff),
@@ -196,8 +189,7 @@ class ContactForm
         );
     }
 
-    protected function generateCaptcha()
-    {
+    protected function generateCaptcha()  {
         $numbers = [
             __('Null', 'rrze-tos'),
             __('Eins', 'rrze-tos'),
