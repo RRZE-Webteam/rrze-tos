@@ -10,8 +10,22 @@
   color: red;
 }
 
+.wcag-contact-form .form-group {
+	margin: .75em 0;
+}
+
+.wcag-contact-form label {
+	display: block;
+}
+
 .wcag-contact-form input:not(:disabled):not([type="submit"]) {
   width: 400px;
+}
+
+.wcag-contact-form textarea {
+  width: 400px;
+  height: 200px;
+  display: block;
 }
 
 .wcag-submit {
@@ -24,10 +38,6 @@
       font-size: 1em;
     }
     font-size: 1em;
-  }
-  .wcag-contact-form textarea {
-    width: 750px !important;
-    display: block;
   }
   #feedback_form {
     margin-bottom: 100px;

@@ -18,6 +18,7 @@ class Theme {
                 'FAU-Philfak',
                 'FAU-Techfak',
                 'FAU-Natfak',
+                'FAU-Jobportal'
             ],
             'rrze' => [
                 'rrze-2015',
