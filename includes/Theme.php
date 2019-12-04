@@ -27,6 +27,9 @@ class Theme {
             'events' => [
                 'FAU-Events',
             ],
+	        'jobs' => [
+		        'FAU-Jobportal-Theme',
+	        ]
         ];
     }
 
