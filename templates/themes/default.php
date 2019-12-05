@@ -9,6 +9,11 @@ namespace RRZE\Tos;
 defined('ABSPATH') || exit;
 
 get_header();
+if ( is_plugin_active( 'rrze-elements/rrze-elements.php' ) ) {
+	wp_enqueue_style('rrze-elements');
+	wp_enqueue_script('rrze-accordions');
+
+}
 ?>
 	<section id="primary" class="content-area">
 		<main id="main" class="site-main">
