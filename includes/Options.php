@@ -353,18 +353,7 @@ class Options {
 				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
-			'display_template_varifast'   => array(
-			    'title'	=>  __('Varifast GmbH Werbung', 'rrze-tos'),
-			    'section'	=> 'rrze_tos_section_privacy_externalservices',
-			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Für den Fall, dass auf der Webseite Varifast GmbH Werbung eingesetzt wird, sollte diese Option aktiviert werden', 'rrze-tos'),
-			     'default'	=> 0,
-			    'options' => [
-				    '1' => __('Ja', 'rrze-tos'),
-				    '0' => __('Nein', 'rrze-tos')
-				]
-			),
-
+			
 
 
 
@@ -608,20 +597,23 @@ class Options {
         $rechtsraum = [
 	0 =>  array(
 	    'region' => __('Bundesebene Deutschland (Öffentlicher Dienst)','rrze-tos'),
-	    'url_law'	=> 'http://www.gesetze-im-internet.de/bgg/',
-	    'url_vo'	=> '',
+	    'url_law'	=> 'https://www.gesetze-im-internet.de/bgg/BGG.pdf',
+	    'url_vo'	=> 'https://www.gesetze-im-internet.de/bitv_2_0/BJNR184300011.html',
 	    'controlling'   => 'Überwachungsstelle des Bundes für Barrierefreiheit von Informationstechnik',
+	    'controlling_namezusatz'	=> 'Bundesministerium für Arbeit und Soziales',
 	    'controlling_email'   => '',
-	    'controlling_url'   => '',
-	    'controlling_address'	=> '',
+	    'controlling_url'   => 'https://www.bfit-bund.de',
+	    'controlling_plz'   => '10117',
+	    'controlling_city'   => 'Berlin',
+	    'controlling_street'   => 'Wilhelmstraße 49',
 	),
 	1 =>  array(
 	    'region' => __('Baden-Württemberg','rrze-tos'),
 	    'url_law'	=> 'http://www.landesrecht-bw.de/jportal/?quelle=jlink&query=BehGleichStG+BW&psml=bsbawueprod.psml&max=true',
-	    'url_vo'	=> '',
-	    'controlling'   => '',
-	    'controlling_email'   => '',
-	    'controlling_url'   => '',
+	    'url_vo'	=> 'http://www.landesrecht-bw.de/jportal/?quelle=jlink&query=BehGleichStGDV+BW&psml=bsbawueprod.psml&max=true&aiz=true',
+	    'controlling'   => 'Überwachungsstelle für mediale Barrierefreiheit des Landes Baden-Württemberg',
+	    'controlling_email'   => 'ueberwachungsstelle@drv-bw.de',
+	    'controlling_url'   => 'https://www.deutsche-rentenversicherung.de/BadenWuerttemberg/DE/Ueber-uns/Mediale-Barrierefreiheit/mediale-barrierefreiheit.html',
 	    'controlling_address'	=> '',
 	),
 	2 =>  array(
@@ -629,13 +621,14 @@ class Options {
 	    'url_law'	=> 'http://gesetze-bayern.de/Content/Document/BayBGG/true',
 	    'url_vo'	=> 'https://www.gesetze-bayern.de/Content/Document/BayBITV',
 	    'controlling'   => 'Landesamt für Digitalisierung, Breitband und Vermessung',
-	    'controlling_email'   => 'service@geodaten.bayern.de',
-	    'controlling_url'   => 'https://www.ldbv.bayern.de/',
+	    'controlling_namezusatz'	=> 'IT-Dienstleistungszentrum des Freistaats Bayern Durchsetzungs- und Überwachungsstelle für barrierefreie Informationstechnik',
+	    'controlling_email'   => 'bitv@bayern.de',
+	    'controlling_url'   => 'https://www.ldbv.bayern.de/digitalisierung/bitv.html',
 	    'controlling_fax'   => ' +49 89 2129-1113',
 	    'controlling_phone'   => '+49 89 2129-1111',
-	    'controlling_plz'   => '80538',
+	    'controlling_plz'   => '81541',
 	    'controlling_city'   => 'München',
-	    'controlling_street'   => 'Alexandrastraße 4',
+	    'controlling_street'   => 'St.-Martin-Straße 47',
 
 	),
 	3 =>  array(
@@ -644,7 +637,7 @@ class Options {
 	    'url_vo'	=> '',
 	    'controlling'   => 'Senatsverwaltung für Inneres und Sport, IKT-Steuerung, Kompetenzstelle für digitale Barrierefreiheit und Usability',
 	    'controlling_email'   => 'Digitale-Barrierefreiheit@senInnDS.berlin.de',
-	    'controlling_url'   => 'https://www.berlin.de/sen/inneres/moderne-verwaltung/digitale-barrierefreiheit/berliner-standards/artikel.803649.php',
+	    'controlling_url'   => 'https://www.berlin.de/sen/inneres/moderne-verwaltung/digitale-barrierefreiheit/ueberwachungsstelle/',
     	    'controlling_plz'   => '10179',
 	    'controlling_city'   => 'Berlin',
 	    'controlling_street'   => 'Klosterstraße 47',
@@ -652,10 +645,10 @@ class Options {
 	4 =>  array(
 	    'region' => __('Brandenburg','rrze-tos'),
 	    'url_law'	=> 'https://bravors.brandenburg.de/gesetze/bbgbgg',
-	    'url_vo'	=> '',
-	    'controlling'   => '',
+	    'url_vo'	=> 'https://bravors.brandenburg.de/verordnungen/bbgbitv',
+	    'controlling'   => 'Landesamt für Soziales und Versorgung',
 	    'controlling_email'   => '',
-	    'controlling_url'   => '',
+	    'controlling_url'   => 'https://lasv.brandenburg.de/',
 	    'controlling_address'	=> '',
 	),
 	5 =>  array(

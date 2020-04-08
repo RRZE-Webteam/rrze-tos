@@ -796,19 +796,19 @@ class Settings {
         $name = esc_attr($args['name']);
 
         $content = '';
-        if (array_key_exists($name, $this->options)) {
+        if (isset($this->options->$name)) {
             $content = wp_unslash($this->options->$name);
         }
-        if (array_key_exists('wpautop', $args)) {
+        if (isset($args['wpautop'])) {
             $wpautop = esc_attr($args['wpautop']);
         }
-        if (array_key_exists('height', $args)) {
+        if (isset($args['height'])) {
             $height = esc_attr($args['height']);
         }
-        if (array_key_exists('description', $args)) {
+        if (isset($args['description'])) {
             $description = esc_attr($args['description']);
         }
-	if (array_key_exists('fieldset', $args)) {
+	if (isset($args['fieldset'])) {
             $fieldset = esc_attr($args['fieldset']);
         }
 	if (isset($fieldset)) {
