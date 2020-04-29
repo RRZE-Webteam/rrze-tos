@@ -353,7 +353,28 @@ class Options {
 				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
-			
+			'display_template_siteimprove'   => array(
+			    'title'	=>  __('Siteimprove', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_externalservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Für den Fall, dass auf der Webseite Siteimprove Analytics eingesetzt wird, sollte diese Option aktiviert werden', 'rrze-tos'),
+			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
+				]
+			),
+			'display_template_varifast'   => array(
+			    'title'	=>  __('Varifast', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_externalservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Für den Fall, dass auf der Webseite Varifast Werbung eingesetzt wird, sollte diese Option aktiviert werden', 'rrze-tos'),
+			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
+				]
+			),
 
 
 
