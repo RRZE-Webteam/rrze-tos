@@ -90,20 +90,45 @@ class Endpoint {
 	/* 
 	 * Dynamic variables for endpoint: Privacy
 	 */
+	
+	if ((isset($this->options->display_template_siteimprove) && $this->options->display_template_siteimprove==1)) {
+	    // Siteimprove already enabled; Therefor we dont look for the plugin
+	} else {
+	    include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	    // check for rrze siteimprove plugin using plugin name
+	    if ( is_plugin_active( 'rrze-siteimprove/rrze-siteimprove.php' ) ) {
+		//plugin is activated
+		$this->options->display_template_siteimprove = 1;
+	    }
+	}
+	if ((isset($this->options->display_template_siteimprove) && $this->options->display_template_siteimprove==1)) {
+	    // check if its realy using analytics mode:
+	    $siteimproveoptions = (array) get_option("rrze_siteimprove");
+	    if (  isset($siteimproveoptions) && isset($siteimproveoptions['analytics_enable']) && $siteimproveoptions['analytics_enable']==0) {
+		$this->options->display_template_siteimprove = 0;
+	    }
+	}
+	
+	
 	if (isset($this->options->privacy_section_extra_text)) {
 	    $this->options->privacy_new_section_text = do_shortcode($this->options->privacy_section_extra_text);
 	}
 	if ((isset($this->options->display_template_youtube) && $this->options->display_template_youtube==1) ||
+	    (isset($this->options->display_template_siteimprove) && $this->options->display_template_siteimprove==1) ||
 	    (isset($this->options->display_template_slideshare) && $this->options->display_template_slideshare==1) ||
 	    (isset($this->options->display_template_vgwort) && $this->options->display_template_vgwort==1) ||
 	    (isset($this->options->display_template_vimeo) && $this->options->display_template_vimeo==1)) {
-	 $this->options->privacy_section_external = 1;
+	    $this->options->privacy_section_external = 1;
 	}
 	
 	$this->options->privacy_defaultteasertext = 1;
 	if (isset($this->options->privacy_section_owndsb) && $this->options->privacy_section_owndsb == 1 && (!empty($this->options->privacy_section_owndsb_text))) {
 	    $this->options->privacy_defaultteasertext = 0;
 	} 
+	
+	
+	
+	
 	
 	/* 
 	 * Dynamic variables for endpoint: Accessibility

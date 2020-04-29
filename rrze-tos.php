@@ -4,7 +4,7 @@
 Plugin Name:     RRZE TOS
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-tos
 Description:     Generator für die Erstellung der rechtlichen Pflichtangaben des Webauftritts
-Version:         1.7.14
+Version:         1.7.15
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -17,8 +17,8 @@ namespace RRZE\Tos;
 
 defined('ABSPATH') || exit;
 
-const RRZE_PHP_VERSION = '7.2';
-const RRZE_WP_VERSION = '5.2';
+const RRZE_PHP_VERSION = '7.3';
+const RRZE_WP_VERSION = '5.3';
 
 const RRZE_PLUGIN_FILE = __FILE__;
 
