@@ -31,6 +31,7 @@ class Options {
 	    'display_template_itsec'  => 1,
 	    'display_template_betroffenenrechte'  => 1,
 	    'display_template_vertretung'   => 1,
+	    'display_template_coronakontaktverfolgung'   => 1,
 	    'imprint_responsible_org'	=> get_bloginfo('name'),
 
 
@@ -258,8 +259,8 @@ class Options {
 		'settings'  => array(
 		    'sections'	=> array(
 			'rrze_tos_section_privacy_fauservices'  => array(
-			    'title' => __('FAU Dienste', 'rrze-tos'),
-			    'desc'	=> __('Falls einer der folgenden FAU-Dienste verwendet wird, aktivieren Sie diesen um einen entsprechenden Hinweis in der Datenschutzerklärung zu erzeugen.', 'rrze-tos'),
+			    'title' => __('Dienste', 'rrze-tos'),
+			    'desc'	=> __('Falls einer der folgenden Dienste verwendet wird, aktivieren Sie diesen um einen entsprechenden Hinweis in der Datenschutzerklärung zu erzeugen.', 'rrze-tos'),
 			    'page'  => 'rrze_tos_options',
 			),
 			'rrze_tos_section_privacy_externalservices'  => array(
@@ -303,6 +304,17 @@ class Options {
 			    'type'	=> 'inputRadioCallback',
 			    'desc'	=> __('Verwenden Sie Formulare für die Anmeldung zu Veranstaltungen oder anderen Funktionen, bei denen man sich Registrieren muss?', 'rrze-tos'),
 			     'default'	=> 0,
+			    'options' => [
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
+				]
+			),
+			'display_template_coronakontaktverfolgung'   => array(
+			    'title'	=>  __('Corona Kontaktverfolgung', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_privacy_fauservices',
+			    'type'	=> 'inputRadioCallback',
+			    'desc'	=> __('Anzeigen der Hinweise zur Corona Kontaktverfolgung für Veranstaltungen', 'rrze-tos'),
+			     'default'	=> 1,
 			    'options' => [
 				    '1' => __('Ja', 'rrze-tos'),
 				    '0' => __('Nein', 'rrze-tos')
