@@ -122,7 +122,7 @@ class ContactForm {
         $subject = sanitize_text_field($this->options->accessibility_feedback_subject);
         $headers = [
             'Content-Type: text/plain; charset=UTF-8',
-            sprintf('From: %1$s <%2$s>', sanitize_text_field($name), sanitize_text_field($from))
+            sprintf('Reply-To: %1$s <%2$s>', sanitize_text_field($name), sanitize_text_field($from))
         ];
         if ($this->options->accessibility_feedback_cc) {
             $headers[] = sprintf('CC: <%s>', sanitize_email($this->options->accessibility_feedback_cc));
