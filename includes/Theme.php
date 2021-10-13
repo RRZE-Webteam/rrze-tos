@@ -40,11 +40,19 @@ class Theme {
     public static function getCurrentStylesheetGroup()
     {
         $currentStylesheet = get_stylesheet();
+	$parentStylesheet = wp_get_theme(get_template());
         $allowedStylesheets = self::allowedStylesheets();
 
         foreach ($allowedStylesheets as $styleGroup => $stylesheets) {
             if (is_array($stylesheets) && in_array(
                 strtolower($currentStylesheet),
+                array_map('strtolower', $stylesheets),
+                true
+            )) {
+                return $styleGroup;
+            }
+	    if (is_array($stylesheets) && in_array(
+                strtolower($parentStylesheet),
                 array_map('strtolower', $stylesheets),
                 true
             )) {
