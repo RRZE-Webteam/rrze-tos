@@ -28,7 +28,7 @@ if ( is_plugin_active( 'rrze-elements/rrze-elements.php' ) ) {
             </header><!-- .entry-header -->
 
             <div class="entry-content">
-                 <div id="rrze-tos">
+                 <div class="rrze-tos">
                         <?php echo $content; ?>
                  </div>
             </div><!-- .entry-content -->
