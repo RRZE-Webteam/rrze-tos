@@ -21,8 +21,6 @@ class Options {
 	    'imprint_webmaster_email'           => $adminMail,
 	    'accessibility_feedback_email'	    => $adminMail,
 	    'display_template_contactinfos'	    => 1,
-	    'accessibility_feedback_mailposttext'   => "\n\n-- \nHinweis: Diese E-Mail wurde aus dem Feedback-Formular zur Barrierefreiheit der Website ".$siteUrl." gesendet.\n\n" ,
-	    'accessibility_feedback_mailpretext'   => "",
 	    'accessibility_region'		    => 2,
 	    'accessibility_conformity_val'	    => -1,
 	    'accessibility_feedback_subject'	=> __('Feedback-Formular Barrierefreiheit', 'rrze-tos'),
@@ -196,7 +194,7 @@ class Options {
 			    'title'	=>  __('Aufsichtsbehörde', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_optional',
 			    'type'	=> 'inputRadioCallback',
-			    'desc'	=> __('Zeigt die Aufsichtsbehörde der FAU an.', 'rrze-tos'),
+			    'desc'	=> __('Zeigt die Aufsichtsbehörde an.', 'rrze-tos'),
 			     'default'	=> 1,
 			    'options' => [
 				    '1' => __('Ja', 'rrze-tos'),
@@ -225,6 +223,26 @@ class Options {
 				    '0' => __('Nein', 'rrze-tos')
 				]
 			),
+			'imprint_section_bildrechte'   => array(
+			    'title'	=>  __('Freitextfeld für Bildrechte einfügen?', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputRadioCallback',
+			    'default'	=> 0,
+			    'options' => [
+				    '1' => __('Ja', 'rrze-tos'),
+				    '0' => __('Nein', 'rrze-tos')
+				]
+			),
+			'imprint_section_bildrechte_text'   => array(
+			    'title'	=>  __('Bildrechte', 'rrze-tos'),
+			    'section'	=> 'rrze_tos_section_imprint_optional',
+			    'type'	=> 'inputWPEditor',
+			    'desc'	=>  __('Optionaler Absatz für die Beschreibung etwaiger verwendeter Bildrechte.', 'rrze-tos'),
+			    'default'	=> '',
+			     'height' => 200,
+			),
+			
+			
 			'imprint_section_extra'   => array(
 			    'title'	=>  __('Neuen Abschnitt hinzufügen?', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_imprint_optional',
@@ -583,7 +601,7 @@ class Options {
 			    'desc'	=>  __('Geben Sie hier einen Namen für den zuständigen Ansprechpartner für Beschwerden oder Hilfeanfragen über mangelnde Zugänglichkeit an.', 'rrze-tos'),
 			),
 			'accessibility_feedback_email'=> array(
-			    'title'	=>  __('EMail-Adresse', 'rrze-tos'),
+			    'title'	=>  __('E-Mail-Adresse', 'rrze-tos'),
 			    'section'	=> 'rrze_tos_section_feedback',
 			    'desc'	=> __('Empfänger-Mailadresse zu Beschwerden oder Hilfeanfragen über mangelnde Zugänglichkeit. Bitte beachten Sie: Bleibt eine Anfrage über die Kontaktmöglichkeit innerhalb von sechs Wochen ganz oder teilweise unbeantwortet, prüft die zuständige Aufsichtsbehörde auf Antrag des Nutzers, ob im Rahmen der Überwachung gegenüber dem Betreiber des Webauftritts (also Ihnen) Maßnahmen erforderlich sind.', 'rrze-tos'),
 			    'type'	=> 'inputEMailCallback',

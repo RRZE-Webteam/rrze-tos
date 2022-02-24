@@ -48,7 +48,7 @@ class Main {
 
         wp_enqueue_script(
             'rrze-tos-admin',
-            plugins_url('assets/js/admin.min.js', plugin_basename(RRZE_PLUGIN_FILE)),
+            plugins_url('assets/js/tos-admin.js', plugin_basename(RRZE_PLUGIN_FILE)),
             ['jquery', 'jquery-ui-tabs', 'jquery-effects-fade', 'jquery-ui-datepicker'],
             false,
             true

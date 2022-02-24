@@ -127,12 +127,29 @@ class ContactForm {
         if ($this->options->accessibility_feedback_cc) {
             $headers[] = sprintf('CC: <%s>', sanitize_email($this->options->accessibility_feedback_cc));
         }
-	if (isset($this->options->accessibility_feedback_mailpretext)) {
-	    $message = $this->options->accessibility_feedback_mailpretext . $message;
+	
+	$pretext = __('Die folgende Nachricht wurde im Feedback-Formular zur Barrierefreiheit eingegeben.', 'rrze-tos')." \n\n";
+	$pretext .= __('Absender:', 'rrze-tos')." \n";
+	$pretext .= __('   Eingegebener Name:', 'rrze-tos').'          '.sanitize_text_field($name)." \n";
+	$pretext .= __('   Eingegebene E-Mail-Adresse:', 'rrze-tos').' '.sanitize_email($from)." \n";	
+	
+	
+	if (isset( $_SERVER['HTTP_USER_AGENT'] )) {
+	    $pretext .= __('   Verwendeter User-Agent: ', 'rrze-tos').'    '.sanitize_text_field($_SERVER['HTTP_USER_AGENT'])." \n";	    
 	}
-	if (isset($this->options->accessibility_feedback_mailposttext)) {
-	    $message = $message . $this->options->accessibility_feedback_mailposttext;
-	}
+
+	$pretext .= __('   Absendezeit:', 'rrze-tos').'                '.date("d.m.Y - H:i")." \n";
+	$pretext .= __('   Formular-Website:', 'rrze-tos').'           '.get_option('siteurl')." \n\n";
+	$pretext .= __('Vom Absender eingegebene Nachricht:', 'rrze-tos')." \n\n";
+	
+	
+	$message = $pretext .$message; 
+	    
+	
+	$message .= "\n\n-- \n";
+	$message .= __('Website aufrufen:', 'rrze-tos').' '.get_option('siteurl')." \n";
+	$message .= __('Dashboard:', 'rrze-tos').'        '.get_option('siteurl')."/wp-admin/ \n";
+	
         return wp_mail($to, $subject, $message, $headers);
     }
 
