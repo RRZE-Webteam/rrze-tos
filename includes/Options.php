@@ -555,13 +555,14 @@ class Options {
 			       'addbreak'	=> true,
 			    'options' => [
 				    1	=>  __('PDF-Dokumente, die vor dem 23.09.2018 erstellt wurden, konnten noch nicht auf ein barrierefreies Format umgestellt werden.', 'rrze-tos'),
-				2	=>  __('PDF-Dokumente, die ab dem 23.09.2018 erstellt wurden, sind noch nicht barrierefrei zugänglich.', 'rrze-tos'),
+				2	=>  __('PDF-Dokumente, die nach dem 23.09.2018 erstellt wurden, sind noch nicht barrierefrei zugänglich.', 'rrze-tos'),
 				3	=>  __('Einige Dokumente wurden von Dritten (z.B. Prüfungsamt, andere Einrichtungen der FAU, Ministerien, u.a.) bereitgestellt. Diese Dokumente liegen nicht in einer barrierefreien Fassung vor.', 'rrze-tos'),
 				4	=>  __('Zu eingebundenen Videos stehen derzeit keine Untertitel oder Transkription zur Verfügung.', 'rrze-tos'),
 				5	=>  __('Zu mittels Karten oder Kartenbildern eingebundenen Anfahrtsbeschreibungen fehlt derzeit die textuelle Beschreibung.', 'rrze-tos'),
 				6	=>  __('In den Seiten enthaltene Grafiken oder Bilder sind derzeit nicht vollständig durch Textbeschreibungen ergänzt worden.', 'rrze-tos'),
 				7	=>  __('Es werden Tabellen zum Zwecke der optischen Gestaltung verwendet.', 'rrze-tos'),
 				8	=>  __('Bei der Verwendung von mehrsprachigen Inhalten auf einer Seite, werden die Sprachen teilweise nicht korrekt in HTML gekennzeichnet.', 'rrze-tos'),
+				9	=>  __('Die Schriftfarbe im Logo mit dem ausgeschriebenen Titel des Webauftritts ist nicht kontrastreich genug.', 'rrze-tos'),
 
 
 				],
