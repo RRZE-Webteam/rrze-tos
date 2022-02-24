@@ -35,15 +35,27 @@ jQuery(document).ready(function($) {
             $("#wp-imprint_section_extra_text-wrap").parents('tr').hide();
         }
     }
+    
+    function checkNewImprintBildrechteSection() {
+        var rrzeTosImprintNewSectionBildrechte = $("input[name='rrze_tos[imprint-imprint_section_bildrechte]']:checked", "#tos-admin-form").val();
+        if ('1' === rrzeTosImprintNewSectionBildrechte) {
+            $("#wp-imprint_section_bildrechte_text-wrap").parents('tr').show();
+        } else {
+            $("#wp-imprint_section_bildrechte_text-wrap").parents('tr').hide();
+        }
+    }
+    
 
 
     checkNewPrivacySection();
     checkNewImprintSection();
+    checkNewImprintBildrechteSection();
     checkAccessibilityHelperSection();
     checkPrivacyOwnDSBSection();
     $("#tos-admin-form input").on('change', function() {
         checkNewPrivacySection();
 	checkNewImprintSection();
+	checkNewImprintBildrechteSection();
 	 checkAccessibilityHelperSection();
 	  checkPrivacyOwnDSBSection();
     });
